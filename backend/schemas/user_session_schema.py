@@ -1,8 +1,10 @@
-from backend.schemas._base_schema import BaseSchema
 import uuid
 from datetime import datetime
 from typing import Optional
+
 import pydantic
+
+from backend.schemas._base_schema import BaseSchema
 
 
 class UserSessionCreateSchema(pydantic.BaseModel):

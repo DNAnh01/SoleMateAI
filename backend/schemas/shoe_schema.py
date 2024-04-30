@@ -1,15 +1,9 @@
-from backend.schemas._base_schema import BaseSchema
 import uuid
 from typing import Optional
+
 import pydantic
 
-"""Request"""
-
-
-"""Response"""
-
-
-"""Base"""
+from backend.schemas._base_schema import BaseSchema
 
 
 class ShoeCreateSchema(pydantic.BaseModel):

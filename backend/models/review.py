@@ -5,7 +5,6 @@ from sqlalchemy.orm import relationship
 from backend.db.base_class import Base
 
 
-
 class Review(Base):
     __tablename__ = "reviews"
 

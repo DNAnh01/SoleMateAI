@@ -1,14 +1,9 @@
-from backend.schemas._base_schema import BaseSchema
-
 import uuid
-import pydantic
 from typing import Optional
 
-"""Request"""
+import pydantic
 
-"""Response"""
-
-"""Base"""
+from backend.schemas._base_schema import BaseSchema
 
 
 class AddressCreateSchema(pydantic.BaseModel):

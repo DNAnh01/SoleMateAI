@@ -1,5 +1,6 @@
-import sys
 import os
+import sys
+
 sys.path.insert(0, os.getcwd())
 # sys.path.insert(0, os.path.join(os.getcwd(), "backend"))
 
@@ -7,10 +8,10 @@ import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.middleware.sessions import SessionMiddleware
+
 from backend.api.v1.api import api_router
 from backend.core.config import settings
 from backend.db.init_db import init_db
-
 
 app = FastAPI()
 

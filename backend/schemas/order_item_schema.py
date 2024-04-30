@@ -1,7 +1,9 @@
-from backend.schemas._base_schema import BaseSchema
-import pydantic
-from typing import Optional
 import uuid
+from typing import Optional
+
+import pydantic
+
+from backend.schemas._base_schema import BaseSchema
 
 """Request"""
 

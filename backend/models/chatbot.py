@@ -5,7 +5,6 @@ from sqlalchemy.orm import relationship
 from backend.db.base_class import Base
 
 
-
 class Chatbot(Base):
     __tablename__ = "chatbots"
     user_id = Column(

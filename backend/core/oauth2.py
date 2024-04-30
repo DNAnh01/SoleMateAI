@@ -11,7 +11,6 @@ from backend.common.logger import setup_logger
 from backend.core.config import settings
 from backend.crud.crud_user import crud_user
 
-
 logger = setup_logger()
 
 
@@ -87,7 +86,7 @@ def get_current_user(
     token (str): The access token.
 
     Returns:
-    UserOut: The current user data.
+    User: The current user data.
     """
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
@@ -95,10 +94,8 @@ def get_current_user(
         headers={"WWW-Authenticate": "Bearer"},
     )
     token_data = verify_access_token(token, credentials_exception)
-
-    # user = user_service.get_by_id(db, token_data.id)
-    user = crud_user.get_one_by_or_fail(db=db, filter={"id": token_data.id})
-    if user is None:
+    user_found = crud_user.get_one_by(db=db, filter={"id": token_data["id"]})
+    if user_found is None:
         logger.error(f"Error in {__name__}.get_current_user: User not found")
         raise credentials_exception
-    return user
+    return user_found

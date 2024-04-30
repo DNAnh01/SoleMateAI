@@ -7,7 +7,6 @@ from sqlalchemy.orm import relationship
 from backend.db.base_class import Base
 
 
-
 class Order(Base):
     __tablename__ = "orders"
     address_id = Column(UUID(as_uuid=True), ForeignKey("addresses.id"), index=True)

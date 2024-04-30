@@ -4,7 +4,6 @@ from sqlalchemy.orm import relationship
 from backend.db.base_class import Base
 
 
-
 class Role(Base):
 
     __tablename__ = "roles"

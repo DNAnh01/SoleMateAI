@@ -1,9 +1,9 @@
-from backend.schemas._base_schema import BaseSchema
-
 import uuid
-
 from typing import Optional
+
 import pydantic
+
+from backend.schemas._base_schema import BaseSchema
 
 
 class ColorCreateSchema(pydantic.BaseModel):

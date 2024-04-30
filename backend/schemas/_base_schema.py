@@ -1,6 +1,7 @@
-import pydantic
-from typing import Optional
 from datetime import datetime
+from typing import Optional
+
+import pydantic
 
 
 class BaseSchema(pydantic.BaseModel):

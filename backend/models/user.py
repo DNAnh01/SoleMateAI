@@ -1,4 +1,4 @@
-from sqlalchemy import Column, ForeignKey, String, Boolean
+from sqlalchemy import Boolean, Column, ForeignKey, String
 from sqlalchemy.dialects.postgresql.base import UUID
 from sqlalchemy.orm import relationship
 
@@ -6,9 +6,8 @@ from backend.common.generate import generate_random_string
 from backend.db.base_class import Base
 
 
-
 class User(Base):
-    
+
     __tablename__ = "users"
     role_id = Column(
         UUID(as_uuid=True), ForeignKey("roles.id", ondelete="CASCADE"), nullable=False
@@ -16,11 +15,13 @@ class User(Base):
 
     email = Column(String, nullable=False, unique=True)
     password_hash = Column(String, nullable=False)
-    display_name = Column(String, nullable=False, default=lambda: generate_random_string(10))
+    display_name = Column(
+        String, nullable=False, default=lambda: generate_random_string(10)
+    )
     avatar_url = Column(
         String,
         nullable=False,
-        default="https://raw.githubusercontent.com/DNAnh01/assets/main/default_user_avatar.png",
+        default="https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/default_user_avatar.png",
     )
     payment_information = Column(String, nullable=True)
     is_verified = Column(Boolean, nullable=False, default=False)

@@ -1,7 +1,9 @@
-from backend.schemas._base_schema import BaseSchema
 import uuid
-import pydantic
 from typing import Optional
+
+import pydantic
+
+from backend.schemas._base_schema import BaseSchema
 
 
 class RolePermissionCreateSchema(pydantic.BaseModel):

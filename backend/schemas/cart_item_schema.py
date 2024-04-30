@@ -1,14 +1,9 @@
-from backend.schemas._base_schema import BaseSchema
-
-from typing import Optional
 import uuid
+from typing import Optional
+
 import pydantic
 
-"""Request"""
-
-"""Response"""
-
-"""Base"""
+from backend.schemas._base_schema import BaseSchema
 
 
 class CartItemCreateSchema(pydantic.BaseModel):

@@ -2,7 +2,6 @@ from fastapi_mail import ConnectionConfig
 
 from backend.core.config import settings
 
-
 conf = ConnectionConfig(
     MAIL_USERNAME=f"{settings.MAIL_USERNAME}",
     MAIL_PASSWORD=f"{settings.MAIL_PASSWORD}",

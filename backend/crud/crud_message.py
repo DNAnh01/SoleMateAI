@@ -1,6 +1,5 @@
 from backend.crud.base import CRUDBase
 from backend.models.message import Message
-
 from backend.schemas.message_schema import MessageCreateSchema, MessageUpdateSchema
 
 

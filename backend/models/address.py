@@ -5,7 +5,6 @@ from sqlalchemy.orm import relationship
 from backend.db.base_class import Base
 
 
-
 class Address(Base):
     __tablename__ = "addresses"
     user_id = Column(UUID(as_uuid=True), ForeignKey("users.id"), index=True)

@@ -13,7 +13,6 @@ from backend.common.utils import clone_model
 from backend.db.base_class import Base
 from backend.db.query_builder import get_count, get_filter, query_builder
 
-
 ModelType = TypeVar("ModelType", bound=Base)
 CreateSchemaType = TypeVar("CreateSchemaType", bound=BaseModel)
 UpdateSchemaType = TypeVar("UpdateSchemaType", bound=BaseModel)
@@ -44,7 +43,7 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
         query = query_builder(
             db=db,
             model=self.model,
-            filter=filter_param.get('filter'),
+            filter=filter_param.get("filter"),
             order_by=filter_param.get("order_by"),
             include=filter_param.get("include"),
             join=filter_param.get("join"),

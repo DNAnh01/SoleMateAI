@@ -14,14 +14,14 @@ def email_verify_template(user_name: str, redirect_url: str, mode: int) -> str:
             <head>
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>Verify Email Address for SoleMateAI</title>
+                <title>Verify Email Address for Sole Mate AI</title>
             </head>
 
             <body style="font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #eff2f4;">
                 <table align="center" border="0" cellpadding="0" cellspacing="0" width="600">
                     <tr>
                         <td align="center">
-                            <img src="https://raw.githubusercontent.com/DNAnh01/assets/main/logo1-removebg-preview.png"
+                            <img src="https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/sole-mate_ai-logo.png"
                                 alt="SoleMateAI Logo" style="display: block; width: 200px; margin: 20px auto;">
                         </td>
                     </tr>
@@ -75,14 +75,14 @@ def email_forgot_password_template(user_name: str, password_reset: str) -> str:
             <head>
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>Reset Password for SoleMateAI</title>
+                <title>Reset Password for Sole Mate AI</title>
             </head>
 
             <body style="font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #eff2f4;">
                 <table align="center" border="0" cellpadding="0" cellspacing="0" width="600">
                     <tr>
                         <td align="center">
-                            <img src="https://raw.githubusercontent.com/DNAnh01/assets/main/logo1-removebg-preview.png"
+                            <img src="https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/sole-mate_ai-logo.png"
                                 alt="SoleMateAI Logo" style="display: block; width: 200px; margin: 20px auto;">
                         </td>
                     </tr>

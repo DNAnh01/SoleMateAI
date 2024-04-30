@@ -1,3 +1,4 @@
+import csv
 from datetime import datetime, timedelta
 from typing import List
 
@@ -6,7 +7,6 @@ from passlib.context import CryptContext
 from sqlalchemy.orm import class_mapper
 
 from backend.core.config import settings
-
 
 # Create a CryptContext instance with bcrypt as the hashing scheme
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
@@ -104,3 +104,9 @@ def read_pdf(file_path):
     return text
 
 
+def read_csv(file_path):
+    with open(file_path, "r") as file:
+        reader = csv.reader(file)
+        next(reader)
+        for row in reader:
+            yield row

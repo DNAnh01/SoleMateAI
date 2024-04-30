@@ -5,10 +5,9 @@ from sqlalchemy.orm import relationship
 from backend.db.base_class import Base
 
 
-
 class CartItem(Base):
     __tablename__ = "cart_items"
-    
+
     cart_id = Column(UUID(as_uuid=True), ForeignKey("carts.id"))
     shoe_id = Column(UUID(as_uuid=True), ForeignKey("shoes.id"))
     quantity = Column(Integer, nullable=False)

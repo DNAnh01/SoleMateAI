@@ -3,6 +3,9 @@
 .env
 .idea
 
-research
-# assets
+Ally-Assistant-Chatbot
+research/be
+research/fe
+research/docs
+assets
 .env.development

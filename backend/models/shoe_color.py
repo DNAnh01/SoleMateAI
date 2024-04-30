@@ -1,8 +1,8 @@
-from backend.db.base_class import Base
-from sqlalchemy import Column, Integer, String, ForeignKey
-from sqlalchemy.orm import relationship
+from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy.orm import relationship
 
+from backend.db.base_class import Base
 
 
 class ShoeColor(Base):
@@ -13,7 +13,7 @@ class ShoeColor(Base):
     image_url = Column(
         String,
         nullable=False,
-        default="https://raw.githubusercontent.com/DNAnh01/assets/main/avatars-000318938987-vks2y6-t500x500.jpg",
+        default="https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/null.jpg",
     )
 
     # relationships

@@ -1,8 +1,8 @@
-from backend.db.base_class import Base
-from sqlalchemy import Column, Integer, ForeignKey
-from sqlalchemy.orm import relationship
+from sqlalchemy import Column, ForeignKey, Integer
 from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy.orm import relationship
 
+from backend.db.base_class import Base
 
 
 class ColorSize(Base):

@@ -5,8 +5,6 @@ from sqlalchemy.orm import relationship
 from backend.db.base_class import Base
 
 
-
-
 class Shoe(Base):
     __tablename__ = "shoes"
     brand_id = Column(UUID(as_uuid=True), ForeignKey("brands.id"), index=True)

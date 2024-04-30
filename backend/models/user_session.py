@@ -10,7 +10,7 @@ from backend.db.base_class import Base
 class UserSession(Base):
     __tablename__ = "users_sessions"
 
-    user_id = Column(UUID(as_uuid=True), ForeignKey('users.id'), nullable=False)
+    user_id = Column(UUID(as_uuid=True), ForeignKey("users.id"), nullable=False)
     token = Column(String, nullable=False, unique=True)
     expires_at = Column(DateTime(timezone=True), default=datetime.now, nullable=False)
 

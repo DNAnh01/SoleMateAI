@@ -6,15 +6,15 @@ from pydantic import PostgresDsn, field_validator
 from pydantic_core.core_schema import FieldValidationInfo
 from pydantic_settings import BaseSettings
 
-import os
 from backend.common.logger import setup_logger
 
 logger = setup_logger()
 
 environment = "development"
 script_dir = os.path.dirname(os.path.realpath(__file__))
-dotenv_path = os.path.join(script_dir, '..', f'.env.{environment}')  # Adjusted 
+dotenv_path = os.path.join(script_dir, "..", f".env.{environment}")  # Adjusted
 load_dotenv(dotenv_path)
+
 
 class Settings(BaseSettings):
     """Application settings"""
@@ -24,7 +24,7 @@ class Settings(BaseSettings):
     SECRET_KEY: str = os.getenv("SECRET_KEY")
 
     POSTGRES_SERVER: str = os.environ.get("POSTGRES_SERVER")
-    
+
     POSTGRES_PORT: int = os.environ.get("POSTGRES_PORT")
     POSTGRES_USER: str = os.environ.get("POSTGRES_USER")
     POSTGRES_PASSWORD: str = os.environ.get("POSTGRES_PASSWORD")

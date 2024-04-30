@@ -1,14 +1,9 @@
-from backend.schemas._base_schema import BaseSchema
 import uuid
-import pydantic
 from typing import Optional
 
+import pydantic
 
-"""Request"""
-
-"""Response"""
-
-"""Base"""
+from backend.schemas._base_schema import BaseSchema
 
 
 class ShoeColorCreateSchema(pydantic.BaseModel):

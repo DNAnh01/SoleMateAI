@@ -1,7 +1,7 @@
-from backend.db.base_class import Base
 from sqlalchemy import Column, Integer
-
 from sqlalchemy.orm import relationship
+
+from backend.db.base_class import Base
 
 
 class Size(Base):

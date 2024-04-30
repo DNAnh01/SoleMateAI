@@ -5,10 +5,9 @@ from sqlalchemy.orm import relationship
 from backend.db.base_class import Base
 
 
-
 class Cart(Base):
     __tablename__ = "carts"
-    
+
     user_id = Column(UUID(as_uuid=True), ForeignKey("users.id"), nullable=False)
     total_item = Column(Integer, nullable=False)
     total_display_price = Column(Double, nullable=False)

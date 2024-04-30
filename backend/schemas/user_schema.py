@@ -1,25 +1,9 @@
-from backend.schemas._base_schema import BaseSchema
 import uuid
 from typing import Optional
+
 import pydantic
 
-"""Request"""
-
-
-class UserSignUpSchema(pydantic.BaseModel):
-    email: pydantic.EmailStr
-    password: str
-
-
-class UserSignInSchema(pydantic.BaseModel):
-    email: pydantic.EmailStr
-    password: str
-
-
-"""Response"""
-
-
-"""Base"""
+from backend.schemas._base_schema import BaseSchema
 
 
 class UserCreateSchema(pydantic.BaseModel):
