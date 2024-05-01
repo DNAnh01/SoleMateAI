@@ -1,0 +1,62 @@
+{
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.python",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.organizeImports.ruff": "explicit"
+        }
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true
+    },
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true
+    },
+    "editor.formatOnSave": true,
+    "prettier.configPath": "./frontend/.prettierrc",
+    "cSpell.words": [
+        "autoflake",
+        "autoflush",
+        "camelcase",
+        "cellspacing",
+        "colorlog",
+        "decamelization",
+        "decamelize",
+        "decamelized",
+        "dekebabize",
+        "depascalize",
+        "dotenv",
+        "drpi",
+        "fastapi",
+        "hzne",
+        "ilike",
+        "initialisms",
+        "isnot",
+        "jsonable",
+        "kebabcase",
+        "kebabize",
+        "kebabized",
+        "levelname",
+        "ondelete",
+        "onupdate",
+        "pascalcase",
+        "pascalize",
+        "pascalized",
+        "passlib",
+        "Pydantic",
+        "pytz",
+        "rsps",
+        "rtype",
+        "selectinload",
+        "sessionmaker",
+        "slugified",
+        "snakecase",
+        "sqlalchemy",
+        "starlette",
+        "tailwindcss",
+        "userinfo",
+        "uvicorn"
+    ]
+}
