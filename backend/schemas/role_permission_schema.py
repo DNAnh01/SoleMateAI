@@ -12,8 +12,8 @@ class RolePermissionCreateSchema(pydantic.BaseModel):
 
 
 class RolePermissionUpdateSchema(BaseSchema):
-    permission_id: Optional[uuid.UUID]
-    role_id: Optional[uuid.UUID]
+    permission_id: Optional[uuid.UUID] = None
+    role_id: Optional[uuid.UUID] = None
 
 
 class RolePermissionInDBSchema(BaseSchema):

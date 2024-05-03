@@ -14,10 +14,10 @@ class AddressCreateSchema(pydantic.BaseModel):
 
 
 class AddressUpdateSchema(BaseSchema):
-    user_id: Optional[uuid.UUID]
-    street: Optional[str]
-    city: Optional[str]
-    state: Optional[str]
+    user_id: Optional[uuid.UUID] = None
+    street: Optional[str] = None
+    city: Optional[str] = None
+    state: Optional[str] = None
 
 
 class AddressInDBSchema(BaseSchema):

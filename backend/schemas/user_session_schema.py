@@ -14,9 +14,9 @@ class UserSessionCreateSchema(pydantic.BaseModel):
 
 
 class UserSessionUpdateSchema(BaseSchema):
-    user_id: Optional[uuid.UUID]
-    token: Optional[str]
-    expires_at: Optional[datetime]
+    user_id: Optional[uuid.UUID] = None
+    token: Optional[str] = None
+    expires_at: Optional[datetime] = None
 
 
 class UserSessionInDBSchema(BaseSchema):

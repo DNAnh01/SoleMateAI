@@ -13,6 +13,10 @@ from backend.common.utils import clone_model
 from backend.db.base_class import Base
 from backend.db.query_builder import get_count, get_filter, query_builder
 
+from backend.common.logger import setup_logger
+
+logger = setup_logger()
+
 ModelType = TypeVar("ModelType", bound=Base)
 CreateSchemaType = TypeVar("CreateSchemaType", bound=BaseModel)
 UpdateSchemaType = TypeVar("UpdateSchemaType", bound=BaseModel)
@@ -40,6 +44,8 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
         db: Session,
         filter_param: dict = None,
     ) -> List[ModelType]:
+        if filter_param is None:
+            filter_param = {}
         query = query_builder(
             db=db,
             model=self.model,
@@ -48,13 +54,11 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
             include=filter_param.get("include"),
             join=filter_param.get("join"),
         )
+        
         query = query.filter(self.model.deleted_at == None)
-        return {
-            "total": get_count(query),
-            "results": query.offset(filter_param.get("skip"))
-            .limit(filter_param.get("limit"))
-            .all(),
-        }
+        return query \
+            .offset(filter_param.get("skip")) \
+            .limit(filter_param.get("limit")).all()
 
     def get_multi_not_paging(
         self,

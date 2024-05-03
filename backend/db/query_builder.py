@@ -7,6 +7,9 @@ from sqlalchemy.orm import Session, selectinload
 from sqlalchemy.sql.expression import cast
 
 from backend.db.base_class import Base
+from backend.common.logger import setup_logger
+
+logger = setup_logger()
 
 ModelType = TypeVar("ModelType", bound=Base)
 
@@ -72,6 +75,7 @@ def query_builder(
 
     if filter is not None:
         filter = get_filter(model, json.loads(filter))
+        # logger.info(f"filter: {filter}")
         query = query.filter(filter)
 
     if include is not None:
@@ -176,3 +180,5 @@ def get_op(model: Type[ModelType], key: str, value: str):
         else:
             op = getattr(model, column).isnot(None)
     return op
+
+

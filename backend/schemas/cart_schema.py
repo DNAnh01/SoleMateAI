@@ -15,11 +15,11 @@ class CartCreateSchema(pydantic.BaseModel):
 
 
 class CartUpdateSchema(BaseSchema):
-    user_id: Optional[uuid.UUID]
-    total_item: Optional[int]
-    total_display_price: Optional[float]
-    total_warehouse_price: Optional[float]
-    total_discounted_price: Optional[float]
+    user_id: Optional[uuid.UUID] = None
+    total_item: Optional[int] = None
+    total_display_price: Optional[float] = None
+    total_warehouse_price: Optional[float] = None
+    total_discounted_price: Optional[float] = None
 
 
 class CartInDBSchema(BaseSchema):

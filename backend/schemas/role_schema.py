@@ -11,7 +11,7 @@ class RoleCreateSchema(pydantic.BaseModel):
 
 
 class RoleUpdateSchema(BaseSchema):
-    role_name: Optional[str]
+    role_name: Optional[str] = None
 
 
 class RoleInDBSchema(BaseSchema):

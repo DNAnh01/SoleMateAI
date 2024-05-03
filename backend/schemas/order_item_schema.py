@@ -22,12 +22,12 @@ class OrderItemCreateSchema(pydantic.BaseModel):
 
 
 class OrderItemUpdateSchema(BaseSchema):
-    order_id: Optional[uuid.UUID]
-    shoe_id: Optional[uuid.UUID]
-    quantity: Optional[int]
-    display_price: Optional[float]
-    warehouse_price: Optional[float]
-    discounted_price: Optional[float]
+    order_id: Optional[uuid.UUID] = None
+    shoe_id: Optional[uuid.UUID] = None
+    quantity: Optional[int] = None
+    display_price: Optional[float] = None
+    warehouse_price: Optional[float] = None
+    discounted_price: Optional[float] = None
 
 
 class OrderItemInDBSchema(BaseSchema):

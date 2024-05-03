@@ -12,8 +12,8 @@ class ShoePromotionCreateSchema(pydantic.BaseModel):
 
 
 class ShoePromotionUpdateSchema(BaseSchema):
-    shoe_id: Optional[uuid.UUID]
-    promotion_id: Optional[uuid.UUID]
+    shoe_id: Optional[uuid.UUID] = None
+    promotion_id: Optional[uuid.UUID] = None
 
 
 class ShoePromotionInDBSchema(BaseSchema):

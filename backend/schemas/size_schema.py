@@ -12,7 +12,7 @@ class SizeCreateSchema(pydantic.BaseModel):
 
 
 class SizeUpdateSchema(BaseSchema):
-    size_number: Optional[int]
+    size_number: Optional[int] = None
     # sort_order: Optional[int]
 
 

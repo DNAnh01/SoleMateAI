@@ -13,8 +13,8 @@ class ColorCreateSchema(pydantic.BaseModel):
 
 
 class ColorUpdateSchema(BaseSchema):
-    color_name: Optional[str]
-    hex_value: Optional[str]
+    color_name: Optional[str] = None
+    hex_value: Optional[str] = None
     # sort_order: Optional[int]
 
 

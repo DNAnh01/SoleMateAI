@@ -12,6 +12,7 @@ class Chatbot(Base):
     )
     chatbot_name = Column(String, nullable=False)
     model = Column(String, nullable=False)
+    is_public = Column(Boolean, default=False)
     description = Column(String, nullable=True, default="description not provided")
     temperature = Column(Double, default=0.5)
     max_token = Column(Integer, default=100)

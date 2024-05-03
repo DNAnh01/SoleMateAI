@@ -13,8 +13,8 @@ class BrandCreateSchema(pydantic.BaseModel):
 
 
 class BrandUpdateSchema(BaseSchema):
-    brand_name: Optional[str]
-    brand_logo: Optional[str]
+    brand_name: Optional[str] = None
+    brand_logo: Optional[str] = None
     # sort_order: Optional[int]
 
 

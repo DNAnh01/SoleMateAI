@@ -20,15 +20,15 @@ class OrderCreateSchema(pydantic.BaseModel):
 
 
 class OrderUpdateSchema(BaseSchema):
-    address_id: Optional[uuid.UUID]
-    user_id: Optional[uuid.UUID]
-    order_date: Optional[datetime]
-    delivery_date: Optional[datetime]
-    status: Optional[str]
-    total_item: Optional[int]
-    total_display_price: Optional[float]
-    total_warehouse_price: Optional[float]
-    total_discounted_price: Optional[float]
+    address_id: Optional[uuid.UUID] = None
+    user_id: Optional[uuid.UUID] = None
+    order_date: Optional[datetime] = None
+    delivery_date: Optional[datetime] = None
+    status: Optional[str] = None
+    total_item: Optional[int] = None
+    total_display_price: Optional[float] = None
+    total_warehouse_price: Optional[float] = None
+    total_discounted_price: Optional[float] = None
 
 
 class OrderInDBSchema(BaseSchema):

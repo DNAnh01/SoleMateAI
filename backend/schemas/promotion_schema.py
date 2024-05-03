@@ -15,10 +15,10 @@ class PromotionCreateSchema(pydantic.BaseModel):
 
 
 class PromotionUpdateSchema(BaseSchema):
-    promotion_name: Optional[str]
-    start_date: Optional[datetime]
-    end_date: Optional[datetime]
-    discount_percent: Optional[int]
+    promotion_name: Optional[str] = None
+    start_date: Optional[datetime] = None
+    end_date: Optional[datetime] = None
+    discount_percent: Optional[int] = None
 
 
 class PromotionInDBSchema(BaseSchema):

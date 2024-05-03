@@ -10,7 +10,9 @@ from backend.core.config import settings
 
 # Create a CryptContext instance with bcrypt as the hashing scheme
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+from backend.common.logger import setup_logger
 
+logger = setup_logger()
 
 def get_expires_at() -> datetime:
     """
@@ -94,13 +96,14 @@ def asdict(obj):
 
 
 def read_pdf(file_path):
-    with open(file_path, "rb") as file:
+    with open(file_path, 'rb') as file:
         reader = PyPDF2.PdfReader(file)
         num_pages = len(reader.pages)
-        text = ""
+        text = ''
         for page_num in range(num_pages):
             page = reader.pages[page_num]
             text += page.extract_text()
+    # logger.info(f"Extracted text from PDF: {text}")
     return text
 
 

@@ -11,7 +11,7 @@ class PermissionCreateSchema(pydantic.BaseModel):
 
 
 class PermissionUpdateSchema(BaseSchema):
-    permission_name: Optional[str]
+    permission_name: Optional[str] = None
 
 
 class PermissionInDBSchema(BaseSchema):

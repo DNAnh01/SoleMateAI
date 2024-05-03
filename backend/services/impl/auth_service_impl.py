@@ -54,7 +54,7 @@ class AuthServiceImpl(AuthService):
         """Check email verification is sent successfully. If so, create a new user."""
         is_sended = await send_email.send_verification_email(
             user_info={"name": display_name, "email": user.email},
-            redirect_url=f"{settings.REDIRECT_FRONTEND_URL}/home",
+            redirect_url=f"{settings.REDIRECT_FRONTEND_URL}/sign-sin",
             mode=1,
         )
         logger.info(

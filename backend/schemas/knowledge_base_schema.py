@@ -7,7 +7,7 @@ from backend.schemas._base_schema import BaseSchema
 
 
 class KnowledgeBaseCreateSchema(pydantic.BaseModel):
-    chatbot_id: uuid.UUID
+    # chatbot_id: uuid.UUID
     knowledge_base_name: str
     content_type: str
     file_path: str
@@ -16,12 +16,12 @@ class KnowledgeBaseCreateSchema(pydantic.BaseModel):
 
 
 class KnowledgeBaseUpdateSchema(BaseSchema):
-    chatbot_id: Optional[uuid.UUID]
-    knowledge_base_name: Optional[str]
-    content_type: Optional[str]
-    file_path: Optional[str]
-    character_count: Optional[int]
-    file_size: Optional[float]
+    chatbot_id: Optional[uuid.UUID] = None
+    knowledge_base_name: Optional[str] = None
+    content_type: Optional[str] = None
+    file_path: Optional[str] = None
+    character_count: Optional[int] = None
+    file_size: Optional[float] = None
 
 
 class KnowledgeBaseInDBSchema(BaseSchema):

@@ -14,9 +14,9 @@ class ColorSizeCreateSchema(pydantic.BaseModel):
 
 
 class ColorSizeUpdateSchema(BaseSchema):
-    shoe_color_id: Optional[uuid.UUID]
-    size_id: Optional[uuid.UUID]
-    quantity_in_stock: Optional[int]
+    shoe_color_id: Optional[uuid.UUID] = None
+    size_id: Optional[uuid.UUID] = None
+    quantity_in_stock: Optional[int] = None
     # reorder: Optional[int]
 
 

@@ -14,10 +14,10 @@ class ShoeColorCreateSchema(pydantic.BaseModel):
 
 
 class ShoeColorUpdateSchema(BaseSchema):
-    shoe_id: Optional[uuid.UUID]
-    color_id: Optional[uuid.UUID]
-    # sort_order: Optional[int]
-    image_url: Optional[str]
+    shoe_id: Optional[uuid.UUID] = None
+    color_id: Optional[uuid.UUID] = None
+    # sort_order: Optional[int] = None
+    image_url: Optional[str] = None
 
 
 class ShoeColorInDBSchema(BaseSchema):

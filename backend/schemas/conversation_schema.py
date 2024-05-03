@@ -16,11 +16,11 @@ class ConversationCreateSchema(pydantic.BaseModel):
 
 
 class ConversationUpdateSchema(BaseSchema):
-    chatbot_id: Optional[uuid.UUID]
-    user_id: Optional[uuid.UUID]
-    started_at: Optional[datetime]
-    ended_at: Optional[datetime]
-    rating_score: Optional[float]
+    chatbot_id: Optional[uuid.UUID] = None
+    user_id: Optional[uuid.UUID] = None
+    started_at: Optional[datetime] = None
+    ended_at: Optional[datetime] = None
+    rating_score: Optional[float] = None
 
 
 class ConversationInDBSchema(BaseSchema):

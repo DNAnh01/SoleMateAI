@@ -13,9 +13,9 @@ class MessageCreateSchema(pydantic.BaseModel):
 
 
 class MessageUpdateSchema(BaseSchema):
-    conversation_id: Optional[uuid.UUID]
-    sender_type: Optional[str]
-    message_text: Optional[str]
+    conversation_id: Optional[uuid.UUID] = None
+    sender_type: Optional[str] = None
+    message_text: Optional[str] = None
 
 
 class MessageInDBSchema(BaseSchema):

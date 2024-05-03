@@ -10,6 +10,9 @@ from backend.api import deps
 from backend.common.logger import setup_logger
 from backend.core.config import settings
 from backend.crud.crud_user import crud_user
+from backend.schemas.user_role_permission_schema import UserRolePermissionSchema
+from backend.crud.crud_user_role_permision import crud_user_role_permission
+
 
 logger = setup_logger()
 
@@ -99,3 +102,11 @@ def get_current_user(
         logger.error(f"Error in {__name__}.get_current_user: User not found")
         raise credentials_exception
     return user_found
+
+
+def get_current_user_role_permission(db: Session = Depends(deps.get_db), token: str = Depends(oauth2_scheme)) -> UserRolePermissionSchema:
+    user_found = get_current_user(db=db, token=token)
+    user_role_permission = crud_user_role_permission.get_user_role_permission(db, user_found.id)
+    
+    # logger.info(f"User Role Permission: {user_role_permission.u_list_permission_name}")
+    return user_role_permission

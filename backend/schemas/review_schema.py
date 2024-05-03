@@ -15,11 +15,11 @@ class ReviewCreateSchema(pydantic.BaseModel):
 
 
 class ReviewUpdateSchema(BaseSchema):
-    user_id: Optional[uuid.UUID]
-    shoe_id: Optional[uuid.UUID]
-    rating: Optional[int]
-    comment: Optional[str]
-    heart_count: Optional[int]
+    user_id: Optional[uuid.UUID] = None
+    shoe_id: Optional[uuid.UUID] = None
+    rating: Optional[int] = None
+    comment: Optional[str] = None
+    heart_count: Optional[int] = None
 
 
 class ReviewInDBSchema(BaseSchema):
