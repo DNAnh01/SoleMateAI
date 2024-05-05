@@ -45,7 +45,7 @@ class Settings(BaseSettings):
     MAIL_PASSWORD: str = os.environ.get("MAIL_PASSWORD")
     MAIL_FROM: str = os.environ.get("MAIL_FROM")
 
-    OPEN_API_KEY: str = os.environ.get("OPEN_API_KEY")
+    OPENAI_API_KEY: str = os.environ.get("OPENAI_API_KEY")
 
     @field_validator("SQLALCHEMY_DATABASE_URI", mode="before")
     @classmethod

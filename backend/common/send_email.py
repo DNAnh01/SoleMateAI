@@ -1,5 +1,4 @@
 from fastapi_mail import FastMail, MessageSchema
-from sqlalchemy.orm import Session
 
 from backend.common.email_template import (
     email_forgot_password_template,

@@ -6,8 +6,8 @@ from sqlalchemy import and_, func, or_
 from sqlalchemy.orm import Session, selectinload
 from sqlalchemy.sql.expression import cast
 
-from backend.db.base_class import Base
 from backend.common.logger import setup_logger
+from backend.db.base_class import Base
 
 logger = setup_logger()
 
@@ -180,5 +180,3 @@ def get_op(model: Type[ModelType], key: str, value: str):
         else:
             op = getattr(model, column).isnot(None)
     return op
-
-

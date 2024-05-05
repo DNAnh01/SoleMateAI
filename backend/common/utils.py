@@ -14,6 +14,7 @@ from backend.common.logger import setup_logger
 
 logger = setup_logger()
 
+
 def get_expires_at() -> datetime:
     """
     Calculate the expiry time for an access token.
@@ -96,10 +97,10 @@ def asdict(obj):
 
 
 def read_pdf(file_path):
-    with open(file_path, 'rb') as file:
+    with open(file_path, "rb") as file:
         reader = PyPDF2.PdfReader(file)
         num_pages = len(reader.pages)
-        text = ''
+        text = ""
         for page_num in range(num_pages):
             page = reader.pages[page_num]
             text += page.extract_text()

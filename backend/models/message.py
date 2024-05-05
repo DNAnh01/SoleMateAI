@@ -12,7 +12,7 @@ class Message(Base):
         ForeignKey("conversations.id", ondelete="CASCADE"),
         nullable=False,
     )
-
+    sender_id = Column(String, nullable=False)
     sender_type = Column(String, nullable=False)
     message_text = Column(String, nullable=False)
 

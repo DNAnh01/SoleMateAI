@@ -1,9 +1,7 @@
-import csv
 import os
 import uuid
 from datetime import datetime
 
-import pytz
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
 
@@ -38,13 +36,9 @@ from backend.crud.crud_user import crud_user
 from backend.crud.crud_user_session import crud_user_session
 
 """Import schemas from backend.schemas."""
-from backend.schemas.brand_schema import BrandCreateSchema
-from backend.schemas.color_schema import ColorCreateSchema
 from backend.schemas.permission_schema import PermissionCreateSchema
-from backend.schemas.promotion_schema import PromotionCreateSchema
 from backend.schemas.role_permission_schema import RolePermissionCreateSchema
 from backend.schemas.role_schema import RoleCreateSchema
-from backend.schemas.size_schema import SizeCreateSchema
 from backend.schemas.user_schema import UserInDBSchema
 
 logger = setup_logger()

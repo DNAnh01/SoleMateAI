@@ -11,7 +11,7 @@ class Chatbot(Base):
         UUID(as_uuid=True), ForeignKey("users.id", ondelete="CASCADE"), nullable=False
     )
     chatbot_name = Column(String, nullable=False)
-    model = Column(String, nullable=False)
+    model = Column(String, default="gpt-4")
     is_public = Column(Boolean, default=False)
     description = Column(String, nullable=True, default="description not provided")
     temperature = Column(Double, default=0.5)

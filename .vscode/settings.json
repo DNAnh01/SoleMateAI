@@ -41,6 +41,7 @@
         "levelname",
         "ondelete",
         "onupdate",
+        "openai",
         "pascalcase",
         "pascalize",
         "pascalized",

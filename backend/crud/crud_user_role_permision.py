@@ -1,13 +1,13 @@
+import uuid
+from typing import Optional
+
+from sqlalchemy import text
+from sqlalchemy.orm import Session
+
 from backend.common.logger import setup_logger
 from backend.schemas.user_role_permission_schema import UserRolePermissionSchema
-from sqlalchemy.orm import Session
-from typing import Optional
-from sqlalchemy import text
-import uuid
-
 
 logger = setup_logger()
-
 
 
 GET_USER_ROLE_PERMISSION = f"""
@@ -36,7 +36,8 @@ GET_USER_ROLE_PERMISSION = f"""
                             WHERE u.id = :user_id
                             AND u.deleted_at IS NULL;
                         """
-                        
+
+
 class CRUDUserRolePermission:
     def get_user_role_permission(
         self, db: Session, user_id: uuid.UUID
@@ -44,23 +45,30 @@ class CRUDUserRolePermission:
         result_proxy = db.execute(text(GET_USER_ROLE_PERMISSION), {"user_id": user_id})
         column_names = result_proxy.keys()
         result = result_proxy.fetchone()
-        
+
         if result:
             result_dict = dict(zip(column_names, result))
             builder = UserRolePermissionSchema.builder()
             """u_id	u_display_name	u_email	u_role_name	u_list_permission_name"""
-            builder \
-                .with_u_id(result_dict[UserRolePermissionSchema.U_ID]) \
-                .with_u_display_name(result_dict[UserRolePermissionSchema.U_DISPLAY_NAME]) \
-                .with_u_email(result_dict[UserRolePermissionSchema.U_EMAIL]) \
-                .with_u_role_name(result_dict[UserRolePermissionSchema.U_ROLE_NAME]) \
-                .with_u_list_permission_name(UserRolePermissionSchema.convert_str_to_list(result_dict['u_list_permission_name']))
-                
+            builder.with_u_id(
+                result_dict[UserRolePermissionSchema.U_ID]
+            ).with_u_display_name(
+                result_dict[UserRolePermissionSchema.U_DISPLAY_NAME]
+            ).with_u_email(
+                result_dict[UserRolePermissionSchema.U_EMAIL]
+            ).with_u_role_name(
+                result_dict[UserRolePermissionSchema.U_ROLE_NAME]
+            ).with_u_list_permission_name(
+                UserRolePermissionSchema.convert_str_to_list(
+                    result_dict["u_list_permission_name"]
+                )
+            )
+
             user_role_permission = builder.build()
             return user_role_permission
-        
+
         else:
             return None
-        
+
+
 crud_user_role_permission = CRUDUserRolePermission()
-                    

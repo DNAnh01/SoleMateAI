@@ -9,6 +9,7 @@ permission_name
 "update_user"
 "delete_user"
 "read_shoe_promotion"
+"read_chatbot"
 "read_brand"
 "read_color"
 "create_message"

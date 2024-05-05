@@ -8,12 +8,11 @@ from sqlalchemy import and_
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
+from backend.common.logger import setup_logger
 from backend.common.string_case import decamelize
 from backend.common.utils import clone_model
 from backend.db.base_class import Base
 from backend.db.query_builder import get_count, get_filter, query_builder
-
-from backend.common.logger import setup_logger
 
 logger = setup_logger()
 
@@ -54,11 +53,13 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
             include=filter_param.get("include"),
             join=filter_param.get("join"),
         )
-        
+
         query = query.filter(self.model.deleted_at == None)
-        return query \
-            .offset(filter_param.get("skip")) \
-            .limit(filter_param.get("limit")).all()
+        return (
+            query.offset(filter_param.get("skip"))
+            .limit(filter_param.get("limit"))
+            .all()
+        )
 
     def get_multi_not_paging(
         self,

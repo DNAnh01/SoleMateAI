@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from sqlalchemy import Column, DateTime, Double, ForeignKey
+from sqlalchemy import Column, DateTime, Double, ForeignKey, String
 from sqlalchemy.dialects.postgresql.base import UUID
 from sqlalchemy.orm import relationship
 
@@ -17,7 +17,8 @@ class Conversation(Base):
     user_id = Column(
         UUID(as_uuid=True), ForeignKey("users.id", ondelete="CASCADE"), nullable=False
     )
-    started_at = Column(DateTime(timezone=True), default=datetime.now)
+    conversation_name = Column(String, nullable=False)
+    started_at = Column(DateTime(timezone=True), nullable= False,default=datetime.now)
     ended_at = Column(DateTime(timezone=True), nullable=True)
     rating_score = Column(Double, nullable=True)
 
