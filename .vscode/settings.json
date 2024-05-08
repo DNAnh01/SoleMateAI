@@ -17,6 +17,7 @@
     "editor.formatOnSave": true,
     "prettier.configPath": "./frontend/.prettierrc",
     "cSpell.words": [
+        "Asics",
         "autoflake",
         "autoflush",
         "camelcase",
@@ -30,6 +31,7 @@
         "dotenv",
         "drpi",
         "fastapi",
+        "heroicons",
         "hzne",
         "ilike",
         "initialisms",
@@ -46,6 +48,7 @@
         "pascalize",
         "pascalized",
         "passlib",
+        "Popins",
         "Pydantic",
         "pytz",
         "rsps",

@@ -29,7 +29,7 @@ def create(
     ),
     db: Session = Depends(deps.get_db),
 ):
-    file_path = f"backend/knowledge_files/{chatbot_id}_{file.filename}"
+    file_path = f"backend/assets/knowledge_files/{chatbot_id}_{file.filename}"
     # Ensure the directory exists
     os.makedirs(os.path.dirname(file_path), exist_ok=True)
     with open(file_path, "wb") as f:

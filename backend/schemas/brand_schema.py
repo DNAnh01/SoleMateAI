@@ -7,8 +7,8 @@ from backend.schemas._base_schema import BaseSchema
 
 
 class BrandCreateSchema(pydantic.BaseModel):
-    brand_name: str
-    brand_logo: str
+    brand_name: Optional[str] = None
+    brand_logo: Optional[str] = None
     # sort_order: Optional[int]
 
 

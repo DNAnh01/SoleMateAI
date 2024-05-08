@@ -1,0 +1,962 @@
+[
+    {
+        "brand": {
+            "brand_name": "Nike",
+            "brand_logo": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/brand_logo_Nike.png"
+        },
+        "size": {
+            "size_number": 43
+        },
+        "color": {
+            "color_name": "Yellow",
+            "hex_value": "#e3a338"
+        },
+        "image_url": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/shoe1.png",
+        "shoe_name": "Nike Air Max 90 Essential",
+        "description": "Giày thể thao nam Nike Air Max 90 Essential mang đến sự êm ái, thoải mái cho người sử dụng.",
+        "quantity_in_stock": 100,
+        "display_price": 800000,
+        "warehouse_price": 620000,
+        "discounted_price": 0
+    },
+    {
+        "brand": {
+            "brand_name": "Nike",
+            "brand_logo": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/brand_logo_Nike.png"
+        },
+        "size": {
+            "size_number": 43
+        },
+        "color": {
+            "color_name": "Black",
+            "hex_value": "#2a292b"
+        },
+        "image_url": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/shoe2.png",
+        "shoe_name": "Nike Air Force 1 '07",
+        "description": "Giày thể thao nam Nike Air Force 1 '07 mang đến sự êm ái, thoải mái cho người sử dụng.",
+        "quantity_in_stock": 100,
+        "display_price": 1200000,
+        "warehouse_price": 1500000,
+        "discounted_price": 0
+    },
+    {
+        "brand": {
+            "brand_name": "Reebok",
+            "brand_logo": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/brand_logo_Reebok.png"
+        },
+        "size": {
+            "size_number": 43
+        },
+        "color": {
+            "color_name": "Blue",
+            "hex_value": "#1a1350"
+        },
+        "image_url": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/shoe3.png",
+        "shoe_name": "Reebok Classic",
+        "description": "Giày thể thao nữ Reebok Classic mang đến sự êm ái, thoải mái cho người sử dụng.",
+        "quantity_in_stock": 100,
+        "display_price": 1800000,
+        "warehouse_price": 1400000,
+        "discounted_price": 0
+    },
+    {
+        "brand": {
+            "brand_name": "Puma",
+            "brand_logo": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/brand_logo_Puma.png"
+        },
+        "size": {
+            "size_number": 43
+        },
+        "color": {
+            "color_name": "Light Blue",
+            "hex_value": "#71c1dd"
+        },
+        "image_url": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/shoe4.png",
+        "shoe_name": "Puma Suede Classic+",
+        "description": "Giày thể thao nam Puma Suede Classic+ mang đến sự êm ái, thoải mái cho người sử dụng.",
+        "quantity_in_stock": 100,
+        "display_price": 2000000,
+        "warehouse_price": 1600000,
+        "discounted_price": 0
+    },
+    {
+        "brand": {
+            "brand_name": "Under Armour",
+            "brand_logo": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/brand_logo_Under_Armour.png"
+        },
+        "size": {
+            "size_number": 43
+        },
+        "color": {
+            "color_name": "Grey",
+            "hex_value": "#636a6e"
+        },
+        "image_url": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/shoe5.png",
+        "shoe_name": "Under Armour Curry 2.5",
+        "description": "Giày thể thao nam Under Armour Curry 2.5 mang đến sự êm ái, thoải mái cho người sử dụng.",
+        "quantity_in_stock": 100,
+        "display_price": 2100000,
+        "warehouse_price": 1800000,
+        "discounted_price": 0
+    },
+    {
+        "brand": {
+            "brand_name": "New Balance",
+            "brand_logo": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/brand_logo_New_Balance.png"
+        },
+        "size": {
+            "size_number": 43
+        },
+        "color": {
+            "color_name": "Orange",
+            "hex_value": "#dc3e26"
+        },
+        "image_url": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/shoe6.png",
+        "shoe_name": "New Balance 574 Classic",
+        "description": "Giày thể thao nam New Balance 574 Classic mang đến sự êm ái, thoải mái cho người sử dụng.",
+        "quantity_in_stock": 100,
+        "display_price": 1000000,
+        "warehouse_price": 800000,
+        "discounted_price": 0
+    },
+    {
+        "brand": {
+            "brand_name": "Vans",
+            "brand_logo": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/brand_logo_Vans.png"
+        },
+        "size": {
+            "size_number": 43
+        },
+        "color": {
+            "color_name": "Red",
+            "hex_value": "#ff4b3d"
+        },
+        "image_url": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/shoe7.png",
+        "shoe_name": "Vans Old Skool",
+        "description": "Giày thể thao nam Vans Old Skool mang đến sự êm ái, thoải mái cho người sử dụng.",
+        "quantity_in_stock": 100,
+        "display_price": 500000,
+        "warehouse_price": 300000,
+        "discounted_price": 0
+    },
+    {
+        "brand": {
+            "brand_name": "Adidas",
+            "brand_logo": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/brand_logo_Adidas.png"
+        },
+        "size": {
+            "size_number": 43
+        },
+        "color": {
+            "color_name": "Grey",
+            "hex_value": "#636a6e"
+        },
+        "image_url": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/shoe8.png",
+        "shoe_name": "Adidas Superstar",
+        "description": "Giày thể thao nam Adidas Superstar mang đến sự êm ái, thoải mái cho người sử dụng.",
+        "quantity_in_stock": 100,
+        "display_price": 2100000,
+        "warehouse_price": 1600000,
+        "discounted_price": 0
+    },
+    {
+        "brand": {
+            "brand_name": "Nike",
+            "brand_logo": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/brand_logo_Nike.png"
+        },
+        "size": {
+            "size_number": 42
+        },
+        "color": {
+            "color_name": "Yellow",
+            "hex_value": "#e3a338"
+        },
+        "image_url": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/shoe1.png",
+        "shoe_name": "Nike Air Max 90 Essential",
+        "description": "Giày thể thao nam Nike Air Max 90 Essential mang đến sự êm ái, thoải mái cho người sử dụng.",
+        "quantity_in_stock": 100,
+        "display_price": 800000,
+        "warehouse_price": 620000,
+        "discounted_price": 0
+    },
+    {
+        "brand": {
+            "brand_name": "Nike",
+            "brand_logo": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/brand_logo_Nike.png"
+        },
+        "size": {
+            "size_number": 42
+        },
+        "color": {
+            "color_name": "Black",
+            "hex_value": "#2a292b"
+        },
+        "image_url": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/shoe2.png",
+        "shoe_name": "Nike Air Force 1 '07",
+        "description": "Giày thể thao nam Nike Air Force 1 '07 mang đến sự êm ái, thoải mái cho người sử dụng.",
+        "quantity_in_stock": 100,
+        "display_price": 1200000,
+        "warehouse_price": 1500000,
+        "discounted_price": 0
+    },
+    {
+        "brand": {
+            "brand_name": "Reebok",
+            "brand_logo": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/brand_logo_Reebok.png"
+        },
+        "size": {
+            "size_number": 42
+        },
+        "color": {
+            "color_name": "Blue",
+            "hex_value": "#1a1350"
+        },
+        "image_url": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/shoe3.png",
+        "shoe_name": "Reebok Classic",
+        "description": "Giày thể thao nữ Reebok Classic mang đến sự êm ái, thoải mái cho người sử dụng.",
+        "quantity_in_stock": 100,
+        "display_price": 1800000,
+        "warehouse_price": 1400000,
+        "discounted_price": 0
+    },
+    {
+        "brand": {
+            "brand_name": "Puma",
+            "brand_logo": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/brand_logo_Puma.png"
+        },
+        "size": {
+            "size_number": 42
+        },
+        "color": {
+            "color_name": "Light Blue",
+            "hex_value": "#71c1dd"
+        },
+        "image_url": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/shoe4.png",
+        "shoe_name": "Puma Suede Classic+",
+        "description": "Giày thể thao nam Puma Suede Classic+ mang đến sự êm ái, thoải mái cho người sử dụng.",
+        "quantity_in_stock": 100,
+        "display_price": 2000000,
+        "warehouse_price": 1600000,
+        "discounted_price": 0
+    },
+    {
+        "brand": {
+            "brand_name": "Under Armour",
+            "brand_logo": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/brand_logo_Under_Armour.png"
+        },
+        "size": {
+            "size_number": 42
+        },
+        "color": {
+            "color_name": "Grey",
+            "hex_value": "#636a6e"
+        },
+        "image_url": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/shoe5.png",
+        "shoe_name": "Under Armour Curry 2.5",
+        "description": "Giày thể thao nam Under Armour Curry 2.5 mang đến sự êm ái, thoải mái cho người sử dụng.",
+        "quantity_in_stock": 100,
+        "display_price": 2100000,
+        "warehouse_price": 1800000,
+        "discounted_price": 0
+    },
+    {
+        "brand": {
+            "brand_name": "New Balance",
+            "brand_logo": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/brand_logo_New_Balance.png"
+        },
+        "size": {
+            "size_number": 42
+        },
+        "color": {
+            "color_name": "Orange",
+            "hex_value": "#dc3e26"
+        },
+        "image_url": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/shoe6.png",
+        "shoe_name": "New Balance 574 Classic",
+        "description": "Giày thể thao nam New Balance 574 Classic mang đến sự êm ái, thoải mái cho người sử dụng.",
+        "quantity_in_stock": 100,
+        "display_price": 1000000,
+        "warehouse_price": 800000,
+        "discounted_price": 0
+    },
+    {
+        "brand": {
+            "brand_name": "Vans",
+            "brand_logo": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/brand_logo_Vans.png"
+        },
+        "size": {
+            "size_number": 42
+        },
+        "color": {
+            "color_name": "Red",
+            "hex_value": "#ff4b3d"
+        },
+        "image_url": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/shoe7.png",
+        "shoe_name": "Vans Old Skool",
+        "description": "Giày thể thao nam Vans Old Skool mang đến sự êm ái, thoải mái cho người sử dụng.",
+        "quantity_in_stock": 100,
+        "display_price": 500000,
+        "warehouse_price": 300000,
+        "discounted_price": 0
+    },
+    {
+        "brand": {
+            "brand_name": "Adidas",
+            "brand_logo": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/brand_logo_Adidas.png"
+        },
+        "size": {
+            "size_number": 42
+        },
+        "color": {
+            "color_name": "Grey",
+            "hex_value": "#636a6e"
+        },
+        "image_url": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/shoe8.png",
+        "shoe_name": "Adidas Superstar",
+        "description": "Giày thể thao nam Adidas Superstar mang đến sự êm ái, thoải mái cho người sử dụng.",
+        "quantity_in_stock": 100,
+        "display_price": 2100000,
+        "warehouse_price": 1600000,
+        "discounted_price": 0
+    },
+    {
+        "brand": {
+            "brand_name": "Nike",
+            "brand_logo": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/brand_logo_Nike.png"
+        },
+        "size": {
+            "size_number": 41
+        },
+        "color": {
+            "color_name": "Yellow",
+            "hex_value": "#e3a338"
+        },
+        "image_url": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/shoe1.png",
+        "shoe_name": "Nike Air Max 90 Essential",
+        "description": "Giày thể thao nam Nike Air Max 90 Essential mang đến sự êm ái, thoải mái cho người sử dụng.",
+        "quantity_in_stock": 100,
+        "display_price": 800000,
+        "warehouse_price": 620000,
+        "discounted_price": 0
+    },
+    {
+        "brand": {
+            "brand_name": "Nike",
+            "brand_logo": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/brand_logo_Nike.png"
+        },
+        "size": {
+            "size_number": 41
+        },
+        "color": {
+            "color_name": "Black",
+            "hex_value": "#2a292b"
+        },
+        "image_url": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/shoe2.png",
+        "shoe_name": "Nike Air Force 1 '07",
+        "description": "Giày thể thao nam Nike Air Force 1 '07 mang đến sự êm ái, thoải mái cho người sử dụng.",
+        "quantity_in_stock": 100,
+        "display_price": 1200000,
+        "warehouse_price": 1500000,
+        "discounted_price": 0
+    },
+    {
+        "brand": {
+            "brand_name": "Reebok",
+            "brand_logo": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/brand_logo_Reebok.png"
+        },
+        "size": {
+            "size_number": 41
+        },
+        "color": {
+            "color_name": "Blue",
+            "hex_value": "#1a1350"
+        },
+        "image_url": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/shoe3.png",
+        "shoe_name": "Reebok Classic",
+        "description": "Giày thể thao nữ Reebok Classic mang đến sự êm ái, thoải mái cho người sử dụng.",
+        "quantity_in_stock": 100,
+        "display_price": 1800000,
+        "warehouse_price": 1400000,
+        "discounted_price": 0
+    },
+    {
+        "brand": {
+            "brand_name": "Puma",
+            "brand_logo": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/brand_logo_Puma.png"
+        },
+        "size": {
+            "size_number": 41
+        },
+        "color": {
+            "color_name": "Light Blue",
+            "hex_value": "#71c1dd"
+        },
+        "image_url": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/shoe4.png",
+        "shoe_name": "Puma Suede Classic+",
+        "description": "Giày thể thao nam Puma Suede Classic+ mang đến sự êm ái, thoải mái cho người sử dụng.",
+        "quantity_in_stock": 100,
+        "display_price": 2000000,
+        "warehouse_price": 1600000,
+        "discounted_price": 0
+    },
+    {
+        "brand": {
+            "brand_name": "Under Armour",
+            "brand_logo": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/brand_logo_Under_Armour.png"
+        },
+        "size": {
+            "size_number": 41
+        },
+        "color": {
+            "color_name": "Grey",
+            "hex_value": "#636a6e"
+        },
+        "image_url": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/shoe5.png",
+        "shoe_name": "Under Armour Curry 2.5",
+        "description": "Giày thể thao nam Under Armour Curry 2.5 mang đến sự êm ái, thoải mái cho người sử dụng.",
+        "quantity_in_stock": 100,
+        "display_price": 2100000,
+        "warehouse_price": 1800000,
+        "discounted_price": 0
+    },
+    {
+        "brand": {
+            "brand_name": "New Balance",
+            "brand_logo": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/brand_logo_New_Balance.png"
+        },
+        "size": {
+            "size_number": 41
+        },
+        "color": {
+            "color_name": "Orange",
+            "hex_value": "#dc3e26"
+        },
+        "image_url": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/shoe6.png",
+        "shoe_name": "New Balance 574 Classic",
+        "description": "Giày thể thao nam New Balance 574 Classic mang đến sự êm ái, thoải mái cho người sử dụng.",
+        "quantity_in_stock": 100,
+        "display_price": 1000000,
+        "warehouse_price": 800000,
+        "discounted_price": 0
+    },
+    {
+        "brand": {
+            "brand_name": "Vans",
+            "brand_logo": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/brand_logo_Vans.png"
+        },
+        "size": {
+            "size_number": 41
+        },
+        "color": {
+            "color_name": "Red",
+            "hex_value": "#ff4b3d"
+        },
+        "image_url": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/shoe7.png",
+        "shoe_name": "Vans Old Skool",
+        "description": "Giày thể thao nam Vans Old Skool mang đến sự êm ái, thoải mái cho người sử dụng.",
+        "quantity_in_stock": 100,
+        "display_price": 500000,
+        "warehouse_price": 300000,
+        "discounted_price": 0
+    },
+    {
+        "brand": {
+            "brand_name": "Adidas",
+            "brand_logo": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/brand_logo_Adidas.png"
+        },
+        "size": {
+            "size_number": 41
+        },
+        "color": {
+            "color_name": "Grey",
+            "hex_value": "#636a6e"
+        },
+        "image_url": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/shoe8.png",
+        "shoe_name": "Adidas Superstar",
+        "description": "Giày thể thao nam Adidas Superstar mang đến sự êm ái, thoải mái cho người sử dụng.",
+        "quantity_in_stock": 100,
+        "display_price": 2100000,
+        "warehouse_price": 1600000,
+        "discounted_price": 0
+    },
+    {
+        "brand": {
+            "brand_name": "Nike",
+            "brand_logo": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/brand_logo_Nike.png"
+        },
+        "size": {
+            "size_number": 40
+        },
+        "color": {
+            "color_name": "Yellow",
+            "hex_value": "#e3a338"
+        },
+        "image_url": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/shoe1.png",
+        "shoe_name": "Nike Air Max 90 Essential",
+        "description": "Giày thể thao nam Nike Air Max 90 Essential mang đến sự êm ái, thoải mái cho người sử dụng.",
+        "quantity_in_stock": 100,
+        "display_price": 800000,
+        "warehouse_price": 620000,
+        "discounted_price": 0
+    },
+    {
+        "brand": {
+            "brand_name": "Nike",
+            "brand_logo": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/brand_logo_Nike.png"
+        },
+        "size": {
+            "size_number": 40
+        },
+        "color": {
+            "color_name": "Black",
+            "hex_value": "#2a292b"
+        },
+        "image_url": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/shoe2.png",
+        "shoe_name": "Nike Air Force 1 '07",
+        "description": "Giày thể thao nam Nike Air Force 1 '07 mang đến sự êm ái, thoải mái cho người sử dụng.",
+        "quantity_in_stock": 100,
+        "display_price": 1200000,
+        "warehouse_price": 1500000,
+        "discounted_price": 0
+    },
+    {
+        "brand": {
+            "brand_name": "Reebok",
+            "brand_logo": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/brand_logo_Reebok.png"
+        },
+        "size": {
+            "size_number": 40
+        },
+        "color": {
+            "color_name": "Blue",
+            "hex_value": "#1a1350"
+        },
+        "image_url": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/shoe3.png",
+        "shoe_name": "Reebok Classic",
+        "description": "Giày thể thao nữ Reebok Classic mang đến sự êm ái, thoải mái cho người sử dụng.",
+        "quantity_in_stock": 100,
+        "display_price": 1800000,
+        "warehouse_price": 1400000,
+        "discounted_price": 0
+    },
+    {
+        "brand": {
+            "brand_name": "Puma",
+            "brand_logo": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/brand_logo_Puma.png"
+        },
+        "size": {
+            "size_number": 40
+        },
+        "color": {
+            "color_name": "Light Blue",
+            "hex_value": "#71c1dd"
+        },
+        "image_url": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/shoe4.png",
+        "shoe_name": "Puma Suede Classic+",
+        "description": "Giày thể thao nam Puma Suede Classic+ mang đến sự êm ái, thoải mái cho người sử dụng.",
+        "quantity_in_stock": 100,
+        "display_price": 2000000,
+        "warehouse_price": 1600000,
+        "discounted_price": 0
+    },
+    {
+        "brand": {
+            "brand_name": "Under Armour",
+            "brand_logo": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/brand_logo_Under_Armour.png"
+        },
+        "size": {
+            "size_number": 40
+        },
+        "color": {
+            "color_name": "Grey",
+            "hex_value": "#636a6e"
+        },
+        "image_url": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/shoe5.png",
+        "shoe_name": "Under Armour Curry 2.5",
+        "description": "Giày thể thao nam Under Armour Curry 2.5 mang đến sự êm ái, thoải mái cho người sử dụng.",
+        "quantity_in_stock": 100,
+        "display_price": 2100000,
+        "warehouse_price": 1800000,
+        "discounted_price": 0
+    },
+    {
+        "brand": {
+            "brand_name": "New Balance",
+            "brand_logo": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/brand_logo_New_Balance.png"
+        },
+        "size": {
+            "size_number": 40
+        },
+        "color": {
+            "color_name": "Orange",
+            "hex_value": "#dc3e26"
+        },
+        "image_url": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/shoe6.png",
+        "shoe_name": "New Balance 574 Classic",
+        "description": "Giày thể thao nam New Balance 574 Classic mang đến sự êm ái, thoải mái cho người sử dụng.",
+        "quantity_in_stock": 100,
+        "display_price": 1000000,
+        "warehouse_price": 800000,
+        "discounted_price": 0
+    },
+    {
+        "brand": {
+            "brand_name": "Vans",
+            "brand_logo": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/brand_logo_Vans.png"
+        },
+        "size": {
+            "size_number": 40
+        },
+        "color": {
+            "color_name": "Red",
+            "hex_value": "#ff4b3d"
+        },
+        "image_url": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/shoe7.png",
+        "shoe_name": "Vans Old Skool",
+        "description": "Giày thể thao nam Vans Old Skool mang đến sự êm ái, thoải mái cho người sử dụng.",
+        "quantity_in_stock": 100,
+        "display_price": 500000,
+        "warehouse_price": 300000,
+        "discounted_price": 0
+    },
+    {
+        "brand": {
+            "brand_name": "Adidas",
+            "brand_logo": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/brand_logo_Adidas.png"
+        },
+        "size": {
+            "size_number": 40
+        },
+        "color": {
+            "color_name": "Grey",
+            "hex_value": "#636a6e"
+        },
+        "image_url": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/shoe8.png",
+        "shoe_name": "Adidas Superstar",
+        "description": "Giày thể thao nam Adidas Superstar mang đến sự êm ái, thoải mái cho người sử dụng.",
+        "quantity_in_stock": 100,
+        "display_price": 2100000,
+        "warehouse_price": 1600000,
+        "discounted_price": 0
+    },
+    {
+        "brand": {
+            "brand_name": "Nike",
+            "brand_logo": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/brand_logo_Nike.png"
+        },
+        "size": {
+            "size_number": 39
+        },
+        "color": {
+            "color_name": "Yellow",
+            "hex_value": "#e3a338"
+        },
+        "image_url": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/shoe1.png",
+        "shoe_name": "Nike Air Max 90 Essential",
+        "description": "Giày thể thao nam Nike Air Max 90 Essential mang đến sự êm ái, thoải mái cho người sử dụng.",
+        "quantity_in_stock": 100,
+        "display_price": 800000,
+        "warehouse_price": 620000,
+        "discounted_price": 0
+    },
+    {
+        "brand": {
+            "brand_name": "Nike",
+            "brand_logo": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/brand_logo_Nike.png"
+        },
+        "size": {
+            "size_number": 39
+        },
+        "color": {
+            "color_name": "Black",
+            "hex_value": "#2a292b"
+        },
+        "image_url": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/shoe2.png",
+        "shoe_name": "Nike Air Force 1 '07",
+        "description": "Giày thể thao nam Nike Air Force 1 '07 mang đến sự êm ái, thoải mái cho người sử dụng.",
+        "quantity_in_stock": 100,
+        "display_price": 1200000,
+        "warehouse_price": 1500000,
+        "discounted_price": 0
+    },
+    {
+        "brand": {
+            "brand_name": "Reebok",
+            "brand_logo": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/brand_logo_Reebok.png"
+        },
+        "size": {
+            "size_number": 39
+        },
+        "color": {
+            "color_name": "Blue",
+            "hex_value": "#1a1350"
+        },
+        "image_url": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/shoe3.png",
+        "shoe_name": "Reebok Classic",
+        "description": "Giày thể thao nữ Reebok Classic mang đến sự êm ái, thoải mái cho người sử dụng.",
+        "quantity_in_stock": 100,
+        "display_price": 1800000,
+        "warehouse_price": 1400000,
+        "discounted_price": 0
+    },
+    {
+        "brand": {
+            "brand_name": "Puma",
+            "brand_logo": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/brand_logo_Puma.png"
+        },
+        "size": {
+            "size_number": 39
+        },
+        "color": {
+            "color_name": "Light Blue",
+            "hex_value": "#71c1dd"
+        },
+        "image_url": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/shoe4.png",
+        "shoe_name": "Puma Suede Classic+",
+        "description": "Giày thể thao nam Puma Suede Classic+ mang đến sự êm ái, thoải mái cho người sử dụng.",
+        "quantity_in_stock": 100,
+        "display_price": 2000000,
+        "warehouse_price": 1600000,
+        "discounted_price": 0
+    },
+    {
+        "brand": {
+            "brand_name": "Under Armour",
+            "brand_logo": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/brand_logo_Under_Armour.png"
+        },
+        "size": {
+            "size_number": 39
+        },
+        "color": {
+            "color_name": "Grey",
+            "hex_value": "#636a6e"
+        },
+        "image_url": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/shoe5.png",
+        "shoe_name": "Under Armour Curry 2.5",
+        "description": "Giày thể thao nam Under Armour Curry 2.5 mang đến sự êm ái, thoải mái cho người sử dụng.",
+        "quantity_in_stock": 100,
+        "display_price": 2100000,
+        "warehouse_price": 1800000,
+        "discounted_price": 0
+    },
+    {
+        "brand": {
+            "brand_name": "New Balance",
+            "brand_logo": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/brand_logo_New_Balance.png"
+        },
+        "size": {
+            "size_number": 39
+        },
+        "color": {
+            "color_name": "Orange",
+            "hex_value": "#dc3e26"
+        },
+        "image_url": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/shoe6.png",
+        "shoe_name": "New Balance 574 Classic",
+        "description": "Giày thể thao nam New Balance 574 Classic mang đến sự êm ái, thoải mái cho người sử dụng.",
+        "quantity_in_stock": 100,
+        "display_price": 1000000,
+        "warehouse_price": 800000,
+        "discounted_price": 0
+    },
+    {
+        "brand": {
+            "brand_name": "Vans",
+            "brand_logo": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/brand_logo_Vans.png"
+        },
+        "size": {
+            "size_number": 39
+        },
+        "color": {
+            "color_name": "Red",
+            "hex_value": "#ff4b3d"
+        },
+        "image_url": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/shoe7.png",
+        "shoe_name": "Vans Old Skool",
+        "description": "Giày thể thao nam Vans Old Skool mang đến sự êm ái, thoải mái cho người sử dụng.",
+        "quantity_in_stock": 100,
+        "display_price": 500000,
+        "warehouse_price": 300000,
+        "discounted_price": 0
+    },
+    {
+        "brand": {
+            "brand_name": "Adidas",
+            "brand_logo": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/brand_logo_Adidas.png"
+        },
+        "size": {
+            "size_number": 39
+        },
+        "color": {
+            "color_name": "Grey",
+            "hex_value": "#636a6e"
+        },
+        "image_url": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/shoe8.png",
+        "shoe_name": "Adidas Superstar",
+        "description": "Giày thể thao nam Adidas Superstar mang đến sự êm ái, thoải mái cho người sử dụng.",
+        "quantity_in_stock": 100,
+        "display_price": 2100000,
+        "warehouse_price": 1600000,
+        "discounted_price": 0
+    },
+    {
+        "brand": {
+            "brand_name": "Nike",
+            "brand_logo": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/brand_logo_Nike.png"
+        },
+        "size": {
+            "size_number": 38
+        },
+        "color": {
+            "color_name": "Yellow",
+            "hex_value": "#e3a338"
+        },
+        "image_url": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/shoe1.png",
+        "shoe_name": "Nike Air Max 90 Essential",
+        "description": "Giày thể thao nam Nike Air Max 90 Essential mang đến sự êm ái, thoải mái cho người sử dụng.",
+        "quantity_in_stock": 100,
+        "display_price": 800000,
+        "warehouse_price": 620000,
+        "discounted_price": 0
+    },
+    {
+        "brand": {
+            "brand_name": "Nike",
+            "brand_logo": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/brand_logo_Nike.png"
+        },
+        "size": {
+            "size_number": 38
+        },
+        "color": {
+            "color_name": "Black",
+            "hex_value": "#2a292b"
+        },
+        "image_url": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/shoe2.png",
+        "shoe_name": "Nike Air Force 1 '07",
+        "description": "Giày thể thao nam Nike Air Force 1 '07 mang đến sự êm ái, thoải mái cho người sử dụng.",
+        "quantity_in_stock": 100,
+        "display_price": 1200000,
+        "warehouse_price": 1500000,
+        "discounted_price": 0
+    },
+    {
+        "brand": {
+            "brand_name": "Reebok",
+            "brand_logo": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/brand_logo_Reebok.png"
+        },
+        "size": {
+            "size_number": 38
+        },
+        "color": {
+            "color_name": "Blue",
+            "hex_value": "#1a1350"
+        },
+        "image_url": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/shoe3.png",
+        "shoe_name": "Reebok Classic",
+        "description": "Giày thể thao nữ Reebok Classic mang đến sự êm ái, thoải mái cho người sử dụng.",
+        "quantity_in_stock": 100,
+        "display_price": 1800000,
+        "warehouse_price": 1400000,
+        "discounted_price": 0
+    },
+    {
+        "brand": {
+            "brand_name": "Puma",
+            "brand_logo": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/brand_logo_Puma.png"
+        },
+        "size": {
+            "size_number": 38
+        },
+        "color": {
+            "color_name": "Light Blue",
+            "hex_value": "#71c1dd"
+        },
+        "image_url": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/shoe4.png",
+        "shoe_name": "Puma Suede Classic+",
+        "description": "Giày thể thao nam Puma Suede Classic+ mang đến sự êm ái, thoải mái cho người sử dụng.",
+        "quantity_in_stock": 100,
+        "display_price": 2000000,
+        "warehouse_price": 1600000,
+        "discounted_price": 0
+    },
+    {
+        "brand": {
+            "brand_name": "Under Armour",
+            "brand_logo": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/brand_logo_Under_Armour.png"
+        },
+        "size": {
+            "size_number": 38
+        },
+        "color": {
+            "color_name": "Grey",
+            "hex_value": "#636a6e"
+        },
+        "image_url": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/shoe5.png",
+        "shoe_name": "Under Armour Curry 2.5",
+        "description": "Giày thể thao nam Under Armour Curry 2.5 mang đến sự êm ái, thoải mái cho người sử dụng.",
+        "quantity_in_stock": 100,
+        "display_price": 2100000,
+        "warehouse_price": 1800000,
+        "discounted_price": 0
+    },
+    {
+        "brand": {
+            "brand_name": "New Balance",
+            "brand_logo": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/brand_logo_New_Balance.png"
+        },
+        "size": {
+            "size_number": 38
+        },
+        "color": {
+            "color_name": "Orange",
+            "hex_value": "#dc3e26"
+        },
+        "image_url": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/shoe6.png",
+        "shoe_name": "New Balance 574 Classic",
+        "description": "Giày thể thao nam New Balance 574 Classic mang đến sự êm ái, thoải mái cho người sử dụng.",
+        "quantity_in_stock": 100,
+        "display_price": 1000000,
+        "warehouse_price": 800000,
+        "discounted_price": 0
+    },
+    {
+        "brand": {
+            "brand_name": "Vans",
+            "brand_logo": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/brand_logo_Vans.png"
+        },
+        "size": {
+            "size_number": 38
+        },
+        "color": {
+            "color_name": "Red",
+            "hex_value": "#ff4b3d"
+        },
+        "image_url": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/shoe7.png",
+        "shoe_name": "Vans Old Skool",
+        "description": "Giày thể thao nam Vans Old Skool mang đến sự êm ái, thoải mái cho người sử dụng.",
+        "quantity_in_stock": 100,
+        "display_price": 500000,
+        "warehouse_price": 300000,
+        "discounted_price": 0
+    },
+    {
+        "brand": {
+            "brand_name": "Adidas",
+            "brand_logo": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/brand_logo_Adidas.png"
+        },
+        "size": {
+            "size_number": 38
+        },
+        "color": {
+            "color_name": "Grey",
+            "hex_value": "#636a6e"
+        },
+        "image_url": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/shoe8.png",
+        "shoe_name": "Adidas Superstar",
+        "description": "Giày thể thao nam Adidas Superstar mang đến sự êm ái, thoải mái cho người sử dụng.",
+        "quantity_in_stock": 100,
+        "display_price": 2100000,
+        "warehouse_price": 1600000,
+        "discounted_price": 0
+    }
+]
