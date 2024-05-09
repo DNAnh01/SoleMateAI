@@ -12,14 +12,27 @@ class UserCreateSchema(pydantic.BaseModel):
 
 
 class UserUpdateSchema(BaseSchema):
-    role_id: Optional[uuid.UUID] = None
+    # role_id: Optional[uuid.UUID] = None
     email: Optional[pydantic.EmailStr] = None
-    password_hash: Optional[str] = None
+    # password_hash: Optional[str] = None
     display_name: Optional[str] = None
     avatar_url: Optional[str] = None
     payment_information: Optional[str] = None
     is_verified: Optional[bool] = None
 
+
+
+class UserOutSchema(BaseSchema):
+    id: uuid.UUID
+    role_name: str
+    email: pydantic.EmailStr
+    display_name: str
+    avatar_url: str
+    payment_information: str
+    is_verified: bool
+
+    class Config:
+        orm_mode = True
 
 class UserInDBSchema(BaseSchema):
     id: uuid.UUID

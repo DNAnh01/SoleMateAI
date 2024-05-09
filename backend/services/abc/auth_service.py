@@ -44,3 +44,4 @@ class AuthService(ABC):
         self, db: Session, current_user: User, password: ChangePasswordSchema
     ):
         pass
+    

@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from backend.api.v1.endpoints import auth, chatbot, knowledge_base, conversation, message, shoe
+from backend.api.v1.endpoints import auth, chatbot, knowledge_base, conversation, message, shoe, user
 
 api_router = APIRouter()
 api_router.include_router(auth.router, prefix="/auth", tags=["authentications"])
@@ -11,3 +11,4 @@ api_router.include_router(
 api_router.include_router(conversation.router, prefix="/conversation", tags=["conversations"])
 api_router.include_router(message.router, prefix="/message", tags=["messages"])
 api_router.include_router(shoe.router, prefix="/shoe", tags=["shoes"])
+api_router.include_router(user.router, prefix="/user", tags=["users"])
