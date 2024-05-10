@@ -5,7 +5,7 @@ import colorlog
 
 def setup_logger() -> logging.Logger:
     logger = colorlog.getLogger(__name__)
-    
+
     # Only add handlers if the logger doesn't have any
     if not logger.handlers:
         handler = colorlog.StreamHandler()

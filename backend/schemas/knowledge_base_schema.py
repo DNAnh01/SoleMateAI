@@ -25,7 +25,7 @@ class KnowledgeBaseUpdateSchema(BaseSchema):
 
 
 class KnowledgeBaseInDBSchema(BaseSchema):
-    
+
     id: uuid.UUID
     chatbot_id: uuid.UUID
     knowledge_base_name: str

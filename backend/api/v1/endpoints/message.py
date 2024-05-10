@@ -1,14 +1,13 @@
-from fastapi import APIRouter, Depends, HTTPException, status, Request, Cookie
-from backend.services.abc.message_service import MessageService
-from backend.services.impl.message_service_impl import MessageServiceImpl
-from backend.api import deps
-from backend.core import oauth2
-from backend.schemas.user_role_permission_schema import UserRolePermissionSchema
-from backend.schemas.message_schema import MessageInDBSchema
+from fastapi import APIRouter, Cookie, Depends, Request, status
 from sqlalchemy.orm import Session
 
+from backend.api import deps
 from backend.common.logger import setup_logger
-
+from backend.core import oauth2
+from backend.schemas.message_schema import MessageInDBSchema
+from backend.schemas.user_role_permission_schema import UserRolePermissionSchema
+from backend.services.abc.message_service import MessageService
+from backend.services.impl.message_service_impl import MessageServiceImpl
 
 logger = setup_logger()
 
@@ -31,8 +30,8 @@ def create_message(
     client_ip = "42.118.119.124"
     return message_service.create(
         db=db,
-        message=message['message'],
-        conversation_id=message['conversation_id'],
+        message=message["message"],
+        conversation_id=message["conversation_id"],
         client_ip=client_ip,
         current_user_role_permission=current_user_role_permission,
     )

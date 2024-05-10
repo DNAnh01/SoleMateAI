@@ -1,15 +1,13 @@
-from fastapi import APIRouter, Depends, HTTPException, status, Request
+from fastapi import APIRouter, Depends, Request, status
+from sqlalchemy.orm import Session
 
+from backend.api import deps
+from backend.common.logger import setup_logger
+from backend.core import oauth2
+from backend.schemas.conversation_schema import ConversationInDBSchema
+from backend.schemas.user_role_permission_schema import UserRolePermissionSchema
 from backend.services.abc.conversation_service import ConversationService
 from backend.services.impl.conversation_service_impl import ConversationServiceImpl
-from backend.api import deps
-from backend.core import oauth2
-from backend.schemas.user_role_permission_schema import UserRolePermissionSchema
-
-from sqlalchemy.orm import Session
-from backend.schemas.conversation_schema import ConversationInDBSchema
-
-from backend.common.logger import setup_logger
 
 logger = setup_logger()
 
@@ -17,7 +15,10 @@ router = APIRouter()
 
 conversation_service: ConversationService = ConversationServiceImpl()
 
-@router.get("/", status_code=status.HTTP_201_CREATED, response_model=ConversationInDBSchema)
+
+@router.get(
+    "/", status_code=status.HTTP_201_CREATED, response_model=ConversationInDBSchema
+)
 def create_conversation(
     request: Request,
     current_user_role_permission: UserRolePermissionSchema = Depends(
@@ -33,4 +34,3 @@ def create_conversation(
         client_ip=client_ip,
         current_user_role_permission=current_user_role_permission,
     )
-

@@ -38,7 +38,11 @@ def create(
     )
 
 
-@router.get("/get-all", status_code=status.HTTP_200_OK, response_model=Optional[List[ChatbotInDBSchema]])
+@router.get(
+    "/get-all",
+    status_code=status.HTTP_200_OK,
+    response_model=Optional[List[ChatbotInDBSchema]],
+)
 def get_all(
     current_user_role_permission: UserRolePermissionSchema = Depends(
         oauth2.get_current_user_role_permission

@@ -8,6 +8,7 @@ from backend.schemas.brand_schema import BrandCreateSchema
 from backend.schemas.color_schema import ColorCreateSchema
 from backend.schemas.size_schema import SizeCreateSchema
 
+
 class ShoeCreateSchema(pydantic.BaseModel):
     # brand_id: uuid.UUID
     brand: BrandCreateSchema
@@ -20,7 +21,8 @@ class ShoeCreateSchema(pydantic.BaseModel):
     display_price: float
     warehouse_price: float
     discounted_price: Optional[float] = None
-    
+
+
 class ShoeUpdateSchema(BaseSchema):
     brand: Optional[BrandCreateSchema] = None
     size: Optional[SizeCreateSchema] = None
@@ -32,6 +34,7 @@ class ShoeUpdateSchema(BaseSchema):
     display_price: Optional[float] = None
     warehouse_price: Optional[float] = None
     discounted_price: Optional[float] = None
+
 
 class ShoeOutSchema(BaseSchema):
     id: uuid.UUID

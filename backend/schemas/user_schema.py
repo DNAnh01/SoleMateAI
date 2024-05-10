@@ -21,7 +21,6 @@ class UserUpdateSchema(BaseSchema):
     is_verified: Optional[bool] = None
 
 
-
 class UserOutSchema(BaseSchema):
     id: uuid.UUID
     role_name: str
@@ -33,6 +32,7 @@ class UserOutSchema(BaseSchema):
 
     class Config:
         orm_mode = True
+
 
 class UserInDBSchema(BaseSchema):
     id: uuid.UUID

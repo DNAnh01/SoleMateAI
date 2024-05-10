@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Double, ForeignKey, String, Integer
+from sqlalchemy import Column, Double, ForeignKey, Integer, String
 from sqlalchemy.dialects.postgresql.base import UUID
 from sqlalchemy.orm import relationship
 
@@ -10,11 +10,15 @@ class Shoe(Base):
     brand_id = Column(UUID(as_uuid=True), ForeignKey("brands.id"), index=True)
     size_id = Column(UUID(as_uuid=True), ForeignKey("sizes.id"), index=True)
     color_id = Column(UUID(as_uuid=True), ForeignKey("colors.id"), index=True)
-    image_url = Column(String, nullable=False, default="https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/null.jpg")
+    image_url = Column(
+        String,
+        nullable=False,
+        default="https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/null.jpg",
+    )
     shoe_name = Column(String, nullable=False)
     description = Column(String, nullable=False)
     quantity_in_stock = Column(Integer, nullable=False)
-    
+
     display_price = Column(Double, nullable=False)
     warehouse_price = Column(Double, nullable=False)
     discounted_price = Column(Double, nullable=False)

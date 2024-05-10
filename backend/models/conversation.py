@@ -18,7 +18,7 @@ class Conversation(Base):
         UUID(as_uuid=True), ForeignKey("users.id", ondelete="CASCADE"), nullable=False
     )
     conversation_name = Column(String, nullable=False)
-    started_at = Column(DateTime(timezone=True), nullable= False,default=datetime.now)
+    started_at = Column(DateTime(timezone=True), nullable=False, default=datetime.now)
     ended_at = Column(DateTime(timezone=True), nullable=True)
     rating_score = Column(Double, nullable=True)
 

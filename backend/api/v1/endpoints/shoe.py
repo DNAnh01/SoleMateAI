@@ -1,21 +1,20 @@
-import os
 from typing import List, Optional
 
-from fastapi import APIRouter, Depends, File, UploadFile, status
+from fastapi import APIRouter, Depends, status
 from sqlalchemy.orm import Session
 
 from backend.api import deps
-from backend.common import utils
+from backend.common import parameters
 from backend.common.logger import setup_logger
 from backend.core import oauth2
-
+from backend.schemas.shoe_schema import (
+    ShoeCreateSchema,
+    ShoeOutSchema,
+    ShoeUpdateSchema,
+)
 from backend.schemas.user_role_permission_schema import UserRolePermissionSchema
 from backend.services.abc.shoe_service import ShoeService
 from backend.services.impl.shoe_service_impl import ShoeServiceImpl
-
-from backend.schemas.shoe_schema import ShoeCreateSchema, ShoeInDBSchema, ShoeUpdateSchema, ShoeOutSchema
-from backend.common import parameters
-
 
 logger = setup_logger()
 
@@ -29,22 +28,25 @@ router = APIRouter()
 def create_shoe(
     shoe_data: ShoeCreateSchema,
     current_user_role_permission: UserRolePermissionSchema = Depends(
-    oauth2.get_current_user_role_permission
+        oauth2.get_current_user_role_permission
     ),
     db: Session = Depends(deps.get_db),
-) -> ShoeOutSchema:    
+) -> ShoeOutSchema:
     shoe_created = shoe_service.create_shoe(
         db=db,
         shoe=shoe_data,
         current_user_role_permission=current_user_role_permission,
-        )
+    )
     return shoe_created
 
-@router.post("/create-multi", status_code=status.HTTP_200_OK, response_model=List[ShoeOutSchema])
+
+@router.post(
+    "/create-multi", status_code=status.HTTP_200_OK, response_model=List[ShoeOutSchema]
+)
 def create_multi_shoes(
     shoes_data: List[ShoeCreateSchema],
     current_user_role_permission: UserRolePermissionSchema = Depends(
-    oauth2.get_current_user_role_permission
+        oauth2.get_current_user_role_permission
     ),
     db: Session = Depends(deps.get_db),
 ) -> List[ShoeOutSchema]:
@@ -52,15 +54,20 @@ def create_multi_shoes(
         db=db,
         shoes=shoes_data,
         current_user_role_permission=current_user_role_permission,
-        )
+    )
 
     return shoes_created
 
-@router.get("/shoe-id={shoe_id}", status_code=status.HTTP_200_OK, response_model=Optional[ShoeOutSchema])
+
+@router.get(
+    "/shoe-id={shoe_id}",
+    status_code=status.HTTP_200_OK,
+    response_model=Optional[ShoeOutSchema],
+)
 def get_shoe_by_id(
     shoe_id: str,
     current_user_role_permission: UserRolePermissionSchema = Depends(
-    oauth2.get_current_user_role_permission
+        oauth2.get_current_user_role_permission
     ),
     db: Session = Depends(deps.get_db),
 ) -> Optional[ShoeOutSchema]:
@@ -68,14 +75,19 @@ def get_shoe_by_id(
         db=db,
         shoe_id=shoe_id,
         current_user_role_permission=current_user_role_permission,
-        )
+    )
     return shoe
 
-@router.get("/get-all", status_code=status.HTTP_200_OK, response_model=Optional[List[ShoeOutSchema]])
+
+@router.get(
+    "/get-all",
+    status_code=status.HTTP_200_OK,
+    response_model=Optional[List[ShoeOutSchema]],
+)
 def get_all_shoes(
     common_filter_parameters: dict = Depends(parameters.common_filter_parameters),
     current_user_role_permission: UserRolePermissionSchema = Depends(
-    oauth2.get_current_user_role_permission
+        oauth2.get_current_user_role_permission
     ),
     db: Session = Depends(deps.get_db),
 ) -> Optional[List[ShoeOutSchema]]:
@@ -83,15 +95,20 @@ def get_all_shoes(
         db=db,
         common_filters=common_filter_parameters,
         current_user_role_permission=current_user_role_permission,
-        )
+    )
     return shoes
 
-@router.patch("/shoe-id={shoe_id}", status_code=status.HTTP_200_OK, response_model=Optional[ShoeOutSchema])
+
+@router.patch(
+    "/shoe-id={shoe_id}",
+    status_code=status.HTTP_200_OK,
+    response_model=Optional[ShoeOutSchema],
+)
 def update_shoe(
     shoe_id: str,
     shoe_data: ShoeUpdateSchema,
     current_user_role_permission: UserRolePermissionSchema = Depends(
-    oauth2.get_current_user_role_permission
+        oauth2.get_current_user_role_permission
     ),
     db: Session = Depends(deps.get_db),
 ) -> Optional[ShoeOutSchema]:
@@ -104,11 +121,15 @@ def update_shoe(
     return shoe
 
 
-@router.delete("/shoe-id={shoe_id}", status_code=status.HTTP_200_OK, response_model=Optional[ShoeOutSchema])
+@router.delete(
+    "/shoe-id={shoe_id}",
+    status_code=status.HTTP_200_OK,
+    response_model=Optional[ShoeOutSchema],
+)
 def delete_shoe(
     shoe_id: str,
     current_user_role_permission: UserRolePermissionSchema = Depends(
-    oauth2.get_current_user_role_permission
+        oauth2.get_current_user_role_permission
     ),
     db: Session = Depends(deps.get_db),
 ) -> Optional[ShoeOutSchema]:

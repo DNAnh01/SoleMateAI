@@ -15,9 +15,9 @@
         "shoe_name": "Nike Air Max 90 Essential",
         "description": "Giày thể thao nam Nike Air Max 90 Essential mang đến sự êm ái, thoải mái cho người sử dụng.",
         "quantity_in_stock": 100,
-        "display_price": 800000,
-        "warehouse_price": 620000,
-        "discounted_price": 0
+        "display_price": 2000000,
+        "warehouse_price": 1500000,
+        "discounted_price": 1800000
     },
     {
         "brand": {
@@ -35,9 +35,9 @@
         "shoe_name": "Nike Air Force 1 '07",
         "description": "Giày thể thao nam Nike Air Force 1 '07 mang đến sự êm ái, thoải mái cho người sử dụng.",
         "quantity_in_stock": 100,
-        "display_price": 1200000,
+        "display_price": 2000000,
         "warehouse_price": 1500000,
-        "discounted_price": 0
+        "discounted_price": 1800000
     },
     {
         "brand": {
@@ -55,9 +55,9 @@
         "shoe_name": "Reebok Classic",
         "description": "Giày thể thao nữ Reebok Classic mang đến sự êm ái, thoải mái cho người sử dụng.",
         "quantity_in_stock": 100,
-        "display_price": 1800000,
-        "warehouse_price": 1400000,
-        "discounted_price": 0
+        "display_price": 2000000,
+        "warehouse_price": 1500000,
+        "discounted_price": 1800000
     },
     {
         "brand": {
@@ -76,8 +76,8 @@
         "description": "Giày thể thao nam Puma Suede Classic+ mang đến sự êm ái, thoải mái cho người sử dụng.",
         "quantity_in_stock": 100,
         "display_price": 2000000,
-        "warehouse_price": 1600000,
-        "discounted_price": 0
+        "warehouse_price": 1500000,
+        "discounted_price": 1800000
     },
     {
         "brand": {
@@ -95,9 +95,9 @@
         "shoe_name": "Under Armour Curry 2.5",
         "description": "Giày thể thao nam Under Armour Curry 2.5 mang đến sự êm ái, thoải mái cho người sử dụng.",
         "quantity_in_stock": 100,
-        "display_price": 2100000,
-        "warehouse_price": 1800000,
-        "discounted_price": 0
+        "display_price": 2000000,
+        "warehouse_price": 1500000,
+        "discounted_price": 1800000
     },
     {
         "brand": {
@@ -115,9 +115,9 @@
         "shoe_name": "New Balance 574 Classic",
         "description": "Giày thể thao nam New Balance 574 Classic mang đến sự êm ái, thoải mái cho người sử dụng.",
         "quantity_in_stock": 100,
-        "display_price": 1000000,
-        "warehouse_price": 800000,
-        "discounted_price": 0
+        "display_price": 2000000,
+        "warehouse_price": 1500000,
+        "discounted_price": 1800000
     },
     {
         "brand": {
@@ -135,9 +135,9 @@
         "shoe_name": "Vans Old Skool",
         "description": "Giày thể thao nam Vans Old Skool mang đến sự êm ái, thoải mái cho người sử dụng.",
         "quantity_in_stock": 100,
-        "display_price": 500000,
-        "warehouse_price": 300000,
-        "discounted_price": 0
+        "display_price": 2000000,
+        "warehouse_price": 1500000,
+        "discounted_price": 1800000
     },
     {
         "brand": {
@@ -155,9 +155,9 @@
         "shoe_name": "Adidas Superstar",
         "description": "Giày thể thao nam Adidas Superstar mang đến sự êm ái, thoải mái cho người sử dụng.",
         "quantity_in_stock": 100,
-        "display_price": 2100000,
-        "warehouse_price": 1600000,
-        "discounted_price": 0
+        "display_price": 2000000,
+        "warehouse_price": 1500000,
+        "discounted_price": 1800000
     },
     {
         "brand": {
@@ -175,9 +175,9 @@
         "shoe_name": "Nike Air Max 90 Essential",
         "description": "Giày thể thao nam Nike Air Max 90 Essential mang đến sự êm ái, thoải mái cho người sử dụng.",
         "quantity_in_stock": 100,
-        "display_price": 800000,
-        "warehouse_price": 620000,
-        "discounted_price": 0
+        "display_price": 2000000,
+        "warehouse_price": 1500000,
+        "discounted_price": 1800000
     },
     {
         "brand": {
@@ -195,9 +195,9 @@
         "shoe_name": "Nike Air Force 1 '07",
         "description": "Giày thể thao nam Nike Air Force 1 '07 mang đến sự êm ái, thoải mái cho người sử dụng.",
         "quantity_in_stock": 100,
-        "display_price": 1200000,
+        "display_price": 2000000,
         "warehouse_price": 1500000,
-        "discounted_price": 0
+        "discounted_price": 1800000
     },
     {
         "brand": {
@@ -215,9 +215,9 @@
         "shoe_name": "Reebok Classic",
         "description": "Giày thể thao nữ Reebok Classic mang đến sự êm ái, thoải mái cho người sử dụng.",
         "quantity_in_stock": 100,
-        "display_price": 1800000,
-        "warehouse_price": 1400000,
-        "discounted_price": 0
+        "display_price": 2000000,
+        "warehouse_price": 1500000,
+        "discounted_price": 1800000
     },
     {
         "brand": {
@@ -236,8 +236,8 @@
         "description": "Giày thể thao nam Puma Suede Classic+ mang đến sự êm ái, thoải mái cho người sử dụng.",
         "quantity_in_stock": 100,
         "display_price": 2000000,
-        "warehouse_price": 1600000,
-        "discounted_price": 0
+        "warehouse_price": 1500000,
+        "discounted_price": 1800000
     },
     {
         "brand": {
@@ -255,9 +255,9 @@
         "shoe_name": "Under Armour Curry 2.5",
         "description": "Giày thể thao nam Under Armour Curry 2.5 mang đến sự êm ái, thoải mái cho người sử dụng.",
         "quantity_in_stock": 100,
-        "display_price": 2100000,
-        "warehouse_price": 1800000,
-        "discounted_price": 0
+        "display_price": 2000000,
+        "warehouse_price": 1500000,
+        "discounted_price": 1800000
     },
     {
         "brand": {
@@ -275,9 +275,9 @@
         "shoe_name": "New Balance 574 Classic",
         "description": "Giày thể thao nam New Balance 574 Classic mang đến sự êm ái, thoải mái cho người sử dụng.",
         "quantity_in_stock": 100,
-        "display_price": 1000000,
-        "warehouse_price": 800000,
-        "discounted_price": 0
+        "display_price": 2000000,
+        "warehouse_price": 1500000,
+        "discounted_price": 1800000
     },
     {
         "brand": {
@@ -295,9 +295,9 @@
         "shoe_name": "Vans Old Skool",
         "description": "Giày thể thao nam Vans Old Skool mang đến sự êm ái, thoải mái cho người sử dụng.",
         "quantity_in_stock": 100,
-        "display_price": 500000,
-        "warehouse_price": 300000,
-        "discounted_price": 0
+        "display_price": 2000000,
+        "warehouse_price": 1500000,
+        "discounted_price": 1800000
     },
     {
         "brand": {
@@ -315,9 +315,9 @@
         "shoe_name": "Adidas Superstar",
         "description": "Giày thể thao nam Adidas Superstar mang đến sự êm ái, thoải mái cho người sử dụng.",
         "quantity_in_stock": 100,
-        "display_price": 2100000,
-        "warehouse_price": 1600000,
-        "discounted_price": 0
+        "display_price": 2000000,
+        "warehouse_price": 1500000,
+        "discounted_price": 1800000
     },
     {
         "brand": {
@@ -335,9 +335,9 @@
         "shoe_name": "Nike Air Max 90 Essential",
         "description": "Giày thể thao nam Nike Air Max 90 Essential mang đến sự êm ái, thoải mái cho người sử dụng.",
         "quantity_in_stock": 100,
-        "display_price": 800000,
-        "warehouse_price": 620000,
-        "discounted_price": 0
+        "display_price": 2000000,
+        "warehouse_price": 1500000,
+        "discounted_price": 1800000
     },
     {
         "brand": {
@@ -355,9 +355,9 @@
         "shoe_name": "Nike Air Force 1 '07",
         "description": "Giày thể thao nam Nike Air Force 1 '07 mang đến sự êm ái, thoải mái cho người sử dụng.",
         "quantity_in_stock": 100,
-        "display_price": 1200000,
+        "display_price": 2000000,
         "warehouse_price": 1500000,
-        "discounted_price": 0
+        "discounted_price": 1800000
     },
     {
         "brand": {
@@ -375,9 +375,9 @@
         "shoe_name": "Reebok Classic",
         "description": "Giày thể thao nữ Reebok Classic mang đến sự êm ái, thoải mái cho người sử dụng.",
         "quantity_in_stock": 100,
-        "display_price": 1800000,
-        "warehouse_price": 1400000,
-        "discounted_price": 0
+        "display_price": 2000000,
+        "warehouse_price": 1500000,
+        "discounted_price": 1800000
     },
     {
         "brand": {
@@ -396,8 +396,8 @@
         "description": "Giày thể thao nam Puma Suede Classic+ mang đến sự êm ái, thoải mái cho người sử dụng.",
         "quantity_in_stock": 100,
         "display_price": 2000000,
-        "warehouse_price": 1600000,
-        "discounted_price": 0
+        "warehouse_price": 1500000,
+        "discounted_price": 1800000
     },
     {
         "brand": {
@@ -415,9 +415,9 @@
         "shoe_name": "Under Armour Curry 2.5",
         "description": "Giày thể thao nam Under Armour Curry 2.5 mang đến sự êm ái, thoải mái cho người sử dụng.",
         "quantity_in_stock": 100,
-        "display_price": 2100000,
-        "warehouse_price": 1800000,
-        "discounted_price": 0
+        "display_price": 2000000,
+        "warehouse_price": 1500000,
+        "discounted_price": 1800000
     },
     {
         "brand": {
@@ -435,9 +435,9 @@
         "shoe_name": "New Balance 574 Classic",
         "description": "Giày thể thao nam New Balance 574 Classic mang đến sự êm ái, thoải mái cho người sử dụng.",
         "quantity_in_stock": 100,
-        "display_price": 1000000,
-        "warehouse_price": 800000,
-        "discounted_price": 0
+        "display_price": 2000000,
+        "warehouse_price": 1500000,
+        "discounted_price": 1800000
     },
     {
         "brand": {
@@ -455,9 +455,9 @@
         "shoe_name": "Vans Old Skool",
         "description": "Giày thể thao nam Vans Old Skool mang đến sự êm ái, thoải mái cho người sử dụng.",
         "quantity_in_stock": 100,
-        "display_price": 500000,
-        "warehouse_price": 300000,
-        "discounted_price": 0
+        "display_price": 2000000,
+        "warehouse_price": 1500000,
+        "discounted_price": 1800000
     },
     {
         "brand": {
@@ -475,9 +475,9 @@
         "shoe_name": "Adidas Superstar",
         "description": "Giày thể thao nam Adidas Superstar mang đến sự êm ái, thoải mái cho người sử dụng.",
         "quantity_in_stock": 100,
-        "display_price": 2100000,
-        "warehouse_price": 1600000,
-        "discounted_price": 0
+        "display_price": 2000000,
+        "warehouse_price": 1500000,
+        "discounted_price": 1800000
     },
     {
         "brand": {
@@ -495,9 +495,9 @@
         "shoe_name": "Nike Air Max 90 Essential",
         "description": "Giày thể thao nam Nike Air Max 90 Essential mang đến sự êm ái, thoải mái cho người sử dụng.",
         "quantity_in_stock": 100,
-        "display_price": 800000,
-        "warehouse_price": 620000,
-        "discounted_price": 0
+        "display_price": 2000000,
+        "warehouse_price": 1500000,
+        "discounted_price": 1800000
     },
     {
         "brand": {
@@ -515,9 +515,9 @@
         "shoe_name": "Nike Air Force 1 '07",
         "description": "Giày thể thao nam Nike Air Force 1 '07 mang đến sự êm ái, thoải mái cho người sử dụng.",
         "quantity_in_stock": 100,
-        "display_price": 1200000,
+        "display_price": 2000000,
         "warehouse_price": 1500000,
-        "discounted_price": 0
+        "discounted_price": 1800000
     },
     {
         "brand": {
@@ -535,9 +535,9 @@
         "shoe_name": "Reebok Classic",
         "description": "Giày thể thao nữ Reebok Classic mang đến sự êm ái, thoải mái cho người sử dụng.",
         "quantity_in_stock": 100,
-        "display_price": 1800000,
-        "warehouse_price": 1400000,
-        "discounted_price": 0
+        "display_price": 2000000,
+        "warehouse_price": 1500000,
+        "discounted_price": 1800000
     },
     {
         "brand": {
@@ -556,8 +556,8 @@
         "description": "Giày thể thao nam Puma Suede Classic+ mang đến sự êm ái, thoải mái cho người sử dụng.",
         "quantity_in_stock": 100,
         "display_price": 2000000,
-        "warehouse_price": 1600000,
-        "discounted_price": 0
+        "warehouse_price": 1500000,
+        "discounted_price": 1800000
     },
     {
         "brand": {
@@ -575,9 +575,9 @@
         "shoe_name": "Under Armour Curry 2.5",
         "description": "Giày thể thao nam Under Armour Curry 2.5 mang đến sự êm ái, thoải mái cho người sử dụng.",
         "quantity_in_stock": 100,
-        "display_price": 2100000,
-        "warehouse_price": 1800000,
-        "discounted_price": 0
+        "display_price": 2000000,
+        "warehouse_price": 1500000,
+        "discounted_price": 1800000
     },
     {
         "brand": {
@@ -595,9 +595,9 @@
         "shoe_name": "New Balance 574 Classic",
         "description": "Giày thể thao nam New Balance 574 Classic mang đến sự êm ái, thoải mái cho người sử dụng.",
         "quantity_in_stock": 100,
-        "display_price": 1000000,
-        "warehouse_price": 800000,
-        "discounted_price": 0
+        "display_price": 2000000,
+        "warehouse_price": 1500000,
+        "discounted_price": 1800000
     },
     {
         "brand": {
@@ -615,9 +615,9 @@
         "shoe_name": "Vans Old Skool",
         "description": "Giày thể thao nam Vans Old Skool mang đến sự êm ái, thoải mái cho người sử dụng.",
         "quantity_in_stock": 100,
-        "display_price": 500000,
-        "warehouse_price": 300000,
-        "discounted_price": 0
+        "display_price": 2000000,
+        "warehouse_price": 1500000,
+        "discounted_price": 1800000
     },
     {
         "brand": {
@@ -635,9 +635,9 @@
         "shoe_name": "Adidas Superstar",
         "description": "Giày thể thao nam Adidas Superstar mang đến sự êm ái, thoải mái cho người sử dụng.",
         "quantity_in_stock": 100,
-        "display_price": 2100000,
-        "warehouse_price": 1600000,
-        "discounted_price": 0
+        "display_price": 2000000,
+        "warehouse_price": 1500000,
+        "discounted_price": 1800000
     },
     {
         "brand": {
@@ -655,9 +655,9 @@
         "shoe_name": "Nike Air Max 90 Essential",
         "description": "Giày thể thao nam Nike Air Max 90 Essential mang đến sự êm ái, thoải mái cho người sử dụng.",
         "quantity_in_stock": 100,
-        "display_price": 800000,
-        "warehouse_price": 620000,
-        "discounted_price": 0
+        "display_price": 2000000,
+        "warehouse_price": 1500000,
+        "discounted_price": 1800000
     },
     {
         "brand": {
@@ -675,9 +675,9 @@
         "shoe_name": "Nike Air Force 1 '07",
         "description": "Giày thể thao nam Nike Air Force 1 '07 mang đến sự êm ái, thoải mái cho người sử dụng.",
         "quantity_in_stock": 100,
-        "display_price": 1200000,
+        "display_price": 2000000,
         "warehouse_price": 1500000,
-        "discounted_price": 0
+        "discounted_price": 1800000
     },
     {
         "brand": {
@@ -695,9 +695,9 @@
         "shoe_name": "Reebok Classic",
         "description": "Giày thể thao nữ Reebok Classic mang đến sự êm ái, thoải mái cho người sử dụng.",
         "quantity_in_stock": 100,
-        "display_price": 1800000,
-        "warehouse_price": 1400000,
-        "discounted_price": 0
+        "display_price": 2000000,
+        "warehouse_price": 1500000,
+        "discounted_price": 1800000
     },
     {
         "brand": {
@@ -716,8 +716,8 @@
         "description": "Giày thể thao nam Puma Suede Classic+ mang đến sự êm ái, thoải mái cho người sử dụng.",
         "quantity_in_stock": 100,
         "display_price": 2000000,
-        "warehouse_price": 1600000,
-        "discounted_price": 0
+        "warehouse_price": 1500000,
+        "discounted_price": 1800000
     },
     {
         "brand": {
@@ -735,9 +735,9 @@
         "shoe_name": "Under Armour Curry 2.5",
         "description": "Giày thể thao nam Under Armour Curry 2.5 mang đến sự êm ái, thoải mái cho người sử dụng.",
         "quantity_in_stock": 100,
-        "display_price": 2100000,
-        "warehouse_price": 1800000,
-        "discounted_price": 0
+        "display_price": 2000000,
+        "warehouse_price": 1500000,
+        "discounted_price": 1800000
     },
     {
         "brand": {
@@ -755,9 +755,9 @@
         "shoe_name": "New Balance 574 Classic",
         "description": "Giày thể thao nam New Balance 574 Classic mang đến sự êm ái, thoải mái cho người sử dụng.",
         "quantity_in_stock": 100,
-        "display_price": 1000000,
-        "warehouse_price": 800000,
-        "discounted_price": 0
+        "display_price": 2000000,
+        "warehouse_price": 1500000,
+        "discounted_price": 1800000
     },
     {
         "brand": {
@@ -775,9 +775,9 @@
         "shoe_name": "Vans Old Skool",
         "description": "Giày thể thao nam Vans Old Skool mang đến sự êm ái, thoải mái cho người sử dụng.",
         "quantity_in_stock": 100,
-        "display_price": 500000,
-        "warehouse_price": 300000,
-        "discounted_price": 0
+        "display_price": 2000000,
+        "warehouse_price": 1500000,
+        "discounted_price": 1800000
     },
     {
         "brand": {
@@ -795,9 +795,9 @@
         "shoe_name": "Adidas Superstar",
         "description": "Giày thể thao nam Adidas Superstar mang đến sự êm ái, thoải mái cho người sử dụng.",
         "quantity_in_stock": 100,
-        "display_price": 2100000,
-        "warehouse_price": 1600000,
-        "discounted_price": 0
+        "display_price": 2000000,
+        "warehouse_price": 1500000,
+        "discounted_price": 1800000
     },
     {
         "brand": {
@@ -815,9 +815,9 @@
         "shoe_name": "Nike Air Max 90 Essential",
         "description": "Giày thể thao nam Nike Air Max 90 Essential mang đến sự êm ái, thoải mái cho người sử dụng.",
         "quantity_in_stock": 100,
-        "display_price": 800000,
-        "warehouse_price": 620000,
-        "discounted_price": 0
+        "display_price": 2000000,
+        "warehouse_price": 1500000,
+        "discounted_price": 1800000
     },
     {
         "brand": {
@@ -835,9 +835,9 @@
         "shoe_name": "Nike Air Force 1 '07",
         "description": "Giày thể thao nam Nike Air Force 1 '07 mang đến sự êm ái, thoải mái cho người sử dụng.",
         "quantity_in_stock": 100,
-        "display_price": 1200000,
+        "display_price": 2000000,
         "warehouse_price": 1500000,
-        "discounted_price": 0
+        "discounted_price": 1800000
     },
     {
         "brand": {
@@ -855,9 +855,9 @@
         "shoe_name": "Reebok Classic",
         "description": "Giày thể thao nữ Reebok Classic mang đến sự êm ái, thoải mái cho người sử dụng.",
         "quantity_in_stock": 100,
-        "display_price": 1800000,
-        "warehouse_price": 1400000,
-        "discounted_price": 0
+        "display_price": 2000000,
+        "warehouse_price": 1500000,
+        "discounted_price": 1800000
     },
     {
         "brand": {
@@ -876,8 +876,8 @@
         "description": "Giày thể thao nam Puma Suede Classic+ mang đến sự êm ái, thoải mái cho người sử dụng.",
         "quantity_in_stock": 100,
         "display_price": 2000000,
-        "warehouse_price": 1600000,
-        "discounted_price": 0
+        "warehouse_price": 1500000,
+        "discounted_price": 1800000
     },
     {
         "brand": {
@@ -895,9 +895,9 @@
         "shoe_name": "Under Armour Curry 2.5",
         "description": "Giày thể thao nam Under Armour Curry 2.5 mang đến sự êm ái, thoải mái cho người sử dụng.",
         "quantity_in_stock": 100,
-        "display_price": 2100000,
-        "warehouse_price": 1800000,
-        "discounted_price": 0
+        "display_price": 2000000,
+        "warehouse_price": 1500000,
+        "discounted_price": 1800000
     },
     {
         "brand": {
@@ -915,9 +915,9 @@
         "shoe_name": "New Balance 574 Classic",
         "description": "Giày thể thao nam New Balance 574 Classic mang đến sự êm ái, thoải mái cho người sử dụng.",
         "quantity_in_stock": 100,
-        "display_price": 1000000,
-        "warehouse_price": 800000,
-        "discounted_price": 0
+        "display_price": 2000000,
+        "warehouse_price": 1500000,
+        "discounted_price": 1800000
     },
     {
         "brand": {
@@ -935,9 +935,9 @@
         "shoe_name": "Vans Old Skool",
         "description": "Giày thể thao nam Vans Old Skool mang đến sự êm ái, thoải mái cho người sử dụng.",
         "quantity_in_stock": 100,
-        "display_price": 500000,
-        "warehouse_price": 300000,
-        "discounted_price": 0
+        "display_price": 2000000,
+        "warehouse_price": 1500000,
+        "discounted_price": 1800000
     },
     {
         "brand": {
@@ -955,8 +955,8 @@
         "shoe_name": "Adidas Superstar",
         "description": "Giày thể thao nam Adidas Superstar mang đến sự êm ái, thoải mái cho người sử dụng.",
         "quantity_in_stock": 100,
-        "display_price": 2100000,
-        "warehouse_price": 1600000,
-        "discounted_price": 0
+        "display_price": 2000000,
+        "warehouse_price": 1500000,
+        "discounted_price": 1800000
     }
 ]

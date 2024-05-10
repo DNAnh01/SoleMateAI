@@ -8,7 +8,10 @@ from backend.api import deps
 from backend.common import utils
 from backend.common.logger import setup_logger
 from backend.core import oauth2
-from backend.schemas.knowledge_base_schema import KnowledgeBaseCreateSchema, KnowledgeBaseInDBSchema
+from backend.schemas.knowledge_base_schema import (
+    KnowledgeBaseCreateSchema,
+    KnowledgeBaseInDBSchema,
+)
 from backend.schemas.user_role_permission_schema import UserRolePermissionSchema
 from backend.services.abc.knowledge_base_service import KnowledgeBaseService
 from backend.services.impl.knowledge_base_service_impl import KnowledgeBaseServiceImpl
@@ -49,7 +52,11 @@ def create(
     return knowledge_base_created
 
 
-@router.get("/chatbot-id={chatbot_id}/get-all", status_code=status.HTTP_200_OK, response_model=Optional[List[KnowledgeBaseInDBSchema]])
+@router.get(
+    "/chatbot-id={chatbot_id}/get-all",
+    status_code=status.HTTP_200_OK,
+    response_model=Optional[List[KnowledgeBaseInDBSchema]],
+)
 def get_all(
     chatbot_id: str,
     current_user_role_permission: UserRolePermissionSchema = Depends(

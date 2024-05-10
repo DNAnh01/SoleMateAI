@@ -6,8 +6,8 @@ from fastapi.responses import JSONResponse
 from sqlalchemy.orm import Session
 
 from backend.common.logger import setup_logger
-from backend.crud.crud_knowledge_base import crud_knowledge_base
 from backend.crud.crud_chatbot import crud_chatbot
+from backend.crud.crud_knowledge_base import crud_knowledge_base
 from backend.schemas.knowledge_base_schema import (
     KnowledgeBaseCreateSchema,
     KnowledgeBaseInDBSchema,
@@ -43,8 +43,7 @@ class KnowledgeBaseServiceImpl(KnowledgeBaseService):
             )
         try:
             chatbot_found = self.__crud_chatbot.get_one_by(
-                db=db,
-                filter={"id": chatbot_id}
+                db=db, filter={"id": chatbot_id}
             )
             if chatbot_found is None:
                 logger.exception(
@@ -52,7 +51,7 @@ class KnowledgeBaseServiceImpl(KnowledgeBaseService):
                 )
                 return JSONResponse(
                     status_code=400,
-                    content="Add knowledge base failed: Chatbot not found"
+                    content="Add knowledge base failed: Chatbot not found",
                 )
             knowledge_base_created = self.__crud_knowledge_base.create(
                 db=db,
@@ -68,7 +67,10 @@ class KnowledgeBaseServiceImpl(KnowledgeBaseService):
                 f"Exception in {__name__}.{self.__class__.__name__}.add_knowledge_base"
             )
             return JSONResponse(status_code=400, content="Add knowledge base failed")
-        return {"chatbot_id": chatbot_found.id, "knowledge_base": knowledge_base_created}
+        return {
+            "chatbot_id": chatbot_found.id,
+            "knowledge_base": knowledge_base_created,
+        }
 
     def get_all(
         self,
@@ -89,8 +91,7 @@ class KnowledgeBaseServiceImpl(KnowledgeBaseService):
             )
         try:
             chatbot_found = self.__crud_chatbot.get_one_by(
-                db=db,
-                filter={"id": chatbot_id}
+                db=db, filter={"id": chatbot_id}
             )
             if chatbot_found is None:
                 logger.exception(
@@ -100,9 +101,12 @@ class KnowledgeBaseServiceImpl(KnowledgeBaseService):
                     status_code=400,
                     content="Get all knowledge base failed: Chatbot not found",
                 )
-        
-            knowledge_bases: List[KnowledgeBaseInDBSchema] = \
-                self.__crud_knowledge_base.get_multi(db=db, filter_param={"chatbot_id": chatbot_found.id})
+
+            knowledge_bases: List[KnowledgeBaseInDBSchema] = (
+                self.__crud_knowledge_base.get_multi(
+                    db=db, filter_param={"chatbot_id": chatbot_found.id}
+                )
+            )
         except:
             logger.exception(f"Exception in {__name__}.{self.__class__name__}.get_all")
             return JSONResponse(

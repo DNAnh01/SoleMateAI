@@ -1,15 +1,10 @@
 from abc import ABC, abstractmethod
-from typing import List, Optional
 
 from sqlalchemy.orm import Session
 
-from backend.schemas.conversation_schema import (
-    ConversationCreateSchema,
-    ConversationInDBSchema,
-    ConversationUpdateSchema,
-)
-
+from backend.schemas.conversation_schema import ConversationInDBSchema
 from backend.schemas.user_role_permission_schema import UserRolePermissionSchema
+
 
 class ConversationService(ABC):
 

@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from typing import Optional
 
 from sqlalchemy.orm import Session
 from starlette.requests import Request
@@ -11,12 +12,15 @@ from backend.schemas.auth_schema import (
     UserSignInSchema,
     UserSignUpSchema,
 )
+from backend.schemas.user_schema import UserInDBSchema
 
 
 class AuthService(ABC):
 
     @abstractmethod
-    async def sign_up(self, db: Session, user: UserSignUpSchema):
+    async def sign_up(
+        self, db: Session, user: UserSignUpSchema
+    ) -> Optional[UserInDBSchema]:
         pass
 
     @abstractmethod
@@ -44,4 +48,3 @@ class AuthService(ABC):
         self, db: Session, current_user: User, password: ChangePasswordSchema
     ):
         pass
-    

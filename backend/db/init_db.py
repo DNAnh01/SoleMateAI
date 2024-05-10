@@ -34,15 +34,16 @@ from backend.crud.crud_user import crud_user
 from backend.crud.crud_user_session import crud_user_session
 
 """Import schemas from backend.schemas."""
-from backend.schemas.permission_schema import PermissionCreateSchema
-from backend.schemas.role_permission_schema import RolePermissionCreateSchema
-from backend.schemas.role_schema import RoleCreateSchema
-from backend.schemas.user_schema import UserInDBSchema
+import pytz
+
 from backend.schemas.brand_schema import BrandCreateSchema
 from backend.schemas.color_schema import ColorCreateSchema
+from backend.schemas.permission_schema import PermissionCreateSchema
 from backend.schemas.promotion_schema import PromotionCreateSchema
+from backend.schemas.role_permission_schema import RolePermissionCreateSchema
+from backend.schemas.role_schema import RoleCreateSchema
 from backend.schemas.size_schema import SizeCreateSchema
-import pytz
+from backend.schemas.user_schema import UserInDBSchema
 
 logger = setup_logger()
 
@@ -150,12 +151,20 @@ def init_db():
                         deleted_at=None,
                     ),
                 )
-            logger.warning("INSERTING DATA INTO THE `promotions` TABLE FROM THE promotions.csv FILE")
-            for row in utils.read_csv(os.path.join(script_dir, "raw_data", "promotions.csv")):
+            logger.warning(
+                "INSERTING DATA INTO THE `promotions` TABLE FROM THE promotions.csv FILE"
+            )
+            for row in utils.read_csv(
+                os.path.join(script_dir, "raw_data", "promotions.csv")
+            ):
                 """['Summer Sale', '2023-06-01', '2023-08-31', '20']"""
                 promotion_name = row[0]
-                start_date = datetime.strptime(row[1], "%Y-%m-%d").replace(tzinfo=pytz.utc)
-                end_date = datetime.strptime(row[2], "%Y-%m-%d").replace(tzinfo=pytz.utc)
+                start_date = datetime.strptime(row[1], "%Y-%m-%d").replace(
+                    tzinfo=pytz.utc
+                )
+                end_date = datetime.strptime(row[2], "%Y-%m-%d").replace(
+                    tzinfo=pytz.utc
+                )
                 discount_percent = int(row[3])
                 crud_promotion.create(
                     db=session,
@@ -166,8 +175,12 @@ def init_db():
                         discount_percent=discount_percent,
                     ),
                 )
-            logger.warning("INSERTING DATA INTO THE `brands` TABLE FROM THE brands.csv FILE")
-            for row in utils.read_csv(os.path.join(script_dir, "raw_data", "brands.csv")):
+            logger.warning(
+                "INSERTING DATA INTO THE `brands` TABLE FROM THE brands.csv FILE"
+            )
+            for row in utils.read_csv(
+                os.path.join(script_dir, "raw_data", "brands.csv")
+            ):
                 """['Adidas','https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/brand_logo_Adidas.png']"""
                 brand_name = row[0]
                 brand_logo = row[1]
@@ -178,8 +191,12 @@ def init_db():
                         brand_logo=brand_logo,
                     ),
                 )
-            logger.warning("INSERTING DATA INTO THE `colors` TABLE FROM THE colors.csv FILE")
-            for row in utils.read_csv(os.path.join(script_dir, "raw_data", "colors.csv")):
+            logger.warning(
+                "INSERTING DATA INTO THE `colors` TABLE FROM THE colors.csv FILE"
+            )
+            for row in utils.read_csv(
+                os.path.join(script_dir, "raw_data", "colors.csv")
+            ):
                 """['Green','#00FF00']"""
                 color_name = row[0]
                 hex_value = row[1]
@@ -190,8 +207,12 @@ def init_db():
                         hex_value=hex_value,
                     ),
                 )
-            logger.warning("INSERTING DATA INTO THE `sizes` TABLE FROM THE sizes.csv FILE")
-            for row in utils.read_csv(os.path.join(script_dir, "raw_data", "sizes.csv")):
+            logger.warning(
+                "INSERTING DATA INTO THE `sizes` TABLE FROM THE sizes.csv FILE"
+            )
+            for row in utils.read_csv(
+                os.path.join(script_dir, "raw_data", "sizes.csv")
+            ):
                 size_number = row[0]
                 crud_size.create(
                     db=session,

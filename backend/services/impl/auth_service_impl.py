@@ -1,6 +1,7 @@
 import asyncio
 import uuid
 from datetime import datetime
+from typing import Optional
 
 from fastapi.responses import JSONResponse, RedirectResponse
 from sqlalchemy.orm import Session
@@ -10,6 +11,7 @@ from backend.common import generate, send_email, utils
 from backend.common.logger import setup_logger
 from backend.core import google_auth, oauth2
 from backend.core.config import settings
+from backend.crud.crud_cart import crud_cart
 from backend.crud.crud_role import crud_role
 from backend.crud.crud_user import crud_user
 from backend.crud.crud_user_session import crud_user_session
@@ -21,6 +23,7 @@ from backend.schemas.auth_schema import (
     UserSignInSchema,
     UserSignUpSchema,
 )
+from backend.schemas.cart_schema import CartCreateSchema
 from backend.schemas.user_schema import UserInDBSchema
 from backend.schemas.user_session_schema import (
     UserSessionCreateSchema,
@@ -36,8 +39,11 @@ class AuthServiceImpl(AuthService):
         self.__crud_user = crud_user
         self.__crud_role = crud_role
         self.__crud_user_session = crud_user_session
+        self.__crud_cart = crud_cart
 
-    async def sign_up(self, db: Session, user: UserSignUpSchema):
+    async def sign_up(
+        self, db: Session, user: UserSignUpSchema
+    ) -> Optional[UserInDBSchema]:
         hashed_password = utils.hash(user.password)
         display_name = (
             f"{user.email.split('@')[0]}-{generate.generate_random_string(5)}"
@@ -57,33 +63,67 @@ class AuthServiceImpl(AuthService):
             redirect_url=f"{settings.REDIRECT_FRONTEND_URL}/sign-sin",
             mode=1,
         )
-        logger.info(
-            f"Info in {__name__}.{self.__class__.__name__}.sign_up: Email verification is sent to {user.email}"
-        )
         if is_sended:
-            """Get user role."""
-            user_role_found = self.__crud_role.get_one_by(
-                db=db, filter={"role_name": "user"}
-            )
-            """Create a new user."""
-            created_user = self.__crud_user.create_user(
-                db=db,
-                user_create=UserInDBSchema(
-                    id=uuid.uuid4(),
-                    role_id=user_role_found.id,
-                    email=user.email,
-                    password_hash=hashed_password,
-                    display_name=display_name,
-                    avatar_url="https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/default_user_avatar.png",
-                    payment_information="",
-                    is_verified=False,
-                    is_active=True,
-                    created_at=datetime.now(),
-                    updated_at=datetime.now(),
-                    deleted_at=None,
-                ),
-            )
-            return created_user
+            try:
+                """Get user role."""
+                user_role_found = self.__crud_role.get_one_by(
+                    db=db, filter={"role_name": "user"}
+                )
+                """Create a new user."""
+                created_user = self.__crud_user.create_user(
+                    db=db,
+                    user_create=UserInDBSchema(
+                        id=uuid.uuid4(),
+                        role_id=user_role_found.id,
+                        email=user.email,
+                        password_hash=hashed_password,
+                        display_name=display_name,
+                        avatar_url="https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/default_user_avatar.png",
+                        payment_information="",
+                        is_verified=False,
+                        is_active=True,
+                        created_at=datetime.now(),
+                        updated_at=datetime.now(),
+                        deleted_at=None,
+                    ),
+                )
+                """create cart"""
+                cart_found = self.__crud_cart.get_one_by(
+                    db=db, filter={"user_id": created_user.id}
+                )
+                if cart_found is None:
+                    cart_created = self.__crud_cart.create(
+                        db=db,
+                        obj_in=CartCreateSchema(
+                            user_id=created_user.id,
+                            total_item=0,
+                            total_display_price=0,
+                            total_warehouse_price=0,
+                            total_discounted_price=0,
+                        ),
+                    )
+                user_out = UserInDBSchema(
+                    id=created_user.id,
+                    role_id=created_user.role_id,
+                    email=created_user.email,
+                    password_hash=created_user.password_hash,
+                    display_name=created_user.display_name,
+                    avatar_url=created_user.avatar_url,
+                    payment_information=created_user.payment_information,
+                    is_verified=created_user.is_verified,
+                    is_active=created_user.is_active,
+                    created_at=created_user.created_at,
+                    updated_at=created_user.updated_at,
+                    deleted_at=created_user.deleted_at,
+                )
+
+            except:
+                logger.exception(
+                    f"Exception in {__name__}.{self.__class__.__name__}.sign_up: Cannot create a new user"
+                )
+                return JSONResponse(
+                    status_code=500, content={"message": "Cannot create a new user"}
+                )
         else:
             """Raise an exception if email verification is not sent."""
             logger.error(
@@ -92,6 +132,7 @@ class AuthServiceImpl(AuthService):
             return JSONResponse(
                 status_code=500, content={"message": "Email verification is not sent"}
             )
+        return user_out
 
     def sign_in(self, db: Session, user_credentials: UserSignInSchema) -> TokenSchema:
         """Get user by email."""
@@ -172,7 +213,7 @@ class AuthServiceImpl(AuthService):
                 status_code=500,
                 content={"message": "Cannot get user info from Google OAuth2.0"},
             )
-
+        """Handle logic create user"""
         if user_info:
             request.session["user"] = dict(user_info)
             user_found = self.__crud_user.get_one_by(
@@ -223,12 +264,29 @@ class AuthServiceImpl(AuthService):
                         deleted_at=None,
                     ),
                 )
+
                 """Create a new user session."""
                 user_session_created = (
                     self.__crud_user_session.create_user_session_with_user_id(
                         db=db, user_id=created_user.id
                     )
                 )
+                """Check cart"""
+                cart_found = self.__crud_cart.get_one_by(
+                    db=db, filter={"user_id": created_user.id}
+                )
+                """Create cart"""
+                if cart_found is None:
+                    cart_created = self.__crud_cart.create(
+                        db=db,
+                        obj_in=CartCreateSchema(
+                            user_id=created_user.id,
+                            total_item=0,
+                            total_display_price=0,
+                            total_warehouse_price=0,
+                            total_discounted_price=0,
+                        ),
+                    )
 
                 is_sended = await send_email.send_verification_email(
                     user_info=user_info,

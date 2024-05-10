@@ -1,3 +1,5 @@
+from typing import Optional
+
 from fastapi import APIRouter, Depends, status
 from sqlalchemy.orm import Session
 from starlette.requests import Request
@@ -11,6 +13,7 @@ from backend.schemas.auth_schema import (
     UserSignInSchema,
     UserSignUpSchema,
 )
+from backend.schemas.user_schema import UserInDBSchema
 from backend.services.abc.auth_service import AuthService
 from backend.services.impl.auth_service_impl import AuthServiceImpl
 
@@ -18,8 +21,14 @@ router = APIRouter()
 auth_service: AuthService = AuthServiceImpl()
 
 
-@router.post("/sign-up", status_code=status.HTTP_201_CREATED)
-async def sign_up(user: UserSignUpSchema, db: Session = Depends(deps.get_db)):
+@router.post(
+    "/sign-up",
+    status_code=status.HTTP_201_CREATED,
+    response_model=Optional[UserInDBSchema],
+)
+async def sign_up(
+    user: UserSignUpSchema, db: Session = Depends(deps.get_db)
+) -> Optional[UserInDBSchema]:
     return await auth_service.sign_up(db=db, user=user)
 
 
