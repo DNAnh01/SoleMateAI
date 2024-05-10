@@ -66,11 +66,6 @@ class CartItemServiceImpl(CartItemService):
                 return JSONResponse(
                     status_code=400, content="Create Cart Item failed: Cart not found"
                 )
-            """
-            class CartItemCreateSchema(pydantic.BaseModel):
-            shoe_id: uuid.UUID
-            quantity: int
-            """
 
             cart_item_created = self.__crud_cart_item.create(
                 db=db,
@@ -122,11 +117,6 @@ class CartItemServiceImpl(CartItemService):
                 status_code=400,
                 content="Update Cart Item failed: User does not have permission to update cart item",
             )
-        """
-        class CartItemUpdateSchema(BaseSchema):
-        shoe_id: Optional[uuid.UUID] = None
-        quantity: Optional[int] = None
-        """
         try:
             shoe_found = self.__crud_shoe.get(db=db, id=cart_item_update.shoe_id)
             if shoe_found is None:
@@ -215,11 +205,6 @@ class CartItemServiceImpl(CartItemService):
                 content="Remove Cart Item failed: User does not have permission to remove cart item",
             )
         try:
-            """
-            class CartItemRemoveSchema(BaseSchema):
-            # cart_id: uuid.UUID
-            shoe_id: uuid.UUID
-            """
             cart_found = self.__crud_cart.get_one_by(
                 db=db, filter={"user_id": current_user_role_permission.u_id}
             )

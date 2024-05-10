@@ -48,18 +48,6 @@ class CartServiceImpl(CartService):
                 content="Add Cart Item failed: User does not have permission to create cart item",
             )
         try:
-            """
-            class CartItemCreateSchema(pydantic.BaseModel):
-            # cart_id: uuid.UUID
-            shoe_id: uuid.UUID
-            quantity: int
-            """
-
-            """
-            class AddCartItemSchema(pydantic.BaseModel):
-            shoe_id: uuid.UUID
-            quantity: int
-            """
             cart_found = self.__crud_cart.get_one_by(
                 db=db, filter={"user_id": current_user_role_permission.u_id}
             )
@@ -73,7 +61,6 @@ class CartServiceImpl(CartService):
                     db=db, cart_id=cart_found.id, shoe_id=shoe_found.id
                 )
             )
-            # nếu tồn tại cart item thì update số lượng cho cart item đó
             if cart_item_exists is not None:
                 cart_item_update_req = CartItemUpdateSchema(
                     shoe_id=shoe_found.id, quantity=add_cart_item_req.quantity

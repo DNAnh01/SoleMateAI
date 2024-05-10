@@ -130,6 +130,7 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
 
     def remove(self, db: Session, *, id: int) -> ModelType:
         obj = db.query(self.model).get(id)
+        obj.is_active = False
         obj.deleted_at = datetime.now()
         db.add(obj)
         db.commit()

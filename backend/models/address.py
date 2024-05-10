@@ -10,7 +10,6 @@ class Address(Base):
     user_id = Column(UUID(as_uuid=True), ForeignKey("users.id"), index=True)
     street = Column(String, nullable=False)
     city = Column(String, nullable=False)
-    state = Column(String, nullable=False)
 
     # relationships
     user = relationship("User", back_populates="addresses")

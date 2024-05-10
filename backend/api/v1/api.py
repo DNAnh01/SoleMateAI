@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 
 from backend.api.v1.endpoints import (
+    address,
     auth,
     brand,
     cart,
@@ -26,3 +27,4 @@ api_router.include_router(shoe.router, prefix="/shoe", tags=["shoes"])
 api_router.include_router(user.router, prefix="/user", tags=["users"])
 api_router.include_router(brand.router, prefix="/brand", tags=["brands"])
 api_router.include_router(cart.router, prefix="/cart", tags=["carts"])
+api_router.include_router(address.router, prefix="/address", tags=["addresses"])
