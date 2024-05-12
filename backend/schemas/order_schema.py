@@ -1,11 +1,12 @@
 import uuid
 from datetime import datetime
-from typing import Optional
+from typing import Optional, List
 
 import pydantic
 
 from backend.schemas._base_schema import BaseSchema
-
+from backend.schemas.order_item_schema import OrderItemOutSchema
+from backend.schemas.address_schema import AddressInDBSchema
 
 class OrderCreateSchema(pydantic.BaseModel):
     address_id: uuid.UUID
@@ -29,6 +30,24 @@ class OrderUpdateSchema(BaseSchema):
     total_display_price: Optional[float] = None
     total_warehouse_price: Optional[float] = None
     total_discounted_price: Optional[float] = None
+
+
+class OrderOutSchema(pydantic.BaseModel):
+    id: uuid.UUID
+    address_id: uuid.UUID
+    user_id: uuid.UUID
+    order_date: datetime
+    delivery_date: datetime
+    status: str
+    total_item: int
+    total_display_price: float
+    total_warehouse_price: float
+    total_discounted_price: float
+    
+    shipping_address: Optional[AddressInDBSchema] = None
+    order_items: Optional[List[OrderItemOutSchema]] = None
+
+
 
 
 class OrderInDBSchema(BaseSchema):

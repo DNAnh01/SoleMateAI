@@ -55,7 +55,11 @@ class AuthServiceImpl(AuthService):
                 f"Error in {__name__}.{self.__class__.__name__}.sign_up: User already exists"
             )
             return JSONResponse(
-                status_code=400, content={"message": "User already exists"}
+                status_code=400, 
+                content={
+                    "status": 400,
+                    "message": "User already exists"
+                }
             )
         """Check email verification is sent successfully. If so, create a new user."""
         is_sended = await send_email.send_verification_email(
@@ -122,7 +126,11 @@ class AuthServiceImpl(AuthService):
                     f"Exception in {__name__}.{self.__class__.__name__}.sign_up: Cannot create a new user"
                 )
                 return JSONResponse(
-                    status_code=500, content={"message": "Cannot create a new user"}
+                    status_code=500, 
+                    content={
+                        "status": 500,
+                        "message": "Cannot create a new user"
+                    }
                 )
         else:
             """Raise an exception if email verification is not sent."""
@@ -130,7 +138,11 @@ class AuthServiceImpl(AuthService):
                 f"Error in {__name__}.{self.__class__.__name__}.sign_up: Email verification is not sent"
             )
             return JSONResponse(
-                status_code=500, content={"message": "Email verification is not sent"}
+                status_code=500, 
+                content={
+                    "status": 500,
+                    "message": "Email verification is not sent"
+                }
             )
         return user_out
 
@@ -144,14 +156,24 @@ class AuthServiceImpl(AuthService):
             logger.error(
                 f"Error in {__name__}.{self.__class__.__name__}.sign_in: User not found"
             )
-            return JSONResponse(status_code=404, content={"message": "User not found"})
+            return JSONResponse(
+                status_code=404, 
+                content={
+                    "status": 404,
+                    "message": "User not found"
+                }
+            )
         """Check if password is correct"""
         if not utils.verify(user_credentials.password, user_found.password_hash):
             logger.error(
                 f"Error in {__name__}.{self.__class__.__name__}.sign_in: Password is incorrect"
             )
             return JSONResponse(
-                status_code=400, content={"message": "Password is incorrect"}
+                status_code=400, 
+                content={
+                    "status": 400,
+                    "message": "Password is incorrect"
+                }
             )
         """Generate access token"""
         access_token: str = oauth2.create_access_token(
@@ -211,7 +233,10 @@ class AuthServiceImpl(AuthService):
             )
             return JSONResponse(
                 status_code=500,
-                content={"message": "Cannot get user info from Google OAuth2.0"},
+                content={
+                    "status": 500,
+                    "message": "Cannot get user info from Google OAuth2.0"
+                },
             )
         """Handle logic create user"""
         if user_info:
@@ -306,10 +331,17 @@ class AuthServiceImpl(AuthService):
         if user_session_found is not None:
             self.__crud_user_session.remove(db=db, id=user_session_found.id)
             return JSONResponse(
-                status_code=200, content={"message": "Sign out successful"}
+                status_code=200, content={
+                    "status": 200,
+                    "message": "Sign out successful"
+                }
             )
         return JSONResponse(
-            status_code=404, content={"message": "User session not found"}
+            status_code=404, 
+            content={
+                "status": 404,
+                "message": "User session not found"
+            }
         )
 
     async def forgot_password(self, db: Session, email: EmailSchema):
@@ -319,7 +351,13 @@ class AuthServiceImpl(AuthService):
             logger.error(
                 f"Error in {__name__}.{self.__class__.__name__}.forgot_password: User not found"
             )
-            return JSONResponse(status_code=404, content={"message": "User not found"})
+            return JSONResponse(
+                status_code=404, 
+                content={
+                    "status": 404,
+                    "message": "User not found"
+                }
+            )
         password_reset = generate.generate_random_string(8)
         user_updated = self.__crud_user.update_one_by(
             db=db,
@@ -331,7 +369,11 @@ class AuthServiceImpl(AuthService):
                 f"Error in {__name__}.{self.__class__.__name__}.forgot_password: Password reset failed"
             )
             return JSONResponse(
-                status_code=500, content={"message": "Update password failed"}
+                status_code=500, 
+                content={
+                    "status": 500,
+                    "message": "Update password failed"
+                }
             )
         is_sended = await send_email.send_reset_password_email(
             email=user_found.email,
@@ -350,13 +392,23 @@ class AuthServiceImpl(AuthService):
             logger.error(
                 f"Error in {__name__}.{self.__class__.__name__}.change_password: User not found"
             )
-            return JSONResponse(status_code=404, content={"message": "User not found"})
+            return JSONResponse(
+                status_code=404, 
+                content={
+                    "status": 404,
+                    "message": "User not found"
+                    }
+                )
         if not utils.verify(password.password_old, user_found.password_hash):
             logger.error(
                 f"Error in {__name__}.{self.__class__.__name__}.change_password: Old password is incorrect"
             )
             return JSONResponse(
-                status_code=400, content={"message": "Old password is incorrect"}
+                status_code=400, 
+                content={
+                    "status": 400,
+                    "message": "Old password is incorrect"
+                }
             )
         user_updated = self.__crud_user.update_one_by(
             db=db,
@@ -368,8 +420,16 @@ class AuthServiceImpl(AuthService):
                 f"Error in {__name__}.{self.__class__.__name__}.change_password: Change password failed"
             )
             return JSONResponse(
-                status_code=500, content={"message": "Change password failed"}
+                status_code=500, 
+                content={
+                    "status": 500,
+                    "message": "Change password failed"
+                }
             )
         return JSONResponse(
-            status_code=200, content={"message": "Change password successful"}
+            status_code=200, 
+            content={
+                "status": 200,
+                "message": "Change password successful"
+            }
         )

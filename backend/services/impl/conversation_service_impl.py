@@ -37,7 +37,10 @@ class ConversationServiceImpl(ConversationService):
             )
             return JSONResponse(
                 status_code=400,
-                content="Create Conversation failed: User does not have permission to create conversation",
+                content={
+                    "status": 400,
+                    "message": "Create Conversation failed: User does not have permission to create conversation"
+                },
             )
 
         try:
@@ -47,7 +50,10 @@ class ConversationServiceImpl(ConversationService):
             if chatbot_found is None:
                 return JSONResponse(
                     status_code=400,
-                    content="Create Conversation failed: No public chatbot found",
+                    content={
+                        "status": 400,
+                        "message": "Create Conversation failed: No public chatbot found"
+                    },
                 )
             client_info = json.loads(
                 requests.get("http://ip-api.com/json/" + client_ip).text
@@ -74,5 +80,10 @@ class ConversationServiceImpl(ConversationService):
             logger.exception(
                 f"Exception in {__name__}.{self.__class__.__name__}.create_conversation"
             )
-            return JSONResponse(status_code=400, content="Create Conversation failed")
+            return JSONResponse(
+                status_code=400, 
+                content={
+                    "status": 400,
+                    "message": "Create Conversation failed"
+                })
         return conversation_created

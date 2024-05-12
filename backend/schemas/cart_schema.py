@@ -44,7 +44,5 @@ class CartInDBSchema(BaseSchema):
     total_warehouse_price: float
     total_discounted_price: float
 
-    # cart_items: Optional[List[CartItemInDBSchema]] = None
-
     class Config:
         orm_mode = True

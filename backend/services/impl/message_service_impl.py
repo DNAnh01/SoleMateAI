@@ -50,7 +50,10 @@ class MessageServiceImpl(MessageService):
             )
             return JSONResponse(
                 status_code=400,
-                content="Create message failed: User does not have permission to create message",
+                content={
+                    "status": 400,
+                    "message": "Create message failed: User does not have permission to create message"
+                },
             )
         try:
             """Check if conversation exists"""
@@ -61,7 +64,10 @@ class MessageServiceImpl(MessageService):
             if chatbot_found is None:
                 return JSONResponse(
                     status_code=400,
-                    content="Create message failed: No public chatbot found",
+                    content={
+                        "status": 400,
+                        "message": "Create message failed: No public chatbot found"
+                    },
                 )
 
             """Check if conversation exists, if not, create a new one"""
@@ -133,7 +139,13 @@ class MessageServiceImpl(MessageService):
             logger.exception(
                 f"Exception in {__name__}.{self.__class__.__name__}.create"
             )
-            return JSONResponse(status_code=400, content="Create message failed")
+            return JSONResponse(
+                status_code=400, 
+                content={
+                    "status": 400,
+                    "message": "Create message failed"
+                }
+            )
 
     def handle_message(self, db: Session, chatbot_id: str, conversation_id: str):
         try:

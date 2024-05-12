@@ -4,12 +4,7 @@ from typing import Optional
 import pydantic
 
 from backend.schemas._base_schema import BaseSchema
-
-"""Request"""
-
-"""Response"""
-
-"""Base"""
+from backend.schemas.shoe_schema import ShoeOutSchema
 
 
 class OrderItemCreateSchema(pydantic.BaseModel):
@@ -29,6 +24,16 @@ class OrderItemUpdateSchema(BaseSchema):
     warehouse_price: Optional[float] = None
     discounted_price: Optional[float] = None
 
+
+class OrderItemOutSchema(pydantic.BaseModel):
+    id: uuid.UUID
+    order_id: uuid.UUID
+    shoe_id: uuid.UUID
+    shoe: ShoeOutSchema
+    quantity: int
+    display_price: float
+    warehouse_price: float
+    discounted_price: float
 
 class OrderItemInDBSchema(BaseSchema):
     id: uuid.UUID

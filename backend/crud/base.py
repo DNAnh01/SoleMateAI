@@ -60,6 +60,27 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
             .limit(filter_param.get("limit"))
             .all()
         )
+    def get_multi_ignore_deleted_and_inactive(
+        self,
+        db: Session,
+        filter_param: dict = None,
+    ) -> List[ModelType]:
+        if filter_param is None:
+            filter_param = {}
+        query = query_builder(
+            db=db,
+            model=self.model,
+            filter=filter_param.get("filter"),
+            order_by=filter_param.get("order_by"),
+            include=filter_param.get("include"),
+            join=filter_param.get("join"),
+        )
+
+        return (
+            query.offset(filter_param.get("skip"))
+            .limit(filter_param.get("limit"))
+            .all()
+        )
 
     def get_multi_not_paging(
         self,
@@ -169,6 +190,14 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
             .filter(and_(self.model.deleted_at == None, get_filter(self.model, filter)))
             .first()
         )
+        
+    def get_one_ignore_deleted_and_inactive(self, db: Session, filter: dict = {}) -> Optional[ModelType]:
+        return (
+            db.query(self.model)
+            .filter(get_filter(self.model, filter))
+            .first()
+        )
+    
 
     def update_one_by(
         self,

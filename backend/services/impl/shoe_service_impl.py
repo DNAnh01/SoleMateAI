@@ -45,7 +45,10 @@ class ShoeServiceImpl(ShoeService):
             )
             return JSONResponse(
                 status_code=400,
-                content="Create shoe failed: User does not have permission to create shoe",
+                content={
+                    "status": 400,
+                    "message": "Create shoe failed: User does not have permission to create shoe"
+                },
             )
 
         try:
@@ -155,7 +158,13 @@ class ShoeServiceImpl(ShoeService):
             logger.exception(
                 f"Exception in {__name__}.{self.__class__.__name__}.create_shoe"
             )
-            return JSONResponse(status_code=400, content="Create shoe failed")
+            return JSONResponse(
+                status_code=400, 
+                content={
+                    "status": 400,
+                    "message": "Create shoe failed"        
+                }
+            )
         return shoe_out
 
     def create_multi_shoes(
@@ -170,7 +179,10 @@ class ShoeServiceImpl(ShoeService):
             )
             return JSONResponse(
                 status_code=400,
-                content="Create shoe failed: User does not have permission to create shoe",
+                content={
+                    "status": 400,
+                    "message": "Create shoe failed: User does not have permission to create shoe"
+                },
             )
         shoes_saved = []
         for shoe in shoes:
@@ -195,12 +207,21 @@ class ShoeServiceImpl(ShoeService):
             )
             return JSONResponse(
                 status_code=400,
-                content="Get shoe by id failed: User does not have permission to read shoe",
+                content={
+                    "status": 400,
+                    "message": "Get shoe by id failed: User does not have permission to read shoe"
+                },
             )
         try:
             shoe_found = self.__crud_shoe.get(db=db, id=shoe_id)
             if shoe_found is None:
-                return JSONResponse(status_code=404, content="Shoe not found")
+                return JSONResponse(
+                    status_code=404, 
+                    content={
+                        "status": 404,
+                        "message": "Shoe not found"
+                    }
+                )
 
             shoe_out = ShoeOutSchema(
                 id=shoe_found.id,
@@ -229,7 +250,13 @@ class ShoeServiceImpl(ShoeService):
             logger.exception(
                 f"Exception in {__name__}.{self.__class__.__name__}.get_shoe_by_id"
             )
-            return JSONResponse(status_code=400, content="Get shoe by id failed")
+            return JSONResponse(
+                status_code=400, 
+                content={
+                    "status": 400,
+                    "message": "Get shoe by id failed"      
+                }
+            )
         return shoe_out
 
     def get_all_shoes(
@@ -244,12 +271,21 @@ class ShoeServiceImpl(ShoeService):
             )
             return JSONResponse(
                 status_code=400,
-                content="Get all shoes failed: User does not have permission to read shoe",
+                content={
+                    "status": 400,
+                    "message": "Get all shoes failed: User does not have permission to read shoe"
+                },
             )
         try:
             shoes = self.__crud_shoe.get_multi(db=db, filter_param=common_filters)
             if shoes is None:
-                return JSONResponse(status_code=404, content="Shoes not found")
+                return JSONResponse(
+                    status_code=404, 
+                    content={
+                        "status": 404,
+                        "message": "Shoes not found"
+                    }
+                )
             shoes_out = []
             for shoe in shoes:
                 shoes_out.append(
@@ -281,7 +317,13 @@ class ShoeServiceImpl(ShoeService):
             logger.exception(
                 f"Exception in {__name__}.{self.__class__.__name__}.get_all_shoes"
             )
-            return JSONResponse(status_code=400, content="Get all shoes failed")
+            return JSONResponse(
+                status_code=400, 
+                content={
+                    "status": 400,
+                    "message": "Get all shoes failed"
+                }
+            )
         return shoes_out
 
     def update_shoe(
@@ -297,13 +339,22 @@ class ShoeServiceImpl(ShoeService):
             )
             return JSONResponse(
                 status_code=400,
-                content="Update shoe failed: User does not have permission to update shoe",
+                content={
+                    "status": 400,
+                    "message": "Update shoe failed: User does not have permission to update shoe"
+                },
             )
         try:
             shoe_found = self.__crud_shoe.get(db=db, id=shoe_id)
 
             if shoe_found is None:
-                return JSONResponse(status_code=404, content="Shoe not found")
+                return JSONResponse(
+                    status_code=404, 
+                    content={
+                        "status": 404,
+                        "message": "Shoe not found"
+                    }
+                )
 
             if shoe.brand and shoe.brand.brand_name:
                 shoe_found.brand.brand_name = shoe.brand.brand_name
@@ -360,7 +411,13 @@ class ShoeServiceImpl(ShoeService):
             logger.exception(
                 f"Exception in {__name__}.{self.__class__.__name__}.update_shoe"
             )
-            return JSONResponse(status_code=400, content="Update shoe failed")
+            return JSONResponse(
+                status_code=400, 
+                content={
+                    "status": 400,
+                    "message": "Update shoe failed"
+                }
+            )
 
         return shoe_out
 
@@ -376,19 +433,38 @@ class ShoeServiceImpl(ShoeService):
             )
             return JSONResponse(
                 status_code=400,
-                content="Delete shoe failed: User does not have permission to delete shoe",
+                content={
+                    "status": 400,
+                    "message": "Delete shoe failed: User does not have permission to delete shoe"
+                },
             )
         try:
             shoe_found = self.__crud_shoe.get(db=db, id=shoe_id)
             if shoe_found is None:
-                return JSONResponse(status_code=404, content="Shoe not found")
+                return JSONResponse(
+                    status_code=404, 
+                    content={
+                        "status": 404,
+                        "message": "Shoe not found"
+                    }
+                )
             shoe_removed = self.__crud_shoe.remove(db=db, id=shoe_id)
             return JSONResponse(
-                status_code=200, content=f"Shoe {shoe_removed.id} removed"
+                status_code=200, 
+                content={
+                    "status": 200,
+                    "message": f"Shoe {shoe_removed.id} removed"
+                }
             )
         except:
             db.rollback()
             logger.exception(
                 f"Exception in {__name__}.{self.__class__.__name__}.delete_shoe"
             )
-            return JSONResponse(status_code=400, content="Delete shoe failed")
+            return JSONResponse(
+                status_code=400, 
+                content={
+                    "status": 400,
+                    "message": "Delete shoe failed"
+                }
+            )

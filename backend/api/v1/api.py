@@ -11,6 +11,8 @@ from backend.api.v1.endpoints import (
     message,
     shoe,
     user,
+    order,
+    admin_order,
 )
 
 api_router = APIRouter()
@@ -28,3 +30,5 @@ api_router.include_router(user.router, prefix="/user", tags=["users"])
 api_router.include_router(brand.router, prefix="/brand", tags=["brands"])
 api_router.include_router(cart.router, prefix="/cart", tags=["carts"])
 api_router.include_router(address.router, prefix="/address", tags=["addresses"])
+api_router.include_router(order.router, prefix="/order", tags=["orders"])
+api_router.include_router(admin_order.router, prefix="/admin-order", tags=["admin-orders"])

@@ -9,6 +9,10 @@ from backend.schemas._base_schema import BaseSchema
 class AddAddressSchema(pydantic.BaseModel):
     street: str
     city: str
+    
+class AddressOutSchema(pydantic.BaseModel):
+    street: str
+    city: str
 
 
 class AddressCreateSchema(pydantic.BaseModel):

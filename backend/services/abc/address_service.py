@@ -10,7 +10,7 @@ from backend.schemas.user_role_permission_schema import UserRolePermissionSchema
 class AddressService(ABC):
 
     @abstractmethod
-    def add_or_update_address(
+    def add_or_check_address(
         self,
         db: Session,
         add_address_req: AddAddressSchema,
