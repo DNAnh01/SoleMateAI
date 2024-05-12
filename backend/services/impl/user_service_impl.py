@@ -21,130 +21,9 @@ class UserServiceImpl(UserService):
         self.__crud_user = crud_user
         self.__crud_role = crud_role
 
-    def get_user_by_id(
-        self,
-        db: Session,
-        user_id: uuid.UUID,
-        current_user_role_permission: UserRolePermissionSchema,
-    ) -> Optional[UserOutSchema]:
-        if "read_user" not in current_user_role_permission.u_list_permission_name:
-            logger.exception(
-                f"Exception in {__name__}.{self.__class__.__name__}.read_user: User does not have permission"
-            )
-            return JSONResponse(
-                status_code=403, 
-                content={
-                    "status": 403,   
-                    "message": "User does not have permission"
-                }
-            )
-        try:
-            user_found = self.__crud_user.get(db=db, id=user_id)
-            if user_found is None:
-                return JSONResponse(
-                    status_code=404, 
-                    content={
-                        "status": 404,   
-                        "message": "User not found"
-                    }
-                )
-            role_found = self.__crud_role.get(db=db, id=user_found.role_id)
-            if role_found is None:
-                return JSONResponse(
-                    status_code=404, 
-                    content={
-                        "status": 404,   
-                        "message": "Role not found"
-                    }
-                )
 
-            user_out = UserOutSchema(
-                id=user_found.id,
-                role_name=role_found.role_name,
-                email=user_found.email,
-                display_name=user_found.display_name,
-                avatar_url=user_found.avatar_url,
-                payment_information=user_found.payment_information,
-                is_verified=user_found.is_verified,
-                is_active=user_found.is_active,
-                created_at=user_found.created_at,
-                updated_at=user_found.updated_at,
-                deleted_at=user_found.deleted_at,
-            )
-        except:
-            logger.exception(
-                f"Exception in {__name__}.{self.__class__.__name__}.get_user_by_id"
-            )
-            return JSONResponse(
-                status_code=400, 
-                content={
-                    "status": 400,
-                    "message": "Get user failed"
-                }
-            )
-        return user_out
 
-    def get_current_user_by_access_token(
-        self, db: Session, current_user_role_permission: UserRolePermissionSchema
-    ) -> Optional[UserOutSchema]:
-        if "read_user" not in current_user_role_permission.u_list_permission_name:
-            logger.exception(
-                f"Exception in {__name__}.{self.__class__.__name__}.read_user: User does not have permission"
-            )
-            return JSONResponse(
-                status_code=403, 
-                content={
-                    "status": 403,   
-                    "message": "User does not have permission"
-                }
-            )
-
-        try:
-            user_found = self.__crud_user.get(
-                db=db, id=current_user_role_permission.u_id
-            )
-            if user_found is None:
-                return JSONResponse(
-                    status_code=404, 
-                    content={
-                        "status": 404,   
-                        "message": "User not found"
-                    }
-                )
-            role_found = self.__crud_role.get(db=db, id=user_found.role_id)
-            if role_found is None:
-                return JSONResponse(
-                    status_code=404, 
-                    content={
-                        "status": 404,   
-                        "message": "Role not found"
-                    }
-                )
-            user_out = UserOutSchema(
-                id=user_found.id,
-                role_name=role_found.role_name,
-                email=user_found.email,
-                display_name=user_found.display_name,
-                avatar_url=user_found.avatar_url,
-                payment_information=user_found.payment_information,
-                is_verified=user_found.is_verified,
-                is_active=user_found.is_active,
-                created_at=user_found.created_at,
-                updated_at=user_found.updated_at,
-                deleted_at=user_found.deleted_at,
-            )
-        except:
-            logger.exception(
-                f"Exception in {__name__}.{self.__class__.__name__}.get_current_user"
-            )
-            return JSONResponse(
-                status_code=400, 
-                content={
-                    "status": 400,   
-                    "message": "Get current user failed"
-                }
-            )
-        return user_out
+    """ADMIN"""
 
     def get_all_users(
         self,
@@ -212,6 +91,118 @@ class UserServiceImpl(UserService):
                 }
             )
         return user_out
+
+    def get_user_by_id(
+        self,
+        db: Session,
+        user_id: uuid.UUID,
+        current_user_role_permission: UserRolePermissionSchema,
+    ) -> Optional[UserOutSchema]:
+        if "read_user" not in current_user_role_permission.u_list_permission_name:
+            logger.exception(
+                f"Exception in {__name__}.{self.__class__.__name__}.read_user: User does not have permission"
+            )
+            return JSONResponse(
+                status_code=403, 
+                content={
+                    "status": 403,   
+                    "message": "User does not have permission"
+                }
+            )
+        try:
+            user_found = self.__crud_user.get(db=db, id=user_id)
+            if user_found is None:
+                return JSONResponse(
+                    status_code=404, 
+                    content={
+                        "status": 404,   
+                        "message": "User not found"
+                    }
+                )
+            role_found = self.__crud_role.get(db=db, id=user_found.role_id)
+            if role_found is None:
+                return JSONResponse(
+                    status_code=404, 
+                    content={
+                        "status": 404,   
+                        "message": "Role not found"
+                    }
+                )
+
+            user_out = UserOutSchema(
+                id=user_found.id,
+                role_name=role_found.role_name,
+                email=user_found.email,
+                display_name=user_found.display_name,
+                avatar_url=user_found.avatar_url,
+                payment_information=user_found.payment_information,
+                is_verified=user_found.is_verified,
+                is_active=user_found.is_active,
+                created_at=user_found.created_at,
+                updated_at=user_found.updated_at,
+                deleted_at=user_found.deleted_at,
+            )
+        except:
+            logger.exception(
+                f"Exception in {__name__}.{self.__class__.__name__}.get_user_by_id"
+            )
+            return JSONResponse(
+                status_code=400, 
+                content={
+                    "status": 400,
+                    "message": "Get user failed"
+                }
+            )
+        return user_out
+    
+    def delete_user(self, db: Session, user_id: uuid.UUID, current_user_role_permission: UserRolePermissionSchema) -> Optional[UserOutSchema]:
+        if 'delete_user' not in current_user_role_permission.u_list_permission_name:
+            logger.exception(
+                f"Exception in {__name__}.{self.__class__.__name__}.delete_user: User does not have permission"
+            )
+            return JSONResponse(
+                status_code=403, 
+                content={
+                    "status": 403,   
+                    "message": "User does not have permission"
+                }
+            )
+        try:
+            user_found = self.__crud_user.get(db=db, id=user_id)
+            if user_found is None:
+                return JSONResponse(
+                    status_code=404, 
+                    content={
+                        "status": 404,   
+                        "message": "User not found"
+                    }
+                )
+            user_found.is_active = False
+            user_found.deleted_at = datetime.now()
+            db.commit()
+            return JSONResponse(
+                status_code=200, 
+                content={
+                    "status": 200,   
+                    "message": "Delete user successfully"
+                }
+            )
+        except:
+            db.rollback()
+            logger.exception(
+                f"Exception in {__name__}.{self.__class__.__name__}.delete_user"
+            )
+            return JSONResponse(
+                status_code=400, 
+                content={
+                    "status": 400,   
+                    "message": "Delete user failed"
+                }
+            )
+
+
+    """USER"""
+
 
     def update_user(
         self,
@@ -282,7 +273,66 @@ class UserServiceImpl(UserService):
                 }
             )
         return user_out
+    
+    def get_current_user_by_access_token(
+        self, db: Session, current_user_role_permission: UserRolePermissionSchema
+    ) -> Optional[UserOutSchema]:
+        if "read_user" not in current_user_role_permission.u_list_permission_name:
+            logger.exception(
+                f"Exception in {__name__}.{self.__class__.__name__}.read_user: User does not have permission"
+            )
+            return JSONResponse(
+                status_code=403, 
+                content={
+                    "status": 403,   
+                    "message": "User does not have permission"
+                }
+            )
 
-    # @abstractmethod
-    # def delete_user(self, db: Session, user_id: uuid.UUID, current_user_role_permission: UserRolePermissionSchema) -> Optional[UserOutSchema]:
-    #     pass
+        try:
+            user_found = self.__crud_user.get(
+                db=db, id=current_user_role_permission.u_id
+            )
+            if user_found is None:
+                return JSONResponse(
+                    status_code=404, 
+                    content={
+                        "status": 404,   
+                        "message": "User not found"
+                    }
+                )
+            role_found = self.__crud_role.get(db=db, id=user_found.role_id)
+            if role_found is None:
+                return JSONResponse(
+                    status_code=404, 
+                    content={
+                        "status": 404,   
+                        "message": "Role not found"
+                    }
+                )
+            user_out = UserOutSchema(
+                id=user_found.id,
+                role_name=role_found.role_name,
+                email=user_found.email,
+                display_name=user_found.display_name,
+                avatar_url=user_found.avatar_url,
+                payment_information=user_found.payment_information,
+                is_verified=user_found.is_verified,
+                is_active=user_found.is_active,
+                created_at=user_found.created_at,
+                updated_at=user_found.updated_at,
+                deleted_at=user_found.deleted_at,
+            )
+        except:
+            logger.exception(
+                f"Exception in {__name__}.{self.__class__.__name__}.get_current_user"
+            )
+            return JSONResponse(
+                status_code=400, 
+                content={
+                    "status": 400,   
+                    "message": "Get current user failed"
+                }
+            )
+        return user_out
+    

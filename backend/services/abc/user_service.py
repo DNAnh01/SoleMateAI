@@ -6,25 +6,13 @@ from sqlalchemy.orm import Session
 
 from backend.schemas.user_role_permission_schema import UserRolePermissionSchema
 from backend.schemas.user_schema import UserOutSchema, UserUpdateSchema
+from fastapi.responses import JSONResponse
 
 
 class UserService(ABC):
 
-    @abstractmethod
-    def get_user_by_id(
-        self,
-        db: Session,
-        user_id: uuid.UUID,
-        current_user_role_permission: UserRolePermissionSchema,
-    ) -> Optional[UserOutSchema]:
-        pass
 
-    @abstractmethod
-    def get_current_user_by_access_token(
-        self, db: Session, current_user_role_permission: UserRolePermissionSchema
-    ) -> Optional[UserOutSchema]:
-        pass
-
+    """ADMIN"""
     @abstractmethod
     def get_all_users(
         self,
@@ -33,7 +21,22 @@ class UserService(ABC):
         current_user_role_permission: UserRolePermissionSchema,
     ) -> Optional[List[UserOutSchema]]:
         pass
+    
+    @abstractmethod
+    def get_user_by_id(
+        self,
+        db: Session,
+        user_id: uuid.UUID,
+        current_user_role_permission: UserRolePermissionSchema,
+    ) -> Optional[UserOutSchema]:
+        pass
+    
+    
+    @abstractmethod
+    def delete_user(self, db: Session, user_id: uuid.UUID, current_user_role_permission: UserRolePermissionSchema) -> Optional[UserOutSchema]:
+        pass
 
+    """USER"""
     @abstractmethod
     def update_user(
         self,
@@ -42,7 +45,10 @@ class UserService(ABC):
         current_user_role_permission: UserRolePermissionSchema,
     ) -> Optional[UserOutSchema]:
         pass
+    
+    @abstractmethod
+    def get_current_user_by_access_token(
+        self, db: Session, current_user_role_permission: UserRolePermissionSchema
+    ) -> Optional[UserOutSchema]:
+        pass
 
-    # @abstractmethod
-    # def delete_user(self, db: Session, user_id: uuid.UUID, current_user_role_permission: UserRolePermissionSchema) -> Optional[UserOutSchema]:
-    #     pass

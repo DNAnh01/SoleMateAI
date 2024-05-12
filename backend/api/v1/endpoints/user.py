@@ -20,45 +20,8 @@ user_service: UserService = UserServiceImpl()
 router = APIRouter()
 
 
-# ADMIN
-@router.get(
-    "/user-id={user_id}",
-    status_code=status.HTTP_200_OK,
-    response_model=Optional[UserOutSchema],
-)
-def get_user_by_id(
-    user_id: str,
-    current_user_role_permission: UserRolePermissionSchema = Depends(
-        oauth2.get_current_user_role_permission
-    ),
-    db: Session = Depends(deps.get_db),
-) -> Optional[UserOutSchema]:
-    user = user_service.get_user_by_id(
-        db=db,
-        user_id=user_id,
-        current_user_role_permission=current_user_role_permission,
-    )
-    return user
 
-
-# USER
-@router.get(
-    "/profile", status_code=status.HTTP_200_OK, response_model=Optional[UserOutSchema]
-)
-def get_current_user_by_access_token(
-    current_user_role_permission: UserRolePermissionSchema = Depends(
-        oauth2.get_current_user_role_permission
-    ),
-    db: Session = Depends(deps.get_db),
-) -> Optional[UserOutSchema]:
-    user = user_service.get_current_user_by_access_token(
-        db=db,
-        current_user_role_permission=current_user_role_permission,
-    )
-    return user
-
-
-# ADMIN
+"""ADMIN"""
 @router.get(
     "/get-all",
     status_code=status.HTTP_200_OK,
@@ -79,7 +42,46 @@ def get_all_users(
     return users
 
 
-# USER
+@router.get(
+    "/user-id={user_id}",
+    status_code=status.HTTP_200_OK,
+    response_model=Optional[UserOutSchema],
+)
+def get_user_by_id(
+    user_id: str,
+    current_user_role_permission: UserRolePermissionSchema = Depends(
+        oauth2.get_current_user_role_permission
+    ),
+    db: Session = Depends(deps.get_db),
+) -> Optional[UserOutSchema]:
+    user = user_service.get_user_by_id(
+        db=db,
+        user_id=user_id,
+        current_user_role_permission=current_user_role_permission,
+    )
+    return user
+
+@router.delete(
+    "/user-id={user_id}",
+    status_code=status.HTTP_200_OK,
+    response_model=Optional[UserOutSchema],
+)
+def delete_user(
+    user_id: str,
+    current_user_role_permission: UserRolePermissionSchema = Depends(
+        oauth2.get_current_user_role_permission
+    ),
+    db: Session = Depends(deps.get_db),
+) -> Optional[UserOutSchema]:
+    user = user_service.delete_user(
+        db=db,
+        user_id=user_id,
+        current_user_role_permission=current_user_role_permission,
+    )
+    return user
+
+
+"""USER"""
 @router.patch(
     "/profile", status_code=status.HTTP_200_OK, response_model=Optional[UserOutSchema]
 )
@@ -93,6 +95,22 @@ def update_user(
     user = user_service.update_user(
         db=db,
         user=user_data,
+        current_user_role_permission=current_user_role_permission,
+    )
+    return user
+
+
+@router.get(
+    "/profile", status_code=status.HTTP_200_OK, response_model=Optional[UserOutSchema]
+)
+def get_current_user_by_access_token(
+    current_user_role_permission: UserRolePermissionSchema = Depends(
+        oauth2.get_current_user_role_permission
+    ),
+    db: Session = Depends(deps.get_db),
+) -> Optional[UserOutSchema]:
+    user = user_service.get_current_user_by_access_token(
+        db=db,
         current_user_role_permission=current_user_role_permission,
     )
     return user
