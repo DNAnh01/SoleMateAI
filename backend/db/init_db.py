@@ -151,30 +151,30 @@ def init_db():
                         deleted_at=None,
                     ),
                 )
-            logger.warning(
-                "INSERTING DATA INTO THE `promotions` TABLE FROM THE promotions.csv FILE"
-            )
-            for row in utils.read_csv(
-                os.path.join(script_dir, "raw_data", "promotions.csv")
-            ):
-                """['Summer Sale', '2023-06-01', '2023-08-31', '20']"""
-                promotion_name = row[0]
-                start_date = datetime.strptime(row[1], "%Y-%m-%d").replace(
-                    tzinfo=pytz.utc
-                )
-                end_date = datetime.strptime(row[2], "%Y-%m-%d").replace(
-                    tzinfo=pytz.utc
-                )
-                discount_percent = int(row[3])
-                crud_promotion.create(
-                    db=session,
-                    obj_in=PromotionCreateSchema(
-                        promotion_name=promotion_name,
-                        start_date=start_date,
-                        end_date=end_date,
-                        discount_percent=discount_percent,
-                    ),
-                )
+            # logger.warning(
+            #     "INSERTING DATA INTO THE `promotions` TABLE FROM THE promotions.csv FILE"
+            # )
+            # for row in utils.read_csv(
+            #     os.path.join(script_dir, "raw_data", "promotions.csv")
+            # ):
+            #     """['Summer Sale', '2023-06-01', '2023-08-31', '20']"""
+            #     promotion_name = row[0]
+            #     start_date = datetime.strptime(row[1], "%Y-%m-%d").replace(
+            #         tzinfo=pytz.utc
+            #     )
+            #     end_date = datetime.strptime(row[2], "%Y-%m-%d").replace(
+            #         tzinfo=pytz.utc
+            #     )
+            #     discount_percent = int(row[3])
+            #     crud_promotion.create(
+            #         db=session,
+            #         obj_in=PromotionCreateSchema(
+            #             promotion_name=promotion_name,
+            #             start_date=start_date,
+            #             end_date=end_date,
+            #             discount_percent=discount_percent,
+            #         ),
+            #     )
             logger.warning(
                 "INSERTING DATA INTO THE `brands` TABLE FROM THE brands.csv FILE"
             )

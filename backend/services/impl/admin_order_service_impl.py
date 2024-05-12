@@ -65,6 +65,7 @@ class AdminOrderServiceImpl(AdminOrderService):
             for order in orders:
                 order_items =[]
                 address_id = order.address_id
+                logger.info(f"address_id: {address_id}")
                 order_items_db = self.__crud_order_item.get_multi(
                     db=db,
                     filter_param={"order_id": order.id}
@@ -88,10 +89,11 @@ class AdminOrderServiceImpl(AdminOrderService):
                                 **order_item.__dict__
                             )
                         )
-                shipping_address = self.__crud_address.get(
+                shipping_address = self.__crud_address.get_one_ignore_deleted_and_inactive(
                     db=db,
-                    id=address_id
+                    filter={"id": address_id}
                 )
+                logger.info(f"shipping_address: {shipping_address}")
                 order_out = OrderOutSchema(
                     **order.__dict__,
                     shipping_address=AddressInDBSchema(**shipping_address.__dict__),
@@ -162,7 +164,7 @@ class AdminOrderServiceImpl(AdminOrderService):
                         )
                     )
             
-            shipping_address = self.__crud_address.get_one_by(
+            shipping_address = self.__crud_address.get_one_ignore_deleted_and_inactive(
                     db=db,
                     filter={"id": address_id}
                 )

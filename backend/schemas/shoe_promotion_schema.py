@@ -17,6 +17,7 @@ class ShoePromotionUpdateSchema(BaseSchema):
 
 
 class ShoePromotionInDBSchema(BaseSchema):
+    id: uuid.UUID
     shoe_id: uuid.UUID
     promotion_id: uuid.UUID
 
