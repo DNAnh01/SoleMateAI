@@ -34,6 +34,12 @@ class UserOutSchema(BaseSchema):
         orm_mode = True
 
 
+class UserOutInProductDetailPageSchema(pydantic.BaseModel):
+    email: pydantic.EmailStr
+    display_name: str
+    avatar_url: str
+
+
 class UserInDBSchema(BaseSchema):
     id: uuid.UUID
     role_id: uuid.UUID

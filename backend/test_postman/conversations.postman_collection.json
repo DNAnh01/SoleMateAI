@@ -1,0 +1,66 @@
+{
+	"info": {
+		"_postman_id": "a0c9258c-6b94-46ea-9314-d1dc6d710507",
+		"name": "conversations",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26335300"
+	},
+	"item": [
+		{
+			"name": "create",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/conversation/",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"conversation",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"ended_at\": \"2024-05-18T03:51:11.451Z\",\r\n  \"rating_score\": 0,\r\n  \"user_id\": \"988ef2e6-1ba3-4cef-883b-6a966a4a60b9\",\r\n  \"chatbot_id\": \"fe39a7d3-1b2b-4095-abff-04f08eb602bf\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/conversation/fe39a7d3-1b2b-4095-abff-04f08eb602bf/create-conversation",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"conversation",
+						"fe39a7d3-1b2b-4095-abff-04f08eb602bf",
+						"create-conversation"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

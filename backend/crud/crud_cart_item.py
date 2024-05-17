@@ -15,24 +15,25 @@ from backend.schemas.cart_item_schema import (
 
 logger = setup_logger()
 
-GET_CART_ITEM_BY_CART_ID_AND_SHOE_ID = f"""
-                                        SELECT 
-                                            ci.id AS {CartItemInDBSchema.ID}, 
-                                            ci.cart_id AS {CartItemInDBSchema.CART_ID}, 
-                                            ci.shoe_id AS {CartItemInDBSchema.SHOE_ID}, 
-                                            ci.quantity AS {CartItemInDBSchema.QUANTITY}, 
-                                            ci.display_price AS {CartItemInDBSchema.DISPLAY_PRICE}, 
-                                            ci.warehouse_price AS {CartItemInDBSchema.WAREHOUSE_PRICE}, 
-                                            ci.discounted_price AS {CartItemInDBSchema.DISCOUNTED_PRICE}, 
-                                            ci.is_active AS {CartItemInDBSchema.IS_ACTIVE}, 
-                                            ci.created_at AS {CartItemInDBSchema.CREATED_AT}, 
-                                            ci.updated_at AS {CartItemInDBSchema.UPDATED_AT}, 
-                                            ci.deleted_at AS {CartItemInDBSchema.DELETED_AT} 
-                                        FROM cart_items AS ci 
-                                        WHERE ci.cart_id = :cart_id 
-                                        AND ci.shoe_id = :shoe_id 
-                                        AND ci.deleted_at IS NULL;
-                                        """
+GET_CART_ITEM_BY_CART_ID_AND_SHOE_ID = \
+    f"""
+    SELECT 
+        ci.id AS {CartItemInDBSchema.ID}, 
+        ci.cart_id AS {CartItemInDBSchema.CART_ID}, 
+        ci.shoe_id AS {CartItemInDBSchema.SHOE_ID}, 
+        ci.quantity AS {CartItemInDBSchema.QUANTITY}, 
+        ci.display_price AS {CartItemInDBSchema.DISPLAY_PRICE}, 
+        ci.warehouse_price AS {CartItemInDBSchema.WAREHOUSE_PRICE}, 
+        ci.discounted_price AS {CartItemInDBSchema.DISCOUNTED_PRICE}, 
+        ci.is_active AS {CartItemInDBSchema.IS_ACTIVE}, 
+        ci.created_at AS {CartItemInDBSchema.CREATED_AT}, 
+        ci.updated_at AS {CartItemInDBSchema.UPDATED_AT}, 
+        ci.deleted_at AS {CartItemInDBSchema.DELETED_AT} 
+    FROM cart_items AS ci 
+    WHERE ci.cart_id = :cart_id 
+    AND ci.shoe_id = :shoe_id 
+    AND ci.deleted_at IS NULL;
+    """
 
 
 class CRUDCartItem(CRUDBase[CartItem, CartItemCreateSchema, CartItemUpdateSchema]):

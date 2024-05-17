@@ -6,6 +6,7 @@ from typing import Optional
 from fastapi.responses import JSONResponse, RedirectResponse
 from sqlalchemy.orm import Session
 from starlette.requests import Request
+from backend.schemas.user_schema import UserOutSchema
 
 from backend.common import generate, send_email, utils
 from backend.common.logger import setup_logger
@@ -188,7 +189,40 @@ class AuthServiceImpl(AuthService):
                 expires_at=utils.get_expires_at(),
             ),
         )
-        return TokenSchema(access_token=user_session_created.token, token_type="bearer")
+        role_found = self.__crud_role.get(
+            db=db,
+            id=user_found.role_id
+        )
+        if role_found is None:
+            logger.error(
+                f"Error in {__name__}.{self.__class__.__name__}.sign_in: Role not found"
+            )
+            return JSONResponse(
+                status_code=404, 
+                content={
+                    "status": 404,
+                    "message": "Role not found"
+                }
+            )
+        user_out = UserOutSchema(
+                id=user_found.id,
+                role_name=role_found.role_name,
+                email=user_found.email,
+                display_name=user_found.display_name,
+                avatar_url=user_found.avatar_url,
+                payment_information=user_found.payment_information,
+                is_verified=user_found.is_verified,
+                is_active=user_found.is_active,
+                created_at=user_found.created_at,
+                updated_at=user_found.updated_at,
+                deleted_at=user_found.deleted_at,
+            )
+        
+        return TokenSchema(
+            access_token=user_session_created.token, 
+            token_type="bearer",
+            user=user_out
+        )
 
     def verify_user(self, db: Session, token: str):
         """Get current user."""

@@ -1,0 +1,142 @@
+{
+	"info": {
+		"_postman_id": "1e3e9a0b-7760-4aaa-9166-9b650f123047",
+		"name": "orders",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26335300"
+	},
+	"item": [
+		{
+			"name": "create",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"street\": \"Thanh Binh\",\r\n  \"city\": \"Quảng Nam\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/order/",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"order",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get history order",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/order/get-all?filter={\"status__like\":\"%%\"}&order_by={\"created_at\":\"asc\"}",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"order",
+						"get-all"
+					],
+					"query": [
+						{
+							"key": "filter",
+							"value": "{\"status__like\":\"%%\"}"
+						},
+						{
+							"key": "order_by",
+							"value": "{\"created_at\":\"asc\"}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get by id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/order/order-id=5afe7ecb-5b47-4cff-a795-1ade4e1a2e91",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"order",
+						"order-id=5afe7ecb-5b47-4cff-a795-1ade4e1a2e91"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "cancel order by id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/order/cancel/order-id=5afe7ecb-5b47-4cff-a795-1ade4e1a2e91",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"order",
+						"cancel",
+						"order-id=5afe7ecb-5b47-4cff-a795-1ade4e1a2e91"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

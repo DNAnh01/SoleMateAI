@@ -19,6 +19,10 @@ from backend.schemas.conversation_schema import ConversationInDBSchema
 from backend.schemas.message_schema import MessageInDBSchema
 from backend.schemas.user_role_permission_schema import UserRolePermissionSchema
 from backend.services.abc.message_service import MessageService
+from backend.crud.crud_shoe import crud_shoe
+from backend.services.abc.shoe_service import ShoeService
+from backend.services.impl.shoe_service_impl import ShoeServiceImpl
+
 
 logger = setup_logger()
 
@@ -31,6 +35,7 @@ class MessageServiceImpl(MessageService):
         self.__crud_knowledge_base = crud_knowledge_base
         self.__crud_chatbot = crud_chatbot
         self.__client_openai = OpenAI(api_key=f"{settings.OPENAI_API_KEY}")
+        self.__shoe_service: ShoeService = ShoeServiceImpl()
 
     def create(
         self,
@@ -157,17 +162,35 @@ class MessageServiceImpl(MessageService):
                 db=db, filter_param={"chatbot_id": chatbot_id}
             )
             chatbot_found = self.__crud_chatbot.get(db=db, id=chatbot_id)
-
+            """add chatbot's prompt to knowledge base"""
             temp_knowledge_base.append(
                 {"role": "system", "content": chatbot_found.prompt}
             )
+            """add content of files to knowledge base"""
             for knowledge_base in knowledge_bases:
-                temp_knowledge_base.append(
-                    {
-                        "role": "system",
-                        "content": utils.read_pdf(knowledge_base.file_path),
-                    }
-                )
+                if knowledge_base.file_path:
+                    temp_knowledge_base.append(
+                        {
+                            "role": "system",
+                            "content": utils.read_pdf(knowledge_base.file_path),
+                        }
+                    )
+            """add data in DB to knowledge base"""
+            shoes_json_lm5 = self.__shoe_service.get_all_shoes(
+                db=db, common_filters={"limit": 5}
+            )
+            temp_knowledge_base.append(
+                {
+                    "role": "system",
+                    "content": json.dumps(
+                        [shoe.json() for shoe in shoes_json_lm5]
+                    ),
+                }
+            )
+            
+            
+            logger.info(f"len temp_knowledge_base: {len(temp_knowledge_base)}")
+            
             for message_ in messages:
                 temp_knowledge_base.append(
                     {

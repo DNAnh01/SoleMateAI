@@ -1,0 +1,137 @@
+{
+	"info": {
+		"_postman_id": "9a34de86-9c59-424d-82b8-3685aac726ed",
+		"name": "users",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26335300"
+	},
+	"item": [
+		{
+			"name": "get by id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/user/user-id=32545454-d6db-490b-bc46-8c34162d8c83",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"user",
+						"user-id=32545454-d6db-490b-bc46-8c34162d8c83"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get profile",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/user/profile",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"user",
+						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/user/get-all?filter={\"email__like\":\"\"}",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"user",
+						"get-all"
+					],
+					"query": [
+						{
+							"key": "filter",
+							"value": "{\"email__like\":\"\"}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update profile",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"display_name\": \"Đỗ Nguyên Ánh\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/user/profile",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"user",
+						"profile"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

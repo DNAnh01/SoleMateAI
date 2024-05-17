@@ -1,0 +1,159 @@
+{
+	"info": {
+		"_postman_id": "9fe1315a-df39-4783-b407-c6ed001153f7",
+		"name": "admin promotions",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26335300"
+	},
+	"item": [
+		{
+			"name": "get all",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/admin-promotion/get-all",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin-promotion",
+						"get-all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"promotion_name\": \"Mua Thu Vang11\",\r\n  \"start_date\": \"2024-05-12T18:31:44.962Z\",\r\n  \"end_date\": \"2024-06-12T18:31:44.963Z\",\r\n  \"discount_percent\": 20,\r\n  \"shoe_ids\": [\r\n    \"418cd401-ae88-4b17-acdc-9f6687168c10\"\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/admin-promotion/",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin-promotion",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get by id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/admin-promotion/promotion-id=",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin-promotion",
+						"promotion-id="
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update by id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/admin-promotion/promotion-id=",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin-promotion",
+						"promotion-id="
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete by id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/admin-promotion/promotion-id=",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin-promotion",
+						"promotion-id="
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

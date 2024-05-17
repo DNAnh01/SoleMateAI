@@ -44,15 +44,11 @@ def create_promotion(
 @router.get("/get-all", status_code=status.HTTP_200_OK, response_model=Optional[List[PromotionOutSchema]])
 def get_all_promotion(
     common_filter_parameters: dict = Depends(parameters.common_filter_parameters),
-    current_user_role_permission: UserRolePermissionSchema = Depends(
-        oauth2.get_current_user_role_permission
-    ),
     db: Session = Depends(deps.get_db),
 ) -> Optional[List[PromotionOutSchema]]:
     return admin_promotion_service.get_all_promotion(
         db=db,
         common_filters=common_filter_parameters,
-        current_user_role_permission=current_user_role_permission,
     )
     
 @router.get("/promotion-id={promotion_id}", status_code=status.HTTP_200_OK, response_model=Optional[PromotionOutSchema])

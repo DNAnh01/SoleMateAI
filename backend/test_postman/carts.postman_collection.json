@@ -1,0 +1,112 @@
+{
+	"info": {
+		"_postman_id": "30fca60f-174f-4f51-bfd4-3e05141b0b95",
+		"name": "carts",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26335300"
+	},
+	"item": [
+		{
+			"name": "get all",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/cart/get-all",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"cart",
+						"get-all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add cart item",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"shoe_id\": \"5594f253-754c-4c98-b5b8-daa909b746a2\",\r\n    \"quantity\": 5\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/cart/add-cart-item",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"cart",
+						"add-cart-item"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "remove cart item",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"shoe_id\": \"52116118-0f9a-433f-9737-9f9411ebe0db\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/cart/remove-cart-item",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"cart",
+						"remove-cart-item"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,7 +1,7 @@
 from sqlalchemy import Boolean, Column, Double, ForeignKey, Integer, String
 from sqlalchemy.dialects.postgresql.base import UUID
 from sqlalchemy.orm import relationship
-
+from backend.common.enum.prompt_default import PromptDefault
 from backend.db.base_class import Base
 
 
@@ -19,9 +19,7 @@ class Chatbot(Base):
     is_default = Column(Boolean, default=True)
     prompt = Column(
         String,
-        default="You are a helpful assistant. The first prompt will be a long text,"
-        "and any messages that you get be regarding that. Please answer any "
-        "questions and requests having in mind the first prompt ",
+        default=PromptDefault.PROMPT_DEFAULT.value,
     )
     # relationship
     user = relationship("User", back_populates="chatbots")

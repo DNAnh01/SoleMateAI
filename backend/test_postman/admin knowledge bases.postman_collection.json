@@ -1,0 +1,106 @@
+{
+	"info": {
+		"_postman_id": "c85410e9-ee90-4696-9212-66cf533b2bc3",
+		"name": "admin knowledge bases",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26335300"
+	},
+	"item": [
+		{
+			"name": "create",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/dongu/OneDrive/Máy tính/ki-nang-co-ban-ftp-2024_2bf1a1.pdf"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{URL}}/knowledge-base/chatbot-id=a2048445-16f1-4192-9270-24dbb62a2561",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"knowledge-base",
+						"chatbot-id=a2048445-16f1-4192-9270-24dbb62a2561"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/knowledge-base/chatbot-id=a2048445-16f1-4192-9270-24dbb62a2561/get-all",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"knowledge-base",
+						"chatbot-id=a2048445-16f1-4192-9270-24dbb62a2561",
+						"get-all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/knowledge-base/chatbot-id=b512d76a-6f5b-4524-bc1d-9ca99e0b14f9/knowledge-base-id=cd7ea7cb-c286-4509-b9d5-8b76bb4a6adb",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"knowledge-base",
+						"chatbot-id=b512d76a-6f5b-4524-bc1d-9ca99e0b14f9",
+						"knowledge-base-id=cd7ea7cb-c286-4509-b9d5-8b76bb4a6adb"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

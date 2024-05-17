@@ -210,11 +210,10 @@ class OrderServiceImpl(OrderService):
                 shipping_address=shipping_address_found,
                 order_items=[
                     OrderItemOutSchema(
-                        shoe=self.__shoe_service.get_shoe_by_id(
+                        shoe=ShoeOutSchema(**self.__shoe_service.get_shoe_by_id(
                             db=db,
-                            shoe_id=order_item.shoe_id,
-                            current_user_role_permission=current_user_role_permission
-                        ),
+                            shoe_id=cart_item.shoe_id,
+                        ).__dict__),
                         **order_item.__dict__
                     )
                     for order_item in temporary_order_items if order_item.is_active is True and order_item.deleted_at is None
@@ -251,15 +250,17 @@ class OrderServiceImpl(OrderService):
                     }
                 )
         try:
-            history_orders = self.__crud_order.get_multi_ignore_deleted_and_inactive(
+            history_orders = self.__crud_order.get_multi(
                 db=db,
-                filter_param={"user_id": current_user_role_permission.u_id, **common_filters}
+                filter_param={
+                    "user_id": current_user_role_permission.u_id, 
+                    **common_filters}
             )
             history_orders_out = []
             for order in history_orders:
                 order_items = []
                 address_id = order.address_id             
-                order_items_db = self.__crud_order_item.get_multi_ignore_deleted_and_inactive(
+                order_items_db = self.__crud_order_item.get_multi(
                     db=db,
                     filter_param={"order_id": order.id}
                 )
@@ -295,7 +296,6 @@ class OrderServiceImpl(OrderService):
                 history_orders_out.append(order_out)
             
             # Moved order_items.clear() outside the loop
-            order_items.clear()
             
             return history_orders_out
         except Exception as e:
@@ -335,7 +335,7 @@ class OrderServiceImpl(OrderService):
             
             address_id = order.address_id
             
-            order_items_db = self.__crud_order_item.get_multi_ignore_deleted_and_inactive(
+            order_items_db = self.__crud_order_item.get_multi(
                 db=db,
                 filter_param={"order_id": order.id}
             )
@@ -388,15 +388,15 @@ class OrderServiceImpl(OrderService):
         order_id: uuid.UUID,
         current_user_role_permission: UserRolePermissionSchema,
     ) -> JSONResponse:
-        if 'delete_order' and 'update_order' not in current_user_role_permission.u_list_permission_name:
+        if 'update_order' not in current_user_role_permission.u_list_permission_name:
             logger.exception(
-                f"Exception in {__name__}.{self.__class__.__name__}.cancel_order: User does not have permission to delete order"
+                f"Exception in {__name__}.{self.__class__.__name__}.cancel_order: User does not have permission to update order"
             )
             return JSONResponse(
                 status_code=403, 
                 content={
                     "status": 403,       
-                    "message": "User does not have permission to delete order"
+                    "message": "User does not have permission to update order"
                 }
             )
         try:
@@ -433,6 +433,7 @@ class OrderServiceImpl(OrderService):
                             "message": "Shoe not found"
                         }
                     )
+                """update quantity in stock of shoe"""
                 updated_shoe = self.__crud_shoe.update_one_by(
                     db=db,
                     filter={"id": order_item.shoe_id},
@@ -457,8 +458,7 @@ class OrderServiceImpl(OrderService):
                 filter={"id": order_id},
                 obj_in=OrderUpdateSchema(
                     status="ORDER-CANCELLED",
-                    updated_at=datetime.now(),
-                    deleted_at=datetime.now()
+                    updated_at=datetime.now()
                 )
             )
             

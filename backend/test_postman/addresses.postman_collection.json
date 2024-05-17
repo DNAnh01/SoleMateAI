@@ -1,0 +1,75 @@
+{
+	"info": {
+		"_postman_id": "18a50fc5-49ec-4c55-a6ae-bcb054f1de18",
+		"name": "addresses",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26335300"
+	},
+	"item": [
+		{
+			"name": "get current shipping address",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/address/",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"address",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add address",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"street\": \"string 2\",\r\n  \"city\": \"string 2\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/address/",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"address",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

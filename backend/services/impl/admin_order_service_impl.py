@@ -100,7 +100,6 @@ class AdminOrderServiceImpl(AdminOrderService):
                     order_items=order_items
                 )
                 order_outs.append(order_out)
-            order_items.clear()
             return order_outs
         
         except Exception as e:
@@ -191,15 +190,15 @@ class AdminOrderServiceImpl(AdminOrderService):
         order_id: uuid.UUID,
         current_user_role_permission: UserRolePermissionSchema,
     ) -> JSONResponse:
-        if 'delete_order' and 'update_order' not in current_user_role_permission.u_list_permission_name:
+        if 'update_order' not in current_user_role_permission.u_list_permission_name:
             logger.exception(
-                f"Exception in {__name__}.{self.__class__.__name__}.cancel_order: User does not have permission to delete order"
+                f"Exception in {__name__}.{self.__class__.__name__}.cancel_order: User does not have permission to update order"
             )
             return JSONResponse(
                 status_code=403, 
                 content={
                     "status": 403,       
-                    "message": "User does not have permission to delete order"
+                    "message": "User does not have permission to update order"
                 }
             )
         try:
@@ -216,6 +215,17 @@ class AdminOrderServiceImpl(AdminOrderService):
                     content={
                         "status": 404,       
                         "message": "Order not found"
+                    }
+                )
+            if order_found.status == "ORDER-CANCELLED":
+                logger.exception(
+                    f"Exception in {__name__}.{self.__class__.__name__}.cancel_order: Order already cancelled"
+                )
+                return JSONResponse(
+                    status_code=400, 
+                    content={
+                        "status": 400,       
+                        "message": "Order already cancelled"
                     }
                 )
             
@@ -236,6 +246,7 @@ class AdminOrderServiceImpl(AdminOrderService):
                             "message": "Shoe not found"
                         }
                     )
+                """update quantity in stock of shoe"""
                 updated_shoe = self.__crud_shoe.update_one_by(
                     db=db,
                     filter={"id": order_item.shoe_id},
@@ -260,8 +271,7 @@ class AdminOrderServiceImpl(AdminOrderService):
                 filter={"id": order_id},
                 obj_in=OrderUpdateSchema(
                     status="ORDER-CANCELLED",
-                    updated_at=datetime.now(),
-                    deleted_at=datetime.now()
+                    updated_at=datetime.now()
                 )
             )
             return JSONResponse(
@@ -298,6 +308,17 @@ class AdminOrderServiceImpl(AdminOrderService):
                     "message": "User does not have permission to update order"
                 }
             )
+        if 'admin' != current_user_role_permission.u_role_name:
+            logger.exception(
+                f"Exception in {__name__}.{self.__class__.__name__}.deliver_order: User does not have permission to update order"
+            )
+            return JSONResponse(
+                status_code=403, 
+                content={
+                    "status": 403,       
+                    "message": "User does not have permission to update order"
+                }
+            )
         try:
             order_found = self.__crud_order.get(
                 db=db,
@@ -312,6 +333,28 @@ class AdminOrderServiceImpl(AdminOrderService):
                     content={
                         "status": 404,       
                         "message": "Order not found"
+                    }
+                )
+            if order_found.status == "ORDER-CANCELLED":
+                logger.exception(
+                    f"Exception in {__name__}.{self.__class__.__name__}.deliver_order: Order already cancelled"
+                )
+                return JSONResponse(
+                    status_code=400, 
+                    content={
+                        "status": 400,       
+                        "message": "Order already cancelled"
+                    }
+                )
+            if order_found.status == "ORDER-DELIVERED":
+                logger.exception(
+                    f"Exception in {__name__}.{self.__class__.__name__}.deliver_order: Order already delivered"
+                )
+                return JSONResponse(
+                    status_code=400, 
+                    content={
+                        "status": 400,       
+                        "message": "Order already delivered"
                     }
                 )
             updated_order = self.__crud_order.update_one_by(

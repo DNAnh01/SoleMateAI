@@ -18,6 +18,7 @@ from backend.services.abc.cart_service import CartService
 from backend.services.abc.shoe_service import ShoeService
 from backend.services.impl.cart_item_service_impl import CartItemServiceImpl
 from backend.services.impl.shoe_service_impl import ShoeServiceImpl
+from backend.schemas.shoe_schema import ShoeOutSchema
 
 logger = setup_logger()
 
@@ -186,11 +187,10 @@ class CartServiceImpl(CartService):
                 total_discounted_price=cart_found.total_discounted_price,
                 cart_items=[
                     CartItemOutSchema(
-                        shoe=self.__shoe_service.get_shoe_by_id(
+                        shoe=ShoeOutSchema(**self.__shoe_service.get_shoe_by_id(
                             db=db,
                             shoe_id=cart_item.shoe_id,
-                            current_user_role_permission=current_user_role_permission,
-                        ),
+                        ).__dict__),
                         **cart_item.__dict__,
                     )
                     for cart_item in cart_found.cart_items

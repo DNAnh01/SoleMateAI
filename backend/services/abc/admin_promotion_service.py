@@ -30,7 +30,6 @@ class AdminPromotionService(ABC):
         self,
         db: Session,
         common_filters: dict,
-        current_user_role_permission: UserRolePermissionSchema,
     ) -> Optional[List[PromotionOutSchema]]:
         pass
     

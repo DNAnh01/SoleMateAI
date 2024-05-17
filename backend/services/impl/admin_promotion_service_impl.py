@@ -250,21 +250,12 @@ class AdminPromotionServiceImpl(AdminPromotionService):
         self,
         db: Session,
         common_filters: dict,
-        current_user_role_permission: UserRolePermissionSchema,
     ) -> Optional[List[PromotionOutSchema]]:
-        if 'read_promotion' not in current_user_role_permission.u_list_permission_name:
-            logger.exception(
-                f"Permission Error: User {current_user_role_permission.u_username} has no permission to read promotion"
-            )
-            return JSONResponse(
-                status_code=403,
-                content={
-                    "status": 403,
-                    "message": "Permission Error: You do not have permission to read promotion"
-                }
-            )
         try:
-            promotions = self.__crud_promotion.get_multi(db=db, filter_param=common_filters)
+            promotions = self.__crud_promotion.get_multi(
+                db=db, 
+                filter_param=common_filters
+            )
             promotions_out = []
             for promotion in promotions:
                 shoes_out = []

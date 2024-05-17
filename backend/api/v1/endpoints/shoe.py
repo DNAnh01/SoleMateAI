@@ -15,6 +15,7 @@ from backend.schemas.shoe_schema import (
 from backend.schemas.user_role_permission_schema import UserRolePermissionSchema
 from backend.services.abc.shoe_service import ShoeService
 from backend.services.impl.shoe_service_impl import ShoeServiceImpl
+from backend.schemas.shoe_schema import ShoeOutInProductDetailPageSchema,ShoeOutInHomePageSchema
 
 logger = setup_logger()
 
@@ -62,19 +63,15 @@ def create_multi_shoes(
 @router.get(
     "/shoe-id={shoe_id}",
     status_code=status.HTTP_200_OK,
-    response_model=Optional[ShoeOutSchema],
+    response_model=Optional[ShoeOutInProductDetailPageSchema],
 )
 def get_shoe_by_id(
     shoe_id: str,
-    current_user_role_permission: UserRolePermissionSchema = Depends(
-        oauth2.get_current_user_role_permission
-    ),
     db: Session = Depends(deps.get_db),
-) -> Optional[ShoeOutSchema]:
+) -> Optional[ShoeOutInProductDetailPageSchema]:
     shoe = shoe_service.get_shoe_by_id(
         db=db,
         shoe_id=shoe_id,
-        current_user_role_permission=current_user_role_permission,
     )
     return shoe
 
@@ -82,19 +79,15 @@ def get_shoe_by_id(
 @router.get(
     "/get-all",
     status_code=status.HTTP_200_OK,
-    response_model=Optional[List[ShoeOutSchema]],
+    response_model=Optional[List[ShoeOutInHomePageSchema]],
 )
 def get_all_shoes(
     common_filter_parameters: dict = Depends(parameters.common_filter_parameters),
-    current_user_role_permission: UserRolePermissionSchema = Depends(
-        oauth2.get_current_user_role_permission
-    ),
     db: Session = Depends(deps.get_db),
-) -> Optional[List[ShoeOutSchema]]:
+) -> Optional[List[ShoeOutInHomePageSchema]]:
     shoes = shoe_service.get_all_shoes(
         db=db,
         common_filters=common_filter_parameters,
-        current_user_role_permission=current_user_role_permission,
     )
     return shoes
 

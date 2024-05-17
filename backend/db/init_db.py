@@ -2,6 +2,8 @@ import os
 import uuid
 from datetime import datetime
 
+
+import random
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
 
@@ -44,6 +46,15 @@ from backend.schemas.role_permission_schema import RolePermissionCreateSchema
 from backend.schemas.role_schema import RoleCreateSchema
 from backend.schemas.size_schema import SizeCreateSchema
 from backend.schemas.user_schema import UserInDBSchema
+from backend.schemas.shoe_schema import ShoeInDBSchema
+from backend.schemas.promotion_schema import PromotionInDBSchema
+from backend.schemas.shoe_promotion_schema import ShoePromotionInDBSchema
+from backend.schemas.review_schema import ReviewInDBSchema
+from backend.schemas.address_schema import AddressInDBSchema
+from backend.schemas.order_schema import OrderInDBSchema
+from backend.schemas.chatbot_schema import ChatbotInDBSchema
+from backend.common.enum.prompt_default import PromptDefault
+
 
 logger = setup_logger()
 
@@ -138,43 +149,66 @@ def init_db():
                     obj_in=UserInDBSchema(
                         id=uuid.uuid4(),
                         role_id=admin_role.id,
-                        email="admin@admin.com",
+                        email="admin@gmail.com",
                         password_hash=utils.hash("admin"),
                         display_name="admin",
                         avatar_url="https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/default_user_avatar.png",
                         payment_information="",
                         is_verified=False,
-                        user_role="admin",
                         is_active=True,
                         created_at=datetime.now(),
                         updated_at=datetime.now(),
                         deleted_at=None,
                     ),
                 )
-            # logger.warning(
-            #     "INSERTING DATA INTO THE `promotions` TABLE FROM THE promotions.csv FILE"
-            # )
-            # for row in utils.read_csv(
-            #     os.path.join(script_dir, "raw_data", "promotions.csv")
-            # ):
-            #     """['Summer Sale', '2023-06-01', '2023-08-31', '20']"""
-            #     promotion_name = row[0]
-            #     start_date = datetime.strptime(row[1], "%Y-%m-%d").replace(
-            #         tzinfo=pytz.utc
-            #     )
-            #     end_date = datetime.strptime(row[2], "%Y-%m-%d").replace(
-            #         tzinfo=pytz.utc
-            #     )
-            #     discount_percent = int(row[3])
-            #     crud_promotion.create(
-            #         db=session,
-            #         obj_in=PromotionCreateSchema(
-            #             promotion_name=promotion_name,
-            #             start_date=start_date,
-            #             end_date=end_date,
-            #             discount_percent=discount_percent,
-            #         ),
-            #     )
+                crud_user.create(
+                    db=session,
+                    obj_in=UserInDBSchema(
+                        id=uuid.uuid4(),
+                        role_id=user_role.id,
+                        email="userdefault@gmail.com",
+                        password_hash=utils.hash("userdefault"),
+                        display_name="userdefault",
+                        avatar_url="https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/default_user_avatar.png",
+                        payment_information="",
+                        is_verified=False,
+                        is_active=True,
+                        created_at=datetime.now(),
+                        updated_at=datetime.now(),
+                        deleted_at=None,
+                    ),
+                )
+                
+                
+            logger.warning(
+                "INSERTING DATA INTO THE `promotions` TABLE FROM THE promotions.csv FILE"
+            )
+            for row in utils.read_csv(
+                os.path.join(script_dir, "raw_data", "promotions.csv")
+            ):
+                """['Summer Sale', '2023-06-01', '2023-08-31', '20']"""
+                promotion_name = row[0]
+                start_date = datetime.strptime(row[1], "%Y-%m-%d").replace(
+                    tzinfo=pytz.utc
+                )
+                end_date = datetime.strptime(row[2], "%Y-%m-%d").replace(
+                    tzinfo=pytz.utc
+                )
+                discount_percent = int(row[3])
+                crud_promotion.create(
+                    db=session,
+                    obj_in=PromotionInDBSchema(
+                        id=uuid.uuid4(),
+                        promotion_name=promotion_name,
+                        start_date=start_date,
+                        end_date=end_date,
+                        discount_percent=discount_percent,
+                        is_active=True,
+                        created_at=datetime.now(),
+                        updated_at=datetime.now(),
+                        deleted_at=None,
+                    )
+                )
             logger.warning(
                 "INSERTING DATA INTO THE `brands` TABLE FROM THE brands.csv FILE"
             )
@@ -220,3 +254,292 @@ def init_db():
                         size_number=size_number,
                     ),
                 )
+            logger.warning(
+                "INSERTING DATA INTO THE `shoes` TABLE FROM THE shoes.csv FILE"
+            )
+            for row in utils.read_csv(
+                os.path.join(script_dir, "raw_data", "shoes.csv")
+            ):
+                brand_id_found = crud_brand.get_one_ignore_deleted_and_inactive(
+                    db=session,
+                    filter={"brand_name": str(row[0])},
+                ).id
+                if brand_id_found is None:
+                    logger.error(f"Brand {row[0]} not found")
+                    
+                color_id_found = crud_color.get_one_ignore_deleted_and_inactive(
+                    db=session,
+                    filter={"color_name": str(row[1])},
+                ).id
+                if color_id_found is None:
+                    logger.error(f"Color {row[1]} not found")
+                
+                size_id_found = crud_size.get_one_ignore_deleted_and_inactive(
+                    db=session,
+                    filter={"size_number": int(row[2])},
+                ).id
+                if size_id_found is None:
+                    logger.error(f"Size {row[2]} not found")
+                
+                image_url = str(row[3])
+                shoe_name = str(row[4])
+                description = str(row[5])
+                quantity_in_stock = int(row[6])
+                display_price = float(row[7])
+                warehouse_price = float(row[8])
+                discounted_price = float(row[9])
+                
+                created_shoe = crud_shoe.create(
+                    db=session,
+                    obj_in=ShoeInDBSchema(
+                        id=uuid.uuid4(),
+                        brand_id=brand_id_found,
+                        size_id=size_id_found,
+                        color_id=color_id_found,
+                        image_url=image_url,
+                        shoe_name=shoe_name,
+                        description=description,
+                        quantity_in_stock=quantity_in_stock,
+                        display_price=display_price,
+                        warehouse_price=warehouse_price,
+                        discounted_price=discounted_price,
+                        is_active=True,
+                        created_at=datetime.now(),
+                        updated_at=datetime.now(),
+                        deleted_at=None,
+                    )
+                )
+                
+                if created_shoe is None:
+                    logger.error(f"Shoe {shoe_name} not created")
+            logger.warning(
+                "INSERTING DATA INTO THE `shoes_promotions` TABLE FROM THE shoes_promotions.csv FILE"
+            )
+            for row in utils.read_csv(
+                os.path.join(script_dir, "raw_data", "shoes_promotions.csv")
+            ):
+                promotion_found = crud_promotion.get_one_ignore_deleted_and_inactive(
+                    db=session,
+                    filter={"promotion_name": str(row[0])},
+                )
+                if promotion_found is None:
+                    logger.error(f"Promotion {row[0]} not found")
+                    
+                shoe_name = str(row[1])
+                for shoe in crud_shoe.get_multi_ignore_deleted_and_inactive(
+                    db=session,
+                    filter_param={"shoe_name": str(row[1])},
+                ):
+                    if shoe is None:
+                        logger.error(f"Shoe {row[1]} not found")
+                    """update shoe's discounted price"""
+                    # logger.info(f"{shoe.shoe_name}>>>>{promotion_found.discount_percent}>>>>{shoe.display_price - (shoe.display_price * promotion_found.discount_percent / 100)}")
+                    if shoe.shoe_name == shoe_name:
+                        updated_shoe = crud_shoe.update_one_by(
+                            db=session,
+                            filter={"id": shoe.id},
+                            obj_in=ShoeInDBSchema(
+                                id=shoe.id,
+                                brand_id=shoe.brand_id,
+                                size_id=shoe.size_id,
+                                color_id=shoe.color_id,
+                                image_url=shoe.image_url,
+                                shoe_name=shoe.shoe_name,
+                                description=shoe.description,
+                                quantity_in_stock=shoe.quantity_in_stock,
+                                display_price=shoe.display_price,
+                                warehouse_price=shoe.warehouse_price,
+                                discounted_price=shoe.display_price - (shoe.display_price * promotion_found.discount_percent / 100),
+                                is_active=True,
+                                created_at=shoe.created_at,
+                                updated_at=datetime.now(),
+                                deleted_at=None,
+                            )
+                        )
+                        """create shoe_promotion"""
+                        created_shoe_promotion = crud_shoe_promotion.create(
+                            db=session,
+                            obj_in=ShoePromotionInDBSchema(
+                                id=uuid.uuid4(),
+                                shoe_id=updated_shoe.id,
+                                promotion_id=promotion_found.id,
+                                is_active=True,
+                                created_at=datetime.now(),
+                                updated_at=datetime.now(),
+                                deleted_at=None,
+                            )
+                        )
+            logger.warning(
+                "INSERTING DATA INTO THE `reviews` TABLE FROM THE reviews.csv FILE"
+            )
+            ratings_comments = {3: "Giày tạm được nha shop.", 4: "Giày đẹp chất lượng ổn.", 5: "Giày đẹp lắm, chất lượng tuyệt vời."}
+            for row in utils.read_csv(
+                os.path.join(script_dir, "raw_data", "reviews.csv")
+            ):
+                user_found = crud_user.get_one_ignore_deleted_and_inactive(
+                    db=session,
+                    filter={"email": str(row[0])},
+                )
+                if user_found is None:
+                    logger.error(f"User {row[0]} not found")  
+                
+                shoe_name = str(row[1])
+                for shoe in crud_shoe.get_multi_ignore_deleted_and_inactive(
+                    db=session,
+                    filter_param={"shoe_name": str(row[1])},
+                ):
+                    if shoe is None:
+                        logger.error(f"Shoe {row[1]} not found")
+                    if shoe.shoe_name == shoe_name:
+                        """create review"""
+                        random_rating = random.choice(list(ratings_comments.keys()))
+                        random_comment = ratings_comments[random_rating]
+                        created_review = crud_review.create(
+                            db=session,
+                            obj_in=ReviewInDBSchema(
+                                id=uuid.uuid4(),
+                                user_id=user_found.id,
+                                shoe_id=shoe.id,
+                                rating=random_rating,
+                                comment=random_comment,
+                                heart_count=random.randint(100, 500),
+                                is_active=True,
+                                created_at=datetime.now(),
+                                updated_at=datetime.now(),
+                                deleted_at=None,
+                            )
+                        )    
+                    
+            logger.warning(
+                "INSERTING DATA INTO THE `addresses` TABLE FROM THE addresses.csv FILE"
+            )
+            for row in utils.read_csv(
+                os.path.join(script_dir, "raw_data", "addresses.csv")
+            ):
+                
+                user_found = crud_user.get_one_ignore_deleted_and_inactive(
+                    db=session,
+                    filter={"email": str(row[0])},
+                )
+                if user_found is None:
+                    logger.error(f"User {row[0]} not found")
+                
+                address_street = str(row[1])
+                address_city = str(row[2])
+                address_is_active = False
+                address_created_at =datetime.strptime(row[3], "%Y-%m-%d").replace(
+                    tzinfo=pytz.utc
+                )
+                address_updated_at =datetime.strptime(row[4], "%Y-%m-%d").replace(
+                    tzinfo=pytz.utc
+                )
+                address_deleted_at =datetime.strptime(row[5], "%Y-%m-%d").replace(
+                    tzinfo=pytz.utc
+                )
+                created_address = crud_address.create(
+                    db=session,
+                    obj_in=AddressInDBSchema(
+                        id=uuid.uuid4(),
+                        user_id=user_found.id,
+                        street=address_street,
+                        city=address_city,
+                        is_active=address_is_active,
+                        created_at=address_created_at,
+                        updated_at=address_updated_at,
+                        deleted_at=address_deleted_at,
+                    )
+                )
+            logger.warning(
+                "INSERTING DATA INTO THE `orders` TABLE FROM THE orders.csv FILE"
+            )
+            for row in utils.read_csv(
+                os.path.join(script_dir, "raw_data", "orders.csv")
+            ):
+                user_found = crud_user.get_one_ignore_deleted_and_inactive(
+                    db=session,
+                    filter={"email": str(row[0])},
+                )
+                if user_found is None:
+                    logger.error(f"User {row[0]} not found")
+                address_street = str(row[1])
+                address_city = str(row[2])
+                order_date = datetime.strptime(row[3], "%Y-%m-%d").replace(
+                    tzinfo=pytz.utc
+                )
+                delivery_date = datetime.strptime(row[4], "%Y-%m-%d").replace(
+                    tzinfo=pytz.utc
+                )
+                status = str(row[5])
+                total_item = int(row[6])
+                total_display_price = float(row[7])
+                total_warehouse_price = float(row[8])
+                total_discounted_price = float(row[9])
+                
+                order_created_at = datetime.strptime(row[10], "%Y-%m-%d").replace(
+                    tzinfo=pytz.utc
+                )
+                
+                order_updated_at = datetime.strptime(row[11], "%Y-%m-%d").replace(
+                    tzinfo=pytz.utc
+                )
+                
+                order_deleted_at = datetime.strptime(row[12], "%Y-%m-%d").replace(
+                    tzinfo=pytz.utc
+                )
+                
+                order_is_active = False
+                
+                address_found = crud_address.get_one_ignore_deleted_and_inactive(
+                    db=session,
+                    filter={
+                        "user_id": user_found.id,
+                        "street": address_street,
+                        "city": address_city,   
+                    },
+                )
+                created_order = crud_order.create(
+                    db=session,
+                    obj_in=OrderInDBSchema(
+                        id=uuid.uuid4(),
+                        address_id=address_found.id,
+                        user_id=user_found.id,
+                        order_date=order_date,
+                        delivery_date=delivery_date,
+                        status=status,
+                        total_item=total_item,
+                        total_display_price=total_display_price,
+                        total_warehouse_price=total_warehouse_price,
+                        total_discounted_price=total_discounted_price,
+                        is_active=order_is_active,
+                        created_at=order_created_at,
+                        updated_at=order_updated_at,
+                        deleted_at=order_deleted_at,
+                    )
+                )
+                
+            logger.warning(
+                "INSERTING DATA INTO THE `orders` TABLE"
+            )
+            user_found = crud_user.get_one_ignore_deleted_and_inactive(
+                db=session,
+                filter={"email": "admin@gmail.com"}
+            )
+            created_chatbot = crud_chatbot.create(
+                db=session,
+                obj_in=ChatbotInDBSchema(
+                    id=uuid.uuid4(),
+                    user_id=user_found.id,
+                    chatbot_name="Chatbot mặc định.",
+                    model="gpt-4",
+                    is_public=True,
+                    description="Chatbot mặc định khi khởi chạy dự án.",
+                    temperature=0.5,
+                    max_token=100,
+                    is_default=True,
+                    prompt=PromptDefault.PROMPT_DEFAULT.value,
+                    is_active=True,
+                    created_at=datetime.now(),
+                    updated_at=datetime.now(),
+                    deleted_at=None,
+                )
+            )

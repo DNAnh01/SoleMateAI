@@ -109,8 +109,8 @@ def read_pdf(file_path):
 
 
 def read_csv(file_path):
-    with open(file_path, "r") as file:
-        reader = csv.reader(file)
+    with open(file_path, 'r', encoding='utf-8') as f:
+        reader = csv.reader(f)
         next(reader)
         for row in reader:
             yield row

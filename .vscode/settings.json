@@ -51,6 +51,7 @@
         "Popins",
         "Pydantic",
         "pytz",
+        "roures",
         "rsps",
         "rtype",
         "selectinload",
@@ -60,6 +61,7 @@
         "sqlalchemy",
         "starlette",
         "tailwindcss",
+        "userdefault",
         "userinfo",
         "uvicorn"
     ]

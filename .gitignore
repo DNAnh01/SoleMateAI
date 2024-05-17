@@ -15,6 +15,9 @@
 /frontend/.pnp
 /frontend/.pnp.js
 
+# ignore common files of project
+design_database_diagram.png
+
 # testing
 /frontend/coverage
 

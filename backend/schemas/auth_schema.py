@@ -1,5 +1,5 @@
 import pydantic
-
+from backend.schemas.user_schema import UserOutSchema
 """request"""
 
 
@@ -28,3 +28,4 @@ class ChangePasswordSchema(pydantic.BaseModel):
 class TokenSchema(pydantic.BaseModel):
     access_token: str
     token_type: str
+    user: UserOutSchema

@@ -1,0 +1,62 @@
+{
+	"info": {
+		"_postman_id": "680d0df8-d86c-4002-99ee-23819c177b39",
+		"name": "shoes",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26335300"
+	},
+	"item": [
+		{
+			"name": "get by id",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/shoe/shoe-id=78028fc5-d83e-450c-b5d4-e15838f5ede6",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"shoe",
+						"shoe-id=78028fc5-d83e-450c-b5d4-e15838f5ede6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/shoe/get-all?filter={\"shoe_name__like\":\"%%\"}&limit=1",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"shoe",
+						"get-all"
+					],
+					"query": [
+						{
+							"key": "filter",
+							"value": "{\"shoe_name__like\":\"%%\"}"
+						},
+						{
+							"key": "limit",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

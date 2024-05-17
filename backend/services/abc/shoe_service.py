@@ -8,6 +8,8 @@ from backend.schemas.shoe_schema import (
     ShoeCreateSchema,
     ShoeOutSchema,
     ShoeUpdateSchema,
+    ShoeOutInHomePageSchema,
+    ShoeOutInProductDetailPageSchema
 )
 from backend.schemas.user_role_permission_schema import UserRolePermissionSchema
 
@@ -37,8 +39,7 @@ class ShoeService(ABC):
         self,
         db: Session,
         shoe_id: uuid.UUID,
-        current_user_role_permission: UserRolePermissionSchema,
-    ) -> Optional[ShoeOutSchema]:
+    ) -> Optional[ShoeOutInProductDetailPageSchema]:
         pass
 
     @abstractmethod
@@ -46,8 +47,7 @@ class ShoeService(ABC):
         self,
         db: Session,
         common_filters: dict,
-        current_user_role_permission: UserRolePermissionSchema,
-    ) -> Optional[List[ShoeOutSchema]]:
+    ) -> Optional[List[ShoeOutInHomePageSchema]]:
         pass
 
     @abstractmethod
