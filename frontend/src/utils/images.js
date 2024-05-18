@@ -1,218 +1,155 @@
-import logo from "../assets/images/logo.png";
+import logo from '~/assets/images/logo.png';
 
 // forms images
-import form_img1 from "../assets/images/form_img1.png";
-import form_img2 from "../assets/images/form_img2.png";
-import form_img3 from "../assets/images/form_img3.png";
-import form_img4 from "../assets/images/form_img4.png";
-import form_img5 from "../assets/images/form_img5.png";
-
+import form_img from '~/assets/images/form_img.png';
 // icons images
-import google from "../assets/icons/google.svg";
-import twitter from "../assets/icons/twitter.svg";
-import google_play from "../assets/images/google_play.jpg";
-import app_store from "../assets/images/app_store.jpg";
-import heart from "../assets/icons/heart.svg";
-import user from "../assets/icons/user.svg";
-import cart from "../assets/icons/cart.svg";
+import google from '~/assets/icons/google.svg';
+import google_play from '~/assets/images/google_play.jpg';
+import app_store from '~/assets/images/app_store.jpg';
+import heart from '~/assets/icons/heart.svg';
+import user from '~/assets/icons/user.svg';
+import cart from '~/assets/icons/cart.svg';
 
-// some random images
-import img1 from "../assets/images/img1.jpg";
-import img2 from "../assets/images/img2.jpg";
-
-// hero banner images
-import hero_img from "../assets/images/hero_img.png";
-
-
-// product images
-import product1 from "../assets/images/product1.jpg";
-import product2 from "../assets/images/product2.jpg";
-import product3 from "../assets/images/product3.jpg";
-import product4 from "../assets/images/product4.jpg";
-import product5 from "../assets/images/product5.jpg";
-import product6 from "../assets/images/product6.jpg";
-import product7 from "../assets/images/product7.jpg";
-import product8 from "../assets/images/product8.jpg";
-import product9 from "../assets/images/product9.jpg";
-import product10 from "../assets/images/product10.jpg";
-import product11 from "../assets/images/product11.jpg";
-import product12 from "../assets/images/product12.png";
-import product13 from "../assets/images/product13.png";
-import product14 from "../assets/images/product14.jpg";
-import product15 from "../assets/images/product15.png";
-import product16 from "../assets/images/product16.jpg";
-import product17 from "../assets/images/product17.jpg";
-import product18 from "../assets/images/product18.jpg";
-import product19 from "../assets/images/product19.jpg";
-import product20 from "../assets/images/product20.jpg";
-import product21 from "../assets/images/product21.jpg";
-import product22 from "../assets/images/product22.jpg";
-import product23 from "../assets/images/product23.jpg";
-import product24 from "../assets/images/product24.jpg";
-
-import bigzone1 from "../assets/images/bigzone1.jpg";
-import bigzone2 from "../assets/images/bigzone2.jpg";
-import bigzone3 from "../assets/images/bigzone3.jpg";
-import bigzone4 from "../assets/images/bigzone4.jpg";
-import bigzone5 from "../assets/images/bigzone5.jpg";
+// shoe images
+import shoe1 from '~/assets/images/shoe1.png';
+import shoe2 from '~/assets/images/shoe2.png';
+import shoe3 from '~/assets/images/shoe3.png';
+import shoe4 from '~/assets/images/shoe4.png';
+import shoe5 from '~/assets/images/shoe5.png';
+import shoe6 from '~/assets/images/shoe6.png';
+import shoe7 from '~/assets/images/shoe7.png';
+import shoe8 from '~/assets/images/shoe8.png';
 
 // brand images
-import brandAdidas from "../assets/images/brand_logo_Adidas.png";
-import brandAsics from "../assets/images/brand_logo_Asics.png";
-import brandConverse from "../assets/images/brand_logo_Converse.png";
-import brandNewBalance from "../assets/images/brand_logo_New_Balance.png";
-import brandNike from "../assets/images/brand_logo_Nike.png";
-import brandPuma from "../assets/images/brand_logo_Puma.png";
-import brandReebok from "../assets/images/brand_logo_Reebok.png";
-import brandTimberland from "../assets/images/brand_logo_Timberland.png";
-import brandUnderArmour from "../assets/images/brand_logo_Under_Armour.png";
-import brandVans from "../assets/images/brand_logo_Vans.png";
+import brand_adidas from '~/assets/images/brand_logo_Adidas.png';
+import brand_nike from '~/assets/images/brand_logo_Nike.png';
+import brand_reebok from '~/assets/images/brand_logo_Reebok.png';
+import brand_puma from '~/assets/images/brand_logo_Puma.png';
 
 // testimonials images
-import test1 from "../assets/images/test1.png";
-import test2 from "../assets/images/test2.png";
-import test3 from "../assets/images/test3.png";
-import test4 from "../assets/images/test4.png";
+import test1 from '~/assets/images/test1.png';
+import test2 from '~/assets/images/test2.png';
+import test3 from '~/assets/images/test3.png';
+import test4 from '~/assets/images/test4.png';
 
-// colors images
-import color1 from "../assets/images/color1.svg";
-import color2 from "../assets/images/color2.svg";
-import color3 from "../assets/images/color3.svg";
-import color4 from "../assets/images/color4.svg";
-import color5 from "../assets/images/color5.svg";
-import color6 from "../assets/images/color6.svg";
-import color7 from "../assets/images/color7.svg";
-import color8 from "../assets/images/color8.svg";
-import color9 from "../assets/images/color9.svg";
-import color10 from "../assets/images/color10.svg";
-import color11 from "../assets/images/color11.svg";
-import color12 from "../assets/images/color1.svg";
+// color images
+import color1 from '~/assets/images/color1.svg';
+import color2 from '~/assets/images/color2.svg';
+import color3 from '~/assets/images/color3.svg';
+import color4 from '~/assets/images/color4.svg';
+import color5 from '~/assets/images/color5.svg';
+import color6 from '~/assets/images/color6.svg';
+import color7 from '~/assets/images/color7.svg';
+import color8 from '~/assets/images/color8.svg';
+import color9 from '~/assets/images/color9.svg';
+import color10 from '~/assets/images/color10.svg';
+import color11 from '~/assets/images/color11.svg';
+import color12 from '~/assets/images/color12.svg';
 
-// product details preview images
-import preview1 from "../assets/images/preview1.jpg";
-import preview2 from "../assets/images/preview2.jpg";
-import preview3 from "../assets/images/preview3.jpg";
-import preview_main from "../assets/images/preview_main.jpg";
-
-// product services images
-import card_icon from "../assets/icons/card_icon.svg";
-import size_icon from "../assets/icons/size_icon.svg";
-import shipping_icon from "../assets/icons/shipping_icon.svg";
-import return_icon from "../assets/icons/return_icon.svg";
+// shoe services images
+import card_icon from '~/assets/icons/card_icon.svg';
+import size_icon from '~/assets/icons/size_icon.svg';
+import shipping_icon from '~/assets/icons/shipping_icon.svg';
+import return_icon from '~/assets/icons/return_icon.svg';
 
 // cart images
-import cart1 from "../assets/images/cart1.png";
-import cart2 from "../assets/images/cart2.png";
-import cart3 from "../assets/images/cart3.png";
-import play_icon from "../assets/icons/play_icon.svg";
+import cart1 from '~/assets/images/shoe1.png';
+import cart2 from '~/assets/images/shoe2.png';
+import cart3 from '~/assets/images/shoe3.png';
 
-// error
-import page_not_found from "../assets/images/page_not_found.png";
-import empty_cart_img from "../assets/images/empty_cart_img.svg";
+import play_icon from '~/assets/icons/play_icon.svg';
 
-// order
-import order1 from "../assets/images/order1.png";
-import order2 from "../assets/images/order2.png";
+// error images
+import page_not_found from '~/assets/images/page_not_found.png';
+import empty_cart_img from '~/assets/images/empty_cart_img.svg';
 
+// order images
+import order1 from '~/assets/images/shoe1.png';
+import order2 from '~/assets/images/shoe2.png';
+import order3 from '~/assets/images/shoe3.png';
 
-// card
-import googlePay from "../assets/images/googlePay.png";
-import visa from "../assets/images/visa.png";
-import paypal from "../assets/images/paypal.png";
-import paypass from "../assets/images/paypass.png";
-import confirmed_img from "../assets/images/confirmed_img.svg";
+// card images
+import googlePay from '~/assets/images/googlePay.png';
+import visa from '~/assets/images/visa.png';
+import paypal from '~/assets/images/paypal.png';
+import paypass from '~/assets/images/paypass.png';
+import confirmed_img from '~/assets/images/confirmed_img.svg';
+
+// other images
+import achievement from '~/assets/images/achievement.png';
+import background_horizontal from '~/assets/images/background_horizontal.png';
+import background_vertical from '~/assets/images/background_vertical.png';
+import complete from '~/assets/images/complete.png';
+import default_user_avatar from '~/assets/images/default_user_avatar.png';
+import empty_bag from '~/assets/images/empty_bag.png';
+import fail from '~/assets/images/fail.jpg';
+import no_image from '~/assets/images/no_image.png';
+import null_rmb from '~/assets/images/null_rmb.png';
+import null_hbg from '~/assets/images/null_hbg.jpg';
 
 export const staticImages = {
-  logo,
-  form_img1,
-  form_img2,
-  form_img3,
-  form_img4,
-  form_img5,
-  google,
-  twitter,
-  google_play,
-  app_store,
-  heart,
-  user,
-  cart,
-  hero_img,
-  img1,
-  img2,
-  product1,
-  product2,
-  product3,
-  product4,
-  product5,
-  product6,
-  product7,
-  product8,
-  product9,
-  product10,
-  product11,
-  product12,
-  product13,
-  product14,
-  product15,
-  product16,
-  product17,
-  product18,
-  product19,
-  product20,
-  product21,
-  product22,
-  product23,
-  product24,
-  bigzone1,
-  bigzone2,
-  bigzone3,
-  bigzone4,
-  bigzone5,
-  brandAdidas,
-  brandAsics,
-  brandConverse,
-  brandNewBalance,
-  brandNike,
-  brandPuma,
-  brandReebok,
-  brandTimberland,
-  brandUnderArmour,
-  brandVans,
-  test1,
-  test2,
-  test3,
-  test4,
-  color1,
-  color2,
-  color3,
-  color4,
-  color5,
-  color6,
-  color7,
-  color8,
-  color9,
-  color10,
-  color11,
-  color12,
-  preview1,
-  preview2,
-  preview3,
-  preview_main,
-  card_icon,
-  size_icon,
-  shipping_icon,
-  return_icon,
-  cart1,
-  cart2,
-  cart3,
-  play_icon,
-  page_not_found,
-  empty_cart_img,
-  order1,
-  order2,
-  googlePay,
-  visa,
-  paypal,
-  paypass,
-  confirmed_img,
+    logo,
+    form_img,
+    google,
+    google_play,
+    app_store,
+    heart,
+    user,
+    cart,
+    shoe1,
+    shoe2,
+    shoe3,
+    shoe4,
+    shoe5,
+    shoe6,
+    shoe7,
+    shoe8,
+    brand_adidas,
+    brand_nike,
+    brand_reebok,
+    brand_puma,
+    test1,
+    test2,
+    test3,
+    test4,
+    color1,
+    color2,
+    color3,
+    color4,
+    color5,
+    color6,
+    color7,
+    color8,
+    color9,
+    color10,
+    color11,
+    color12,
+    card_icon,
+    size_icon,
+    shipping_icon,
+    return_icon,
+    cart1,
+    cart2,
+    cart3,
+    play_icon,
+    page_not_found,
+    empty_cart_img,
+    order1,
+    order2,
+    order3,
+    googlePay,
+    visa,
+    paypal,
+    paypass,
+    confirmed_img,
+    achievement,
+    background_horizontal,
+    background_vertical,
+    complete,
+    default_user_avatar,
+    empty_bag,
+    fail,
+    no_image,
+    null_rmb,
+    null_hbg,
 };

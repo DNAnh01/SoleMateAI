@@ -6,17 +6,15 @@
             "source.organizeImports.ruff": "explicit"
         }
     },
-    "[javascript]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "editor.formatOnSave": true
-    },
-    "[typescript]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "editor.formatOnSave": true
-    },
     "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
     "prettier.configPath": "./frontend/.prettierrc",
     "cSpell.words": [
+        "Achats",
+        "apos",
         "Asics",
         "autoflake",
         "autoflush",
@@ -32,6 +30,7 @@
         "drpi",
         "fastapi",
         "heroicons",
+        "horiz",
         "hzne",
         "ilike",
         "initialisms",
@@ -44,17 +43,21 @@
         "ondelete",
         "onupdate",
         "openai",
+        "outerspace",
         "pascalcase",
         "pascalize",
         "pascalized",
         "passlib",
+        "paypass",
         "Popins",
+        "productlist",
         "Pydantic",
         "pytz",
         "roures",
         "rsps",
         "rtype",
         "selectinload",
+        "semibod",
         "sessionmaker",
         "slugified",
         "snakecase",
@@ -63,6 +66,7 @@
         "tailwindcss",
         "userdefault",
         "userinfo",
-        "uvicorn"
+        "uvicorn",
+        "whitesmoke"
     ]
 }
