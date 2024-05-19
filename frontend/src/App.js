@@ -47,8 +47,6 @@ import SignIn from '~/pages/auth/SignInPage';
 import SignUp from '~/pages/auth/SignUpPage';
 import Reset from '~/pages/auth/ResetPage';
 import ChangePassword from '~/pages/auth/ChangePasswordPage';
-import CheckMail from '~/pages/auth/CheckMailPage';
-import Verification from '~/pages/auth/VerificationPage';
 import NotFound from '~/pages/error/NotFoundPage';
 import ProductList from '~/pages/product/ProductListPage';
 import ProductDetails from '~/pages/product/ProductDetailsPage';
@@ -89,8 +87,6 @@ function App() {
                         <Route path="sign_up" element={<SignUp />} />
                         <Route path="reset" element={<Reset />} />
                         <Route path="change_password" element={<ChangePassword />} />
-                        <Route path="check_mail" element={<CheckMail />} />
-                        <Route path="verification" element={<Verification />} />
                     </Route>
                     <Route path="*" element={<NotFound />} />
                 </Routes>

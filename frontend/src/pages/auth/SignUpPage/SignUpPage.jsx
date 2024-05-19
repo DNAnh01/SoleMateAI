@@ -1,12 +1,13 @@
 import styled from 'styled-components';
-import { CheckboxGroup, FormGridWrapper, FormTitle } from '~/styles/form_grid';
+import { FormGridWrapper, FormTitle } from '~/styles/form_grid';
 import { Container } from '~/styles/styles';
-import { staticImages } from '~/utils/images';
 import AuthOptions from '~/components/auth/AuthOptions';
 import { FormElement, Input } from '~/styles/form';
 import PasswordInput from '~/components/auth/PasswordInput';
 import { Link } from 'react-router-dom';
 import { BaseButtonBlack } from '~/styles/button';
+import { defaultTheme } from '~/styles/themes/default';
+import images from '~/assets/images';
 
 const SignUpPageWrapper = styled.section`
     form {
@@ -20,6 +21,19 @@ const SignUpPageWrapper = styled.section`
     .text-space {
         margin: 0 4px;
     }
+
+    .form-grid-left {
+        display:  flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(to top right, ${defaultTheme.color_yellow_green}, ${defaultTheme.color_purple});
+    }
+    .form-grid-left-img {
+        position: absolute;
+        object-fit: cover;
+        height: 100%;
+        width: auto;
+    }
 `;
 
 const SignUpPage = () => {
@@ -29,54 +43,34 @@ const SignUpPage = () => {
                 <Container>
                     <div className="form-grid-content">
                         <div className="form-grid-left">
-                            <img src={staticImages.background_vertical} className="object-fit-cover" alt="" />
+                            <img src={images.backgroundVertical} alt="" className="form-grid-left-img" />
                         </div>
                         <div className="form-grid-right">
                             <FormTitle>
-                                <h3>Sign Up</h3>
-                                <p className="text-base">Sign up for free to access to in any of our products</p>
+                                <h3>Đăng ký</h3>
                             </FormTitle>
                             <AuthOptions />
                             <form>
                                 <FormElement>
                                     <label htmlFor="" className="forme-elem-label">
-                                        User name or email address
+                                        Tên người dùng hoặc địa chỉ email
                                     </label>
                                     <Input type="text" placeholder="" name="" className="form-elem-control" />
-                                    <span className="form-elem-error">*Please enter valid email address.</span>
+                                    <span className="form-elem-error">*Vui lòng nhập địa chỉ email hợp lệ.</span>
                                 </FormElement>
-                                <PasswordInput fieldName="Password" name="password" />
+                                <PasswordInput fieldName="Mật khẩu" name="password" />
+                                <PasswordInput fieldName="Nhập lại mật khẩu" name="confirmPassword" />
                                 <span className="form-elem-text font-medium">
-                                    Use 8 or more characters with a mix of letters, numbers & symbols
+                                    Sử dụng 8 ký tự trở lên kết hợp chữ cái, số và ký hiệu
                                 </span>
-
-                                <CheckboxGroup>
-                                    <li className="flex items-center">
-                                        <input type="checkbox" />
-                                        <span className="text-sm">
-                                            Agree to our
-                                            <Link to="/" className="text-underline">
-                                                Terms of use
-                                            </Link>
-                                            <span className="text-space">and</span>
-                                            <Link to="/" className="text-underline">
-                                                Privacy Policy
-                                            </Link>
-                                        </span>
-                                    </li>
-                                    <li className="flex items-center">
-                                        <input type="checkbox" />
-                                        <span className="text-sm">Subscribe to our monthly newsletter</span>
-                                    </li>
-                                </CheckboxGroup>
                                 <BaseButtonBlack type="submit" className="form-submit-btn">
-                                    Sign Up
+                                    Đăng ký
                                 </BaseButtonBlack>
                             </form>
                             <p className="flex flex-wrap account-rel-text">
-                                Already have an account?
+                                Bạn đã có tài khoản?
                                 <Link to="/sign_in" className="font-medium">
-                                    Log in
+                                    Đăng nhập
                                 </Link>
                             </p>
                         </div>

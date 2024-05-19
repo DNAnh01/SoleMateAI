@@ -7,7 +7,8 @@ import PasswordInput from '~/components/auth/PasswordInput';
 import { Link } from 'react-router-dom';
 import { BaseButtonBlack } from '~/styles/button';
 import { breakpoints, defaultTheme } from '~/styles/themes/default';
-import { staticImages } from '~/utils/images';
+import images from '~/assets/images';
+
 
 const SignInPageWrapper = styled.section`
     .form-separator {
@@ -20,8 +21,8 @@ const SignInPageWrapper = styled.section`
 
         .separator-text {
             border-radius: 50%;
-            min-width: 36px;
-            height: 36px;
+            min-width: 40px;
+            height: 40px;
             background-color: ${defaultTheme.color_purple};
             position: relative;
         }
@@ -37,26 +38,39 @@ const SignInPageWrapper = styled.section`
         margin-top: -16px;
         display: block;
     }
+    .form-grid-left {
+        display:  flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(to top right, ${defaultTheme.color_yellow_green}, ${defaultTheme.color_purple});
+    }
+    .form-grid-left-img {
+        position: absolute;
+        object-fit: cover;
+        height: 100%;
+        width: auto;
+    }
 `;
 
 const SignInPage = () => {
+
     return (
         <SignInPageWrapper>
             <FormGridWrapper>
-                <Container>
+                <Container className="container">
                     <div className="form-grid-content">
                         <div className="form-grid-left">
-                            <img src={staticImages.background_vertical} className="object-fit-cover" alt="" />
+                            <img src={images.backgroundVertical} alt="" className="form-grid-left-img" />
                         </div>
                         <div className="form-grid-right">
                             <FormTitle>
-                                <h3>Sign In</h3>
+                                <h3>Đăng nhập</h3>
                             </FormTitle>
                             <AuthOptions />
                             <div className="form-separator flex items-center justify-center">
                                 <span className="separator-line"></span>
                                 <span className="separator-text inline-flex items-center justify-center text-white">
-                                    OR
+                                    Hoặc
                                 </span>
                                 <span className="separator-line"></span>
                             </div>
@@ -64,30 +78,29 @@ const SignInPage = () => {
                             <form>
                                 <FormElement>
                                     <label htmlFor="" className="form-elem-label">
-                                        User name or email address
+                                        Tên người dùng hoặc địa chỉ email
                                     </label>
                                     <Input type="text" placeholder="" name="" className="form-elem-control" />
                                 </FormElement>
-                                <PasswordInput fieldName="Password" name="password" />
+                                <PasswordInput fieldName="Mật khẩu" name="password" />
                                 <Link to="/reset" className="form-elem-text text-end font-medium">
-                                    Forgot your password?
+                                    Quên mật khẩu?
                                 </Link>
                                 <BaseButtonBlack type="submit" className="form-submit-btn">
-                                    Sign In
+                                    Đăng nhập
                                 </BaseButtonBlack>
                             </form>
                             <p className="flex flex-wrap account-rel-text">
-                                Don&apos;t have a account?
+                                Bạn chưa có tài khoản?
                                 <Link to="/sign_up" className="font-medium">
-                                    Sign Up
+                                    Đăng ký ngay
                                 </Link>
-                                `
                             </p>
                         </div>
                     </div>
                 </Container>
             </FormGridWrapper>
-        </SignInPageWrapper>
+        </SignInPageWrapper >
     );
 };
 

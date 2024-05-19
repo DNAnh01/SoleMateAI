@@ -111,7 +111,7 @@ export const UserContent = styled.div`
             color: ${defaultTheme.color_gray};
             opacity: 0;
             padding-top: 1px;
-            color: ${defaultTheme.color_sea_green};
+            color: ${defaultTheme.color_yellow_green};
         }
     }
 

@@ -225,7 +225,7 @@ const OrderDetailListWrapper = styled.div`
         &-btn {
             margin-bottom: auto;
             &:hover {
-                color: ${defaultTheme.color_sea_green};
+                color: ${defaultTheme.color_yellow_green};
             }
 
             @media (max-width: ${breakpoints.sm}) {

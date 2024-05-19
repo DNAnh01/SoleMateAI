@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { staticImages } from '~/utils/images';
 import { Link } from 'react-router-dom';
 import { defaultTheme } from '~/styles/themes/default';
+import Icons from '~/components/common/Icons/Icons';
 
 const SignOptions = styled.div`
     row-gap: 12px;
@@ -31,7 +31,7 @@ const AuthOptions = () => {
         <SignOptions className="grid">
             <Link to="/" className="sign-option flex items-center justify-center">
                 <span className="sign-opt-icon flex items-center justify-center">
-                    <img src={staticImages.google} alt="" />
+                    <Icons icon="google" width="1.25rem" />
                 </span>
                 <span className="sign-opt-text font-medium">Tiếp tục với Google</span>
             </Link>

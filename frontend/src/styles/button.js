@@ -36,8 +36,8 @@ const BaseLink = styled(Link)`
 `;
 
 const BaseButtonGreen = styled(BaseButton)`
-    background-color: ${defaultTheme.color_sea_green};
-    border-color: ${defaultTheme.color_sea_green};
+    background-color: ${defaultTheme.color_yellow_green};
+    border-color: ${defaultTheme.color_yellow_green};
 `;
 
 const BaseButtonBlack = styled(BaseButton)`
@@ -54,8 +54,8 @@ const BaseButtonWhitesmoke = styled(BaseButton)`
 `;
 
 const BaseLinkGreen = styled(BaseLink)`
-    background-color: ${defaultTheme.color_sea_green};
-    border-color: ${defaultTheme.color_sea_green};
+    background-color: ${defaultTheme.color_yellow_green};
+    border-color: ${defaultTheme.color_yellow_green};
 `;
 
 const BaseLinkBlack = styled(BaseLink)`

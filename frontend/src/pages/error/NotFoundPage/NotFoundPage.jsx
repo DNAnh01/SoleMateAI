@@ -27,11 +27,11 @@ const NotFoundPage = () => {
                         <img src={staticImages.page_not_found} alt="" className="object-fit-cover" />
                     </div>
                     <div className="page-not-found-msg w-full flex flex-col justify-center items-center">
-                        <p className="text-4xl font-semibold text-outerspace">Oops! Page not found.</p>
+                        <p className="text-4xl font-semibold text-outerspace">Ối! Không tìm thấy trang.</p>
                         <p className="text-gray text-center">
-                            The page you are looking for might have been removed or temporarily unavailable.
+                            Trang bạn đang tìm kiếm có thể đã bị xóa hoặc tạm thời không có.
                         </p>
-                        <BaseLinkGreen to="/">Back to HomePage</BaseLinkGreen>
+                        <BaseLinkGreen to="/">Quay lại trang chủ.</BaseLinkGreen>
                     </div>
                 </div>
             </Container>

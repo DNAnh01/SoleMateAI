@@ -6,9 +6,9 @@ import {
     PriceFilter,
     ProductCategoryFilter,
     SizesFilter,
-    StyleFilter,
 } from '~/styles/filter';
-import { ProductFilterList, StyleFilterList } from '~/data/data.mock';
+// import { ProductFilterList } from '~/data/data.mock';
+import { products } from '~/data/data.api.productlist';
 import { staticImages } from '~/utils/images';
 
 const ProductFilter = () => {
@@ -72,21 +72,21 @@ const ProductFilter = () => {
                     className="filter-title flex items-center justify-between"
                     onClick={() => toggleFilter('product')}
                 >
-                    <p className="filter-title-text text-gray text-base font-semibold text-lg">Filter</p>
+                    <p className="filter-title-text text-gray text-base font-semibold text-lg">Thương hiệu</p>
                     <span className={`text-gray text-xxl filter-title-icon ${!isProductFilterOpen ? 'rotate' : ''}`}>
                         <i className="bi bi-filter"></i>
                     </span>
                 </FilterTitle>
                 <FilterWrap className={`${!isProductFilterOpen ? 'hide' : 'show'}`}>
-                    {ProductFilterList?.map((productFilter) => {
+                    {products?.map((product) => {
                         return (
-                            <div className="product-filter-item" key={productFilter.id}>
+                            <div className="product-filter-item" key={product.id}>
                                 <button
                                     type="button"
                                     className="filter-item-head w-full flex items-center justify-between"
                                 >
                                     <span className="filter-head-title text-base text-gray font-semibold">
-                                        {productFilter.title}
+                                        {product?.brand?.brand_name}
                                     </span>
                                     <span className="filter-head-icon text-gray">
                                         <i className="bi bi-chevron-right"></i>
@@ -103,7 +103,7 @@ const ProductFilter = () => {
                     className="filter-title flex items-center justify-between"
                     onClick={() => toggleFilter('price')}
                 >
-                    <p className="filter-title-text text-gray text-base font-semibold text-lg">Price</p>
+                    <p className="filter-title-text text-gray text-base font-semibold text-lg">Giá</p>
                     <span className={`text-gray text-xl filter-title-icon ${!isPriceFilterOpen ? 'rotate' : ''}`}>
                         <i className="bi bi-chevron-up"></i>
                     </span>
@@ -113,8 +113,8 @@ const ProductFilter = () => {
                         <span
                             className="range-selected h-full bg-sea-green"
                             style={{
-                                left: calculateRangePosition(minRange, 1000),
-                                right: calculateRangePosition(1000 - maxRange, 1000),
+                                left: calculateRangePosition(minRange, 2000000),
+                                right: calculateRangePosition(2000000 - maxRange, 2000000),
                             }}
                         ></span>
                     </div>
@@ -123,7 +123,7 @@ const ProductFilter = () => {
                             type="range"
                             className="min w-full"
                             min="0"
-                            max="1000"
+                            max="2000000"
                             value={minRange}
                             step="10"
                             name="min"
@@ -133,7 +133,7 @@ const ProductFilter = () => {
                             type="range"
                             className="min w-full"
                             min="0"
-                            max="1000"
+                            max="2000000"
                             value={maxRange}
                             step="10"
                             name="max"
@@ -161,7 +161,7 @@ const ProductFilter = () => {
 
             <ColorsFilter>
                 <FilterTitle className="flex items-center justify-between" onClick={() => toggleFilter('color')}>
-                    <p className="filter-title-text text-gray text-base font-semibold text-lg">Colors</p>
+                    <p className="filter-title-text text-gray text-base font-semibold text-lg">Màu sắc</p>
                     <span className={`text-gray text-xl filter-title-icon ${!isColorFilterOpen ? 'rotate' : ''}`}>
                         <i className="bi bi-chevron-up"></i>
                     </span>
@@ -188,40 +188,12 @@ const ProductFilter = () => {
                             <input type="checkbox" />
                             <img src={staticImages.color5} alt="" />
                         </div>
-                        <div className="colors-item text-center flex flex-col justify-center items-center">
-                            <input type="checkbox" />
-                            <img src={staticImages.color6} alt="" />
-                        </div>
-                        <div className="colors-item text-center flex flex-col justify-center items-center">
-                            <input type="checkbox" />
-                            <img src={staticImages.color7} alt="" />
-                        </div>
-                        <div className="colors-item text-center flex flex-col justify-center items-center">
-                            <input type="checkbox" />
-                            <img src={staticImages.color8} alt="" />
-                        </div>
-                        <div className="colors-item text-center flex flex-col justify-center items-center">
-                            <input type="checkbox" />
-                            <img src={staticImages.color9} alt="" />
-                        </div>
-                        <div className="colors-item text-center flex flex-col justify-center items-center">
-                            <input type="checkbox" />
-                            <img src={staticImages.color10} alt="" />
-                        </div>
-                        <div className="colors-item text-center flex flex-col justify-center items-center">
-                            <input type="checkbox" />
-                            <img src={staticImages.color11} alt="" />
-                        </div>
-                        <div className="colors-item text-center flex flex-col justify-center items-center">
-                            <input type="checkbox" />
-                            <img src={staticImages.color12} alt="" />
-                        </div>
                     </div>
                 </FilterWrap>
             </ColorsFilter>
             <SizesFilter>
                 <FilterTitle className="flex items-center justify-between" onClick={() => toggleFilter('size')}>
-                    <p className="filter-title-text text-gray text-base font-semibold text-lg">Size</p>
+                    <p className="filter-title-text text-gray text-base font-semibold text-lg">Kích cỡ</p>
                     <span className={`text-gray text-xl filter-title-icon ${!isSizeFilterOpen ? 'rotate' : ''}`}>
                         <i className="bi bi-chevron-up"></i>
                     </span>
@@ -230,66 +202,31 @@ const ProductFilter = () => {
                     <div className="sizes-list grid text-center justify-center">
                         <div className="sizes-item text-sm font-semibold text-outerspace w-full">
                             <input type="checkbox" />
-                            <span className="flex items-center justify-center uppercase">xxs</span>
+                            <span className="flex items-center justify-center uppercase">38</span>
                         </div>
                         <div className="sizes-item text-sm font-semibold text-outerspace w-full">
                             <input type="checkbox" />
-                            <span className="flex items-center justify-center uppercase">xs</span>
+                            <span className="flex items-center justify-center uppercase">39</span>
                         </div>
                         <div className="sizes-item text-sm font-semibold text-outerspace w-full">
                             <input type="checkbox" />
-                            <span className="flex items-center justify-center uppercase">s</span>
+                            <span className="flex items-center justify-center uppercase">40</span>
                         </div>
                         <div className="sizes-item text-sm font-semibold text-outerspace w-full">
                             <input type="checkbox" />
-                            <span className="flex items-center justify-center uppercase">m</span>
+                            <span className="flex items-center justify-center uppercase">41</span>
                         </div>
                         <div className="sizes-item text-sm font-semibold text-outerspace w-full">
                             <input type="checkbox" />
-                            <span className="flex items-center justify-center uppercase">l</span>
+                            <span className="flex items-center justify-center uppercase">42</span>
                         </div>
                         <div className="sizes-item text-sm font-semibold text-outerspace w-full">
                             <input type="checkbox" />
-                            <span className="flex items-center justify-center uppercase">xxl</span>
-                        </div>
-                        <div className="sizes-item text-sm font-semibold text-outerspace w-full">
-                            <input type="checkbox" />
-                            <span className="flex items-center justify-center uppercase">3xl</span>
-                        </div>
-                        <div className="sizes-item text-sm font-semibold text-outerspace w-full">
-                            <input type="checkbox" />
-                            <span className="flex items-center justify-center uppercase">4xl</span>
+                            <span className="flex items-center justify-center uppercase">43</span>
                         </div>
                     </div>
                 </FilterWrap>
             </SizesFilter>
-            <StyleFilter onClick={() => toggleFilter('style')}>
-                <FilterTitle className="flex items-center justify-between">
-                    <p className="filter-title-text text-gray text-base font-semibold text-lg">Dress Style</p>
-                    <span className={`text-gray text-xl filter-title-icon ${!isStyleFilterOpen ? 'rotate' : ''}`}>
-                        <i className="bi bi-chevron-up"></i>
-                    </span>
-                </FilterTitle>
-                <FilterWrap className={`${!isStyleFilterOpen ? 'hide' : 'show'}`}>
-                    {StyleFilterList?.map((styleFilter) => {
-                        return (
-                            <div className="style-filter-item" key={styleFilter.id}>
-                                <button
-                                    type="button"
-                                    className="filter-item-head w-full flex items-center justify-between"
-                                >
-                                    <span className="filter-head-title text-base text-gray font-semibold">
-                                        {styleFilter.title}
-                                    </span>
-                                    <span className="filter-head-icon text-gray">
-                                        <i className="bi bi-chevron-right"></i>
-                                    </span>
-                                </button>
-                            </div>
-                        );
-                    })}
-                </FilterWrap>
-            </StyleFilter>
         </>
     );
 };

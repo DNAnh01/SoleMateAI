@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 import { HeaderMainWrapper, SiteBrandWrapper } from '~/styles/header';
 import { Container } from '~/styles/styles';
-import { staticImages } from '~/utils/images';
 import { Link, useLocation } from 'react-router-dom';
 import { Input, InputGroupWrapper } from '~/styles/form';
 import { breakpoints, defaultTheme } from '~/styles/themes/default';
 import { useDispatch } from 'react-redux';
 import { toggleSidebar } from '~/redux/slices/sidebarSlice';
+import Icons from '~/components/common/Icons/Icons';
+import images from '~/assets/images';
 
 const NavigationAndSearchWrapper = styled.div`
     column-gap: 20px;
@@ -53,7 +54,7 @@ const IconLinksWrapper = styled.div`
         border-radius: 6px;
 
         &.active {
-            background-color: ${defaultTheme.color_sea_green};
+            background-color: ${defaultTheme.color_yellow_green};
             img {
                 filter: brightness(100);
             }
@@ -83,11 +84,11 @@ const Header = () => {
                 <div className="header-wrap flex items-center justify-between">
                     <div className="flex items-center">
                         <button type="button" className="sidebar-toggler" onClick={() => dispatch(toggleSidebar())}>
-                            <i className="bi bi-list"></i>
+                            <Icons icon='list' width={20} height={20} className={"icon-hover"} color={defaultTheme.color_dim_gray} />
                         </button>
                         <SiteBrandWrapper to="/" className="inline-flex">
                             <div className="brand-img-wrap flex items-center justify-center">
-                                <img className="site-brand-img" src={staticImages.logo} alt="site logo" />
+                                <img src={images.logo} alt="" className='site-brand-img' />
                             </div>
                             <span className="site-brand-text text-outerspace">Sole Mate AI</span>
                         </SiteBrandWrapper>
@@ -96,7 +97,7 @@ const Header = () => {
                         <form className="search-form">
                             <InputGroupWrapper className="input-group">
                                 <span className="input-icon flex items-center justify-center text-xl text-gray">
-                                    <i className="bi bi-search"></i>
+                                    <Icons icon='search' width={20} height={20} className={"icon-hover"} color={defaultTheme.color_dim_gray} />
                                 </span>
                                 <Input type="text" className="input-control w-full" placeholder="Tìm kiếm sản phẩm" />
                             </InputGroupWrapper>
@@ -106,19 +107,17 @@ const Header = () => {
                     <IconLinksWrapper className="flex items-center">
                         <Link
                             to="/account"
-                            className={`icon-link ${
-                                location.pathname === '/account' || location.pathname === '/account/add' ? 'active' : ''
-                            } inline-flex items-center justify-center`}
+                            className={`icon-link ${location.pathname === '/account' || location.pathname === '/account/add' ? 'active' : ''
+                                } inline-flex items-center justify-center`}
                         >
-                            <img src={staticImages.user} alt="" />
+                            <Icons icon='user' width={20} height={20} className={"icon-hover"} color={defaultTheme.color_dim_gray} />
                         </Link>
                         <Link
                             to="/cart"
-                            className={`icon-link ${
-                                location.pathname === '/cart' ? 'active' : ''
-                            } inline-flex items-center justify-center`}
+                            className={`icon-link ${location.pathname === '/cart' ? 'active' : ''
+                                } inline-flex items-center justify-center`}
                         >
-                            <img src={staticImages.cart} alt="" />
+                            <Icons icon='cart' width={20} height={20} className={"icon-hover"} color={defaultTheme.color_dim_gray} />
                         </Link>
                     </IconLinksWrapper>
                 </div>

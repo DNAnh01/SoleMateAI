@@ -10,6 +10,13 @@ import heart from '~/assets/icons/heart.svg';
 import user from '~/assets/icons/user.svg';
 import cart from '~/assets/icons/cart.svg';
 
+// shoe services images
+import card_icon from '~/assets/icons/card_icon.svg';
+import size_icon from '~/assets/icons/size_icon.svg';
+import shipping_icon from '~/assets/icons/shipping_icon.svg';
+import return_icon from '~/assets/icons/return_icon.svg';
+import play_icon from '~/assets/icons/play_icon.svg';
+
 // shoe images
 import shoe1 from '~/assets/images/shoe1.png';
 import shoe2 from '~/assets/images/shoe2.png';
@@ -46,18 +53,10 @@ import color10 from '~/assets/images/color10.svg';
 import color11 from '~/assets/images/color11.svg';
 import color12 from '~/assets/images/color12.svg';
 
-// shoe services images
-import card_icon from '~/assets/icons/card_icon.svg';
-import size_icon from '~/assets/icons/size_icon.svg';
-import shipping_icon from '~/assets/icons/shipping_icon.svg';
-import return_icon from '~/assets/icons/return_icon.svg';
-
 // cart images
 import cart1 from '~/assets/images/shoe1.png';
 import cart2 from '~/assets/images/shoe2.png';
 import cart3 from '~/assets/images/shoe3.png';
-
-import play_icon from '~/assets/icons/play_icon.svg';
 
 // error images
 import page_not_found from '~/assets/images/page_not_found.png';

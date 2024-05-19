@@ -23,7 +23,7 @@ const defaultTheme = {
     // default transition
     default_transition: 'all 300ms ease-in-out',
     // font family
-    font_family_inter: "'Inter', sans-serif",
+    font_family_inter: "'Poppins', sans-serif",
 };
 
 // media query

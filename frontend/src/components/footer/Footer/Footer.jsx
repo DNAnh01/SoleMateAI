@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import { Container } from '~/styles/styles';
-import { footerData, socialLinksData } from '~/data/data.mock';
 import { Link } from 'react-router-dom';
-import { staticImages } from '~/utils/images';
 import { breakpoints, defaultTheme } from '~/styles/themes/default';
+import images from '~/assets/images';
+import Icons from '~/components/common/Icons/Icons';
 
 const FooterWrapper = styled.footer`
     padding-top: 60px;
@@ -105,15 +105,77 @@ const FooterWrapper = styled.footer`
         }
     }
 
-    .footer-bottom {
-        padding-top: 36px;
-        border-top: 1px solid rgba(190, 188, 189, 0.4);
-
-        @media (max-width: ${breakpoints.lg}) {
-            padding-top: 20px;
+    .social-icon {
+        width: 25px;
+        height: 25px;
+        border-radius: 4px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: ${defaultTheme.color_white};
+        &:hover {
+            background-color: ${defaultTheme.color_yellow_green};
+            transform: scale(1.2);
         }
     }
 `;
+
+
+const footerData = [
+    {
+        id: 'f_need_help',
+        title: 'Cần Trợ Giúp',
+        links: [
+            { text: 'Liên Hệ Chúng Tôi', url: '/contact' },
+            { text: 'Theo Dõi Đơn Hàng', url: '/track_order' },
+            { text: 'Trả Hàng & Hoàn Tiền', url: '/returns_refunds' },
+            { text: 'Câu Hỏi Thường Gặp', url: '/faqs' },
+        ],
+    },
+    {
+        id: 'f_company',
+        title: 'Công Ty',
+        links: [
+            { text: 'Về Chúng Tôi', url: '*' },
+            { text: 'Sole Mate AI', url: '*' },
+            { text: 'Hợp Tác', url: '*' },
+            { text: 'Truyền Thông', url: '*' },
+        ],
+    },
+    {
+        id: 'f_more_info',
+        title: 'Thông Tin Thêm',
+        links: [
+            { text: 'Điều Khoản và Điều Kiện', url: '*' },
+            { text: 'Chính Sách Bảo Mật', url: '*' },
+            { text: 'Chính Sách Giao Hàng', url: '*' },
+        ],
+    },
+    {
+        id: 'f_location',
+        title: 'Địa Chỉ',
+        lists: [
+            { text: 'donguyenanhgithub@gmail.com' },
+            { text: 'Hòa Khánh Bắc, Đà Nẵng' },
+            { text: 'Điện Thoại: +000 999 8888' },
+        ],
+    },
+];
+const socialLinksData = [
+    {
+        id: 'social_link_1',
+        icon_name: 'google',
+    },
+    {
+        id: 'social_link_2',
+        icon_name: 'facebook',
+    },
+    {
+        id: 'social_link_3',
+        icon_name: 'instagram',
+    }
+];
+
 
 const Footer = () => {
     return (
@@ -153,11 +215,13 @@ const Footer = () => {
                         {socialLinksData?.map((socialLink) => {
                             return (
                                 <Link
-                                    to={socialLink.site_url}
+                                    to="*"
                                     key={socialLink.id}
                                     className="ftr-social-link bg-white flex items-center justify-center"
                                 >
-                                    <i className={socialLink.site_icon}></i>
+                                    <div className='social-icon'>
+                                        <Icons icon={socialLink.icon_name} width={18} height={18} />
+                                    </div>
                                 </Link>
                             );
                         })}
@@ -165,23 +229,14 @@ const Footer = () => {
                     <div className="ftr-app-links">
                         <p className="app-links-title text-white text-xl font-semibold text-lg">Tải ứng dụng tại</p>
                         <div className="app-links-group flex items-center">
-                            <Link to="/">
-                                <img src={staticImages.google_play} alt="" />
+                            <Link to="*">
+                                <img src={images.googlePlay} alt="" />
                             </Link>
-                            <Link to="/">
-                                <img src={staticImages.app_store} alt="" />
+                            <Link to="*">
+                                <img src={images.appStore} alt="" />
                             </Link>
                         </div>
                     </div>
-                </div>
-                <div className="footer-bottom text-center">
-                    <p className="text-base text-white">
-                        Copyright &copy; 2023 &nbsp;
-                        <Link to="/" className="text-white">
-                            Achats site
-                        </Link>
-                        &nbsp;. All rights reserved.
-                    </p>
                 </div>
             </Container>
         </FooterWrapper>

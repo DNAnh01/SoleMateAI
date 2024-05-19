@@ -176,14 +176,14 @@ class MessageServiceImpl(MessageService):
                         }
                     )
             """add data in DB to knowledge base"""
-            shoes_json_lm5 = self.__shoe_service.get_all_shoes(
-                db=db, common_filters={"limit": 5}
+            shoes_json_lm3 = self.__shoe_service.get_all_shoes(
+                db=db, common_filters={"limit": 3}
             )
             temp_knowledge_base.append(
                 {
                     "role": "system",
                     "content": json.dumps(
-                        [shoe.json() for shoe in shoes_json_lm5]
+                        [shoe.json() for shoe in shoes_json_lm3]
                     ),
                 }
             )

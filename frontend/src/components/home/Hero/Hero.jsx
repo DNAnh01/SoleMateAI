@@ -13,7 +13,7 @@ const SectionHeroWrapper = styled.section`
     margin-top: 72px;
     position: relative;
     overflow: hidden;
-    background: linear-gradient(270deg, ${defaultTheme.color_flash_white}, ${defaultTheme.color_sea_green_v1});
+    background: linear-gradient(to top right, ${defaultTheme.color_yellow_green}, ${defaultTheme.color_purple});
     background-size: 200% 200%;
     animation: Gradient 2s ease infinite;
 

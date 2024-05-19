@@ -52,7 +52,7 @@ export const ProductCategoryFilter = styled.div`
         &:hover {
             .filter-head-title {
                 transition: ${defaultTheme.default_transition};
-                color: ${defaultTheme.color_sea_green};
+                color: ${defaultTheme.color_yellow_green};
             }
         }
 
@@ -104,7 +104,7 @@ export const PriceFilter = styled.div`
         height: 16px;
         width: 16px;
         border-radius: 50%;
-        background-color: ${defaultTheme.color_sea_green};
+        background-color: ${defaultTheme.color_yellow_green};
         pointer-events: auto;
         -webkit-appearance: none;
     }
@@ -245,9 +245,9 @@ export const SizesFilter = styled.div`
 
             &:checked {
                 & + span {
-                    background-color: ${defaultTheme.color_sea_green};
+                    background-color: ${defaultTheme.color_yellow_green};
                     color: ${defaultTheme.color_white};
-                    border-color: ${defaultTheme.color_sea_green};
+                    border-color: ${defaultTheme.color_yellow_green};
                 }
             }
         }

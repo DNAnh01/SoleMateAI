@@ -95,7 +95,7 @@ export const FormElement = styled.div`
         transition: ${defaultTheme.default_transition};
 
         &:focus {
-            border-color: ${defaultTheme.color_sea_green};
+            border-color: ${defaultTheme.color_yellow_green};
         }
     }
 
@@ -112,7 +112,7 @@ export const FormElement = styled.div`
 
     a.form-elem-text {
         &:hover {
-            color: ${defaultTheme.color_sea_green};
+            color: ${defaultTheme.color_yellow_green};
         }
     }
 `;

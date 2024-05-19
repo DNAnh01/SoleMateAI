@@ -24,7 +24,7 @@ const CartSummaryWrapper = styled.div`
 
             &:last-child {
                 margin-top: 20px;
-                border-top: 1px dashed ${defaultTheme.color_sea_green};
+                border-top: 1px dashed ${defaultTheme.color_yellow_green};
                 padding-top: 10px;
             }
         }

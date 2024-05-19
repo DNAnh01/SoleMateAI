@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 import { HeaderMainWrapper, SiteBrandWrapper } from '~/styles/header';
 import { Container } from '~/styles/styles';
-import { staticImages } from '~/utils/images';
 import { BaseLinkGreen, BaseLinkOutlineDark } from '~/styles/button';
 import { breakpoints } from '~/styles/themes/default';
+import images from '~/assets/images';
+
 
 const ButtonGroupWrapper = styled.div`
     gap: 8px;
@@ -22,7 +23,7 @@ const AuthHeader = () => {
                 <div className="header-wrap flex items-center justify-between">
                     <SiteBrandWrapper to="/" className="inline-flex">
                         <div className="brand-img-wrap flex items-center justify-center">
-                            <img className="site-brand-img" src={staticImages.logo} alt="" />
+                            <img src={images.logo} alt="" className='site-brand-img' />
                         </div>
                         <span className="site-brand-text">Sole Mate AI</span>
                     </SiteBrandWrapper>

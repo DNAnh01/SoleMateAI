@@ -2,46 +2,9 @@ import { createGlobalStyle } from 'styled-components';
 import { breakpoints, defaultTheme } from '~/styles/themes/default';
 
 export const GlobalStyles = createGlobalStyle`
-    /* Reset css */
-    * {
-        box-sizing: border-box;
-        padding: 0;
-        margin: 0;
-        font-family: inherit;
-    }
 
-    html {
-        -moz-osx-font-smoothing: grayscale;
-        -webkit-font-smoothing: antialiased;
-        text-rendering: optimizeLegibility;
-        -webkit-text-size-adjust: 100%;
-    }
-    body{
-        min-height: 100vh;
-        font-size: 14px;
-        font-weight: 400;
-        line-height: 1.6;
-        font-family: ${defaultTheme.font_family_inter};
-        color: ${defaultTheme.color_jet};
-    }
-
-    ul {
-        list-style-type: none;
-    }
-
-    a {
-        transition: ${defaultTheme.default_transition};
-    }
-
-    button {
-        border: none;
-        cursor: pointer;
-        background-color: transparent;
-        transition: ${defaultTheme.default_transition};
-    }
-    
-    /* Font embedded  */
-    @font-face {
+/* Font embedded  */
+@font-face {
     font-family: Poppins;
     src: url('/assets/fonts/Poppins-Thin.ttf');
     font-weight: 100;
@@ -76,6 +39,60 @@ export const GlobalStyles = createGlobalStyle`
         src: url('/assets/fonts/Poppins-Black.ttf');
         font-weight: 900;
     }
+    // Scrollbar CSS
+    html *::-webkit-scrollbar {
+        border-radius: 0;
+        width: 8px;
+    }
+
+    html *::-webkit-scrollbar-thumb {
+        border-radius: 4px;
+        background-color: rgba(22, 24, 35, 0.2);
+    }
+
+    html *::-webkit-scrollbar-track {
+        border-radius: 0;
+        background-color: rgba(0, 0, 0, 0);
+    }
+    /* Reset css */
+    * {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+        font-family: ${defaultTheme.font_family_inter}!important;
+    }
+
+    html {
+        -moz-osx-font-smoothing: grayscale;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+        -webkit-text-size-adjust: 100%;
+    }
+    body{
+        min-height: 100vh;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1.6;
+        font-family: ${defaultTheme.font_family_inter};
+        color: ${defaultTheme.color_jet};
+    }
+
+    ul {
+        list-style-type: none;
+    }
+
+    a {
+        transition: ${defaultTheme.default_transition};
+    }
+
+    button {
+        border: none;
+        cursor: pointer;
+        background-color: transparent;
+        transition: ${defaultTheme.default_transition};
+    }
+    
+    
 
 
 
@@ -185,7 +202,7 @@ export const GlobalStyles = createGlobalStyle`
         color: ${defaultTheme.color_black};
     }
     .text-sea-green {
-        color: ${defaultTheme.color_sea_green};
+        color: ${defaultTheme.color_yellow_green};
     }
     .text-red {
         color: ${defaultTheme.color_red};
@@ -234,7 +251,7 @@ export const GlobalStyles = createGlobalStyle`
         background-color: ${defaultTheme.color_black};
     }
     .bg-sea-green {
-        background-color: ${defaultTheme.color_sea_green};
+        background-color: ${defaultTheme.color_yellow_green};
     }
     .bg-transparent {
         background-color: transparent;
@@ -351,4 +368,12 @@ export const GlobalStyles = createGlobalStyle`
             font-size: 20px!important;
         }
     }
+
+    .icon-hover {
+        &:hover {
+            transform: scale(1.2);
+        }
+    }
+
+
 `;

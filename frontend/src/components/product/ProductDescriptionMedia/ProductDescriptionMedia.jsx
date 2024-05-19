@@ -1,8 +1,8 @@
 import { useRef, useState } from 'react';
 import styled from 'styled-components';
 import preview_video from '~/assets/videos/preview_video.mp4';
-import { staticImages } from '~/utils/images';
 import { breakpoints, defaultTheme } from '~/styles/themes/default';
+import Icons from '~/components/common/Icons/Icons';
 
 const DescriptionMediaWrapper = styled.div`
     height: 330px;
@@ -85,14 +85,11 @@ const ProductDescriptionMedia = () => {
         <DescriptionMediaWrapper>
             <video className="w-full h-full" loop muted ref={mediaVideoRef}>
                 <source src={preview_video} type="video/mp4"></source>
-                Your browser does not support the video tag.
+                Trình duyệt của bạn không hỗ trợ thẻ video.
             </video>
             <button type="button" className="media-play-btn" onClick={handlePlayPause}>
-                <img src={staticImages.play_icon} alt="play icon" />
+                <Icons icon="play" width={30} height={30} color={defaultTheme.color_black} />
             </button>
-            <h4 className="media-title text-white text-xl font-medium text-center">
-                Raven Hoodie with black colored design
-            </h4>
         </DescriptionMediaWrapper>
     );
 };

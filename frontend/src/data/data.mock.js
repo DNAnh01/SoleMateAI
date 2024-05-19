@@ -71,47 +71,6 @@ const orderData = [
     },
 ];
 
-const footerData = [
-    {
-        id: 'f_need_help',
-        title: 'Cần Trợ Giúp',
-        links: [
-            { text: 'Liên Hệ Chúng Tôi', url: '/contact' },
-            { text: 'Theo Dõi Đơn Hàng', url: '/track_order' },
-            { text: 'Trả Hàng & Hoàn Tiền', url: '/returns_refunds' },
-            { text: 'Câu Hỏi Thường Gặp', url: '/faqs' },
-        ],
-    },
-    {
-        id: 'f_company',
-        title: 'Công Ty',
-        links: [
-            { text: 'Về Chúng Tôi', url: '/contact' },
-            { text: 'Sole Mate AI', url: '/blog' },
-            { text: 'Hợp Tác', url: '/collaboration' },
-            { text: 'Truyền Thông', url: '/media' },
-        ],
-    },
-    {
-        id: 'f_more_info',
-        title: 'Thông Tin Thêm',
-        links: [
-            { text: 'Điều Khoản và Điều Kiện', url: '/tac' },
-            { text: 'Chính Sách Bảo Mật', url: '/privacy' },
-            { text: 'Chính Sách Giao Hàng', url: '/shipping' },
-        ],
-    },
-    {
-        id: 'f_location',
-        title: 'Địa Chỉ',
-        lists: [
-            { text: 'donguyenanhgithub@gmail.com' },
-            { text: 'Hòa Khánh Bắc, Đà Nẵng' },
-            { text: 'Điện Thoại: +000 999 8888' },
-        ],
-    },
-];
-
 const socialLinksData = [
     {
         id: 'social_link_1',
@@ -407,7 +366,6 @@ const cardsData = [
 
 export {
     orderData,
-    footerData,
     socialLinksData,
     brandsData,
     newArrivalData,

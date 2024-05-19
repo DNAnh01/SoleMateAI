@@ -129,7 +129,7 @@ const ShippingPaymentWrapper = styled.div`
                 padding: 16px;
 
                 &:focus {
-                    border-color: ${defaultTheme.color_sea_green};
+                    border-color: ${defaultTheme.color_yellow_green};
                 }
 
                 @media (max-width: ${breakpoints.sm}) {

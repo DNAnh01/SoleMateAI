@@ -12,7 +12,7 @@ const commonArrowStyles = css`
     width: 32px;
     height: 32px;
     border-radius: 100%;
-    background-color: ${defaultTheme.color_sea_green};
+    background-color: ${defaultTheme.color_yellow_green};
     border: 3px solid ${defaultTheme.color_whitesmoke};
     svg {
         scale: 1.3;

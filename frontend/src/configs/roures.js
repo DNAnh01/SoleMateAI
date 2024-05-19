@@ -1,7 +1,7 @@
 const roures = {
     home: '/',
     productList: '/product',
-    productDetail: '/product/:id',
+    productDetail: '/product/detail',
     notFound: '*',
 
     auth: {
@@ -19,7 +19,7 @@ const roures = {
         emptyCart: '/user/empty-cart',
         checkout: '/user/checkout',
         order: '/user/order',
-        orderDetail: '/user/order/:id',
+        orderDetail: '/user/order/detail',
         confirm: '/user/confirm',
         profile: '/user/profile',
         addAddress: '/user/profile/add-address',
@@ -29,11 +29,11 @@ const roures = {
         chatbot: '/admin/chatbot',
         knowledgeBase: '/admin/chatbot/knowledge-base',
         order: '/admin/order',
-        orderDetail: '/admin/order/:id',
+        orderDetail: '/admin/order/detail',
         product: '/admin/product',
-        productDetail: '/admin/product/:id',
+        productDetail: '/admin/product/detail',
         promotion: '/admin/promotion',
-        promotionDetail: '/admin/promotion/:id',
+        promotionDetail: '/admin/promotion/detail',
         user: '/admin/user',
     },
 };

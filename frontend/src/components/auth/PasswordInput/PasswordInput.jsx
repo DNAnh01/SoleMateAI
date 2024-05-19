@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { FormElement, Input } from '~/styles/form';
 import { PropTypes } from 'prop-types';
 import { useState } from 'react';
+import Icons from '~/components/common/Icons/Icons';
 
 const PasswordToggleButton = styled.button`
     position: absolute;
@@ -40,13 +41,11 @@ const PasswordInput = ({ fieldName, name, errorMsg = '' }) => {
                 >
                     {showPassword ? (
                         <>
-                            <i className="bi bi-eye-fill"></i>
-                            <span className="pwd-toggle-text text-sm">Ẩn</span>
+                            <Icons icon="closedEye" width={20} height={20} className="icon-hover" color="#000" />
                         </>
                     ) : (
                         <>
-                            <i className="bi bi-eye-slash-fill"></i>
-                            <span className="pwd-toggle-text text-sm">Hiện</span>
+                            <Icons icon="eye" width={20} height={20} className="icon-hover" color="#000" />
                         </>
                     )}
                 </PasswordToggleButton>

@@ -28,7 +28,7 @@ const SideNavigationWrapper = styled.div`
         right: 16px;
         top: 16px;
         &:hover {
-            color: ${defaultTheme.color_sea_green};
+            color: ${defaultTheme.color_yellow_green};
         }
     }
 
@@ -59,7 +59,7 @@ const SideNavigationWrapper = styled.div`
 
                 a {
                     span {
-                        color: ${defaultTheme.color_sea_green};
+                        color: ${defaultTheme.color_yellow_green};
                     }
                 }
             }
@@ -68,7 +68,7 @@ const SideNavigationWrapper = styled.div`
         a {
             column-gap: 16px;
             &.active {
-                color: ${defaultTheme.color_sea_green};
+                color: ${defaultTheme.color_yellow_green};
             }
         }
     }

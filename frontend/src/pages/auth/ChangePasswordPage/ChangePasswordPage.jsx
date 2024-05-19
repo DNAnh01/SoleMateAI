@@ -4,8 +4,23 @@ import { Container } from '~/styles/styles';
 import { staticImages } from '~/utils/images';
 import PasswordInput from '~/components/auth/PasswordInput';
 import { BaseButtonBlack } from '~/styles/button';
+import { defaultTheme } from '~/styles/themes/default';
+import images from '~/assets/images';
 
-const ChangePwdScreenWrapper = styled.section``;
+const ChangePwdScreenWrapper = styled.section`
+    .form-grid-left {
+        display:  flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(to top right, ${defaultTheme.color_yellow_green}, ${defaultTheme.color_purple});
+    }
+    .form-grid-left-img {
+        position: absolute;
+        object-fit: cover;
+        height: 100%;
+        width: auto;
+    }
+`;
 
 const ChangePasswordPage = () => {
     return (
@@ -14,22 +29,22 @@ const ChangePasswordPage = () => {
                 <Container>
                     <div className="form-grid-content">
                         <div className="form-grid-left">
-                            <img src={staticImages.background_vertical} className="object-fit-cover" alt="" />
+                            <img src={images.backgroundVertical} alt="" className="form-grid-left-img" />
                         </div>
                         <div className="form-grid-right">
                             <FormTitle>
-                                <h3>Create New Password</h3>
-                                <p>Your new password mst be different from previous used passwords.</p>
+                                <h3>Tạo mật khẩu mới</h3>
+                                <p>Mật khẩu mới của bạn phải khác với mật khẩu đã sử dụng trước đó.</p>
                             </FormTitle>
                             <form>
-                                <PasswordInput fieldName="Password" name="password" />
+                                <PasswordInput fieldName="Mật khẩu" name="password" />
                                 <PasswordInput
-                                    fieldName="Confirm Password"
+                                    fieldName="Nhập lại mật khẩu"
                                     name="confirm_password"
-                                    errorMsg="New password and confirm password do not match"
+                                    errorMsg="Mật khẩu mới và mật khẩu xác nhận không khớp"
                                 />
                                 <BaseButtonBlack type="submit" className="form-submit-btn">
-                                    Reset Password
+                                    Đặt lại mật khẩu
                                 </BaseButtonBlack>
                             </form>
                         </div>

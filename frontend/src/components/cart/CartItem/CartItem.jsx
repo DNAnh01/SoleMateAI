@@ -23,8 +23,8 @@ const CartTableRowWrapper = styled.tr`
                 border-radius: 2px;
 
                 &:hover {
-                    border-color: ${defaultTheme.color_sea_green};
-                    background-color: ${defaultTheme.color_sea_green};
+                    border-color: ${defaultTheme.color_yellow_green};
+                    background-color: ${defaultTheme.color_yellow_green};
                     color: ${defaultTheme.color_white};
                 }
             }

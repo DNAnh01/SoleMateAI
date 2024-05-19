@@ -67,7 +67,7 @@ export const TitleWrapper = styled.div`
         transform: translateY(-50%);
         width: 6px;
         height: 30px;
-        background-color: ${defaultTheme.color_sea_green};
+        background-color: ${defaultTheme.color_yellow_green};
         border-radius: 100vh;
     }
 `;
@@ -86,7 +86,7 @@ export const ContentStylings = styled.div`
         margin: 8px 0;
     }
     a {
-        color: ${defaultTheme.color_sea_green};
+        color: ${defaultTheme.color_yellow_green};
         font-weight: 600;
     }
     span,

@@ -1,5 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
+import Icons from '~/components/common/Icons/Icons';
 import Title from '~/components/common/Title';
 import { breakpoints, defaultTheme } from '~/styles/themes/default';
 
@@ -75,9 +76,8 @@ const UserMenu = () => {
                     <li className="nav-menu-item">
                         <Link
                             to="/order"
-                            className={`nav-menu-link flex items-center ${
-                                location.pathname === '/order' || location.pathname === '/order_detail' ? 'active' : ''
-                            }`}
+                            className={`nav-menu-link flex items-center ${location.pathname === '/order' || location.pathname === '/order_detail' ? 'active' : ''
+                                }`}
                         >
                             <span className="nav-link-icon flex items-center justify-center">
                                 <img src="./assets/icons/ac_orders.svg" alt="" />
@@ -88,9 +88,8 @@ const UserMenu = () => {
                     <li className="nav-menu-item">
                         <Link
                             to="/account"
-                            className={`nav-menu-link flex items-center ${
-                                location.pathname === '/account' || location.pathname === '/account/add' ? 'active' : ''
-                            }`}
+                            className={`nav-menu-link flex items-center ${location.pathname === '/account' || location.pathname === '/account/add' ? 'active' : ''
+                                }`}
                         >
                             <span className="nav-link-icon flex items-center justify-center">
                                 <img src="./assets/icons/ac_user.svg" alt="" />
@@ -102,6 +101,7 @@ const UserMenu = () => {
                         <Link to="/" className={`nav-menu-link flex items-center`}>
                             <span className="nav-link-icon flex items-center justify-center">
                                 <img src="./assets/icons/ac_sign_out.svg" alt="" />
+                                <Icons icon='signOut' width={25} height={25} />
                             </span>
                             <span className="text-base font-semibold nav-link-text no-wrap">Sign out</span>
                         </Link>
