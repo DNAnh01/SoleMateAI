@@ -70,11 +70,32 @@ export const GlobalStyles = createGlobalStyle`
     }
     body{
         min-height: 100vh;
-        font-size: 14px;
+        font-size: 16px;
         font-weight: 400;
         line-height: 1.6;
         font-family: ${defaultTheme.font_family_inter};
         color: ${defaultTheme.color_jet};
+        /* Custom tippy tooltip */
+        .tippy-box {
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 2.2rem;
+        background-color: ${defaultTheme.color_gray};
+        margin-top: -10px;
+        }
+
+        .tippy-arrow {
+            color: ${defaultTheme.color_gray};
+        }
+
+        .tippy-content {
+            padding: 8px 9px;
+        }
+
+        .tippy-box[data-placement^='bottom'] > .tippy-arrow:before {
+            top: -7px;
+        }
     }
 
     ul {
@@ -369,11 +390,11 @@ export const GlobalStyles = createGlobalStyle`
         }
     }
 
-    .icon-hover {
+    .icon-default {
+        width: 24px;
+        height: 24px;
         &:hover {
             transform: scale(1.2);
         }
     }
-
-
 `;

@@ -10,7 +10,7 @@ import { bannerData } from '~/data/data.api.banner';
 import { getFormattedDate } from '~/utils/helper';
 
 const SectionHeroWrapper = styled.section`
-    margin-top: 72px;
+    margin-top: 100px;
     position: relative;
     overflow: hidden;
     background: linear-gradient(to top right, ${defaultTheme.color_yellow_green}, ${defaultTheme.color_purple});
@@ -49,7 +49,7 @@ const HeroSliderWrapper = styled.div`
 
 const HeroSliderItemWrapper = styled.div`
     position: relative;
-    height: 716px;
+    height: 600px;
     overflow: hidden;
 
     &::after {
@@ -183,7 +183,6 @@ const Hero = () => {
                 <Slider nextArrow={<CustomNextArrow />} prevArrow={<CustomPrevArrow />} {...settings}>
                     {bannerData?.map((banner) => (
                         <HeroSliderItemWrapper key={banner.id}>
-                            {console.log(banner.id)}
                             <HeroSlideContent className="flex items-center w-full h-full">
                                 <Container>
                                     <HeroSlideContentContainer>

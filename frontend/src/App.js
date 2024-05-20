@@ -58,8 +58,19 @@ import OrderDetail from '~/pages/user/OrderDetailPage';
 import Confirm from '~/pages/user/ConfirmPage';
 import Account from '~/pages/user/AccountPage';
 import Address from '~/pages/user/AddressPage';
+import configs from './configs';
+import { useContext, useEffect } from 'react';
+import { AppContext } from './contexts/app.context';
+import { LocalStorageEventTarget } from './utils/auth';
 
 function App() {
+    const { reset } = useContext(AppContext);
+    useEffect(() => {
+        LocalStorageEventTarget.addEventListener('clearLocalStorage', reset);
+        return () => {
+            LocalStorageEventTarget.removeEventListener('clearLocalStorage', reset);
+        };
+    }, [reset]);
     return (
         <>
             <Router>
@@ -68,24 +79,24 @@ function App() {
                     {/* main screens */}
                     <Route path="/" element={<BaseLayout />}>
                         <Route index element={<Home />} />
-                        <Route path="/product" element={<ProductList />} />
+                        <Route path={configs.roures.productList} element={<ProductList />} />
                         <Route path="/product/details" element={<ProductDetails />} />
 
-                        <Route path="/cart" element={<Cart />} />
+                        <Route path={configs.roures.user.cart} element={<Cart />} />
                         <Route path="/empty_cart" element={<CartEmpty />} />
                         <Route path="/checkout" element={<Checkout />} />
                         <Route path="/order" element={<Order />} />
                         <Route path="/order_detail" element={<OrderDetail />} />
                         <Route path="/confirm" element={<Confirm />} />
-                        <Route path="/account" element={<Account />} />
-                        <Route path="/account/add" element={<Address />} />
+                        <Route path={configs.roures.user.profile} element={<Account />} />
+                        <Route path={configs.roures.user.addAddress} element={<Address />} />
                     </Route>
 
                     {/* auth screens */}
                     <Route path="/" element={<AuthLayout />}>
-                        <Route path="sign_in" element={<SignIn />} />
-                        <Route path="sign_up" element={<SignUp />} />
-                        <Route path="reset" element={<Reset />} />
+                        <Route path={configs.roures.auth.signIn} element={<SignIn />} />
+                        <Route path={configs.roures.auth.signUp} element={<SignUp />} />
+                        <Route path={configs.roures.auth.forgetPassword} element={<Reset />} />
                         <Route path="change_password" element={<ChangePassword />} />
                     </Route>
                     <Route path="*" element={<NotFound />} />

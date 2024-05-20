@@ -8,7 +8,7 @@ import CartSummary from '~/components/cart/CartSummary';
 
 const CartPageWrapper = styled.main`
     padding: 48px 0;
-    margin-top: 72px;
+    margin-top: 100px;
     .breadcrumb-nav {
         margin-bottom: 20px;
     }

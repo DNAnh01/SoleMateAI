@@ -78,10 +78,7 @@ const Icons = (props) => {
 
     const IconComponent = components[props.icon];
 
-    return (
-        <IconComponent
-            ref={props.ref} {...props}
-        />);
+    return <IconComponent ref={props.ref} {...props} />;
 };
 
 Icons.propTypes = {
@@ -97,6 +94,7 @@ Icons.propTypes = {
 };
 Icons.defaultProps = {
     icon: 'heart',
+    size: 24,
     color: '#a9aba7',
 };
 

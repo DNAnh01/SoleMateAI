@@ -65,7 +65,7 @@ class AuthServiceImpl(AuthService):
         """Check email verification is sent successfully. If so, create a new user."""
         is_sended = await send_email.send_verification_email(
             user_info={"name": display_name, "email": user.email},
-            redirect_url=f"{settings.REDIRECT_FRONTEND_URL}/sign-sin",
+            redirect_url=f"{settings.REDIRECT_FRONTEND_URL}/",
             mode=1,
         )
         if is_sended:
@@ -83,7 +83,7 @@ class AuthServiceImpl(AuthService):
                         email=user.email,
                         password_hash=hashed_password,
                         display_name=display_name,
-                        avatar_url="https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/default_user_avatar.png",
+                        avatar_url="https://avatars.githubusercontent.com/u/96216102?s=400&u=e68b3692ae68ed13fee08b23330cb1bbf4d264bd&v=4P",
                         payment_information="",
                         is_verified=False,
                         is_active=True,
@@ -121,7 +121,6 @@ class AuthServiceImpl(AuthService):
                     updated_at=created_user.updated_at,
                     deleted_at=created_user.deleted_at,
                 )
-
             except:
                 logger.exception(
                     f"Exception in {__name__}.{self.__class__.__name__}.sign_up: Cannot create a new user"
@@ -415,8 +414,22 @@ class AuthServiceImpl(AuthService):
             password_reset=password_reset,
         )
         if is_sended:
-            return RedirectResponse(url=f"{settings.REDIRECT_FRONTEND_URL}/success")
-        return RedirectResponse(url=f"{settings.REDIRECT_FRONTEND_URL}/failed")
+            return JSONResponse(
+                status_code=200, 
+                content={
+                    "status": 200,
+                    "message": "Reset password successful"
+                }
+            )
+        return JSONResponse(
+            status_code=500, 
+            content={
+                "status": 500,
+                "message": "Reset password failed"
+            }
+        )
+    
+    
 
     async def change_password(
         self, db: Session, current_user: User, password: ChangePasswordSchema

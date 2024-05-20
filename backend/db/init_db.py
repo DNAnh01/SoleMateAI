@@ -141,7 +141,7 @@ def init_db():
                 )
             logger.warning("INSERTING DATA INTO THE `users` TABLE (ADMIN)")
             if (
-                crud_user.get_one_by(db=session, filter={"email": "admin@admin.com"})
+                crud_user.get_one_by(db=session, filter={"email": "admin@gmail.com"})
                 is None
             ):
                 crud_user.create(
@@ -150,9 +150,9 @@ def init_db():
                         id=uuid.uuid4(),
                         role_id=admin_role.id,
                         email="admin@gmail.com",
-                        password_hash=utils.hash("admin"),
+                        password_hash=utils.hash("admin123"),
                         display_name="admin",
-                        avatar_url="https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/default_user_avatar.png",
+                        avatar_url="https://avatars.githubusercontent.com/u/96216102?s=400&u=e68b3692ae68ed13fee08b23330cb1bbf4d264bd&v=4P",
                         payment_information="",
                         is_verified=False,
                         is_active=True,

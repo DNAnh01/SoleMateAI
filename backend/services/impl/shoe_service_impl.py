@@ -110,7 +110,7 @@ class ShoeServiceImpl(ShoeService):
                     db=db,
                     obj_in=SizeInDBSchema(
                         id=uuid.uuid4(),
-                        size_number=shoe.size_number,
+                        size_number=shoe.size.size_number,
                         is_active=True,
                         created_at=datetime.now(),
                         updated_at=datetime.now(),

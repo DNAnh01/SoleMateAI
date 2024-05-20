@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { breakpoints, defaultTheme } from '~/styles/themes/default';
 
 const ProductPreviewWrapper = styled.div`
-    grid-template-columns: 72px auto;
+    grid-template-columns: 100px auto;
     gap: 24px;
 
     @media (max-width: ${breakpoints.xl}) {
