@@ -58,6 +58,10 @@ import OrderDetail from '~/pages/user/OrderDetailPage';
 import Confirm from '~/pages/user/ConfirmPage';
 import Account from '~/pages/user/AccountPage';
 import Address from '~/pages/user/AddressPage';
+import AdminLayout from './components/layout/AdminLayout/AdminLayout';
+import DashboardAdmin from './pages/dashboardAdmin/dashboardAdmin';
+import ProductAdmin from './pages/productAdmin/productAdmin';
+import './index.css';
 
 function App() {
     return (
@@ -87,6 +91,10 @@ function App() {
                         <Route path="sign_up" element={<SignUp />} />
                         <Route path="reset" element={<Reset />} />
                         <Route path="change_password" element={<ChangePassword />} />
+                    </Route>
+                    <Route path="admin" element={<AdminLayout />}>
+                        <Route path="dashboard" element={<DashboardAdmin />} />
+                        <Route path="product" element={<ProductAdmin />} />
                     </Route>
                     <Route path="*" element={<NotFound />} />
                 </Routes>
