@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { FormGridWrapper, FormTitle } from '~/styles/form_grid';
 import { Container } from '~/styles/styles';
-import { staticImages } from '~/utils/images';
 import PasswordInput from '~/components/auth/PasswordInput';
 import { BaseButtonBlack } from '~/styles/button';
 import { defaultTheme } from '~/styles/themes/default';
@@ -9,7 +8,7 @@ import images from '~/assets/images';
 
 const ChangePwdScreenWrapper = styled.section`
     .form-grid-left {
-        display:  flex;
+        display: flex;
         align-items: center;
         justify-content: center;
         background: linear-gradient(to top right, ${defaultTheme.color_yellow_green}, ${defaultTheme.color_purple});

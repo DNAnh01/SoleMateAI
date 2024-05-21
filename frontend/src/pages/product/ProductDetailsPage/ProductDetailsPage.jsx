@@ -10,6 +10,7 @@ import { breakpoints, defaultTheme } from '~/styles/themes/default';
 import ProductDescriptionTab from '~/components/product/ProductDescriptionTab';
 import ProductSimilar from '~/components/product/ProductSimilar';
 import ProductServices from '~/components/product/ProductServices';
+import configs from '~/configs';
 
 const DetailsScreenWrapper = styled.main`
     margin: 40px 0;
@@ -256,7 +257,7 @@ const ProductDetailsPage = () => {
                             </div>
                         </ProductColorWrapper>
                         <div className="btn-and-price flex items-center flex-wrap">
-                            <BaseLinkGreen to="/cart" as={BaseLinkGreen} className="prod-add-btn">
+                            <BaseLinkGreen to={configs.roures.user.cart} as={BaseLinkGreen} className="prod-add-btn">
                                 <span className="prod-add-btn-icon">
                                     <i className="bi bi-cart2"></i>
                                 </span>

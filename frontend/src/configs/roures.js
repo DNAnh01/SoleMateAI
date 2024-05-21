@@ -7,11 +7,9 @@ const roures = {
     auth: {
         signIn: '/auth/sign-in',
         signUp: '/auth/sign-up',
-        forgetPassword: '/auth/forget-password',
+        forgetPassword: '/auth/forgot-password',
         changePassword: '/auth/change-password',
         resetPassword: '/auth/reset-password',
-        checkMail: '/auth/check-mail',
-        verification: '/auth/verification',
         signOut: '/auth/sign-out',
     },
     user: {

@@ -67,7 +67,7 @@ def sign_out(
     return auth_service.sign_out(db=db, current_user=current_user)
 
 
-@router.post("/forgot-password")
+@router.post("/forgot-password", status_code=status.HTTP_200_OK)
 async def forgot_password(
     email: EmailSchema,
     db: Session = Depends(deps.get_db),
@@ -75,7 +75,7 @@ async def forgot_password(
     return await auth_service.forgot_password(db=db, email=email)
 
 
-@router.get("/change-password")
+@router.post("/change-password")
 async def change_password(
     change_password: ChangePasswordSchema,
     current_user=Depends(oauth2.get_current_user),

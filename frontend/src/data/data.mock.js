@@ -253,33 +253,6 @@ const servicesData = [
     },
 ];
 
-const sideMenuData = [
-    {
-        id: 'side-menu-1',
-        menuLink: '/',
-        menuText: 'Trang chủ',
-        iconName: 'house',
-    },
-    {
-        id: 'side-menu-2',
-        menuLink: '/product',
-        menuText: 'Sản phẩm',
-        iconName: 'grid-fill',
-    },
-    {
-        id: 'side-menu-4',
-        menuLink: '/account',
-        menuText: 'Tài khoản',
-        iconName: 'person-fill',
-    },
-    {
-        id: 'side-menu-5',
-        menuLink: '/cart',
-        menuText: 'Giỏ hàng',
-        iconName: 'bag-check-fill',
-    },
-];
-
 const cartItems = [
     {
         id: 'C001',
@@ -373,7 +346,6 @@ export {
     ProductFilterList,
     StyleFilterList,
     servicesData,
-    sideMenuData,
     cartItems,
     product_one,
     cardsData,

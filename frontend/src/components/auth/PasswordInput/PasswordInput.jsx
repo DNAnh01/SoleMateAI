@@ -14,7 +14,7 @@ const PasswordToggleButton = styled.button`
     }
 `;
 
-const PasswordInput = ({ fieldName, name, errorMsg = '' }) => {
+const PasswordInput = ({ fieldName, name, errorMsg = '', onChange, value, onBlur }) => {
     const [showPassword, setShowPassword] = useState(false);
 
     const togglePassword = () => {
@@ -32,6 +32,9 @@ const PasswordInput = ({ fieldName, name, errorMsg = '' }) => {
                     placeholder=""
                     name={name}
                     className="form-elem-control"
+                    onChange={onChange}
+                    value={value}
+                    onBlur={onBlur}
                 />
 
                 <PasswordToggleButton
@@ -41,11 +44,11 @@ const PasswordInput = ({ fieldName, name, errorMsg = '' }) => {
                 >
                     {showPassword ? (
                         <>
-                            <Icons icon="closedEye" width={20} height={20} className="icon-hover" color="#000" />
+                            <Icons icon="closedEye"className="icon-default" color="#000" />
                         </>
                     ) : (
                         <>
-                            <Icons icon="eye" width={20} height={20} className="icon-hover" color="#000" />
+                            <Icons icon="eye" className="icon-default" color="#000" />
                         </>
                     )}
                 </PasswordToggleButton>

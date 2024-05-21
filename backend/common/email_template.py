@@ -1,20 +1,20 @@
 def email_verify_template(user_name: str, redirect_url: str, mode: int) -> str:
     if mode == 1:
-        button_text = "Go to Landing Page"
+        button_text = "Trang chủ"
         button_style = "background-color: #0f2f48; color: #ffffff; text-decoration: none; padding: 10px 20px; border-radius: 5px; font-size: 16px;"
         button_link = redirect_url
     elif mode == 2:
-        button_text = "Verify Email"
+        button_text = "Xác nhận Email"
         button_style = "background-color: #0f2f48; color: #ffffff; text-decoration: none; padding: 10px 20px; border-radius: 5px; font-size: 16px;"
         button_link = redirect_url
     return f"""
             <!DOCTYPE html>
-            <html lang="en">
+            <html lang="vi">
 
             <head>
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>Verify Email Address for Sole Mate AI</title>
+                <title>Xác nhận địa chỉ Email cho Sole Mate AI</title>
             </head>
 
             <body style="font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #eff2f4;">
@@ -30,13 +30,12 @@ def email_verify_template(user_name: str, redirect_url: str, mode: int) -> str:
                             <table border="0" cellpadding="0" cellspacing="0" width="100%">
                                 <tr>
                                     <td style="color: #153643; font-size: 28px;">
-                                        <b>Hey {user_name},</b>
+                                        <b>Chào {user_name},</b>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td style="padding: 20px 0 30px 0; color: #153643; font-size: 16px; line-height: 20px;">
-                                        Thanks for registering for an account on SoleMateAI! Before we get started, we just need to
-                                        confirm that this is you. Click below to verify your email address:
+                                        Cảm ơn bạn đã đăng ký tài khoản trên SoleMateAI! Trước khi bắt đầu, chúng tôi chỉ cần xác nhận rằng đây là bạn. Nhấp vào liên kết dưới đây để xác nhận địa chỉ email của bạn:
                                     </td>
                                 </tr>
                                 <tr>
@@ -54,7 +53,7 @@ def email_verify_template(user_name: str, redirect_url: str, mode: int) -> str:
                             <table border="0" cellpadding="0" cellspacing="0" width="100%">
                                 <tr>
                                     <td style="color: #153643; font-size: 14px; text-align: center;">
-                                        Term of Service | Privacy Statement
+                                        Điều khoản dịch vụ | Chính sách bảo mật
                                     </td>
                                 </tr>
                             </table>
@@ -70,12 +69,12 @@ def email_verify_template(user_name: str, redirect_url: str, mode: int) -> str:
 def email_forgot_password_template(user_name: str, password_reset: str) -> str:
     return f"""
             <!DOCTYPE html>
-            <html lang="en">
+            <html lang="vi">
 
             <head>
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>Reset Password for Sole Mate AI</title>
+                <title>Đặt lại mật khẩu cho Sole Mate AI</title>
             </head>
 
             <body style="font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #eff2f4;">
@@ -91,13 +90,12 @@ def email_forgot_password_template(user_name: str, password_reset: str) -> str:
                             <table border="0" cellpadding="0" cellspacing="0" width="100%">
                                 <tr>
                                     <td style="color: #153643; font-size: 28px;">
-                                        <b>Hey {user_name},</b>
+                                        <b>Chào {user_name},</b>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td style="padding: 20px 0 30px 0; color: #153643; font-size: 16px; line-height: 20px;">
-                                        We received a request to reset your password. Please follow the instructions below to reset
-                                        your password:
+                                        Chúng tôi đã nhận được yêu cầu đặt lại mật khẩu của bạn. Vui lòng làm theo hướng dẫn dưới đây để đặt lại mật khẩu của bạn:
                                     </td>
                                 </tr>
                                 <tr>
@@ -119,7 +117,7 @@ def email_forgot_password_template(user_name: str, password_reset: str) -> str:
                             <table border="0" cellpadding="0" cellspacing="0" width="100%">
                                 <tr>
                                     <td style="color: #153643; font-size: 14px; text-align: center;">
-                                        Term of Service | Privacy Statement
+                                        Điều khoản dịch vụ | Chính sách bảo mật
                                     </td>
                                 </tr>
                             </table>

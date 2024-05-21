@@ -6,11 +6,16 @@ import { Container } from '~/styles/styles';
 import { breakpoints, defaultTheme } from '~/styles/themes/default';
 import CustomNextArrow from '~/components/common/CustomNextArrow';
 import CustomPrevArrow from '~/components/common/CustomPrevArrow';
-import { bannerData } from '~/data/data.api.banner';
-import { getFormattedDate } from '~/utils/helper';
+import { formatCurrency, getFormattedDate } from '~/utils/helper';
+import Image from '~/components/common/Image';
+import Tippy from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css';
+import { useEffect, useState } from 'react';
+import promotionApi from '~/apis/promotion.api';
+import { toast } from 'react-toastify';
 
 const SectionHeroWrapper = styled.section`
-    margin-top: 72px;
+    margin-top: 100px;
     position: relative;
     overflow: hidden;
     background: linear-gradient(to top right, ${defaultTheme.color_yellow_green}, ${defaultTheme.color_purple});
@@ -49,7 +54,7 @@ const HeroSliderWrapper = styled.div`
 
 const HeroSliderItemWrapper = styled.div`
     position: relative;
-    height: 716px;
+    height: 400px;
     overflow: hidden;
 
     &::after {
@@ -106,16 +111,20 @@ const HeroSlideContent = styled.div`
         }
     }
 
+    .hero-text {
+        font-family: ${defaultTheme.font_family_inter};
+        color: ${defaultTheme.color_white};
+    }
+
     .hero-text-top {
         font-size: 26px;
-
         @media (max-width: ${breakpoints.lg}) {
             font-size: 24px;
         }
     }
 
     .hero-text-large {
-        font-size: 60px;
+        font-size: 40px;
         letter-spacing: 0.315px;
         line-height: 1.2;
         margin-bottom: 20px;
@@ -155,7 +164,86 @@ const HeroSlideContentContainer = styled.div`
     justify-content: space-around;
 `;
 
+const HeroContentLeft = styled.div`
+    width: 50%;
+    height: 100%;
+`;
+
+const HeroContentRight = styled.div`
+    width: 50%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 10px;
+
+    .image-wrapper {
+        overflow: hidden;
+        position: relative;
+        transition: transform 0.3s, box-shadow 0.3s;
+
+        &:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 20px ${defaultTheme.color_orange};
+        }
+
+        .image-count {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background-color: ${defaultTheme.color_black_04};
+            color: white;
+            padding: 5px;
+            border-radius: 50%;
+        }
+    }
+`;
+
+const TooltipContent = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h4 {
+        margin: 0;
+        font-size: 14px;
+        color: ${defaultTheme.color_black};
+    }
+
+    .price-info {
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+        font-size: 16px;
+    }
+
+    .display-price {
+        color: ${defaultTheme.color_black_04};
+        text-decoration: line-through;
+        margin-right: 8px;
+    }
+
+    .discounted-price {
+        color: ${defaultTheme.color_red};
+    }
+`;
+
 const Hero = () => {
+    const [promotions, setPromotions] = useState([]);
+    useEffect(() => {
+        const fetchPromotions = async () => {
+            try {
+                const response = await promotionApi.getAllPromotion();
+                setPromotions(response.data);
+            } catch (error) {
+                toast.error('Không có chương trình khuyến mãi nào.', {
+                    autoClose: 3000,
+                });
+            }
+        };
+        fetchPromotions();
+    }, []);
+
     const settings = {
         infinite: true,
         slidesToShow: 1,
@@ -181,36 +269,54 @@ const Hero = () => {
         <SectionHeroWrapper>
             <HeroSliderWrapper>
                 <Slider nextArrow={<CustomNextArrow />} prevArrow={<CustomPrevArrow />} {...settings}>
-                    {bannerData?.map((banner) => (
+                    {promotions?.map((banner) => (
                         <HeroSliderItemWrapper key={banner.id}>
-                            {console.log(banner.id)}
                             <HeroSlideContent className="flex items-center w-full h-full">
                                 <Container>
                                     <HeroSlideContentContainer>
-                                        <div>
-                                            <p className="hero-text-top font-bold italic">
-                                                {'Từ ngày: ' + getFormattedDate(banner.start_date)}
+                                        <HeroContentLeft>
+                                            <p className="hero-text hero-text-top font-bold">
+                                                {'Từ ngày: ' + getFormattedDate(banner.start_date)}
                                             </p>
-                                            <p className="hero-text-top font-bold italic">
-                                                {'Đến ngày: ' + getFormattedDate(banner.end_date)}
+                                            <p className="hero-text hero-text-top font-bold">
+                                                {'Đến ngày: ' + getFormattedDate(banner.end_date)}
                                             </p>
-                                            <h2 className="hero-text-large font-extrabold">{banner.promotion_name}</h2>
-                                            <p className="hero-text-bottom font-semibold uppercase">
-                                                {'Giảm giá: ' + banner.discount_percent + '% cho các sản phẩm'}
+                                            <h2 className="hero-text hero-text-large font-extrabold">
+                                                {banner.promotion_name}
+                                            </h2>
+                                            <p className="hero-text hero-text-bottom font-semibold uppercase">
+                                                {'Giảm giá: ' + banner.discount_percent + '% cho các sản phẩm'}
                                             </p>
-                                        </div>
-                                        <div>
-                                            <p className="hero-text-top font-bold italic">
-                                                {'Từ ngày: ' + getFormattedDate(banner.start_date)}
-                                            </p>
-                                            <p className="hero-text-top font-bold italic">
-                                                {'Đến ngày: ' + getFormattedDate(banner.end_date)}
-                                            </p>
-                                            <h2 className="hero-text-large font-extrabold">{banner.promotion_name}</h2>
-                                            <p className="hero-text-bottom font-semibold uppercase">
-                                                {'Giảm giá: ' + banner.discount_percent + '% cho các sản phẩm'}
-                                            </p>
-                                        </div>
+                                        </HeroContentLeft>
+                                        <HeroContentRight>
+                                            {banner.shoes.slice(0, 15).map((shoe, index) => (
+                                                <div className="image-wrapper" key={shoe.id}>
+                                                    <Tippy
+                                                        key={shoe.id}
+                                                        delay={[0, 40]}
+                                                        placement="bottom"
+                                                        content={
+                                                            <TooltipContent>
+                                                                <h4>{shoe.shoe_name}</h4>
+                                                                <div className="price-info">
+                                                                    <p className="display-price">
+                                                                        {formatCurrency(shoe.display_price)}
+                                                                    </p>
+                                                                    <p className="discounted-price">
+                                                                        {formatCurrency(shoe.discounted_price)}
+                                                                    </p>
+                                                                </div>
+                                                            </TooltipContent>
+                                                        }
+                                                    >
+                                                        <Image src={shoe.image_url} alt={shoe.shoe_name} />
+                                                    </Tippy>
+                                                    {index === 14 && banner.shoes.length > 15 && (
+                                                        <div className="image-count">+{banner.shoes.length - 14}</div>
+                                                    )}
+                                                </div>
+                                            ))}
+                                        </HeroContentRight>
                                     </HeroSlideContentContainer>
                                 </Container>
                             </HeroSlideContent>

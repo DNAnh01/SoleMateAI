@@ -7,6 +7,7 @@ import Title from '~/components/common/Title';
 import { FormElement, Input, Textarea } from '~/styles/form';
 import { BaseButtonGreen, BaseButtonWhitesmoke } from '~/styles/button';
 import { defaultTheme } from '~/styles/themes/default';
+import configs from '~/configs';
 
 const AddressPageWrapper = styled.main`
     .form-elem-control {
@@ -20,9 +21,9 @@ const AddressPageWrapper = styled.main`
 `;
 
 const breadcrumbItems = [
-    { label: 'Home', link: '/' },
-    { label: 'Account', link: '/account' },
-    { label: 'Add Address', link: '/account/add' },
+    { label: 'Home', link: `${configs.roures.home}` },
+    { label: 'Account', link: `${configs.roures.user.profile}` },
+    { label: 'Add Address', link: `${configs.roures.user.addAddress}` },
 ];
 
 const AddressPage = () => {

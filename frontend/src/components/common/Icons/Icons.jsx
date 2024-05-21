@@ -7,6 +7,7 @@ import {
     BasketIcon,
     CalendarIcon,
     CartIcon,
+    CloseIcon,
     ClosedEyeIcon,
     CogIcon,
     CustomersIcon,
@@ -74,14 +75,12 @@ const Icons = (props) => {
         shipping: ShippingIcon,
         return: ReturnIcon,
         play: PlayIcon,
+        close: CloseIcon,
     };
 
     const IconComponent = components[props.icon];
 
-    return (
-        <IconComponent
-            ref={props.ref} {...props}
-        />);
+    return <IconComponent ref={props.ref} {...props} />;
 };
 
 Icons.propTypes = {
@@ -97,6 +96,7 @@ Icons.propTypes = {
 };
 Icons.defaultProps = {
     icon: 'heart',
+    size: 24,
     color: '#a9aba7',
 };
 

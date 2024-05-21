@@ -4,10 +4,16 @@ import { Container } from '~/styles/styles';
 import AuthOptions from '~/components/auth/AuthOptions';
 import { FormElement, Input } from '~/styles/form';
 import PasswordInput from '~/components/auth/PasswordInput';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { BaseButtonBlack } from '~/styles/button';
 import { defaultTheme } from '~/styles/themes/default';
 import images from '~/assets/images';
+import configs from '~/configs';
+import authApi from '~/apis/auth.api';
+import { useFormik } from 'formik';
+import * as yup from 'yup';
+import { getRules } from '~/utils/rules';
+import { toast } from 'react-toastify';
 
 const SignUpPageWrapper = styled.section`
     form {
@@ -23,7 +29,7 @@ const SignUpPageWrapper = styled.section`
     }
 
     .form-grid-left {
-        display:  flex;
+        display: flex;
         align-items: center;
         justify-content: center;
         background: linear-gradient(to top right, ${defaultTheme.color_yellow_green}, ${defaultTheme.color_purple});
@@ -37,6 +43,48 @@ const SignUpPageWrapper = styled.section`
 `;
 
 const SignUpPage = () => {
+    const navigate = useNavigate();
+    const handleSignUp = async (event) => {
+        event.preventDefault();
+        try {
+            const res = await authApi.signUp({
+                email: formik.values.email,
+                password: formik.values.password,
+            });
+            if (res.status === 201) {
+                toast.success('Đăng ký thành công', {
+                    autoClose: 3000,
+                });
+                navigate(configs.roures.auth.signIn);
+            }
+            if (res.status === 400) {
+                toast.error('Email đã được sử dụng', {
+                    autoClose: 3000,
+                });
+            }
+            if (res.status === 500) {
+                toast.error('Có lỗi xảy ra', {
+                    autoClose: 3000,
+                });
+            }
+        } catch (error) {
+            toast.error('Có lỗi xảy ra', {
+                autoClose: 3000,
+            });
+        }
+    };
+    const validationSchema = yup.object().shape(getRules());
+
+    const formik = useFormik({
+        initialValues: {
+            email: '',
+            password: '',
+            confirmPassword: '',
+        },
+        validationSchema: validationSchema,
+        onSubmit: handleSignUp,
+    });
+
     return (
         <SignUpPageWrapper>
             <FormGridWrapper>
@@ -50,26 +98,55 @@ const SignUpPage = () => {
                                 <h3>Đăng ký</h3>
                             </FormTitle>
                             <AuthOptions />
-                            <form>
+                            <form onSubmit={handleSignUp}>
                                 <FormElement>
                                     <label htmlFor="" className="forme-elem-label">
                                         Tên người dùng hoặc địa chỉ email
                                     </label>
-                                    <Input type="text" placeholder="" name="" className="form-elem-control" />
-                                    <span className="form-elem-error">*Vui lòng nhập địa chỉ email hợp lệ.</span>
+                                    <Input
+                                        type="text"
+                                        placeholder=""
+                                        id="email"
+                                        name="email"
+                                        className="form-elem-control"
+                                        onChange={formik.handleChange}
+                                        value={formik.values.email}
+                                        onBlur={formik.handleBlur}
+                                    />
+
+                                    {formik.touched.email && formik.errors.email ? (
+                                        <span className="form-elem-error">{formik.errors.email}</span>
+                                    ) : null}
                                 </FormElement>
-                                <PasswordInput fieldName="Mật khẩu" name="password" />
-                                <PasswordInput fieldName="Nhập lại mật khẩu" name="confirmPassword" />
-                                <span className="form-elem-text font-medium">
-                                    Sử dụng 8 ký tự trở lên kết hợp chữ cái, số và ký hiệu
-                                </span>
+                                <PasswordInput
+                                    fieldName="Mật khẩu"
+                                    name="password"
+                                    onChange={formik.handleChange}
+                                    value={formik.values.password}
+                                    onBlur={formik.handleBlur}
+                                    errorMsg={
+                                        formik.touched.password && formik.errors.password ? formik.errors.password : ''
+                                    }
+                                />
+                                <PasswordInput
+                                    fieldName="Nhập lại mật khẩu"
+                                    name="confirmPassword"
+                                    onChange={formik.handleChange}
+                                    value={formik.values.confirmPassword}
+                                    onBlur={formik.handleBlur}
+                                    errorMsg={
+                                        formik.touched.confirmPassword && formik.errors.confirmPassword
+                                            ? formik.errors.confirmPassword
+                                            : ''
+                                    }
+                                />
                                 <BaseButtonBlack type="submit" className="form-submit-btn">
                                     Đăng ký
                                 </BaseButtonBlack>
                             </form>
                             <p className="flex flex-wrap account-rel-text">
                                 Bạn đã có tài khoản?
-                                <Link to="/sign_in" className="font-medium">
+                                <Link to={configs.roures.auth.signIn} className="font-medium">
                                     Đăng nhập
                                 </Link>
                             </p>

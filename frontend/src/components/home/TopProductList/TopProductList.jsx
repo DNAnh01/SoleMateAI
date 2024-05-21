@@ -68,7 +68,7 @@ const TopProductList = ({ title }) => {
                             return (
                                 <ProductCardBoxWrapper key={newArrival.id}>
                                     <div className="product-img">
-                                        <img className="object-fit-cover" src={newArrival.imgSource} />
+                                        <img className="object-fit-cover" src={newArrival.imgSource} alt="" />
                                     </div>
                                     <div className="product-info">
                                         <p className="font-semibold text-xl">{newArrival.title}</p>

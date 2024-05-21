@@ -8,6 +8,7 @@ import { FormElement, Input } from '~/styles/form';
 import { BaseLinkGreen } from '~/styles/button';
 import { Link } from 'react-router-dom';
 import { breakpoints, defaultTheme } from '~/styles/themes/default';
+import configs from '~/configs';
 
 const AccountPageWrapper = styled.main`
     .address-list {
@@ -137,7 +138,7 @@ const AccountPage = () => {
                         </form>
                         <div>
                             <h4 className="title-sm">My Contact Addresss</h4>
-                            <BaseLinkGreen to="/account/add">Add Address</BaseLinkGreen>
+                            <BaseLinkGreen to={configs.roures.user.addAddress}>Add Address</BaseLinkGreen>
                             <div className="address-list grid">
                                 <div className="address-item grid">
                                     <p className="text-outerspace text-lg font-semibold address-title">Richard Doe</p>

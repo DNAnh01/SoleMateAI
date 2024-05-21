@@ -11,7 +11,7 @@ export const HeaderMainWrapper = styled.header`
     width: 100%;
     background-color: #fff;
 
-    min-height: 72px;
+    min-height: 100px;
     box-shadow: rgba(17, 17, 26, 0.05) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 24px,
         rgba(17, 17, 26, 0.05) 0px 16px 56px;
 
@@ -23,10 +23,11 @@ export const HeaderMainWrapper = styled.header`
         }
     }
 
-    .sidebar-toggler {
-        font-size: 26px;
-        margin-right: 10px;
-        margin-bottom: -1px;
+    .name-project {
+        display: inline-block;
+        height: 64px;
+        line-height: 64px;
+        vertical-align: middle;
     }
 `;
 
@@ -36,7 +37,7 @@ export const SiteBrandWrapper = styled(Link)`
 
     .brand-img-wrap {
         img {
-            width: 40px;
+            width: 64px;
         }
     }
 
