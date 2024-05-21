@@ -62,6 +62,10 @@ import configs from './configs';
 import { useContext, useEffect } from 'react';
 import { AppContext } from './contexts/app.context';
 import { LocalStorageEventTarget } from './utils/auth';
+import AdminLayout from './components/layout/AdminLayout/AdminLayout';
+import DashboardAdmin from './pages/dashboardAdmin/dashboardAdmin';
+import ProductAdmin from './pages/productAdmin/productAdmin';
+import './index.css';
 
 function App() {
     const { reset } = useContext(AppContext);
@@ -81,7 +85,6 @@ function App() {
                         <Route index element={<Home />} />
                         <Route path={configs.roures.productList} element={<ProductList />} />
                         <Route path="/product/details" element={<ProductDetails />} />
-
                         <Route path={configs.roures.user.cart} element={<Cart />} />
                         <Route path="/empty_cart" element={<CartEmpty />} />
                         <Route path="/checkout" element={<Checkout />} />
@@ -91,13 +94,16 @@ function App() {
                         <Route path={configs.roures.user.profile} element={<Account />} />
                         <Route path={configs.roures.user.addAddress} element={<Address />} />
                     </Route>
-
                     {/* auth screens */}
                     <Route path="/" element={<AuthLayout />}>
                         <Route path={configs.roures.auth.signIn} element={<SignIn />} />
                         <Route path={configs.roures.auth.signUp} element={<SignUp />} />
                         <Route path={configs.roures.auth.forgetPassword} element={<Reset />} />
                         <Route path="change_password" element={<ChangePassword />} />
+                    </Route>
+                    <Route path="admin" element={<AdminLayout />}>
+                        <Route path="dashboard" element={<DashboardAdmin />} />
+                        <Route path="product" element={<ProductAdmin />} />
                     </Route>
                     <Route path="*" element={<NotFound />} />
                 </Routes>
