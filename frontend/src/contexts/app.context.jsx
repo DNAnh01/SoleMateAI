@@ -32,6 +32,8 @@ export const getInitialAppContext = () => ({
     isSidebarOpen: false,
     toggleSidebar: () => null,
     reset: () => null,
+    products: [],
+    setProducts: () => null,
 });
 
 const initialAppContext = getInitialAppContext();
@@ -43,7 +45,7 @@ export const AppProvider = ({ children, defaultValue = initialAppContext }) => {
     const [profile, setProfile] = useState(defaultValue.profile);
     const [role, setRole] = useState(defaultValue.role);
     const [isSidebarOpen, setIsSidebarOpen] = useState(defaultValue.isSidebarOpen);
-
+    const [products, setProducts] = useState([]);
     const reset = () => {
         setIsAuthenticated(false);
         setProfile(null);
@@ -66,6 +68,8 @@ export const AppProvider = ({ children, defaultValue = initialAppContext }) => {
                 reset,
                 isSidebarOpen,
                 toggleSidebar,
+                products,
+                setProducts,
             }}
         >
             {children}

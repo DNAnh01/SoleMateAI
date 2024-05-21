@@ -214,7 +214,7 @@ const TooltipContent = styled.div`
         display: flex;
         justify-content: space-around;
         width: 100%;
-        font-size: 12px;
+        font-size: 16px;
     }
 
     .display-price {

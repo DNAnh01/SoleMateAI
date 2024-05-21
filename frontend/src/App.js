@@ -66,15 +66,25 @@ import AdminLayout from './components/layout/AdminLayout/AdminLayout';
 import DashboardAdmin from './pages/dashboardAdmin/dashboardAdmin';
 import ProductAdmin from './pages/productAdmin/productAdmin';
 import './index.css';
+import productApi from './apis/product.api';
 
 function App() {
-    const { reset } = useContext(AppContext);
+    const { reset, setProducts } = useContext(AppContext);
     useEffect(() => {
         LocalStorageEventTarget.addEventListener('clearLocalStorage', reset);
         return () => {
             LocalStorageEventTarget.removeEventListener('clearLocalStorage', reset);
         };
     }, [reset]);
+    useEffect(() => {
+        const fetchProducts = async () => {
+            const result = await productApi.getAll();
+            setProducts(result.data);
+        };
+
+        fetchProducts();
+    }, []);
+
     return (
         <>
             <Router>

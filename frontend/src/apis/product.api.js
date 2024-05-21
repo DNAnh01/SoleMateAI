@@ -5,5 +5,8 @@ const productApi = {
     async fetchProductByName(shoeName) {
         return await http.get(`${configs.baseUrl.product.getAll}?filter={"shoe_name__like":"%${shoeName}%"}&limit=6`);
     },
+    async getAll() {
+        return http.get(configs.baseUrl.product.getAll);
+    },
 };
 export default productApi;

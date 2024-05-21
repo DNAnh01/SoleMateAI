@@ -1,8 +1,9 @@
 import styled from 'styled-components';
-import { products } from '~/data/data.api.productlist';
 import ProductItem from '~/components/product/ProductItem';
 import { PropTypes } from 'prop-types';
 import { breakpoints } from '~/styles/themes/default';
+import { useContext } from 'react';
+import { AppContext } from '~/contexts/app.context';
 
 const ProductListWrapper = styled.div`
     column-gap: 20px;
@@ -16,6 +17,7 @@ const ProductListWrapper = styled.div`
 `;
 
 const ProductList = () => {
+    const { products } = useContext(AppContext);
     return (
         <ProductListWrapper className="grid">
             {products?.map((product) => {
