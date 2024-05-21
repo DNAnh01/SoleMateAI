@@ -10,6 +10,11 @@ const baseUrl = {
         forgotPassword: '/auth/forgot-password',
         signOut: '/auth/sign-out',
     },
+    admin: {
+        promotion: {
+            getAll: '/admin-promotion/get-all',
+        },
+    },
 };
 
 export default baseUrl;

@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Image from '../Image';
 import { defaultTheme } from '~/styles/themes/default';
+import { formatCurrency } from '~/utils/helper';
 
 const ShoeItemWrapper = styled.div`
     display: flex;
@@ -76,12 +77,8 @@ const ShoeItem = ({ data }) => {
                 <div className="details">
                     <Image className="brand-logo" src={data?.brand?.brand_logo} alt={data?.brand?.brand_name} />
                     <span className="color-dot" style={{ backgroundColor: data?.color?.hex_value }}></span>
-                    <span className="display-price">
-                        {data?.display_price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}
-                    </span>
-                    <span className="discounted-price">
-                        {data?.discounted_price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}
-                    </span>
+                    <span className="display-price">{formatCurrency(data?.display_price)}</span>
+                    <span className="discounted-price">{formatCurrency(data?.discounted_price)}</span>
                 </div>
             </div>
         </ShoeItemWrapper>

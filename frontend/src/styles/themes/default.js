@@ -18,6 +18,7 @@ const defaultTheme = {
     color_silver: '#bebcbd',
     color_whitesmoke: '#f6f6f6',
     color_brown: '#fb9f4c',
+    color_orange: '#de9a38',
     color_dark_slate_blue: '#193350',
     color_black_04: 'rgba(0, 0, 0, 0.4)',
     // default transition
