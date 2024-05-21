@@ -8,6 +8,7 @@
 /backend/.vscode
 /backend/.env
 /backend/.idea
+/backend/venv
 
 # ignore files of frontend
 # dependencies

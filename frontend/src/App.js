@@ -61,7 +61,6 @@ import Address from '~/pages/user/AddressPage';
 import AdminLayout from './components/layout/AdminLayout/AdminLayout';
 import DashboardAdmin from './pages/dashboardAdmin/dashboardAdmin';
 import ProductAdmin from './pages/productAdmin/productAdmin';
-import './index.css';
 
 function App() {
     return (
