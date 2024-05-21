@@ -7,6 +7,7 @@ import {
     BasketIcon,
     CalendarIcon,
     CartIcon,
+    CloseIcon,
     ClosedEyeIcon,
     CogIcon,
     CustomersIcon,
@@ -74,6 +75,7 @@ const Icons = (props) => {
         shipping: ShippingIcon,
         return: ReturnIcon,
         play: PlayIcon,
+        close: CloseIcon,
     };
 
     const IconComponent = components[props.icon];

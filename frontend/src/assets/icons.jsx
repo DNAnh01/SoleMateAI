@@ -788,3 +788,21 @@ export const PlayIcon = ({ width = '2.4rem', height = '2.4rem ', color, classNam
         </g>
     </svg>
 );
+
+export const CloseIcon = ({ width = '2.4rem', height = '2.4rem ', color, className, onClick }) => (
+    <svg
+        width={width}
+        height={height}
+        fill={color}
+        className={className}
+        onClick={onClick}
+        version="1.0"
+        preserveAspectRatio="xMidYMid meet"
+        viewBox="0 0 128.000000 128.000000"
+        xmlns="http://www.w3.org/2000/svg"
+    >
+        <g transform="translate(0.000000,128.000000) scale(0.100000,-0.100000)" fill={color} stroke="none">
+            <path d="M74 1260 c-54 -22 -82 -106 -53 -163 6 -12 108 -120 227 -240 l217 -217 -222 -223 c-121 -122 -226 -232 -232 -244 -15 -30 -14 -69 4 -103 22 -43 53 -60 109 -60 l50 0 231 230 230 230 215 -216 c118 -118 227 -222 242 -230 35 -18 91 -18 128 1 51 26 74 98 49 148 -6 12 -112 123 -235 247 l-224 225 225 225 c174 174 226 232 231 257 16 85 -66 160 -153 138 -18 -4 -108 -87 -251 -228 l-222 -222 -193 191 c-257 255 -268 264 -315 263 -20 0 -47 -4 -58 -9z" />
+        </g>
+    </svg>
+);

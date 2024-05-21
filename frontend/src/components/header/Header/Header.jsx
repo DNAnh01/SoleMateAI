@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { HeaderMainWrapper, SiteBrandWrapper } from '~/styles/header';
 import { Container } from '~/styles/styles';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Input, InputGroupWrapper } from '~/styles/form';
 import { breakpoints, defaultTheme } from '~/styles/themes/default';
 import Icons from '~/components/common/Icons/Icons';
 import images from '~/assets/images';
@@ -13,48 +12,9 @@ import Image from '~/components/common/Image';
 import { BaseLinkGreen, BaseLinkOutlineDark } from '~/styles/button';
 import Tippy from '@tippyjs/react';
 import authApi from '~/apis/auth.api';
-import { clearLocalStorage, getAccessTokenFromLocalStorage } from '~/utils/auth';
+import { clearLocalStorage } from '~/utils/auth';
 import { toast } from 'react-toastify';
-
-const NavigationAndSearchWrapper = styled.div`
-    column-gap: 20px;
-    .search-form {
-        @media (max-width: ${breakpoints.lg}) {
-            width: 100%;
-            max-width: 500px;
-        }
-        @media (max-width: ${breakpoints.sm}) {
-            display: none;
-        }
-    }
-    .ml-3 {
-        margin-left: 0.75rem;
-    }
-
-    .input-group {
-        min-width: 500px;
-
-        .input-control {
-            @media (max-width: ${breakpoints.sm}) {
-                display: none;
-            }
-        }
-
-        @media (max-width: ${breakpoints.xl}) {
-            min-width: 160px;
-        }
-
-        @media (max-width: ${breakpoints.sm}) {
-            min-width: auto;
-            grid-template-columns: 100%;
-        }
-    }
-
-    @media (max-width: ${breakpoints.lg}) {
-        width: 100%;
-        justify-content: flex-end;
-    }
-`;
+import Search from '~/components/header/Search';
 
 const IconLinksWrapper = styled.div`
     column-gap: 18px;
@@ -200,20 +160,7 @@ const Header = () => {
                             <span className="site-brand-text text-outerspace name-project">Sole Mate AI</span>
                         </SiteBrandWrapper>
                     </div>
-                    <NavigationAndSearchWrapper className="flex items-center">
-                        <form className="search-form">
-                            <InputGroupWrapper className="input-group">
-                                <span className="input-icon flex items-center justify-center text-xl text-gray">
-                                    <Icons
-                                        icon="search"
-                                        className={'icon-default'}
-                                        color={defaultTheme.color_dim_gray}
-                                    />
-                                </span>
-                                <Input type="text" className="input-control w-full" placeholder="Tìm kiếm sản phẩm" />
-                            </InputGroupWrapper>
-                        </form>
-                    </NavigationAndSearchWrapper>
+                    <Search />
                     <IconLinksWrapper>
                         {profile ? (
                             <ActionGroupWrapper>

@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { toast } from 'react-toastify';
 import configs from '~/configs';
 import { getAccessTokenFromLocalStorage, clearLocalStorage } from '~/utils/auth';
 
@@ -30,9 +29,8 @@ class Http {
             },
             (error) => {
                 if (error.response?.status !== 200 && error.response?.status !== 201) {
-                    // HttpStatusCode.Unauthorized is typically 401
                     clearLocalStorage();
-                    window.location.href = configs.routes.auth.signIn; // fixed typo in 'routes'
+                    window.location.href = configs.routes.auth.signIn;
                 }
                 return Promise.reject(error);
             },
