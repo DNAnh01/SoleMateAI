@@ -1,13 +1,16 @@
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import { Container } from '~/styles/styles';
 import Breadcrumb from '~/components/common/Breadcrumb';
-import { Link } from 'react-router-dom';
 import ProductList from '~/components/product/ProductList';
-import { products } from '~/data/data.api.productlist';
-import { breakpoints, defaultTheme } from '~/styles/themes/default';
 import ProductFilter from '~/components/product/ProductFilter';
+import Pagination from '~/components/common/Pagination';
+import { AppContext } from '~/contexts/app.context';
+import { breakpoints, defaultTheme } from '~/styles/themes/default';
+import { getMinMaxDiscountedPrice } from '~/utils/helper';
 
 const ProductsContent = styled.div`
+    display: grid;
     grid-template-columns: 320px auto;
     margin: 20px 0;
 
@@ -22,9 +25,9 @@ const ProductsContent = styled.div`
 `;
 
 const ProductsContentLeft = styled.div`
-    border: 1px solid rgba(190, 188, 189, 0.4);
+    border: 1px solid ${defaultTheme.color_gray};
     border-radius: 12px;
-    box-shadow: rgba(0, 0, 0, 0.05) 0 10px 50px;
+    box-shadow: ${defaultTheme.color_dim_gray} 0 10px 50px;
     overflow: hidden;
 
     @media (max-width: ${breakpoints.lg}) {
@@ -34,27 +37,6 @@ const ProductsContentLeft = styled.div`
 
 const ProductsContentRight = styled.div`
     padding: 16px 40px;
-
-    .products-right-top {
-        margin-bottom: 40px;
-        @media (max-width: ${breakpoints.lg}) {
-            margin-bottom: 24px;
-        }
-        @media (max-width: ${breakpoints.sm}) {
-            flex-direction: column;
-            row-gap: 16px;
-            align-items: flex-start;
-        }
-    }
-
-    .products-right-nav {
-        column-gap: 16px;
-        li {
-            a.active {
-                color: ${defaultTheme.color_purple};
-            }
-        }
-    }
 
     @media (max-width: ${breakpoints.lg}) {
         padding-left: 12px;
@@ -67,7 +49,9 @@ const ProductsContentRight = styled.div`
     }
 
     .product-card-list {
-        grid-template-columns: repeat(auto-fill, repeat(290px, auto));
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+        gap: 20px;
     }
 
     .product-card {
@@ -81,31 +65,24 @@ const ProductListPage = () => {
         { label: 'Home', link: '/' },
         { label: 'Products', link: '' },
     ];
+    const { products } = useContext(AppContext);
+    const [currentPage, setCurrentPage] = useState(1);
+    const productsPerPage = 9;
+    const totalProducts = products.length;
+    const totalPages = Math.ceil(totalProducts / productsPerPage);
+    const currentProducts = products.slice((currentPage - 1) * productsPerPage, currentPage * productsPerPage);
+
     return (
         <main className="page-py-spacing">
             <Container>
                 <Breadcrumb items={breadcrumbItems} />
                 <ProductsContent className="grid items-start">
                     <ProductsContentLeft>
-                        <ProductFilter />
+                        <ProductFilter products={products} />
                     </ProductsContentLeft>
                     <ProductsContentRight>
-                        <div className="products-right-top flex items-center justify-between">
-                            <h4 className="text-xxl">'Nike Air Max 90 Essential'</h4>
-                            <ul className="products-right-nav flex items-center justify-end flex-wrap">
-                                <li>
-                                    <Link to="/" className="active text-lg font-semibold">
-                                        New
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link to="/" className="text-lg font-semibold">
-                                        Recommended
-                                    </Link>
-                                </li>
-                            </ul>
-                        </div>
-                        <ProductList products={products.slice(0, 12)} />
+                        <ProductList products={currentProducts} />
+                        <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
                     </ProductsContentRight>
                 </ProductsContent>
             </Container>

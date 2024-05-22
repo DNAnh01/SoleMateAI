@@ -44,25 +44,55 @@ export const FilterWrap = styled.div`
     }
 `;
 
-export const ProductCategoryFilter = styled.div`
-    .product-filter-item {
-        padding: 4px 0;
-        margin: 12px 0;
+export const BrandsFilter = styled.div`
+    .brands-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+        gap: 16px;
 
-        &:hover {
-            .filter-head-title {
-                transition: ${defaultTheme.default_transition};
-                color: ${defaultTheme.color_yellow_green};
-            }
-        }
-
-        @media (max-width: ${breakpoints.lg}) {
-            padding: 2px 0;
+        @media (max-width: 768px) {
+            grid-template-columns: repeat(auto-fill, minmax(36px, 1fr));
+            gap: 8px;
         }
     }
 
-    .filter-title {
-        border-top: 0;
+    .brands-item {
+        position: relative;
+        width: 40px;
+        height: 30px;
+        cursor: pointer;
+
+        @media (max-width: 768px) {
+            width: 36px;
+            height: 24px;
+        }
+
+        input {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            z-index: 5;
+            cursor: pointer;
+
+            &:checked + img {
+                outline: 2px solid ${defaultTheme.color_black};
+                outline-offset: 4px;
+                transform: scale(0.9);
+            }
+        }
+
+        img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.3s ease;
+            &:hover {
+                transform: scale(0.9);
+            }
+        }
     }
 `;
 
@@ -76,7 +106,7 @@ export const PriceFilter = styled.div`
     .range-slider {
         height: 5px;
         position: relative;
-        background-color: rgba(128, 125, 126, 0.3);
+        background-color: ${defaultTheme.color_black};
         border-radius: 2px;
         margin-top: 10px;
     }
@@ -85,6 +115,7 @@ export const PriceFilter = styled.div`
         right: 30%;
         position: absolute;
         border-radius: 5px;
+        background-color: ${defaultTheme.color_black};
     }
     .range-input {
         position: relative;
@@ -112,7 +143,7 @@ export const PriceFilter = styled.div`
         height: 15px;
         width: 15px;
         border-radius: 50%;
-        background-color: ${defaultTheme.color_white};
+        background-color: ${defaultTheme.color_yellow_green};
         pointer-events: auto;
         -webkit-appearance: none;
     }
@@ -126,29 +157,29 @@ export const PriceFilter = styled.div`
         padding: 5px;
         height: 32px;
         border-radius: 4px;
-        border: 1px solid rgba(190, 188, 189, 0.8);
+        border: 1px solid ${defaultTheme.color_black};
     }
 `;
 
 export const ColorsFilter = styled.div`
     .colors-list {
+        display: grid;
         grid-template-columns: repeat(auto-fill, minmax(36px, 1fr));
         gap: 16px;
 
-        @media (max-width: ${breakpoints.lg}) {
+        @media (max-width: 768px) {
             grid-template-columns: repeat(auto-fill, minmax(24px, 1fr));
             gap: 8px;
         }
     }
 
     .colors-item {
-        row-gap: 4px;
+        position: relative;
         width: 36px;
         height: 36px;
         cursor: pointer;
-        position: relative;
 
-        @media (max-width: ${breakpoints.lg}) {
+        @media (max-width: 768px) {
             width: 26px;
             height: 26px;
         }
@@ -157,42 +188,28 @@ export const ColorsFilter = styled.div`
             position: absolute;
             top: 0;
             left: 0;
-            width: 34px;
-            height: 34px;
-            opacity: 0;
+            width: 100%;
+            height: 100%;
             opacity: 0;
             z-index: 5;
             cursor: pointer;
 
-            @media (max-width: ${breakpoints.lg}) {
-                width: 26px;
-                height: 26px;
-            }
-
-            &:checked {
-                & + img {
-                    outline: 1px solid ${defaultTheme.color_platinum};
-                    outline-offset: 4px;
-                    border-radius: 12px;
-                    scale: 0.8;
-
-                    @media (max-width: ${breakpoints.lg}) {
-                        border-radius: 6px;
-                    }
-                }
+            &:checked + span {
+                outline: 2px solid ${defaultTheme.color_black}; /* Change this to the desired outline color */
+                outline-offset: 4px;
+                border-radius: 50%;
+                transform: scale(0.9);
             }
         }
 
-        img {
-            border-radius: 12px;
-            transition: ${defaultTheme.default_transition};
+        span {
+            display: block;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
             &:hover {
-                scale: 0.9;
-            }
-
-            @media (max-width: ${breakpoints.lg}) {
-                width: 26px;
-                height: 26px;
+                transform: scale(0.9);
             }
         }
     }
