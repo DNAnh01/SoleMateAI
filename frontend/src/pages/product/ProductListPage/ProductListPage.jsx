@@ -7,7 +7,7 @@ import ProductFilter from '~/components/product/ProductFilter';
 import Pagination from '~/components/common/Pagination';
 import { AppContext } from '~/contexts/app.context';
 import { breakpoints, defaultTheme } from '~/styles/themes/default';
-import { getMinMaxDiscountedPrice } from '~/utils/helper';
+import { ProductFilterContext } from '~/contexts/productFilter.context';
 
 const ProductsContent = styled.div`
     display: grid;
@@ -66,11 +66,29 @@ const ProductListPage = () => {
         { label: 'Products', link: '' },
     ];
     const { products } = useContext(AppContext);
+    const { brands, minRange, maxRange, colors, sizes } = useContext(ProductFilterContext);
+    const filteredProducts = products.filter((product) => {
+        // Check if the product's brand is in the selected brands or if no brands are selected
+        const isBrandSelected = brands.length === 0 || brands.includes(product?.brand?.brand_name);
+
+        // Check if the product's price is within the selected price range
+        const isWithinPriceRange = product?.discounted_price >= minRange && product?.discounted_price <= maxRange;
+
+        // Check if the product's color is in the selected colors or if no colors are selected
+        const isColorSelected = colors.length === 0 || colors.includes(product?.color?.color_name);
+
+        // Check if the product's size is in the selected sizes or if no sizes are selected
+        const isSizeSelected = sizes.length === 0 || sizes.includes(product?.size?.size_number);
+
+        // A product passes the filter if it meets all the above conditions
+        return isBrandSelected && isWithinPriceRange && isColorSelected && isSizeSelected;
+    });
+
     const [currentPage, setCurrentPage] = useState(1);
     const productsPerPage = 9;
-    const totalProducts = products.length;
+    const totalProducts = filteredProducts.length;
     const totalPages = Math.ceil(totalProducts / productsPerPage);
-    const currentProducts = products.slice((currentPage - 1) * productsPerPage, currentPage * productsPerPage);
+    const currentProducts = filteredProducts.slice((currentPage - 1) * productsPerPage, currentPage * productsPerPage);
 
     return (
         <main className="page-py-spacing">

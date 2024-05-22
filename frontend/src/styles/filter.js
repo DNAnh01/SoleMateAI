@@ -195,7 +195,7 @@ export const ColorsFilter = styled.div`
             cursor: pointer;
 
             &:checked + span {
-                outline: 2px solid ${defaultTheme.color_black}; /* Change this to the desired outline color */
+                outline: 2px solid ${defaultTheme.color_black};
                 outline-offset: 4px;
                 border-radius: 50%;
                 transform: scale(0.9);
@@ -221,7 +221,7 @@ export const SizesFilter = styled.div`
         grid-template-columns: repeat(auto-fill, minmax(60px, 60px));
 
         @media (max-width: ${breakpoints.lg}) {
-            grid-template-columns: repeat(auto-fill, minmax(40px 40px));
+            grid-template-columns: repeat(auto-fill, minmax(40px, 40px));
             gap: 6px;
         }
     }
@@ -267,6 +267,12 @@ export const SizesFilter = styled.div`
                     border-color: ${defaultTheme.color_yellow_green};
                 }
             }
+        }
+
+        &.active span {
+            background-color: ${defaultTheme.color_yellow_green};
+            color: ${defaultTheme.color_white};
+            border-color: ${defaultTheme.color_yellow_green};
         }
     }
 `;

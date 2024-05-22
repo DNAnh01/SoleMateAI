@@ -1,20 +1,25 @@
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { BrandsFilter, ColorsFilter, FilterTitle, FilterWrap, PriceFilter, SizesFilter } from '~/styles/filter';
 import Color from './components/Color';
 import Brand from './components/Brand';
 import Price from './components/Price';
 import Size from './components/Size';
 import { getUniqueProperties } from '~/utils/helper';
+import useDebounce from '~/hooks';
+import { ProductFilterContext } from '~/contexts/productFilter.context';
 
 const ProductFilter = ({ products }) => {
-    const [isBrandFilterOpen, setBrandFilterOpen] = useState(false);
-    const [isPriceFilterOpen, setPriceFilterOpen] = useState(false);
-    const [isColorFilterOpen, setColorFilterOpen] = useState(false);
-    const [isSizeFilterOpen, setSizeFilterOpen] = useState(false);
+    const { setMinRange: updateMinRange } = useContext(ProductFilterContext);
+    const { setMaxRange: updateMaxRange } = useContext(ProductFilterContext);
+
+    const [isBrandFilterOpen, setBrandFilterOpen] = useState(true);
+    const [isPriceFilterOpen, setPriceFilterOpen] = useState(true);
+    const [isColorFilterOpen, setColorFilterOpen] = useState(true);
+    const [isSizeFilterOpen, setSizeFilterOpen] = useState(true);
 
     const { uniqueColors, uniqueBrands, uniqueSizes, minPrice, maxPrice } = getUniqueProperties(products);
-    const uniqueMinRangeInitial = minPrice;
-    const uniqueMaxRangeInitial = maxPrice;
+    const uniqueMinRangeInitial = minPrice - 100000;
+    const uniqueMaxRangeInitial = maxPrice + 100000;
 
     const toggleFilter = (filter) => {
         switch (filter) {
@@ -35,9 +40,9 @@ const ProductFilter = ({ products }) => {
         }
     };
 
-    const rangeMin = 100000;
-    const [minRange, setMinRange] = useState(uniqueMinRangeInitial + 100000);
-    const [maxRange, setMaxRange] = useState(uniqueMaxRangeInitial - 100000);
+    const rangeMin = 1000;
+    const [minRange, setMinRange] = useState(uniqueMinRangeInitial);
+    const [maxRange, setMaxRange] = useState(uniqueMaxRangeInitial);
 
     const handleInputChange = (e) => {
         const inputName = e.target.name;
@@ -45,16 +50,32 @@ const ProductFilter = ({ products }) => {
 
         if (inputName === 'min') {
             setMinRange(inputValue);
-            if (maxRange - inputValue < rangeMin) {
-                setMaxRange(inputValue + rangeMin);
-            }
         } else if (inputName === 'max') {
             setMaxRange(inputValue);
-            if (inputValue - minRange < rangeMin) {
-                setMinRange(inputValue - rangeMin);
-            }
         }
     };
+
+    const debouncedMinRange = useDebounce(minRange, 1000);
+    const debouncedMaxRange = useDebounce(maxRange, 1000);
+
+    useEffect(() => {
+        if (maxRange - debouncedMinRange < rangeMin) {
+            setMaxRange(debouncedMinRange + rangeMin);
+        }
+    }, [debouncedMinRange, maxRange, rangeMin]);
+
+    useEffect(() => {
+        if (debouncedMaxRange - minRange < rangeMin) {
+            setMinRange(debouncedMaxRange - rangeMin);
+        }
+    }, [debouncedMaxRange, minRange, rangeMin]);
+
+    useEffect(() => {
+        updateMinRange(minRange);
+        updateMaxRange(maxRange);
+        console.log('minRange', minRange);
+        console.log('maxRange', maxRange);
+    }, [minRange, maxRange, updateMinRange, updateMaxRange]);
 
     return (
         <>
@@ -70,7 +91,7 @@ const ProductFilter = ({ products }) => {
                 </FilterTitle>
                 <FilterWrap className={`${!isBrandFilterOpen ? 'hide' : 'show'}`}>
                     <div className="brands-list grid">
-                        <Brand handleChange={() => {}} uniqueBrands={uniqueBrands} />
+                        <Brand uniqueBrands={uniqueBrands} />
                     </div>
                 </FilterWrap>
             </BrandsFilter>
@@ -105,7 +126,7 @@ const ProductFilter = ({ products }) => {
                 </FilterTitle>
                 <FilterWrap className={`${!isColorFilterOpen ? 'hide' : 'show'}`}>
                     <div className="colors-list grid">
-                        <Color handleChange={() => {}} uniqueColors={uniqueColors} />
+                        <Color uniqueColors={uniqueColors} />
                     </div>
                 </FilterWrap>
             </ColorsFilter>
@@ -118,7 +139,7 @@ const ProductFilter = ({ products }) => {
                 </FilterTitle>
                 <FilterWrap className={`${!isSizeFilterOpen ? 'hide' : 'show'}`}>
                     <div className="sizes-list grid text-center justify-center">
-                        <Size handleChange={() => {}} uniqueSizes={uniqueSizes} />
+                        <Size uniqueSizes={uniqueSizes} />
                     </div>
                 </FilterWrap>
             </SizesFilter>
