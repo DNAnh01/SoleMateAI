@@ -152,6 +152,30 @@ const Star = styled(FaStar)`
     }
 `;
 
+const Size = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: ${(props) => props.color};
+    color: ${defaultTheme.color_white};
+    margin-right: 5px;
+    &:hover {
+        transform: scale(1.5);
+    }
+`;
+const SizeWrapper = styled.div`
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+`;
+
 const RatingWrapper = styled.div`
     position: absolute;
     top: 10px;
@@ -193,8 +217,13 @@ const AddToCartButton = styled.button`
 
 const ProductItem = ({ product }) => {
     return (
-        <ProductCardWrapper to="/" circleColor={product.color.hex_value}>
+        <ProductCardWrapper to="*" circleColor={product.color.hex_value}>
             <Rating rating={product.avg_rating} />
+            <SizeWrapper>
+                <Size key={product?.size?.size_number} color={product?.color.hex_value}>
+                    {product?.size.size_number}
+                </Size>
+            </SizeWrapper>
             <ProductImageWrapper>
                 <ProductImage className="product-image" src={product.image_url} alt={product.shoe_name} />
             </ProductImageWrapper>

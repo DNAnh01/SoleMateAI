@@ -1,21 +1,34 @@
 import styled from 'styled-components';
 import Hero from '~/components/home/Hero';
-// import TopProductList from '~/components/home/TopProductList';
 import Catalog from '~/components/home/Catalog';
-import { products } from '~/data/data.api.productlist';
 import Brands from '~/components/home/Brands';
+import { useContext, useState } from 'react';
+import { AppContext } from '~/contexts/app.context';
+import Pagination from '~/components/common/Pagination';
 
 const HomePageWrapper = styled.main``;
 
 const HomePage = () => {
-    const dataCatalog = [...products.slice(4, 11), products[1]];
+    const { products } = useContext(AppContext);
+    const [currentPage, setCurrentPage] = useState(1);
+    const productsPerPage = 12;
+    const totalProducts = products.length;
+    const totalPages = Math.ceil(totalProducts / productsPerPage);
+
+    const handlePageChange = (page) => {
+        setCurrentPage(page);
+    };
+
+    const currentProducts = products.slice((currentPage - 1) * productsPerPage, currentPage * productsPerPage);
+
     return (
         <HomePageWrapper>
             <Hero />
             <Brands />
             {/*<TopProductList title={'Sản phẩm mới'} />
     <TopProductList title={'Sản phẩm bán chạy'} />*/}
-            <Catalog catalogTitle={'Các sản phẩm'} products={dataCatalog} />
+            <Catalog catalogTitle={'Các sản phẩm'} products={currentProducts} />
+            <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
         </HomePageWrapper>
     );
 };
