@@ -17,6 +17,7 @@ import * as yup from 'yup';
 import { getRules } from '~/utils/rules';
 import { AppContext } from '~/contexts/app.context';
 import { clearLocalStorage, setAccessTokenToLocalStorage, setProfileToLocalStorage } from '~/utils/auth';
+import useAppStore from '~/store';
 
 const SignInPageWrapper = styled.section`
     .form-separator {
@@ -62,11 +63,18 @@ const SignInPageWrapper = styled.section`
 
 const SignInPage = () => {
     const { setIsAuthenticated, setProfile, setRole } = useContext(AppContext);
+    const {
+        setProfile: setProfileStore,
+        setAccessToken: setAccessTokenStore,
+        setIsAuthenticated: setIsAuthenticatedStore,
+        setIsLoadingAPI: setIsLoadingAPIStore,
+    } = useAppStore();
     const navigate = useNavigate();
 
     const handleSignIn = async (event) => {
         event.preventDefault();
         try {
+            setIsLoadingAPIStore(true);
             const res = await authApi.signIn({
                 email: formik.values.email,
                 password: formik.values.password,
@@ -75,6 +83,12 @@ const SignInPage = () => {
                 toast.success('Đăng nhập thành công', {
                     autoClose: 3000,
                 });
+                // new
+                setProfileStore(res.data.user);
+                setAccessTokenStore(res.data.access_token);
+                setIsAuthenticatedStore(true);
+
+                // old
                 clearLocalStorage();
                 setAccessTokenToLocalStorage(res.data.access_token);
                 setProfileToLocalStorage(res.data.user);
@@ -85,6 +99,10 @@ const SignInPage = () => {
                 // window.location.reload();
             }
             if (res.status === 404) {
+                //new
+                setIsAuthenticatedStore(false);
+
+                //old
                 setIsAuthenticated(false);
                 setProfile(null);
                 setRole('user');
@@ -107,6 +125,8 @@ const SignInPage = () => {
             toast.error('Đăng nhập thất bại', {
                 autoClose: 3000,
             });
+        } finally {
+            setIsLoadingAPIStore(false);
         }
     };
     const validationSchema = yup.object().shape(getRules());

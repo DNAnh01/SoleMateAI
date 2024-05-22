@@ -185,6 +185,9 @@ const Header = () => {
                                                 <div className="tippy-item" onClick={handleSignOut}>
                                                     Đăng xuất
                                                 </div>
+                                                <Link to={'/admin/dashboard'} className="tippy-item">
+                                                    Trang quản lý
+                                                </Link>
                                             </MenuTippyWrapper>
                                         }
                                     >

@@ -65,8 +65,12 @@ import { LocalStorageEventTarget } from './utils/auth';
 import AdminLayout from './components/layout/AdminLayout/AdminLayout';
 import DashboardAdmin from './pages/dashboardAdmin/dashboardAdmin';
 import ProductAdmin from './pages/productAdmin/productAdmin';
+import ChatbotAdmin from './pages/chatbotAdmin/chatbotAdmin';
 import './index.css';
 import productApi from './apis/product.api';
+import UpdateChatbotAdmin from './pages/updateChatbotAdmin/updateChatbotAdmin';
+import Loading from './components/loading/loading';
+import Overlay from './components/overlay/overlay';
 
 function App() {
     const { reset, setProducts } = useContext(AppContext);
@@ -83,6 +87,7 @@ function App() {
         };
 
         fetchProducts();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
@@ -114,10 +119,14 @@ function App() {
                     <Route path="admin" element={<AdminLayout />}>
                         <Route path="dashboard" element={<DashboardAdmin />} />
                         <Route path="product" element={<ProductAdmin />} />
+                        <Route path="chatbot" element={<ChatbotAdmin />} />
+                        <Route path="chatbot/:id" element={<UpdateChatbotAdmin />} />
                     </Route>
                     <Route path="*" element={<NotFound />} />
                 </Routes>
             </Router>
+            <Loading />
+            <Overlay />
         </>
     );
 }

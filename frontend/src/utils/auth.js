@@ -4,8 +4,8 @@ export const setAccessTokenToLocalStorage = (accessToken) => {
     localStorage.setItem('access_token', accessToken);
 };
 
-export const getAccessTokenFromLocalStorage = () => {
-    return localStorage.getItem('access_token');
+export const getAccessTokenFromLocalStorage = (key = 'access_token') => {
+    return localStorage.getItem(key);
 };
 
 export const setProfileToLocalStorage = (profile) => {

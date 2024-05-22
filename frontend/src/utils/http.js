@@ -6,12 +6,15 @@ class Http {
     instance;
     constructor() {
         this.instance = axios.create({
-            baseURL: configs.baseUrl.url,
-            timeout: 10000,
+            baseURL: 'http://localhost:8000/api/v1',
+            timeout: 100000,
         });
 
         this.instance.interceptors.request.use(
             (config) => {
+                // ?new
+
+                //old
                 const accessToken = getAccessTokenFromLocalStorage();
                 if (accessToken) {
                     config.headers.Authorization = `Bearer ${accessToken}`;
