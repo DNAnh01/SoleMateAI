@@ -2,9 +2,8 @@ import { createGlobalStyle } from 'styled-components';
 import { breakpoints, defaultTheme } from '~/styles/themes/default';
 
 export const GlobalStyles = createGlobalStyle`
-
-/* Font embedded  */
-@font-face {
+    /* Font embedded  */
+    @font-face {
     font-family: Poppins;
     src: url('/assets/fonts/Poppins-Thin.ttf');
     font-weight: 100;

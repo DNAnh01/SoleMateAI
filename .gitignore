@@ -9,6 +9,7 @@
 /backend/.env
 /backend/.idea
 /backend/venv
+/backend/assets/knowledge_files/*
 
 # ignore files of frontend
 # dependencies
@@ -24,6 +25,7 @@ design_database_diagram.png
 
 # production
 /frontend/build
+
 
 # misc
 .DS_Store

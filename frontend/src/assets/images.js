@@ -55,6 +55,7 @@ const images = {
     noImage: require('~/assets/images/no_image.png'),
     nullRmb: require('~/assets/images/null_rmb.png'),
     nullHbg: require('~/assets/images/null_hbg.jpg'),
+    chatbot: require('~/assets/images/chatbot.jpg'),
 };
 
 export default images;

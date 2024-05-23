@@ -29,6 +29,7 @@ import {
     ReturnIcon,
     SearchIcon,
     SellPhoneLinkIcon,
+    SendMessageIcon,
     ShippingIcon,
     SignOutIcon,
     SizeIcon,
@@ -76,6 +77,7 @@ const Icons = (props) => {
         return: ReturnIcon,
         play: PlayIcon,
         close: CloseIcon,
+        sendMessage: SendMessageIcon,
     };
 
     const IconComponent = components[props.icon];

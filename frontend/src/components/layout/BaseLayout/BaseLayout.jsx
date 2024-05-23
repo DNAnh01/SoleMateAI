@@ -4,6 +4,7 @@ import Footer from '~/components/footer/Footer';
 import Sidebar from '~/components/sidebar/Sidebar';
 import { Outlet } from 'react-router-dom';
 import Toast from '~/components/common/Toast';
+import Chatbot from '~/components/Chatbot';
 
 const BaseLayout = () => {
     return (
@@ -18,6 +19,7 @@ const BaseLayout = () => {
             >
                 <Outlet />
             </div>
+            <Chatbot />
             <Footer />
         </PageWrapper>
     );

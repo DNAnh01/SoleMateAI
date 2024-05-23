@@ -21,6 +21,7 @@
         "autoflush",
         "camelcase",
         "cellspacing",
+        "Chatbox",
         "colorlog",
         "decamelization",
         "decamelize",
