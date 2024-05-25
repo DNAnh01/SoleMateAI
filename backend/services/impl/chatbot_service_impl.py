@@ -1,3 +1,4 @@
+import json
 import uuid
 from datetime import datetime
 from typing import List, Optional
@@ -36,7 +37,7 @@ class ChatbotServiceImpl(ChatbotService):
                 status_code=400,
                 content={
                     "status": 400,
-                    "message": "Create Chatbot failed: User does not have permission to create chatbot"
+                    "message": "Create Chatbot failed: User does not have permission to create chatbot",
                 },
             )
         try:
@@ -57,11 +58,8 @@ class ChatbotServiceImpl(ChatbotService):
                 f"Exception in {__name__}.{self.__class__.__name__}.create_chatbot"
             )
             return JSONResponse(
-                status_code=400, 
-                content={
-                    "status": 400,
-                    "message": "Create Chatbot failed"
-                }
+                status_code=400,
+                content={"status": 400, "message": "Create Chatbot failed"},
             )
         return created_chatbot
 
@@ -76,23 +74,25 @@ class ChatbotServiceImpl(ChatbotService):
                 status_code=400,
                 content={
                     "status": 400,
-                    "message": "Get all chatbot failed: User does not have permission to read chatbot"
+                    "message": "Get all chatbot failed: User does not have permission to read chatbot",
                 },
             )
         try:
             chatbots: List[ChatbotInDBSchema] = self.__crud_chatbot.get_multi(
-                db=db, filter_param={"user_id": current_user_role_permission.u_id}
+                db=db,
+                filter_param={
+                    "filter": json.dumps(
+                        {"user_id": str(current_user_role_permission.u_id)}
+                    )
+                },
             )
         except:
             logger.exception(
                 f"Exception in {__name__}.{self.__class__.__name__}.get_all"
             )
             return JSONResponse(
-                status_code=400, 
-                content={
-                    "status": 400,
-                    "message": "Get all chatbot failed"       
-                }
+                status_code=400,
+                content={"status": 400, "message": "Get all chatbot failed"},
             )
         return chatbots
 
@@ -110,7 +110,7 @@ class ChatbotServiceImpl(ChatbotService):
                 status_code=400,
                 content={
                     "status": 400,
-                    "message": "Get one chatbot failed: User does not have permission to read chatbot"
+                    "message": "Get one chatbot failed: User does not have permission to read chatbot",
                 },
             )
         try:
@@ -122,20 +122,13 @@ class ChatbotServiceImpl(ChatbotService):
                 f"Exception in {__name__}.{self.__class__.__name__}.get_one"
             )
             return JSONResponse(
-                status_code=400, 
-                content={
-                    "status": 400,
-                    "message": "Get one chatbot failed"
-                }
+                status_code=400,
+                content={"status": 400, "message": "Get one chatbot failed"},
             )
 
         if chatbot_found is None:
             return JSONResponse(
-                status_code=404, 
-                content={
-                    "status": 404,
-                    "message": "Chatbot not found"
-                }
+                status_code=404, content={"status": 404, "message": "Chatbot not found"}
             )
         return chatbot_found
 
@@ -154,7 +147,7 @@ class ChatbotServiceImpl(ChatbotService):
                 status_code=400,
                 content={
                     "status": 400,
-                    "message": "Update chatbot failed: User does not have permission to update chatbot"
+                    "message": "Update chatbot failed: User does not have permission to update chatbot",
                 },
             )
         chatbot_found: ChatbotInDBSchema = self.get_one(
@@ -167,7 +160,12 @@ class ChatbotServiceImpl(ChatbotService):
             """If chatbot is public, set all other chatbots of the user to is_public = False"""
             try:
                 chatbots: List[ChatbotInDBSchema] = self.__crud_chatbot.get_multi(
-                    db=db, filter_param={"user_id": current_user_role_permission.u_id}
+                    db=db,
+                    filter_param={
+                        "filter": json.dumps(
+                            {"user_id": str(current_user_role_permission.u_id)}
+                        )
+                    },
                 )
                 for chatbot in chatbots:
                     if chatbot.id != chatbot_found.id:
@@ -185,11 +183,8 @@ class ChatbotServiceImpl(ChatbotService):
                     f"Exception in {__name__}.{self.__class__.__name__}.update"
                 )
                 return JSONResponse(
-                    status_code=400, 
-                    content={
-                        "status": 400,
-                        "message": "Update chatbot failed"
-                    }
+                    status_code=400,
+                    content={"status": 400, "message": "Update chatbot failed"},
                 )
         else:
             try:
@@ -201,11 +196,8 @@ class ChatbotServiceImpl(ChatbotService):
                     f"Exception in {__name__}.{self.__class__.__name__}.update"
                 )
                 return JSONResponse(
-                    status_code=400, 
-                    content={
-                        "status": 400,
-                        "message": "Update chatbot failed"
-                    }
+                    status_code=400,
+                    content={"status": 400, "message": "Update chatbot failed"},
                 )
         return chatbot_updated
 
@@ -223,7 +215,7 @@ class ChatbotServiceImpl(ChatbotService):
                 status_code=400,
                 content={
                     "status": 400,
-                    "message": "Delete chatbot failed: User does not have permission to delete chatbot"
+                    "message": "Delete chatbot failed: User does not have permission to delete chatbot",
                 },
             )
         chatbot_found: ChatbotInDBSchema = self.get_one(
@@ -240,10 +232,7 @@ class ChatbotServiceImpl(ChatbotService):
                 f"Exception in {__name__}.{self.__class__.__name__}.delete"
             )
             return JSONResponse(
-                status_code=400, 
-                content={
-                    "status": 400,
-                    "message": "Delete chatbot failed"
-                }
+                status_code=400,
+                content={"status": 400, "message": "Delete chatbot failed"},
             )
         return chatbot_deleted

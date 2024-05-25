@@ -6,6 +6,7 @@ import pydantic
 from backend.schemas._base_schema import BaseSchema
 from backend.schemas.user_schema import UserOutInProductDetailPageSchema
 
+
 class ReviewCreateSchema(pydantic.BaseModel):
     user_id: uuid.UUID
     shoe_id: uuid.UUID
@@ -28,6 +29,7 @@ class ReviewOutInProductDetailPageSchema(pydantic.BaseModel):
     comment: str
     heart_count: int
 
+
 class ReviewInDBSchema(BaseSchema):
     ID: ClassVar[str] = "id"
     USER_ID: ClassVar[str] = "user_id"
@@ -35,8 +37,7 @@ class ReviewInDBSchema(BaseSchema):
     RATING: ClassVar[str] = "rating"
     COMMENT: ClassVar[str] = "comment"
     HEART_COUNT: ClassVar[str] = "heart_count"
-    
-    
+
     id: uuid.UUID
     user_id: uuid.UUID
     shoe_id: uuid.UUID

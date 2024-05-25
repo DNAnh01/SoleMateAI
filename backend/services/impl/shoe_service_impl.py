@@ -8,27 +8,25 @@ from sqlalchemy.orm import Session
 from backend.common.logger import setup_logger
 from backend.crud.crud_brand import crud_brand
 from backend.crud.crud_color import crud_color
+from backend.crud.crud_review import crud_review
 from backend.crud.crud_shoe import crud_shoe
 from backend.crud.crud_size import crud_size
+from backend.crud.crud_user import crud_user
 from backend.schemas.brand_schema import BrandCreateSchema, BrandInDBSchema
 from backend.schemas.color_schema import ColorCreateSchema, ColorInDBSchema
+from backend.schemas.review_schema import ReviewOutInProductDetailPageSchema
 from backend.schemas.shoe_schema import (
     ShoeCreateSchema,
     ShoeInDBSchema,
+    ShoeOutInHomePageSchema,
+    ShoeOutInProductDetailPageSchema,
     ShoeOutSchema,
     ShoeUpdateSchema,
-    ShoeOutInProductDetailPageSchema,
-    ShoeOutInHomePageSchema
 )
 from backend.schemas.size_schema import SizeCreateSchema, SizeInDBSchema
 from backend.schemas.user_role_permission_schema import UserRolePermissionSchema
-from backend.services.abc.shoe_service import ShoeService
-from backend.schemas.review_schema import ReviewOutInProductDetailPageSchema
 from backend.schemas.user_schema import UserOutInProductDetailPageSchema
-from backend.crud.crud_review import crud_review
-from backend.crud.crud_user import crud_user
-
-
+from backend.services.abc.shoe_service import ShoeService
 
 logger = setup_logger()
 
@@ -57,7 +55,7 @@ class ShoeServiceImpl(ShoeService):
                 status_code=400,
                 content={
                     "status": 400,
-                    "message": "Create shoe failed: User does not have permission to create shoe"
+                    "message": "Create shoe failed: User does not have permission to create shoe",
                 },
             )
 
@@ -169,11 +167,8 @@ class ShoeServiceImpl(ShoeService):
                 f"Exception in {__name__}.{self.__class__.__name__}.create_shoe"
             )
             return JSONResponse(
-                status_code=400, 
-                content={
-                    "status": 400,
-                    "message": "Create shoe failed"        
-                }
+                status_code=400,
+                content={"status": 400, "message": "Create shoe failed"},
             )
         return shoe_out
 
@@ -191,7 +186,7 @@ class ShoeServiceImpl(ShoeService):
                 status_code=400,
                 content={
                     "status": 400,
-                    "message": "Create shoe failed: User does not have permission to create shoe"
+                    "message": "Create shoe failed: User does not have permission to create shoe",
                 },
             )
         shoes_saved = []
@@ -206,105 +201,101 @@ class ShoeServiceImpl(ShoeService):
         return shoes_saved
 
     def get_shoe_by_id(
-            self,
-            db: Session,
-            shoe_id: uuid.UUID,
-        ) -> Optional[ShoeOutInProductDetailPageSchema]:
-            try:
-                
-                
-                shoe_found = self.__crud_shoe.get(db=db, id=shoe_id)
-                if shoe_found is None:
-                    return JSONResponse(
-                        status_code=404, 
-                        content={
-                            "status": 404,
-                            "message": "Shoe not found"
-                        }
-                    )
-                
-                # Initialize variables for reviews and average rating calculation
-                avg_rating = 0
-                reviews_out = []
-                
-                # Retrieve reviews for the specified shoe
-                reviews_found = self.__crud_review.get_all_reviews_by_shoe_id(db=db, shoe_id=shoe_id)
-                
-                if not reviews_found:
-                    reviews_found = []
-                
-                total_user_rating = 0
-                total_rating = 0
-                
-                for review in reviews_found:
-                    user_found = self.__crud_user.get_one_ignore_deleted_and_inactive(
-                        db=db, 
-                        filter={"id": review.user_id}
-                    )
-                    if user_found is None:
-                        logger.error(f"User with ID {review.user_id} not found for review {review.id}")
-                        continue
-                    
-                    # Add review details to output
-                    total_user_rating += 1
-                    total_rating += review.rating
-                    reviews_out.append(
-                        ReviewOutInProductDetailPageSchema(
-                            user=UserOutInProductDetailPageSchema(
-                                email=user_found.email,
-                                display_name=user_found.display_name,
-                                avatar_url=user_found.avatar_url,
-                            ),
-                            rating=review.rating,
-                            comment=review.comment,
-                            heart_count=review.heart_count,
-                        )
-                    )
-                
-                # Calculate average rating
-                if total_user_rating != 0:
-                    avg_rating = total_rating / total_user_rating
-                else:
-                    avg_rating = 0
+        self,
+        db: Session,
+        shoe_id: uuid.UUID,
+    ) -> Optional[ShoeOutInProductDetailPageSchema]:
+        try:
 
-                # Prepare shoe details for output
-                shoe_out = ShoeOutInProductDetailPageSchema(
-                    id=shoe_found.id,
-                    brand=BrandCreateSchema(
-                        brand_name=shoe_found.brand.brand_name,
-                        brand_logo=shoe_found.brand.brand_logo,
-                    ),
-                    color=ColorCreateSchema(
-                        color_name=shoe_found.color.color_name,
-                        hex_value=shoe_found.color.hex_value,
-                    ),
-                    size=SizeCreateSchema(size_number=shoe_found.size.size_number),
-                    image_url=shoe_found.image_url,
-                    shoe_name=shoe_found.shoe_name,
-                    description=shoe_found.description,
-                    quantity_in_stock=shoe_found.quantity_in_stock,
-                    display_price=shoe_found.display_price,
-                    warehouse_price=shoe_found.warehouse_price,
-                    discounted_price=shoe_found.discounted_price,
-                    avg_rating=avg_rating,
-                    reviews=reviews_out,
-                    is_active=shoe_found.is_active,
-                    created_at=shoe_found.created_at,
-                    updated_at=shoe_found.updated_at,
-                    deleted_at=shoe_found.deleted_at,
-                )
-            except Exception as e:
-                logger.exception(
-                    f"Exception in {__name__}.{self.__class__.__name__}.get_shoe_by_id: {e}"
-                )
+            shoe_found = self.__crud_shoe.get(db=db, id=shoe_id)
+            if shoe_found is None:
                 return JSONResponse(
-                    status_code=400, 
-                    content={
-                        "status": 400,
-                        "message": "Get shoe by id failed"      
-                    }
+                    status_code=404,
+                    content={"status": 404, "message": "Shoe not found"},
                 )
-            return shoe_out
+
+            # Initialize variables for reviews and average rating calculation
+            avg_rating = 0
+            reviews_out = []
+
+            # Retrieve reviews for the specified shoe
+            reviews_found = self.__crud_review.get_all_reviews_by_shoe_id(
+                db=db, shoe_id=shoe_id
+            )
+
+            if not reviews_found:
+                reviews_found = []
+
+            total_user_rating = 0
+            total_rating = 0
+
+            for review in reviews_found:
+                user_found = self.__crud_user.get_one_ignore_deleted_and_inactive(
+                    db=db, filter={"id": review.user_id}
+                )
+                if user_found is None:
+                    logger.error(
+                        f"User with ID {review.user_id} not found for review {review.id}"
+                    )
+                    continue
+
+                # Add review details to output
+                total_user_rating += 1
+                total_rating += review.rating
+                reviews_out.append(
+                    ReviewOutInProductDetailPageSchema(
+                        user=UserOutInProductDetailPageSchema(
+                            email=user_found.email,
+                            display_name=user_found.display_name,
+                            avatar_url=user_found.avatar_url,
+                        ),
+                        rating=review.rating,
+                        comment=review.comment,
+                        heart_count=review.heart_count,
+                    )
+                )
+
+            # Calculate average rating
+            if total_user_rating != 0:
+                avg_rating = total_rating / total_user_rating
+            else:
+                avg_rating = 0
+
+            # Prepare shoe details for output
+            shoe_out = ShoeOutInProductDetailPageSchema(
+                id=shoe_found.id,
+                brand=BrandCreateSchema(
+                    brand_name=shoe_found.brand.brand_name,
+                    brand_logo=shoe_found.brand.brand_logo,
+                ),
+                color=ColorCreateSchema(
+                    color_name=shoe_found.color.color_name,
+                    hex_value=shoe_found.color.hex_value,
+                ),
+                size=SizeCreateSchema(size_number=shoe_found.size.size_number),
+                image_url=shoe_found.image_url,
+                shoe_name=shoe_found.shoe_name,
+                description=shoe_found.description,
+                quantity_in_stock=shoe_found.quantity_in_stock,
+                display_price=shoe_found.display_price,
+                warehouse_price=shoe_found.warehouse_price,
+                discounted_price=shoe_found.discounted_price,
+                avg_rating=avg_rating,
+                reviews=reviews_out,
+                is_active=shoe_found.is_active,
+                created_at=shoe_found.created_at,
+                updated_at=shoe_found.updated_at,
+                deleted_at=shoe_found.deleted_at,
+            )
+        except Exception as e:
+            logger.exception(
+                f"Exception in {__name__}.{self.__class__.__name__}.get_shoe_by_id: {e}"
+            )
+            return JSONResponse(
+                status_code=400,
+                content={"status": 400, "message": "Get shoe by id failed"},
+            )
+        return shoe_out
 
     def get_all_shoes(
         self,
@@ -315,32 +306,29 @@ class ShoeServiceImpl(ShoeService):
             shoes = self.__crud_shoe.get_multi(db=db, filter_param=common_filters)
             if shoes is None:
                 return JSONResponse(
-                    status_code=404, 
-                    content={
-                        "status": 404,
-                        "message": "Shoes not found"
-                    }
+                    status_code=404,
+                    content={"status": 404, "message": "Shoes not found"},
                 )
             shoes_out = []
             for shoe in shoes:
                 total_user_rating = 0
                 total_rating = 0
                 avg_rating = 0
-                review_found = self.__crud_review.get_all_reviews_by_shoe_id(db=db, shoe_id=shoe.id)
+                review_found = self.__crud_review.get_all_reviews_by_shoe_id(
+                    db=db, shoe_id=shoe.id
+                )
                 if not review_found:
                     review_found = []
-                    
+
                 for review in review_found:
                     total_user_rating += 1
                     total_rating += review.rating
-                    
+
                 if total_user_rating != 0:
                     avg_rating = total_rating / total_user_rating
                 else:
                     avg_rating = 0
-                
-                
-                
+
                 shoes_out.append(
                     ShoeOutInHomePageSchema(
                         id=shoe.id,
@@ -372,11 +360,8 @@ class ShoeServiceImpl(ShoeService):
                 f"Exception in {__name__}.{self.__class__.__name__}.get_all_shoes"
             )
             return JSONResponse(
-                status_code=400, 
-                content={
-                    "status": 400,
-                    "message": "Get all shoes failed"
-                }
+                status_code=400,
+                content={"status": 400, "message": "Get all shoes failed"},
             )
         return shoes_out
 
@@ -395,7 +380,7 @@ class ShoeServiceImpl(ShoeService):
                 status_code=400,
                 content={
                     "status": 400,
-                    "message": "Update shoe failed: User does not have permission to update shoe"
+                    "message": "Update shoe failed: User does not have permission to update shoe",
                 },
             )
         try:
@@ -403,11 +388,8 @@ class ShoeServiceImpl(ShoeService):
 
             if shoe_found is None:
                 return JSONResponse(
-                    status_code=404, 
-                    content={
-                        "status": 404,
-                        "message": "Shoe not found"
-                    }
+                    status_code=404,
+                    content={"status": 404, "message": "Shoe not found"},
                 )
 
             if shoe.brand and shoe.brand.brand_name:
@@ -466,11 +448,8 @@ class ShoeServiceImpl(ShoeService):
                 f"Exception in {__name__}.{self.__class__.__name__}.update_shoe"
             )
             return JSONResponse(
-                status_code=400, 
-                content={
-                    "status": 400,
-                    "message": "Update shoe failed"
-                }
+                status_code=400,
+                content={"status": 400, "message": "Update shoe failed"},
             )
 
         return shoe_out
@@ -489,26 +468,20 @@ class ShoeServiceImpl(ShoeService):
                 status_code=400,
                 content={
                     "status": 400,
-                    "message": "Delete shoe failed: User does not have permission to delete shoe"
+                    "message": "Delete shoe failed: User does not have permission to delete shoe",
                 },
             )
         try:
             shoe_found = self.__crud_shoe.get(db=db, id=shoe_id)
             if shoe_found is None:
                 return JSONResponse(
-                    status_code=404, 
-                    content={
-                        "status": 404,
-                        "message": "Shoe not found"
-                    }
+                    status_code=404,
+                    content={"status": 404, "message": "Shoe not found"},
                 )
             shoe_removed = self.__crud_shoe.remove(db=db, id=shoe_id)
             return JSONResponse(
-                status_code=200, 
-                content={
-                    "status": 200,
-                    "message": f"Shoe {shoe_removed.id} removed"
-                }
+                status_code=200,
+                content={"status": 200, "message": f"Shoe {shoe_removed.id} removed"},
             )
         except:
             db.rollback()
@@ -516,9 +489,6 @@ class ShoeServiceImpl(ShoeService):
                 f"Exception in {__name__}.{self.__class__.__name__}.delete_shoe"
             )
             return JSONResponse(
-                status_code=400, 
-                content={
-                    "status": 400,
-                    "message": "Delete shoe failed"
-                }
+                status_code=400,
+                content={"status": 400, "message": "Delete shoe failed"},
             )

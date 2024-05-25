@@ -2,14 +2,15 @@ import styled from 'styled-components';
 import Hero from '~/components/home/Hero';
 import Catalog from '~/components/home/Catalog';
 import Brands from '~/components/home/Brands';
-import { useContext, useState } from 'react';
-import { AppContext } from '~/contexts/app.context';
+import { useState } from 'react';
 import Pagination from '~/components/common/Pagination';
+import useAppStore from '~/store';
 
 const HomePageWrapper = styled.main``;
 
 const HomePage = () => {
-    const { products } = useContext(AppContext);
+    const { products } = useAppStore();
+
     const [currentPage, setCurrentPage] = useState(1);
     const productsPerPage = 12;
     const totalProducts = products.length;

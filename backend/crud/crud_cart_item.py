@@ -15,8 +15,7 @@ from backend.schemas.cart_item_schema import (
 
 logger = setup_logger()
 
-GET_CART_ITEM_BY_CART_ID_AND_SHOE_ID = \
-    f"""
+GET_CART_ITEM_BY_CART_ID_AND_SHOE_ID = f"""
     SELECT 
         ci.id AS {CartItemInDBSchema.ID}, 
         ci.cart_id AS {CartItemInDBSchema.CART_ID}, 

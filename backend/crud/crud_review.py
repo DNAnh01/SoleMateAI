@@ -1,12 +1,18 @@
-from backend.crud.base import CRUDBase
-from backend.models.review import Review
-from backend.schemas.review_schema import ReviewCreateSchema, ReviewUpdateSchema, ReviewInDBSchema
-from typing import Optional, List
+import uuid
+from typing import List
+
 from sqlalchemy import text
 from sqlalchemy.orm import Session
-import uuid
-GET_ALL_REVIEWS_BY_SHOE_ID = \
-    f"""
+
+from backend.crud.base import CRUDBase
+from backend.models.review import Review
+from backend.schemas.review_schema import (
+    ReviewCreateSchema,
+    ReviewInDBSchema,
+    ReviewUpdateSchema,
+)
+
+GET_ALL_REVIEWS_BY_SHOE_ID = f"""
     SELECT
         r.id AS {ReviewInDBSchema.ID},
         r.user_id AS {ReviewInDBSchema.USER_ID},
@@ -22,8 +28,11 @@ GET_ALL_REVIEWS_BY_SHOE_ID = \
     AND r.deleted_at IS NULL;
     """
 
+
 class CRUDReview(CRUDBase[Review, ReviewCreateSchema, ReviewUpdateSchema]):
-    def get_all_reviews_by_shoe_id(self, db: Session, shoe_id: uuid.UUID) -> List[ReviewInDBSchema]:
+    def get_all_reviews_by_shoe_id(
+        self, db: Session, shoe_id: uuid.UUID
+    ) -> List[ReviewInDBSchema]:
         result_proxy = db.execute(
             text(GET_ALL_REVIEWS_BY_SHOE_ID),
             {"shoe_id": shoe_id},
@@ -35,7 +44,6 @@ class CRUDReview(CRUDBase[Review, ReviewCreateSchema, ReviewUpdateSchema]):
             result_dict = dict(zip(column_names, result))
             reviews.append(ReviewInDBSchema(**result_dict))
         return reviews
-    pass
 
 
 crud_review = CRUDReview(Review)

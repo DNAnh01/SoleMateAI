@@ -4,6 +4,16 @@ const baseUrl = {
         getAll: '/shoe/get-all',
         getById: '/shoe/shoe-id=',
     },
+    conversation: {
+        createWithAuth: '/conversation/with-auth',
+        createWithoutAuth: '/conversation/without-auth',
+    },
+
+    message: {
+        createWithAuth: '/message/with-auth',
+        createWithoutAuth: '/message/without-auth',
+        getByConversationId: '/message/conversation-id=',
+    },
     auth: {
         signIn: '/auth/sign-in',
         signUp: '/auth/sign-up',

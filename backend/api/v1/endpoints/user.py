@@ -20,8 +20,9 @@ user_service: UserService = UserServiceImpl()
 router = APIRouter()
 
 
-
 """ADMIN"""
+
+
 @router.get(
     "/get-all",
     status_code=status.HTTP_200_OK,
@@ -61,6 +62,7 @@ def get_user_by_id(
     )
     return user
 
+
 @router.delete(
     "/user-id={user_id}",
     status_code=status.HTTP_200_OK,
@@ -82,6 +84,8 @@ def delete_user(
 
 
 """USER"""
+
+
 @router.patch(
     "/profile", status_code=status.HTTP_200_OK, response_model=Optional[UserOutSchema]
 )

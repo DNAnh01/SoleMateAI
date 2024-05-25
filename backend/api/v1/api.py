@@ -2,6 +2,8 @@ from fastapi import APIRouter
 
 from backend.api.v1.endpoints import (
     address,
+    admin_order,
+    admin_promotion,
     auth,
     brand,
     cart,
@@ -9,11 +11,9 @@ from backend.api.v1.endpoints import (
     conversation,
     knowledge_base,
     message,
+    order,
     shoe,
     user,
-    order,
-    admin_order,
-    admin_promotion,
 )
 
 api_router = APIRouter()
@@ -32,5 +32,9 @@ api_router.include_router(brand.router, prefix="/brand", tags=["brands"])
 api_router.include_router(cart.router, prefix="/cart", tags=["carts"])
 api_router.include_router(address.router, prefix="/address", tags=["addresses"])
 api_router.include_router(order.router, prefix="/order", tags=["orders"])
-api_router.include_router(admin_order.router, prefix="/admin-order", tags=["admin-orders"])
-api_router.include_router(admin_promotion.router, prefix="/admin-promotion", tags=["admin-promotions"])
+api_router.include_router(
+    admin_order.router, prefix="/admin-order", tags=["admin-orders"]
+)
+api_router.include_router(
+    admin_promotion.router, prefix="/admin-promotion", tags=["admin-promotions"]
+)

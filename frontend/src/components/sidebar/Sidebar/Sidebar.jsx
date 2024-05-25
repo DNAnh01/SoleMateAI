@@ -3,9 +3,8 @@ import styled from 'styled-components';
 import { SiteBrandWrapper } from '~/styles/header';
 import { staticImages } from '~/utils/images';
 import { breakpoints, defaultTheme } from '~/styles/themes/default';
-import { useContext } from 'react';
-import { AppContext } from '~/contexts/app.context';
 import configs from '~/configs';
+import useAppStore from '~/store';
 
 const SideNavigationWrapper = styled.div`
     position: fixed;
@@ -109,8 +108,11 @@ const Sidebar = () => {
     // const isSidebarOpen = useSelector(selectIsSidebarOpen);
     // const dispatch = useDispatch();
 
-    const { isSidebarOpen, toggleSidebar } = useContext(AppContext);
-
+    const { isSidebarOpen, setIsSidebarOpen } = useAppStore();
+    const toggleSidebar = () => {
+        console.log('isSidebarOpen', isSidebarOpen);
+        setIsSidebarOpen(!isSidebarOpen);
+    };
     return (
         <SideNavigationWrapper className={`bg-white h-full ${isSidebarOpen ? 'show' : ''}`}>
             <button className="sidebar-close-btn text-3xl" onClick={toggleSidebar}>

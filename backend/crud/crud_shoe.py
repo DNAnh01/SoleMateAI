@@ -4,6 +4,7 @@ from backend.schemas.shoe_schema import ShoeCreateSchema, ShoeUpdateSchema
 
 
 class CRUDShoe(CRUDBase[Shoe, ShoeCreateSchema, ShoeUpdateSchema]):
+
     pass
 
 

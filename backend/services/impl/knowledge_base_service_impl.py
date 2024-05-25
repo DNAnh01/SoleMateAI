@@ -1,3 +1,4 @@
+import json
 import uuid
 from datetime import datetime
 from typing import List, Optional
@@ -41,7 +42,7 @@ class KnowledgeBaseServiceImpl(KnowledgeBaseService):
                 status_code=400,
                 content={
                     "status": 400,
-                    "message": "Add knowledge base failed: User does not have permission to create knowledge base"
+                    "message": "Add knowledge base failed: User does not have permission to create knowledge base",
                 },
             )
         try:
@@ -56,7 +57,7 @@ class KnowledgeBaseServiceImpl(KnowledgeBaseService):
                     status_code=400,
                     content={
                         "status": 400,
-                        "message": "Add knowledge base failed: Chatbot not found"
+                        "message": "Add knowledge base failed: Chatbot not found",
                     },
                 )
             knowledge_base_created = self.__crud_knowledge_base.create(
@@ -73,11 +74,8 @@ class KnowledgeBaseServiceImpl(KnowledgeBaseService):
                 f"Exception in {__name__}.{self.__class__.__name__}.add_knowledge_base"
             )
             return JSONResponse(
-                status_code=400, 
-                content={
-                    "status": 400,
-                    "message": "Add knowledge base failed"
-                }
+                status_code=400,
+                content={"status": 400, "message": "Add knowledge base failed"},
             )
         return {
             "chatbot_id": chatbot_found.id,
@@ -101,7 +99,7 @@ class KnowledgeBaseServiceImpl(KnowledgeBaseService):
                 status_code=400,
                 content={
                     "status": 400,
-                    "message": "Get all knowledge base failed: User does not have permission to read knowledge base"   
+                    "message": "Get all knowledge base failed: User does not have permission to read knowledge base",
                 },
             )
         try:
@@ -116,23 +114,23 @@ class KnowledgeBaseServiceImpl(KnowledgeBaseService):
                     status_code=400,
                     content={
                         "status": 400,
-                        "message": "Get all knowledge base failed: Chatbot not found"
+                        "message": "Get all knowledge base failed: Chatbot not found",
                     },
                 )
 
             knowledge_bases: List[KnowledgeBaseInDBSchema] = (
                 self.__crud_knowledge_base.get_multi(
-                    db=db, filter_param={"chatbot_id": chatbot_found.id}
+                    db=db,
+                    filter_param={
+                        "filter": json.dumps({"chatbot_id": str(chatbot_found.id)})
+                    },
                 )
             )
         except:
             logger.exception(f"Exception in {__name__}.{self.__class__name__}.get_all")
             return JSONResponse(
-                status_code=400, 
-                content={
-                    "status": 400,
-                    "message": "Get all knowledge base failed"
-                }
+                status_code=400,
+                content={"status": 400, "message": "Get all knowledge base failed"},
             )
         return knowledge_bases
 
@@ -154,7 +152,7 @@ class KnowledgeBaseServiceImpl(KnowledgeBaseService):
                 status_code=400,
                 content={
                     "status": 400,
-                    "message": "Remove knowledge base failed: User does not have permission to delete knowledge base"
+                    "message": "Remove knowledge base failed: User does not have permission to delete knowledge base",
                 },
             )
 
@@ -165,11 +163,8 @@ class KnowledgeBaseServiceImpl(KnowledgeBaseService):
 
             if knowledge_base_found is None:
                 return JSONResponse(
-                    status_code=404, 
-                    content={
-                        "status": 404,
-                        "message": "Knowledge base not found"
-                    }
+                    status_code=404,
+                    content={"status": 404, "message": "Knowledge base not found"},
                 )
 
             knowledge_base_deleted = self.__crud_knowledge_base.remove(
@@ -180,11 +175,8 @@ class KnowledgeBaseServiceImpl(KnowledgeBaseService):
                 f"Exception in {__name__}.{self.__class__.__name__}.remove_knowledge_base"
             )
             return JSONResponse(
-                status_code=400, 
-                content={
-                    "status": 400,
-                    "message": "Remove knowledge base failed"
-                }
+                status_code=400,
+                content={"status": 400, "message": "Remove knowledge base failed"},
             )
         return {
             "chatbot_id": chatbot_id,

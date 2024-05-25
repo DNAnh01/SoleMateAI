@@ -22,20 +22,14 @@ class BrandServiceImpl(BrandService):
             brands = self.__crud_brand.get_multi(db=db, filter_param=common_filters)
             if brands is None:
                 return JSONResponse(
-                    status_code=404, 
-                    content={
-                        "status": 404,
-                        "message": "Brands not found"
-                    }
+                    status_code=404,
+                    content={"status": 404, "message": "Brands not found"},
                 )
         except:
             logger.error("Error while fetching brands")
             return JSONResponse(
-                status_code=500, 
-                content={
-                    "status": 500,
-                    "message": "Error while fetching brands"
-                }
+                status_code=500,
+                content={"status": 500, "message": "Error while fetching brands"},
             )
 
         return brands

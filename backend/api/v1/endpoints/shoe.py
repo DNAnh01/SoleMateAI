@@ -9,13 +9,14 @@ from backend.common.logger import setup_logger
 from backend.core import oauth2
 from backend.schemas.shoe_schema import (
     ShoeCreateSchema,
+    ShoeOutInHomePageSchema,
+    ShoeOutInProductDetailPageSchema,
     ShoeOutSchema,
     ShoeUpdateSchema,
 )
 from backend.schemas.user_role_permission_schema import UserRolePermissionSchema
 from backend.services.abc.shoe_service import ShoeService
 from backend.services.impl.shoe_service_impl import ShoeServiceImpl
-from backend.schemas.shoe_schema import ShoeOutInProductDetailPageSchema,ShoeOutInHomePageSchema
 
 logger = setup_logger()
 

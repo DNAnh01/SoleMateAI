@@ -35,6 +35,7 @@ class OrderItemOutSchema(pydantic.BaseModel):
     warehouse_price: float
     discounted_price: float
 
+
 class OrderItemInDBSchema(BaseSchema):
     id: uuid.UUID
     order_id: uuid.UUID

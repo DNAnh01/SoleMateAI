@@ -13,7 +13,7 @@ from backend.core.config import settings
 from backend.db.init_db import init_db
 
 app = FastAPI()
-    
+
 # Add SessionMiddleware
 app.add_middleware(SessionMiddleware, secret_key=settings.SECRET_KEY)
 

@@ -109,8 +109,24 @@ def read_pdf(file_path):
 
 
 def read_csv(file_path):
-    with open(file_path, 'r', encoding='utf-8') as f:
+    with open(file_path, "r", encoding="utf-8") as f:
         reader = csv.reader(f)
         next(reader)
         for row in reader:
             yield row
+
+
+import uuid
+from datetime import datetime
+from json import JSONEncoder
+
+
+class UUIDEncoder(JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, uuid.UUID):
+            # if the obj is uuid, we simply return the value of uuid
+            return str(obj)
+        elif isinstance(obj, datetime):
+            # if the obj is datetime, we return its isoformat
+            return obj.isoformat()
+        return super().default(obj)

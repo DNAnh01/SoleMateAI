@@ -12,13 +12,13 @@ from backend.schemas.cart_item_schema import (
     CartItemUpdateSchema,
 )
 from backend.schemas.cart_schema import CartOutSchema
+from backend.schemas.shoe_schema import ShoeOutSchema
 from backend.schemas.user_role_permission_schema import UserRolePermissionSchema
 from backend.services.abc.cart_item_service import CartItemService
 from backend.services.abc.cart_service import CartService
 from backend.services.abc.shoe_service import ShoeService
 from backend.services.impl.cart_item_service_impl import CartItemServiceImpl
 from backend.services.impl.shoe_service_impl import ShoeServiceImpl
-from backend.schemas.shoe_schema import ShoeOutSchema
 
 logger = setup_logger()
 
@@ -48,7 +48,7 @@ class CartServiceImpl(CartService):
                 status_code=400,
                 content={
                     "status": 400,
-                    "message": "Add Cart Item failed: User does not have permission to create cart item"
+                    "message": "Add Cart Item failed: User does not have permission to create cart item",
                 },
             )
         try:
@@ -57,20 +57,14 @@ class CartServiceImpl(CartService):
             )
             if cart_found is None:
                 return JSONResponse(
-                    status_code=404, 
-                    content={
-                        "status": 404,
-                        "message": "Cart not found"
-                    }
+                    status_code=404,
+                    content={"status": 404, "message": "Cart not found"},
                 )
             shoe_found = self.__crud_shoe.get(db=db, id=add_cart_item_req.shoe_id)
             if shoe_found is None:
                 return JSONResponse(
-                    status_code=404, 
-                    content={
-                        "status": 404,
-                        "message": "Shoe not found"
-                    }
+                    status_code=404,
+                    content={"status": 404, "message": "Shoe not found"},
                 )
             """check quantity in stock of shoe before add to cart"""
             if shoe_found.quantity_in_stock < add_cart_item_req.quantity:
@@ -81,10 +75,10 @@ class CartServiceImpl(CartService):
                     status_code=400,
                     content={
                         "status": 400,
-                        "message": "Add Cart Item failed: Quantity in stock of shoe is not enough"
+                        "message": "Add Cart Item failed: Quantity in stock of shoe is not enough",
                     },
                 )
-            
+
             cart_item_exists: CartItemInDBSchema = (
                 self.__cart_item_service.is_cart_item_exists(
                     db=db, cart_id=cart_found.id, shoe_id=shoe_found.id
@@ -115,22 +109,16 @@ class CartServiceImpl(CartService):
             )
 
             return JSONResponse(
-                status_code=200, 
-                content={
-                    "status": 200,
-                    "message": "Add Cart Item successfully"
-                }
+                status_code=200,
+                content={"status": 200, "message": "Add Cart Item successfully"},
             )
         except:
             logger.exception(
                 f"Exception in {__name__}.{self.__class__.__name__}.add_cart_item"
             )
             return JSONResponse(
-                status_code=500, 
-                content={
-                    "status": 500,
-                    "message": "Internal Server Error"
-                }
+                status_code=500,
+                content={"status": 500, "message": "Internal Server Error"},
             )
 
     def get_cart(
@@ -145,7 +133,7 @@ class CartServiceImpl(CartService):
                 status_code=400,
                 content={
                     "status": 400,
-                    "message": "Get Cart failed: User does not have permission to read cart"
+                    "message": "Get Cart failed: User does not have permission to read cart",
                 },
             )
         try:
@@ -154,11 +142,8 @@ class CartServiceImpl(CartService):
             )
             if cart_found is None:
                 return JSONResponse(
-                    status_code=404, 
-                    content={
-                        "status": 404,
-                        "message": "Cart not found"
-                    }
+                    status_code=404,
+                    content={"status": 404, "message": "Cart not found"},
                 )
 
             total_item: int = 0
@@ -187,10 +172,12 @@ class CartServiceImpl(CartService):
                 total_discounted_price=cart_found.total_discounted_price,
                 cart_items=[
                     CartItemOutSchema(
-                        shoe=ShoeOutSchema(**self.__shoe_service.get_shoe_by_id(
-                            db=db,
-                            shoe_id=cart_item.shoe_id,
-                        ).__dict__),
+                        shoe=ShoeOutSchema(
+                            **self.__shoe_service.get_shoe_by_id(
+                                db=db,
+                                shoe_id=cart_item.shoe_id,
+                            ).__dict__
+                        ),
                         **cart_item.__dict__,
                     )
                     for cart_item in cart_found.cart_items
@@ -204,9 +191,6 @@ class CartServiceImpl(CartService):
                 f"Exception in {__name__}.{self.__class__.__name__}.get_cart"
             )
             return JSONResponse(
-                status_code=500, 
-                content={
-                    "status": 500,
-                    "message": "Internal Server Error"
-                }
+                status_code=500,
+                content={"status": 500, "message": "Internal Server Error"},
             )

@@ -6,15 +6,14 @@ import { breakpoints, defaultTheme } from '~/styles/themes/default';
 import Icons from '~/components/common/Icons/Icons';
 import images from '~/assets/images';
 import configs from '~/configs';
-import { useContext, useState } from 'react';
-import { AppContext } from '~/contexts/app.context';
 import Image from '~/components/common/Image';
 import { BaseLinkGreen, BaseLinkOutlineDark } from '~/styles/button';
 import Tippy from '@tippyjs/react';
 import authApi from '~/apis/auth.api';
-import { clearLocalStorage } from '~/utils/auth';
 import { toast } from 'react-toastify';
 import Search from '~/components/header/Search';
+import useAppStore from '~/store';
+import { useState } from 'react';
 
 const IconLinksWrapper = styled.div`
     column-gap: 18px;
@@ -109,13 +108,16 @@ const MenuTippyWrapper = styled.div`
 `;
 
 const Header = () => {
+    const { clearLocalStorage, setIsAuthenticated, isSidebarOpen, setIsSidebarOpen, profile, isAuthenticated } =
+        useAppStore();
     const location = useLocation();
     const navigate = useNavigate();
-    const { isSidebarOpen, toggleSidebar, profile, setIsAuthenticated } = useContext(AppContext);
     const [activeButton, setActiveButton] = useState('signIn');
+
     const handleButtonClick = (button) => {
         setActiveButton(button);
     };
+
     const handleSignOut = async () => {
         try {
             const res = await authApi.signOut();
@@ -126,8 +128,7 @@ const Header = () => {
                     autoClose: 3000,
                 });
                 navigate(configs.roures.auth.signIn);
-            }
-            if (res.status === 404) {
+            } else if (res.status === 404) {
                 toast.error('Người dùng chưa đăng nhập', {
                     autoClose: 3000,
                 });
@@ -137,6 +138,11 @@ const Header = () => {
                 autoClose: 3000,
             });
         }
+    };
+
+    const toggleSidebar = () => {
+        console.log('isSidebarOpen', isSidebarOpen);
+        setIsSidebarOpen(!isSidebarOpen);
     };
 
     return (
@@ -162,7 +168,7 @@ const Header = () => {
                     </div>
                     <Search />
                     <IconLinksWrapper>
-                        {profile ? (
+                        {isAuthenticated ? (
                             <ActionGroupWrapper>
                                 <Link
                                     to={configs.roures.user.cart}

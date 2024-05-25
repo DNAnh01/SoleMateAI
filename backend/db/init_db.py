@@ -1,9 +1,9 @@
+import json
 import os
+import random
 import uuid
 from datetime import datetime
 
-
-import random
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
 
@@ -38,23 +38,21 @@ from backend.crud.crud_user_session import crud_user_session
 """Import schemas from backend.schemas."""
 import pytz
 
+from backend.common.enum.prompt_default import PromptDefault
+from backend.schemas.address_schema import AddressInDBSchema
 from backend.schemas.brand_schema import BrandCreateSchema
+from backend.schemas.chatbot_schema import ChatbotInDBSchema
 from backend.schemas.color_schema import ColorCreateSchema
+from backend.schemas.order_schema import OrderInDBSchema
 from backend.schemas.permission_schema import PermissionCreateSchema
-from backend.schemas.promotion_schema import PromotionCreateSchema
+from backend.schemas.promotion_schema import PromotionInDBSchema
+from backend.schemas.review_schema import ReviewInDBSchema
 from backend.schemas.role_permission_schema import RolePermissionCreateSchema
 from backend.schemas.role_schema import RoleCreateSchema
+from backend.schemas.shoe_promotion_schema import ShoePromotionInDBSchema
+from backend.schemas.shoe_schema import ShoeInDBSchema
 from backend.schemas.size_schema import SizeCreateSchema
 from backend.schemas.user_schema import UserInDBSchema
-from backend.schemas.shoe_schema import ShoeInDBSchema
-from backend.schemas.promotion_schema import PromotionInDBSchema
-from backend.schemas.shoe_promotion_schema import ShoePromotionInDBSchema
-from backend.schemas.review_schema import ReviewInDBSchema
-from backend.schemas.address_schema import AddressInDBSchema
-from backend.schemas.order_schema import OrderInDBSchema
-from backend.schemas.chatbot_schema import ChatbotInDBSchema
-from backend.common.enum.prompt_default import PromptDefault
-
 
 logger = setup_logger()
 
@@ -178,8 +176,7 @@ def init_db():
                         deleted_at=None,
                     ),
                 )
-                
-                
+
             logger.warning(
                 "INSERTING DATA INTO THE `promotions` TABLE FROM THE promotions.csv FILE"
             )
@@ -207,7 +204,7 @@ def init_db():
                         created_at=datetime.now(),
                         updated_at=datetime.now(),
                         deleted_at=None,
-                    )
+                    ),
                 )
             logger.warning(
                 "INSERTING DATA INTO THE `brands` TABLE FROM THE brands.csv FILE"
@@ -266,21 +263,21 @@ def init_db():
                 ).id
                 if brand_id_found is None:
                     logger.error(f"Brand {row[0]} not found")
-                    
+
                 color_id_found = crud_color.get_one_ignore_deleted_and_inactive(
                     db=session,
                     filter={"color_name": str(row[1])},
                 ).id
                 if color_id_found is None:
                     logger.error(f"Color {row[1]} not found")
-                
+
                 size_id_found = crud_size.get_one_ignore_deleted_and_inactive(
                     db=session,
                     filter={"size_number": int(row[2])},
                 ).id
                 if size_id_found is None:
                     logger.error(f"Size {row[2]} not found")
-                
+
                 image_url = str(row[3])
                 shoe_name = str(row[4])
                 description = str(row[5])
@@ -288,7 +285,7 @@ def init_db():
                 display_price = float(row[7])
                 warehouse_price = float(row[8])
                 discounted_price = float(row[9])
-                
+
                 created_shoe = crud_shoe.create(
                     db=session,
                     obj_in=ShoeInDBSchema(
@@ -307,9 +304,9 @@ def init_db():
                         created_at=datetime.now(),
                         updated_at=datetime.now(),
                         deleted_at=None,
-                    )
+                    ),
                 )
-                
+
                 if created_shoe is None:
                     logger.error(f"Shoe {shoe_name} not created")
             logger.warning(
@@ -324,11 +321,11 @@ def init_db():
                 )
                 if promotion_found is None:
                     logger.error(f"Promotion {row[0]} not found")
-                    
+
                 shoe_name = str(row[1])
                 for shoe in crud_shoe.get_multi_ignore_deleted_and_inactive(
                     db=session,
-                    filter_param={"shoe_name": str(row[1])},
+                    filter_param={"filter": json.dumps({"shoe_name": str(row[1])})},
                 ):
                     if shoe is None:
                         logger.error(f"Shoe {row[1]} not found")
@@ -349,12 +346,17 @@ def init_db():
                                 quantity_in_stock=shoe.quantity_in_stock,
                                 display_price=shoe.display_price,
                                 warehouse_price=shoe.warehouse_price,
-                                discounted_price=shoe.display_price - (shoe.display_price * promotion_found.discount_percent / 100),
+                                discounted_price=shoe.display_price
+                                - (
+                                    shoe.display_price
+                                    * promotion_found.discount_percent
+                                    / 100
+                                ),
                                 is_active=True,
                                 created_at=shoe.created_at,
                                 updated_at=datetime.now(),
                                 deleted_at=None,
-                            )
+                            ),
                         )
                         """create shoe_promotion"""
                         created_shoe_promotion = crud_shoe_promotion.create(
@@ -367,12 +369,16 @@ def init_db():
                                 created_at=datetime.now(),
                                 updated_at=datetime.now(),
                                 deleted_at=None,
-                            )
+                            ),
                         )
             logger.warning(
                 "INSERTING DATA INTO THE `reviews` TABLE FROM THE reviews.csv FILE"
             )
-            ratings_comments = {3: "Giày tạm được nha shop.", 4: "Giày đẹp chất lượng ổn.", 5: "Giày đẹp lắm, chất lượng tuyệt vời."}
+            ratings_comments = {
+                3: "Giày tạm được nha shop.",
+                4: "Giày đẹp chất lượng ổn.",
+                5: "Giày đẹp lắm, chất lượng tuyệt vời.",
+            }
             for row in utils.read_csv(
                 os.path.join(script_dir, "raw_data", "reviews.csv")
             ):
@@ -381,12 +387,12 @@ def init_db():
                     filter={"email": str(row[0])},
                 )
                 if user_found is None:
-                    logger.error(f"User {row[0]} not found")  
-                
+                    logger.error(f"User {row[0]} not found")
+
                 shoe_name = str(row[1])
                 for shoe in crud_shoe.get_multi_ignore_deleted_and_inactive(
                     db=session,
-                    filter_param={"shoe_name": str(row[1])},
+                    filter_param={"filter": json.dumps({"shoe_name": str(row[1])})},
                 ):
                     if shoe is None:
                         logger.error(f"Shoe {row[1]} not found")
@@ -407,33 +413,33 @@ def init_db():
                                 created_at=datetime.now(),
                                 updated_at=datetime.now(),
                                 deleted_at=None,
-                            )
-                        )    
-                    
+                            ),
+                        )
+
             logger.warning(
                 "INSERTING DATA INTO THE `addresses` TABLE FROM THE addresses.csv FILE"
             )
             for row in utils.read_csv(
                 os.path.join(script_dir, "raw_data", "addresses.csv")
             ):
-                
+
                 user_found = crud_user.get_one_ignore_deleted_and_inactive(
                     db=session,
                     filter={"email": str(row[0])},
                 )
                 if user_found is None:
                     logger.error(f"User {row[0]} not found")
-                
+
                 address_street = str(row[1])
                 address_city = str(row[2])
                 address_is_active = False
-                address_created_at =datetime.strptime(row[3], "%Y-%m-%d").replace(
+                address_created_at = datetime.strptime(row[3], "%Y-%m-%d").replace(
                     tzinfo=pytz.utc
                 )
-                address_updated_at =datetime.strptime(row[4], "%Y-%m-%d").replace(
+                address_updated_at = datetime.strptime(row[4], "%Y-%m-%d").replace(
                     tzinfo=pytz.utc
                 )
-                address_deleted_at =datetime.strptime(row[5], "%Y-%m-%d").replace(
+                address_deleted_at = datetime.strptime(row[5], "%Y-%m-%d").replace(
                     tzinfo=pytz.utc
                 )
                 created_address = crud_address.create(
@@ -447,7 +453,7 @@ def init_db():
                         created_at=address_created_at,
                         updated_at=address_updated_at,
                         deleted_at=address_deleted_at,
-                    )
+                    ),
                 )
             logger.warning(
                 "INSERTING DATA INTO THE `orders` TABLE FROM THE orders.csv FILE"
@@ -474,27 +480,27 @@ def init_db():
                 total_display_price = float(row[7])
                 total_warehouse_price = float(row[8])
                 total_discounted_price = float(row[9])
-                
+
                 order_created_at = datetime.strptime(row[10], "%Y-%m-%d").replace(
                     tzinfo=pytz.utc
                 )
-                
+
                 order_updated_at = datetime.strptime(row[11], "%Y-%m-%d").replace(
                     tzinfo=pytz.utc
                 )
-                
+
                 order_deleted_at = datetime.strptime(row[12], "%Y-%m-%d").replace(
                     tzinfo=pytz.utc
                 )
-                
+
                 order_is_active = False
-                
+
                 address_found = crud_address.get_one_ignore_deleted_and_inactive(
                     db=session,
                     filter={
                         "user_id": user_found.id,
                         "street": address_street,
-                        "city": address_city,   
+                        "city": address_city,
                     },
                 )
                 created_order = crud_order.create(
@@ -514,15 +520,11 @@ def init_db():
                         created_at=order_created_at,
                         updated_at=order_updated_at,
                         deleted_at=order_deleted_at,
-                    )
+                    ),
                 )
-                
-            logger.warning(
-                "INSERTING DATA INTO THE `orders` TABLE"
-            )
+
             user_found = crud_user.get_one_ignore_deleted_and_inactive(
-                db=session,
-                filter={"email": "admin@gmail.com"}
+                db=session, filter={"email": "admin@gmail.com"}
             )
             created_chatbot = crud_chatbot.create(
                 db=session,
@@ -541,5 +543,5 @@ def init_db():
                     created_at=datetime.now(),
                     updated_at=datetime.now(),
                     deleted_at=None,
-                )
+                ),
             )

@@ -1,44 +1,45 @@
 import axios from 'axios';
+import { useEffect } from 'react';
 import configs from '~/configs';
-import { getAccessTokenFromLocalStorage, clearLocalStorage } from '~/utils/auth';
 
-class Http {
-    instance;
-    constructor() {
-        this.instance = axios.create({
-            baseURL: 'http://localhost:8000/api/v1',
-            timeout: 100000,
-        });
+// Create an instance of axios outside the class
+const instance = axios.create({
+    baseURL: configs.baseUrl.url,
+    timeout: 100000,
+});
 
-        this.instance.interceptors.request.use(
+// Interceptor logic that will be used in a functional component
+const useAxiosInterceptors = (accessToken, setAccessToken) => {
+    useEffect(() => {
+        const requestInterceptor = instance.interceptors.request.use(
             (config) => {
-                // ?new
-
-                //old
-                const accessToken = getAccessTokenFromLocalStorage();
                 if (accessToken) {
                     config.headers.Authorization = `Bearer ${accessToken}`;
                 }
                 return config;
             },
-            (error) => {
-                return Promise.reject(error);
-            },
+            (error) => Promise.reject(error),
         );
 
-        this.instance.interceptors.response.use(
-            (response) => {
-                return response;
-            },
+        const responseInterceptor = instance.interceptors.response.use(
+            (response) => response,
             (error) => {
                 if (error.response?.status !== 200 && error.response?.status !== 201) {
-                    clearLocalStorage();
-                    window.location.href = configs.routes.auth.signIn;
+                    setAccessToken('');
+                    window.location.href = configs.roures.auth.signIn;
                 }
                 return Promise.reject(error);
             },
         );
-    }
-}
-const http = new Http().instance;
+
+        // Cleanup function to remove the interceptors
+        return () => {
+            instance.interceptors.request.eject(requestInterceptor);
+            instance.interceptors.response.eject(responseInterceptor);
+        };
+    }, [accessToken, setAccessToken]);
+};
+
+const http = instance;
+export { useAxiosInterceptors };
 export default http;

@@ -1,6 +1,7 @@
 from sqlalchemy import Boolean, Column, Double, ForeignKey, Integer, String
 from sqlalchemy.dialects.postgresql.base import UUID
 from sqlalchemy.orm import relationship
+
 from backend.common.enum.prompt_default import PromptDefault
 from backend.db.base_class import Base
 

@@ -52,11 +52,11 @@ class CartItemServiceImpl(CartItemService):
                     f"Exception in {__name__}.{self.__class__.__name__}.create_cart_item: Shoe not found"
                 )
                 return JSONResponse(
-                    status_code=400, 
+                    status_code=400,
                     content={
                         "status": 400,
-                        "message": "Create Cart Item failed: Shoe not found"
-                    }
+                        "message": "Create Cart Item failed: Shoe not found",
+                    },
                 )
 
             cart_found = self.__crud_cart.get_one_by(
@@ -68,11 +68,11 @@ class CartItemServiceImpl(CartItemService):
                     f"Exception in {__name__}.{self.__class__.__name__}.create_cart_item: Cart not found"
                 )
                 return JSONResponse(
-                    status_code=400, 
+                    status_code=400,
                     content={
                         "status": 400,
-                        "message": "Create Cart Item failed: Cart not found"
-                    }
+                        "message": "Create Cart Item failed: Cart not found",
+                    },
                 )
 
             cart_item_created = self.__crud_cart_item.create(
@@ -99,11 +99,8 @@ class CartItemServiceImpl(CartItemService):
                 f"Exception in {__name__}.{self.__class__.__name__}.create_cart_item"
             )
             return JSONResponse(
-                status_code=400, 
-                content={
-                    "status": 400,
-                    "message": "Create Cart Item failed"
-                }
+                status_code=400,
+                content={"status": 400, "message": "Create Cart Item failed"},
             )
         return cart_item_created
 
@@ -131,7 +128,7 @@ class CartItemServiceImpl(CartItemService):
                 status_code=400,
                 content={
                     "status": 400,
-                    "message": "Update Cart Item failed: User does not have permission to update cart item"
+                    "message": "Update Cart Item failed: User does not have permission to update cart item",
                 },
             )
         try:
@@ -141,11 +138,11 @@ class CartItemServiceImpl(CartItemService):
                     f"Exception in {__name__}.{self.__class__.__name__}.update_cart_item: Shoe not found"
                 )
                 return JSONResponse(
-                    status_code=400, 
+                    status_code=400,
                     content={
                         "status": 400,
-                        "message": "Update Cart Item failed: Shoe not found"
-                    }
+                        "message": "Update Cart Item failed: Shoe not found",
+                    },
                 )
 
             cart_found = self.__crud_cart.get_one_by(
@@ -156,11 +153,11 @@ class CartItemServiceImpl(CartItemService):
                     f"Exception in {__name__}.{self.__class__.__name__}.update_cart_item: Cart not found"
                 )
                 return JSONResponse(
-                    status_code=400, 
+                    status_code=400,
                     content={
                         "status": 400,
-                        "message": "Update Cart Item failed: Cart not found"
-                    }
+                        "message": "Update Cart Item failed: Cart not found",
+                    },
                 )
 
             cart_item_found = self.__crud_cart_item.get_one_by(
@@ -176,7 +173,7 @@ class CartItemServiceImpl(CartItemService):
                     status_code=400,
                     content={
                         "status": 400,
-                        "message": "Update Cart Item failed: Cart Item not found"
+                        "message": "Update Cart Item failed: Cart Item not found",
                     },
                 )
 
@@ -213,11 +210,8 @@ class CartItemServiceImpl(CartItemService):
                 f"Exception in {__name__}.{self.__class__.__name__}.update_cart_item"
             )
             return JSONResponse(
-                status_code=400, 
-                content={
-                    "status": 400,
-                    "message": "Update Cart Item failed"
-                }
+                status_code=400,
+                content={"status": 400, "message": "Update Cart Item failed"},
             )
         return cart_item_out
 
@@ -238,7 +232,7 @@ class CartItemServiceImpl(CartItemService):
                 status_code=400,
                 content={
                     "status": 400,
-                    "message": "Remove Cart Item failed: User does not have permission to remove cart item"
+                    "message": "Remove Cart Item failed: User does not have permission to remove cart item",
                 },
             )
         try:
@@ -250,11 +244,11 @@ class CartItemServiceImpl(CartItemService):
                     f"Exception in {__name__}.{self.__class__.__name__}.remove_cart_item: Cart not found"
                 )
                 return JSONResponse(
-                    status_code=400, 
+                    status_code=400,
                     content={
                         "status": 400,
-                        "message": "Remove Cart Item failed: Cart not found"
-                    }
+                        "message": "Remove Cart Item failed: Cart not found",
+                    },
                 )
 
             cart_item_found = self.__crud_cart_item.get_one_by(
@@ -270,7 +264,7 @@ class CartItemServiceImpl(CartItemService):
                     status_code=400,
                     content={
                         "status": 400,
-                        "message": "Remove Cart Item failed: Cart Item not found"
+                        "message": "Remove Cart Item failed: Cart Item not found",
                     },
                 )
 
@@ -280,21 +274,14 @@ class CartItemServiceImpl(CartItemService):
             db.commit()
 
             return JSONResponse(
-                status_code=200, 
-                content={
-                    "status": 200,
-                    "message": "Cart Item removed successfully"
-                }
+                status_code=200,
+                content={"status": 200, "message": "Cart Item removed successfully"},
             )
         except:
             logger.exception(
                 f"Exception in {__name__}.{self.__class__.__name__}.remove_cart_item"
             )
             return JSONResponse(
-                status_code=400, 
-                content={
-                    "status": 400,
-                    "message": "Remove Cart Item failed"
-                }
-                
+                status_code=400,
+                content={"status": 400, "message": "Remove Cart Item failed"},
             )

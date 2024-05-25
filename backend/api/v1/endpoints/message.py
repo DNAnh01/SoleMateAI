@@ -1,4 +1,6 @@
-from fastapi import APIRouter, Cookie, Depends, Request, status
+from typing import List
+
+from fastapi import APIRouter, Depends, Request, status
 from sqlalchemy.orm import Session
 
 from backend.api import deps
@@ -16,22 +18,52 @@ router = APIRouter()
 message_service: MessageService = MessageServiceImpl()
 
 
-@router.post("/", status_code=status.HTTP_201_CREATED, response_model=MessageInDBSchema)
-def create_message(
+@router.post(
+    "/with-auth", status_code=status.HTTP_201_CREATED, response_model=MessageInDBSchema
+)
+def create_message_with_auth(
     request: Request,
     message: dict,
     current_user_role_permission: UserRolePermissionSchema = Depends(
         oauth2.get_current_user_role_permission
     ),
     db: Session = Depends(deps.get_db),
-    conversation_id: str = Cookie(None),
+) -> MessageInDBSchema:
+    return message_service.create_message_with_auth(
+        db=db,
+        message=message["message"],
+        conversation_id=message["conversation_id"],
+        current_user_role_permission=current_user_role_permission,
+    )
+
+
+@router.post(
+    "/without-auth",
+    status_code=status.HTTP_201_CREATED,
+    response_model=MessageInDBSchema,
+)
+def create_message_without_auth(
+    request: Request,
+    message: dict,
+    db: Session = Depends(deps.get_db),
 ) -> MessageInDBSchema:
     # client_ip = request.client.host
+    # logger.info("client_ip: " + client_ip)
     client_ip = "42.118.119.124"
-    return message_service.create(
+    return message_service.create_message_without_auth(
         db=db,
         message=message["message"],
         conversation_id=message["conversation_id"],
         client_ip=client_ip,
-        current_user_role_permission=current_user_role_permission,
+    )
+
+
+@router.get("/conversation-id={conversation_id}", status_code=status.HTTP_200_OK)
+def get_all_by_conversation_id(
+    conversation_id: str,
+    db: Session = Depends(deps.get_db),
+) -> List[MessageInDBSchema]:
+    return message_service.get_all_by_conversation_id(
+        db=db,
+        conversation_id=conversation_id,
     )

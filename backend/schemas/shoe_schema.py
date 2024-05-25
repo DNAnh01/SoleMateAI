@@ -1,14 +1,13 @@
 import uuid
-from typing import Optional, List
+from typing import List, Optional
 
 import pydantic
 
 from backend.schemas._base_schema import BaseSchema
 from backend.schemas.brand_schema import BrandCreateSchema
 from backend.schemas.color_schema import ColorCreateSchema
-from backend.schemas.size_schema import SizeCreateSchema
 from backend.schemas.review_schema import ReviewOutInProductDetailPageSchema
-
+from backend.schemas.size_schema import SizeCreateSchema
 
 
 class ShoeCreateSchema(pydantic.BaseModel):
@@ -65,7 +64,8 @@ class ShoeOutInHomePageSchema(BaseSchema):
     warehouse_price: float
     discounted_price: float
     avg_rating: Optional[float] = None
-    
+
+
 class ShoeOutInProductDetailPageSchema(BaseSchema):
     id: uuid.UUID
     brand: BrandCreateSchema
@@ -80,7 +80,6 @@ class ShoeOutInProductDetailPageSchema(BaseSchema):
     discounted_price: float
     avg_rating: Optional[float] = None
     reviews: Optional[List[ReviewOutInProductDetailPageSchema]] = None
-    
 
 
 class ShoeInDBSchema(BaseSchema):

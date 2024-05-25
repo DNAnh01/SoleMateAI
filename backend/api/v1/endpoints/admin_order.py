@@ -1,16 +1,15 @@
-from typing import Optional, List
+from typing import List, Optional
 
 from fastapi import APIRouter, Depends, status
+from fastapi.responses import JSONResponse
 from sqlalchemy.orm import Session
-from backend.common import parameters
+
 from backend.api import deps
+from backend.common import parameters
 from backend.common.logger import setup_logger
 from backend.core import oauth2
-from backend.schemas.address_schema import AddAddressSchema
-from backend.schemas.user_role_permission_schema import UserRolePermissionSchema
 from backend.schemas.order_schema import OrderOutSchema
-from fastapi.responses import JSONResponse
-
+from backend.schemas.user_role_permission_schema import UserRolePermissionSchema
 from backend.services.abc.admin_order_service import AdminOrderService
 from backend.services.impl.admin_order_service_impl import AdminOrderServiceImpl
 
@@ -21,7 +20,12 @@ admin_order_service: AdminOrderService = AdminOrderServiceImpl()
 
 router = APIRouter()
 
-@router.get("/get-all", status_code=status.HTTP_200_OK, response_model=Optional[List[OrderOutSchema]])
+
+@router.get(
+    "/get-all",
+    status_code=status.HTTP_200_OK,
+    response_model=Optional[List[OrderOutSchema]],
+)
 def get_all_order(
     common_filter_parameters: dict = Depends(parameters.common_filter_parameters),
     current_user_role_permission: UserRolePermissionSchema = Depends(
@@ -34,8 +38,13 @@ def get_all_order(
         common_filters=common_filter_parameters,
         current_user_role_permission=current_user_role_permission,
     )
-    
-@router.get("/order-id={order_id}", status_code=status.HTTP_200_OK, response_model=Optional[OrderOutSchema])
+
+
+@router.get(
+    "/order-id={order_id}",
+    status_code=status.HTTP_200_OK,
+    response_model=Optional[OrderOutSchema],
+)
 def get_order_by_id(
     order_id: str,
     current_user_role_permission: UserRolePermissionSchema = Depends(
@@ -48,6 +57,7 @@ def get_order_by_id(
         order_id=order_id,
         current_user_role_permission=current_user_role_permission,
     )
+
 
 @router.patch("/cancel/order-id={order_id}", status_code=status.HTTP_200_OK)
 def cancel_order(
@@ -62,7 +72,8 @@ def cancel_order(
         order_id=order_id,
         current_user_role_permission=current_user_role_permission,
     )
-    
+
+
 @router.patch("/deliver/order-id={order_id}", status_code=status.HTTP_200_OK)
 def deliver_order(
     order_id: str,

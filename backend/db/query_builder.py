@@ -1,5 +1,5 @@
 import json
-from typing import Type, TypeVar
+from typing import Type, TypeVar, Union
 
 import sqlalchemy
 from sqlalchemy import and_, func, or_
@@ -62,7 +62,7 @@ ModelType = TypeVar("ModelType", bound=Base)
 def query_builder(
     db: Session,
     model: Type[ModelType],
-    filter: str = None,
+    filter: Union[str, dict] = None,
     order_by: str = None,
     include: str = None,
     join: str = None,
@@ -74,6 +74,8 @@ def query_builder(
             query = query.join(getattr(model, table))
 
     if filter is not None:
+        if isinstance(filter, dict):
+            filter = json.dumps(filter)  # Convert dict to JSON string
         filter = get_filter(model, json.loads(filter))
         # logger.info(f"filter: {filter}")
         query = query.filter(filter)

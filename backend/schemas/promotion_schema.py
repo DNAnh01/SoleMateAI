@@ -7,6 +7,7 @@ import pydantic
 from backend.schemas._base_schema import BaseSchema
 from backend.schemas.shoe_schema import ShoeOutSchema
 
+
 class PromotionCreateSchema(pydantic.BaseModel):
     promotion_name: str
     start_date: datetime
@@ -30,6 +31,7 @@ class PromotionOutSchema(BaseSchema):
     end_date: datetime
     discount_percent: int
     shoes: Optional[list[ShoeOutSchema]] = None
+
 
 class PromotionInDBSchema(BaseSchema):
     id: uuid.UUID

@@ -17,20 +17,36 @@ conversation_service: ConversationService = ConversationServiceImpl()
 
 
 @router.get(
-    "/", status_code=status.HTTP_201_CREATED, response_model=ConversationInDBSchema
+    "/with-auth",
+    status_code=status.HTTP_201_CREATED,
+    response_model=ConversationInDBSchema,
 )
-def create_conversation(
+def create_conversation_with_auth(
     request: Request,
     current_user_role_permission: UserRolePermissionSchema = Depends(
         oauth2.get_current_user_role_permission
     ),
     db: Session = Depends(deps.get_db),
 ) -> ConversationInDBSchema:
+    return conversation_service.create_conversation_with_auth(
+        db=db,
+        current_user_role_permission=current_user_role_permission,
+    )
+
+
+@router.get(
+    "/without-auth",
+    status_code=status.HTTP_201_CREATED,
+    response_model=ConversationInDBSchema,
+)
+def create_conversation_without_auth(
+    request: Request,
+    db: Session = Depends(deps.get_db),
+) -> ConversationInDBSchema:
     # client_ip = request.client.host
     # logger.info("client_ip: " + client_ip)
     client_ip = "42.118.119.124"
-    return conversation_service.create(
+    return conversation_service.create_conversation_without_auth(
         db=db,
         client_ip=client_ip,
-        current_user_role_permission=current_user_role_permission,
     )

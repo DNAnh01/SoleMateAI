@@ -5,9 +5,9 @@ import Breadcrumb from '~/components/common/Breadcrumb';
 import ProductList from '~/components/product/ProductList';
 import ProductFilter from '~/components/product/ProductFilter';
 import Pagination from '~/components/common/Pagination';
-import { AppContext } from '~/contexts/app.context';
 import { breakpoints, defaultTheme } from '~/styles/themes/default';
 import { ProductFilterContext } from '~/contexts/productFilter.context';
+import useAppStore from '~/store';
 
 const ProductsContent = styled.div`
     display: grid;
@@ -65,7 +65,8 @@ const ProductListPage = () => {
         { label: 'Home', link: '/' },
         { label: 'Products', link: '' },
     ];
-    const { products } = useContext(AppContext);
+    const { products } = useAppStore();
+
     const { brands, minRange, maxRange, colors, sizes } = useContext(ProductFilterContext);
     const filteredProducts = products.filter((product) => {
         // Check if the product's brand is in the selected brands or if no brands are selected

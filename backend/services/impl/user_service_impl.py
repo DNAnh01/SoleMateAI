@@ -21,8 +21,6 @@ class UserServiceImpl(UserService):
         self.__crud_user = crud_user
         self.__crud_role = crud_role
 
-
-
     """ADMIN"""
 
     def get_all_users(
@@ -36,33 +34,24 @@ class UserServiceImpl(UserService):
                 f"Exception in {__name__}.{self.__class__.__name__}.read_user: User does not have permission"
             )
             return JSONResponse(
-                status_code=403, 
-                content={
-                    "status": 403,   
-                    "message": "User does not have permission"
-                }
+                status_code=403,
+                content={"status": 403, "message": "User does not have permission"},
             )
 
         try:
             users = self.__crud_user.get_multi(db=db, filter_param=common_filters)
             if users is None:
                 return JSONResponse(
-                    status_code=404, 
-                    content={
-                        "status": 404,
-                        "message": "User not found"
-                    }
+                    status_code=404,
+                    content={"status": 404, "message": "User not found"},
                 )
             user_out = []
             for user in users:
                 role_found = self.__crud_role.get(db=db, id=user.role_id)
                 if role_found is None:
                     return JSONResponse(
-                        status_code=404, 
-                        content={
-                            "status": 404,   
-                            "message": "Role not found"
-                        }
+                        status_code=404,
+                        content={"status": 404, "message": "Role not found"},
                     )
                 user_out.append(
                     UserOutSchema(
@@ -84,11 +73,8 @@ class UserServiceImpl(UserService):
                 f"Exception in {__name__}.{self.__class__.__name__}.get_all_users"
             )
             return JSONResponse(
-                status_code=400, 
-                content={
-                    "status": 400,   
-                    "message": "Get all users failed"
-                }
+                status_code=400,
+                content={"status": 400, "message": "Get all users failed"},
             )
         return user_out
 
@@ -103,30 +89,21 @@ class UserServiceImpl(UserService):
                 f"Exception in {__name__}.{self.__class__.__name__}.read_user: User does not have permission"
             )
             return JSONResponse(
-                status_code=403, 
-                content={
-                    "status": 403,   
-                    "message": "User does not have permission"
-                }
+                status_code=403,
+                content={"status": 403, "message": "User does not have permission"},
             )
         try:
             user_found = self.__crud_user.get(db=db, id=user_id)
             if user_found is None:
                 return JSONResponse(
-                    status_code=404, 
-                    content={
-                        "status": 404,   
-                        "message": "User not found"
-                    }
+                    status_code=404,
+                    content={"status": 404, "message": "User not found"},
                 )
             role_found = self.__crud_role.get(db=db, id=user_found.role_id)
             if role_found is None:
                 return JSONResponse(
-                    status_code=404, 
-                    content={
-                        "status": 404,   
-                        "message": "Role not found"
-                    }
+                    status_code=404,
+                    content={"status": 404, "message": "Role not found"},
                 )
 
             user_out = UserOutSchema(
@@ -147,45 +124,37 @@ class UserServiceImpl(UserService):
                 f"Exception in {__name__}.{self.__class__.__name__}.get_user_by_id"
             )
             return JSONResponse(
-                status_code=400, 
-                content={
-                    "status": 400,
-                    "message": "Get user failed"
-                }
+                status_code=400, content={"status": 400, "message": "Get user failed"}
             )
         return user_out
-    
-    def delete_user(self, db: Session, user_id: uuid.UUID, current_user_role_permission: UserRolePermissionSchema) -> Optional[UserOutSchema]:
-        if 'delete_user' not in current_user_role_permission.u_list_permission_name:
+
+    def delete_user(
+        self,
+        db: Session,
+        user_id: uuid.UUID,
+        current_user_role_permission: UserRolePermissionSchema,
+    ) -> Optional[UserOutSchema]:
+        if "delete_user" not in current_user_role_permission.u_list_permission_name:
             logger.exception(
                 f"Exception in {__name__}.{self.__class__.__name__}.delete_user: User does not have permission"
             )
             return JSONResponse(
-                status_code=403, 
-                content={
-                    "status": 403,   
-                    "message": "User does not have permission"
-                }
+                status_code=403,
+                content={"status": 403, "message": "User does not have permission"},
             )
         try:
             user_found = self.__crud_user.get(db=db, id=user_id)
             if user_found is None:
                 return JSONResponse(
-                    status_code=404, 
-                    content={
-                        "status": 404,   
-                        "message": "User not found"
-                    }
+                    status_code=404,
+                    content={"status": 404, "message": "User not found"},
                 )
             user_found.is_active = False
             user_found.deleted_at = datetime.now()
             db.commit()
             return JSONResponse(
-                status_code=200, 
-                content={
-                    "status": 200,   
-                    "message": "Delete user successfully"
-                }
+                status_code=200,
+                content={"status": 200, "message": "Delete user successfully"},
             )
         except:
             db.rollback()
@@ -193,16 +162,11 @@ class UserServiceImpl(UserService):
                 f"Exception in {__name__}.{self.__class__.__name__}.delete_user"
             )
             return JSONResponse(
-                status_code=400, 
-                content={
-                    "status": 400,   
-                    "message": "Delete user failed"
-                }
+                status_code=400,
+                content={"status": 400, "message": "Delete user failed"},
             )
 
-
     """USER"""
-
 
     def update_user(
         self,
@@ -215,11 +179,8 @@ class UserServiceImpl(UserService):
                 f"Exception in {__name__}.{self.__class__.__name__}.update_user: User does not have permission"
             )
             return JSONResponse(
-                status_code=403, 
-                content={
-                    "status": 403,   
-                    "message": "User does not have permission"
-                }
+                status_code=403,
+                content={"status": 403, "message": "User does not have permission"},
             )
 
         try:
@@ -228,11 +189,8 @@ class UserServiceImpl(UserService):
             )
             if user_found is None:
                 return JSONResponse(
-                    status_code=404, 
-                    content={
-                        "status": 404,   
-                        "message": "User not found"
-                    }
+                    status_code=404,
+                    content={"status": 404, "message": "User not found"},
                 )
             role_found = self.__crud_role.get(db=db, id=user_found.role_id)
             if user.email is not None:
@@ -266,14 +224,11 @@ class UserServiceImpl(UserService):
                 f"Exception in {__name__}.{self.__class__.__name__}.update_user"
             )
             return JSONResponse(
-                status_code=400, 
-                content={
-                    "status": 400,   
-                    "message": "Update user failed"
-                }
+                status_code=400,
+                content={"status": 400, "message": "Update user failed"},
             )
         return user_out
-    
+
     def get_current_user_by_access_token(
         self, db: Session, current_user_role_permission: UserRolePermissionSchema
     ) -> Optional[UserOutSchema]:
@@ -282,11 +237,8 @@ class UserServiceImpl(UserService):
                 f"Exception in {__name__}.{self.__class__.__name__}.read_user: User does not have permission"
             )
             return JSONResponse(
-                status_code=403, 
-                content={
-                    "status": 403,   
-                    "message": "User does not have permission"
-                }
+                status_code=403,
+                content={"status": 403, "message": "User does not have permission"},
             )
 
         try:
@@ -295,20 +247,14 @@ class UserServiceImpl(UserService):
             )
             if user_found is None:
                 return JSONResponse(
-                    status_code=404, 
-                    content={
-                        "status": 404,   
-                        "message": "User not found"
-                    }
+                    status_code=404,
+                    content={"status": 404, "message": "User not found"},
                 )
             role_found = self.__crud_role.get(db=db, id=user_found.role_id)
             if role_found is None:
                 return JSONResponse(
-                    status_code=404, 
-                    content={
-                        "status": 404,   
-                        "message": "Role not found"
-                    }
+                    status_code=404,
+                    content={"status": 404, "message": "Role not found"},
                 )
             user_out = UserOutSchema(
                 id=user_found.id,
@@ -328,11 +274,7 @@ class UserServiceImpl(UserService):
                 f"Exception in {__name__}.{self.__class__.__name__}.get_current_user"
             )
             return JSONResponse(
-                status_code=400, 
-                content={
-                    "status": 400,   
-                    "message": "Get current user failed"
-                }
+                status_code=400,
+                content={"status": 400, "message": "Get current user failed"},
             )
         return user_out
-    

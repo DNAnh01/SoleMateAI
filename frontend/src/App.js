@@ -1,48 +1,11 @@
-// import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-// import { Fragment } from 'react';
-// import { publicRoutes } from '~/routes';
-// import GlobalStyles from './styles/global/GlobalStyles';
-
-// function App() {
-//     return (
-//         <Router>
-//             <GlobalStyles />
-//             <div className="App">
-//                 <Routes>
-//                     {publicRoutes.map((route, index) => {
-//                         const Page = route.component;
-//                         let Layout = Fragment;
-//                         if (route.layout) {
-//                             Layout = route.layout;
-//                         }
-
-//                         return (
-//                             <Route
-//                                 key={index}
-//                                 path={route.path}
-//                                 element={
-//                                     <Layout>
-//                                         <Page />
-//                                     </Layout>
-//                                 }
-//                             />
-//                         );
-//                     })}
-//                 </Routes>
-//             </div>
-//         </Router>
-//     );
-// }
-
-// export default App;
-
+import React, { useEffect, useContext } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import GlobalStyles from '~/styles/global/GlobalStyles';
+import { toast } from 'react-toastify';
 import Home from '~/pages/home/HomePage';
-// layouts
 import BaseLayout from '~/components/layout/BaseLayout';
 import AuthLayout from '~/components/layout/AuthLayout';
-import GlobalStyles from '~/styles/global/GlobalStyles';
-// auth pages
+import AdminLayout from '~/components/layout/AdminLayout/AdminLayout';
 import SignIn from '~/pages/auth/SignInPage';
 import SignUp from '~/pages/auth/SignUpPage';
 import Reset from '~/pages/auth/ResetPage';
@@ -58,28 +21,29 @@ import OrderDetail from '~/pages/user/OrderDetailPage';
 import Confirm from '~/pages/user/ConfirmPage';
 import Account from '~/pages/user/AccountPage';
 import Address from '~/pages/user/AddressPage';
-import configs from './configs';
-import { useContext, useEffect } from 'react';
-import { AppContext } from './contexts/app.context';
-import { LocalStorageEventTarget } from './utils/auth';
-import AdminLayout from './components/layout/AdminLayout/AdminLayout';
-import DashboardAdmin from './pages/dashboardAdmin/dashboardAdmin';
-import ProductAdmin from './pages/productAdmin/productAdmin';
-import ChatbotAdmin from './pages/chatbotAdmin/chatbotAdmin';
-import './index.css';
-import productApi from './apis/product.api';
-import UpdateChatbotAdmin from './pages/updateChatbotAdmin/updateChatbotAdmin';
-import Loading from './components/loading/loading';
-import Overlay from './components/overlay/overlay';
+import DashboardAdmin from '~/pages/dashboardAdmin/dashboardAdmin';
+import ProductAdmin from '~/pages/productAdmin/productAdmin';
+import ChatbotAdmin from '~/pages/chatbotAdmin/chatbotAdmin';
+import UpdateChatbotAdmin from '~/pages/updateChatbotAdmin/updateChatbotAdmin';
+import Loading from '~/components/loading/loading';
+import Overlay from '~/components/overlay/overlay';
+import configs from '~/configs';
+import { AppContext } from '~/contexts/app.context';
+import productApi from '~/apis/product.api';
+import promotionApi from '~/apis/promotion.api';
+import useAppStore from '~/store';
+import { useAxiosInterceptors } from '~/utils/http';
 
 function App() {
-    const { reset, setProducts } = useContext(AppContext);
-    useEffect(() => {
-        LocalStorageEventTarget.addEventListener('clearLocalStorage', reset);
-        return () => {
-            LocalStorageEventTarget.removeEventListener('clearLocalStorage', reset);
-        };
-    }, [reset]);
+    const { accessToken, setAccessToken } = useAppStore();
+
+    // Setup axios interceptors
+    useAxiosInterceptors(accessToken, setAccessToken);
+
+    const { setPromotions } = useContext(AppContext);
+    const { setProducts } = useAppStore();
+
+    // Fetch products on mount
     useEffect(() => {
         const fetchProducts = async () => {
             const result = await productApi.getAll();
@@ -87,15 +51,28 @@ function App() {
         };
 
         fetchProducts();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [setProducts]);
+
+    // Fetch promotions on mount
+    useEffect(() => {
+        const fetchPromotions = async () => {
+            try {
+                const response = await promotionApi.getAllPromotion();
+                setPromotions(response.data);
+            } catch (error) {
+                toast.error('Không có chương trình khuyến mãi nào.', {
+                    autoClose: 3000,
+                });
+            }
+        };
+        fetchPromotions();
+    }, [setPromotions]);
 
     return (
         <>
             <Router>
                 <GlobalStyles />
                 <Routes>
-                    {/* main screens */}
                     <Route path="/" element={<BaseLayout />}>
                         <Route index element={<Home />} />
                         <Route path={configs.roures.productList} element={<ProductList />} />
@@ -109,7 +86,6 @@ function App() {
                         <Route path={configs.roures.user.profile} element={<Account />} />
                         <Route path={configs.roures.user.addAddress} element={<Address />} />
                     </Route>
-                    {/* auth screens */}
                     <Route path="/" element={<AuthLayout />}>
                         <Route path={configs.roures.auth.signIn} element={<SignIn />} />
                         <Route path={configs.roures.auth.signUp} element={<SignUp />} />

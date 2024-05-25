@@ -46,7 +46,7 @@ class AddressServiceImpl(AddressService):
             address_found = self.__crud_address.get_one_by(
                 db=db, filter={"user_id": current_user_role_permission.u_id}
             )
-            
+
             if address_found is None:
                 """create address"""
                 created_address = self.__crud_address.create(
@@ -63,14 +63,14 @@ class AddressServiceImpl(AddressService):
                     ),
                 )
                 return AddressInDBSchema(**created_address.__dict__)
-                
+
             check_address = self.__crud_address.get_one_by(
-                db=db, 
+                db=db,
                 filter={
                     "user_id": current_user_role_permission.u_id,
                     "street": add_address_req.street,
-                    "city": add_address_req.city
-                }
+                    "city": add_address_req.city,
+                },
             )
             if check_address is None:
                 """remove old address"""
@@ -130,7 +130,7 @@ class AddressServiceImpl(AddressService):
                     status_code=400,
                     content={
                         "status": 400,
-                        "message": "Get Current Shipping Address failed: No shipping address found"
+                        "message": "Get Current Shipping Address failed: No shipping address found",
                     },
                 )
             return current_shipping_address
@@ -142,6 +142,6 @@ class AddressServiceImpl(AddressService):
                 status_code=400,
                 content={
                     "status": 400,
-                    "message": "Get Current Shipping Address failed: Unexpected error"
+                    "message": "Get Current Shipping Address failed: Unexpected error",
                 },
             )

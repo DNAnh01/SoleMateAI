@@ -10,9 +10,8 @@ import { formatCurrency, getFormattedDate } from '~/utils/helper';
 import Image from '~/components/common/Image';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
-import { useEffect, useState } from 'react';
-import promotionApi from '~/apis/promotion.api';
-import { toast } from 'react-toastify';
+import { useContext } from 'react';
+import { AppContext } from '~/contexts/app.context';
 
 const SectionHeroWrapper = styled.section`
     margin-top: 100px;
@@ -178,6 +177,8 @@ const HeroContentRight = styled.div`
     gap: 10px;
 
     .image-wrapper {
+        width: 100%;
+        height: 100%;
         overflow: hidden;
         position: relative;
         transition: transform 0.3s, box-shadow 0.3s;
@@ -185,6 +186,12 @@ const HeroContentRight = styled.div`
         &:hover {
             transform: scale(1.1);
             box-shadow: 0 4px 20px ${defaultTheme.color_orange};
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Đảm bảo ảnh lấp đầy ô mà không bị biến dạng */
         }
 
         .image-count {
@@ -229,20 +236,7 @@ const TooltipContent = styled.div`
 `;
 
 const Hero = () => {
-    const [promotions, setPromotions] = useState([]);
-    useEffect(() => {
-        const fetchPromotions = async () => {
-            try {
-                const response = await promotionApi.getAllPromotion();
-                setPromotions(response.data);
-            } catch (error) {
-                toast.error('Không có chương trình khuyến mãi nào.', {
-                    autoClose: 3000,
-                });
-            }
-        };
-        fetchPromotions();
-    }, []);
+    const { promotions } = useContext(AppContext);
 
     const settings = {
         infinite: true,
@@ -290,9 +284,8 @@ const Hero = () => {
                                         </HeroContentLeft>
                                         <HeroContentRight>
                                             {banner.shoes.slice(0, 15).map((shoe, index) => (
-                                                <div className="image-wrapper" key={shoe.id}>
+                                                <div key={shoe.id} className="image-wrapper">
                                                     <Tippy
-                                                        key={shoe.id}
                                                         delay={[0, 40]}
                                                         placement="bottom"
                                                         content={

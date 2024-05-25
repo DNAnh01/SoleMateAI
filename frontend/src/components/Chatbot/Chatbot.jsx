@@ -1,9 +1,10 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { defaultTheme } from '~/styles/themes/default';
 import Icons from '../common/Icons/Icons';
 import Image from '../common/Image';
 import images from '~/assets/images';
+import messageApi from '~/apis/message.api';
 
 const shakeAnimation = keyframes`
     0% { transform: rotate(0deg); }
@@ -162,7 +163,7 @@ const ChatItem = styled.li`
     }
 
     &.outgoing p {
-        background: ${defaultTheme.color_yellow_green};
+        background: ${defaultTheme.color_dark_slate_blue};
         color: #fff;
         border-radius: 15px 15px 0 15px;
     }
@@ -264,6 +265,16 @@ const Chatbot = () => {
     const [chatMessages, setChatMessages] = useState([]);
     const [userMessage, setUserMessage] = useState('');
     const chatboxRef = useRef(null);
+    
+    
+
+    if (showChatbot) {
+        const fetchData = async () => {
+            const res = await messageApi.fetchMessageByConversationId('8c1a7bd3-0372-4dbf-aecf-5c53c487cc32');
+            console.log('get all message by conversation id', res.data);
+        };
+        fetchData();
+    }
 
     const createChatItem = (message, className) => (
         <ChatItem className={className}>
@@ -275,7 +286,12 @@ const Chatbot = () => {
             <p>{message}</p>
             {className === 'outgoing' && (
                 <span>
-                    <Image src={images.defaultUserAvatar} alt="user" width={32} height={32} />
+                    <Image
+                        src="https://avatars.githubusercontent.com/u/96216102?s=400&u=e68b3692ae68ed13fee08b23330cb1bbf4d264bd&v=4P"
+                        alt="user"
+                        width={32}
+                        height={32}
+                    />
                 </span>
             )}
         </ChatItem>
@@ -301,7 +317,10 @@ const Chatbot = () => {
 
             // Fake response after a delay
             setTimeout(() => {
-                const responseChatItem = createChatItem('This is a response from the chatbot.', 'incoming');
+                const responseChatItem = createChatItem(
+                    'Dưới đây là thông tin về mẫu giày Nike mà bạn đang tìm kiếm trong dữ liệu của chúng tôi:\n\nThông tin về giày: \n- Tên giày: Nike Air Max 90 Essential,\t\n- Thương hiệu: Nike,\t\n- Kích thước: 43,\n- Màu sắc: Yellow,\n- Giá bán: 1600000.0,\n- Chương trình khuyến mãi: Mùa Hè Sale cùng Sole Mate AI,\n- Ngày bắt đầu chương trình khuyến mãi: 01-06-2024,\n- Ngày kết thúc chương trình khuyến mãi: 31-08-2024,\n- Phần trăm khuyến mãi: 20%\n\n_shoe_id: 0b8422f0-7c0b-44ed-9725-39eb5b071c09',
+                    'incoming',
+                );
                 setChatMessages((prev) => {
                     const updatedMessages = [...prev];
                     updatedMessages[updatedMessages.indexOf(incomingChatItem)] = responseChatItem;

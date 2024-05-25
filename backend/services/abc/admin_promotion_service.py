@@ -1,21 +1,20 @@
+import uuid
 from abc import ABC, abstractmethod
 from typing import List, Optional
 
+from fastapi.responses import JSONResponse
+from sqlalchemy.orm import Session
+
 from backend.schemas.promotion_schema import (
     PromotionCreateSchema,
-    PromotionInDBSchema,
-    PromotionUpdateSchema,
     PromotionOutSchema,
+    PromotionUpdateSchema,
 )
-from sqlalchemy.orm import Session
-from fastapi.responses import JSONResponse
 from backend.schemas.user_role_permission_schema import UserRolePermissionSchema
 
 
-import uuid
-
 class AdminPromotionService(ABC):
-    
+
     @abstractmethod
     def create_promotion(
         self,
@@ -24,7 +23,7 @@ class AdminPromotionService(ABC):
         current_user_role_permission: UserRolePermissionSchema,
     ) -> PromotionOutSchema:
         pass
-    
+
     @abstractmethod
     def get_all_promotion(
         self,
@@ -32,7 +31,7 @@ class AdminPromotionService(ABC):
         common_filters: dict,
     ) -> Optional[List[PromotionOutSchema]]:
         pass
-    
+
     @abstractmethod
     def get_promotion_by_id(
         self,
@@ -41,7 +40,7 @@ class AdminPromotionService(ABC):
         current_user_role_permission: UserRolePermissionSchema,
     ) -> Optional[PromotionOutSchema]:
         pass
-    
+
     @abstractmethod
     def update_promotion(
         self,
@@ -51,7 +50,7 @@ class AdminPromotionService(ABC):
         current_user_role_permission: UserRolePermissionSchema,
     ) -> PromotionOutSchema:
         pass
-    
+
     @abstractmethod
     def delete_promotion(
         self,
