@@ -122,8 +122,9 @@ const Header = () => {
         try {
             const res = await authApi.signOut();
             if (res.status === 200) {
-                clearLocalStorage();
                 setIsAuthenticated(false);
+                console.log(isAuthenticated);
+                clearLocalStorage();
                 toast.success('Đăng xuất thành công', {
                     autoClose: 3000,
                 });

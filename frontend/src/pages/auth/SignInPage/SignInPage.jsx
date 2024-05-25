@@ -15,6 +15,8 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { getRules } from '~/utils/rules';
 import useAppStore from '~/store';
+import { useState } from 'react';
+import Icons from '~/components/common/Icons/Icons';
 
 const SignInPageWrapper = styled.section`
     .form-separator {
@@ -56,63 +58,86 @@ const SignInPageWrapper = styled.section`
         height: 100%;
         width: auto;
     }
+    .loading-icon {
+        margin-top: 8px;
+        animation: spinner 0.8s linear infinite;
+    }
+    @keyframes spinner {
+        from {
+            transform: translateY(-50%) rotate(0);
+        }
+        to {
+            transform: translateY(-50%) rotate(360deg);
+        }
+    }
 `;
 
 const SignInPage = () => {
-    const { setProfile, setAccessToken, setIsAuthenticated, setIsLoadingAPI, setRole } = useAppStore();
+    const { setProfile, setAccessToken, setIsAuthenticated, setRole } = useAppStore();
+    const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
 
     const handleSignIn = async (event) => {
         event.preventDefault();
         try {
-            setIsLoadingAPI(true);
+            setIsLoading(true);
             const res = await authApi.signIn({
                 email: formik.values.email,
                 password: formik.values.password,
             });
+
             if (res.status === 200) {
+                setIsLoading(false);
                 toast.success('Đăng nhập thành công', {
-                    autoClose: 3000,
+                    autoClose: 5000,
                 });
                 setProfile(res.data.user);
                 setAccessToken(res.data.access_token);
                 setIsAuthenticated(true);
-                setProfile(res.data.user);
                 setRole(res.data.user.role_name);
                 navigate(configs.roures.home);
-            }
-            if (res.status === 404) {
-                //new
-                setIsAuthenticated(false);
-
-                //old
-                setIsAuthenticated(false);
-                setProfile(null);
-                setRole('user');
+            } else if (res.status === 404) {
+                setIsLoading(false);
                 toast.error('Email không tồn tại', {
-                    autoClose: 3000,
+                    autoClose: 5000,
                 });
-            }
-            if (res.status === 400) {
-                setIsAuthenticated(false);
                 setProfile(null);
+                setAccessToken('');
+                setIsAuthenticated(false);
                 setRole('user');
+            } else if (res.status === 400) {
+                setIsLoading(false);
                 toast.error('Mật khẩu không đúng', {
-                    autoClose: 3000,
+                    autoClose: 5000,
                 });
+                setProfile(null);
+                setAccessToken('');
+                setIsAuthenticated(false);
+                setRole('user');
+            } else {
+                setIsLoading(false);
+                toast.error('Đăng nhập thất bại', {
+                    autoClose: 5000,
+                });
+                setProfile(null);
+                setAccessToken('');
+                setIsAuthenticated(false);
+                setRole('user');
             }
         } catch (error) {
-            setIsAuthenticated(false);
-            setProfile(null);
-            setRole('user');
+            setIsLoading(false);
             toast.error('Đăng nhập thất bại', {
-                autoClose: 3000,
+                autoClose: 5000,
             });
-        } finally {
-            setIsLoadingAPI(false);
+            setProfile(null);
+            setAccessToken('');
+            setIsAuthenticated(false);
+            setRole('user');
         }
     };
+
     const validationSchema = yup.object().shape(getRules());
+
     const formik = useFormik({
         initialValues: {
             email: '',
@@ -121,6 +146,7 @@ const SignInPage = () => {
         validationSchema: validationSchema,
         onSubmit: handleSignIn,
     });
+
     return (
         <SignInPageWrapper>
             <FormGridWrapper>
@@ -178,7 +204,17 @@ const SignInPage = () => {
                                     Quên mật khẩu?
                                 </Link>
                                 <BaseButtonBlack type="submit" className="form-submit-btn">
-                                    Đăng nhập
+                                    {isLoading ? (
+                                        <Icons
+                                            icon="loading"
+                                            className="loading-icon"
+                                            width={16}
+                                            height={16}
+                                            color={defaultTheme.color_white}
+                                        />
+                                    ) : (
+                                        'Đăng nhập'
+                                    )}
                                 </BaseButtonBlack>
                             </form>
                             <p className="flex flex-wrap account-rel-text">

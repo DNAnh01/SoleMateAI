@@ -5,6 +5,8 @@ import Icons from '../common/Icons/Icons';
 import Image from '../common/Image';
 import images from '~/assets/images';
 import messageApi from '~/apis/message.api';
+import useAppStore from '~/store';
+import conversationApi from '~/apis/conversation.api';
 
 const shakeAnimation = keyframes`
     0% { transform: rotate(0deg); }
@@ -110,7 +112,18 @@ const ChatItem = styled.li`
     &.outgoing {
         justify-content: flex-end;
 
+        .timestamp {
+            order: 0;
+            margin-right: 10px;
+        }
+
+        p {
+            order: 1;
+            border-radius: 15px 15px 0 15px;
+        }
+
         span {
+            order: 2;
             width: 32px;
             height: 32px;
             color: #fff;
@@ -133,6 +146,7 @@ const ChatItem = styled.li`
         justify-content: flex-start;
 
         span {
+            order: 0;
             width: 32px;
             height: 32px;
             color: #fff;
@@ -148,6 +162,16 @@ const ChatItem = styled.li`
                 height: 32px;
                 border-radius: 50%;
             }
+        }
+
+        p {
+            order: 1;
+            border-radius: 15px 15px 15px 0;
+        }
+
+        .timestamp {
+            order: 2;
+            margin-left: 10px;
         }
     }
 
@@ -165,17 +189,21 @@ const ChatItem = styled.li`
     &.outgoing p {
         background: ${defaultTheme.color_dark_slate_blue};
         color: #fff;
-        border-radius: 15px 15px 0 15px;
     }
     &.incoming p {
         background: #3a3a3a;
         color: #fff;
-        border-radius: 15px 15px 15px 0;
     }
 
     p.error {
         color: #721c24;
         background: #f8d7da;
+    }
+
+    .timestamp {
+        font-size: 0.75rem;
+        color: #ccc;
+        margin-top: 5px;
     }
 `;
 
@@ -264,84 +292,134 @@ const Chatbot = () => {
     const [showChatbot, setShowChatbot] = useState(false);
     const [chatMessages, setChatMessages] = useState([]);
     const [userMessage, setUserMessage] = useState('');
+    const [loading, setLoading] = useState(false);
     const chatboxRef = useRef(null);
-    
-    
+    const { isAuthenticated, profile, conversationId, setConversationId } = useAppStore();
 
-    if (showChatbot) {
-        const fetchData = async () => {
-            const res = await messageApi.fetchMessageByConversationId('8c1a7bd3-0372-4dbf-aecf-5c53c487cc32');
-            console.log('get all message by conversation id', res.data);
+    useEffect(() => {
+        const fetchConversation = async () => {
+            let resConversation;
+            if (isAuthenticated) {
+                resConversation = await conversationApi.createConversationWithAuth();
+            } else {
+                resConversation = await conversationApi.createConversationWithoutAuth();
+            }
+            const conversationId = resConversation.data.id;
+            setConversationId(conversationId);
+
+            const resMessages = await messageApi.getMessageByConversationId(conversationId);
+            const messages =
+                resMessages.data.length > 0
+                    ? resMessages.data
+                    : [
+                          {
+                              id: 1,
+                              sender_type: 'bot',
+                              message_text: 'Xin chào, tôi có thể giúp gì cho bạn?',
+                              created_at: new Date().toISOString(),
+                          },
+                      ];
+            // Sort messages by created_at
+            messages.sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
+            setChatMessages(messages);
         };
-        fetchData();
-    }
 
-    const createChatItem = (message, className) => (
-        <ChatItem className={className}>
-            {className === 'incoming' && (
+        if (showChatbot) {
+            fetchConversation();
+        }
+    }, [showChatbot, isAuthenticated, setConversationId]);
+
+    useEffect(() => {
+        if (showChatbot && chatboxRef.current) {
+            chatboxRef.current.scrollTop = chatboxRef.current.scrollHeight;
+        }
+    }, [showChatbot, chatMessages]);
+
+    const handleChat = async () => {
+        if (!userMessage.trim()) return;
+
+        const newMessage = {
+            id: chatMessages.length + 1,
+            sender_type: 'guest',
+            message_text: userMessage,
+            created_at: new Date().toISOString(),
+        };
+        const newChatMessages = [...chatMessages, newMessage];
+        setChatMessages(newChatMessages);
+        setUserMessage('');
+        setLoading(true);
+
+        try {
+            let response;
+            if (isAuthenticated) {
+                response = await messageApi.createMessageWithAuth({
+                    message: userMessage,
+                    conversation_id: conversationId,
+                });
+            } else {
+                response = await messageApi.createMessageWithoutAuth({
+                    message: userMessage,
+                    conversation_id: conversationId,
+                });
+            }
+            setChatMessages((prevMessages) => [
+                ...prevMessages,
+                {
+                    id: response.data.id,
+                    sender_type: 'bot',
+                    message_text: response.data.message_text,
+                    created_at: response.data.created_at,
+                },
+            ]);
+        } catch (error) {
+            setChatMessages((prevMessages) => [
+                ...prevMessages,
+                {
+                    id: prevMessages.length + 1,
+                    sender_type: 'bot',
+                    message_text: 'Xin lỗi, có lỗi xảy ra. Vui lòng thử lại sau.',
+                    created_at: new Date().toISOString(),
+                },
+            ]);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleEnterPress = (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            handleChat();
+        }
+    };
+
+    const createChatItem = (message) => (
+        <ChatItem key={message.id} className={message.sender_type === 'guest' ? 'outgoing' : 'incoming'}>
+            {message.sender_type === 'bot' && (
                 <span>
-                    <Image src={images.chatbot} alt="chatbot" width={32} height={32} />
+                    <Image className="chatbot-icon" src={images.chatbot} alt="Bot" />
                 </span>
             )}
-            <p>{message}</p>
-            {className === 'outgoing' && (
+            <p>{message.message_text}</p>
+            <div className="timestamp">{new Date(message.created_at).toLocaleTimeString()}</div>
+            {message.sender_type === 'guest' && (
                 <span>
-                    <Image
-                        src="https://avatars.githubusercontent.com/u/96216102?s=400&u=e68b3692ae68ed13fee08b23330cb1bbf4d264bd&v=4P"
-                        alt="user"
-                        width={32}
-                        height={32}
-                    />
+                    {isAuthenticated ? (
+                        <Image className="" src={profile.avatar_url} alt="User Avatar" />
+                    ) : (
+                        <Image className="" src={images.defaultUserAvatar} alt="User Avatar" />
+                    )}
                 </span>
             )}
         </ChatItem>
     );
 
-    const handleChat = () => {
-        if (!userMessage.trim()) return;
-
-        const outgoingChatItem = createChatItem(userMessage.trim(), 'outgoing');
-        setChatMessages((prev) => [...prev, outgoingChatItem]);
-        setUserMessage('');
-
-        setTimeout(() => {
-            const incomingChatItem = (
-                <ChatItem className="incoming">
-                    <span>
-                        <Image src={images.chatbot} alt="chatbot" width={32} height={32} />
-                    </span>
-                    <SkeletonLoading />
-                </ChatItem>
-            );
-            setChatMessages((prev) => [...prev, incomingChatItem]);
-
-            // Fake response after a delay
-            setTimeout(() => {
-                const responseChatItem = createChatItem(
-                    'Dưới đây là thông tin về mẫu giày Nike mà bạn đang tìm kiếm trong dữ liệu của chúng tôi:\n\nThông tin về giày: \n- Tên giày: Nike Air Max 90 Essential,\t\n- Thương hiệu: Nike,\t\n- Kích thước: 43,\n- Màu sắc: Yellow,\n- Giá bán: 1600000.0,\n- Chương trình khuyến mãi: Mùa Hè Sale cùng Sole Mate AI,\n- Ngày bắt đầu chương trình khuyến mãi: 01-06-2024,\n- Ngày kết thúc chương trình khuyến mãi: 31-08-2024,\n- Phần trăm khuyến mãi: 20%\n\n_shoe_id: 0b8422f0-7c0b-44ed-9725-39eb5b071c09',
-                    'incoming',
-                );
-                setChatMessages((prev) => {
-                    const updatedMessages = [...prev];
-                    updatedMessages[updatedMessages.indexOf(incomingChatItem)] = responseChatItem;
-                    return updatedMessages;
-                });
-                chatboxRef.current.scrollTo(0, chatboxRef.current.scrollHeight);
-            }, 1000);
-        }, 600);
-    };
-
     return (
         <>
-            {!showChatbot && (
-                <ChatbotIcon onClick={() => setShowChatbot(true)}>
-                    <Image src={images.chatbot} alt="chatbot" width={70} height={70} className="chatbot-icon" />
-                </ChatbotIcon>
-            )}
-            {showChatbot && (
+            {showChatbot ? (
                 <ChatbotContainer>
                     <ChatbotHeader>
-                        <Image src={images.chatbot} alt="chatbot" width={40} height={40} className="chatbot-icon" />
+                        <Image className="chatbot-icon" src={images.chatbot} alt="Chatbot" width={40} height={40} />
                         <h4>Chatbot</h4>
                         <Icons
                             icon="close"
@@ -352,29 +430,42 @@ const Chatbot = () => {
                         />
                     </ChatbotHeader>
                     <Chatbox ref={chatboxRef}>
-                        {chatMessages.map((chat, index) => (
-                            <React.Fragment key={index}>{chat}</React.Fragment>
-                        ))}
+                        {chatMessages.length > 0 ? (
+                            chatMessages.map((msg) => createChatItem(msg))
+                        ) : (
+                            <ChatItem className="incoming">
+                                <span>
+                                    <Image className="chatbot-icon" src={images.chatbot} alt="Bot" />
+                                </span>
+                                <SkeletonLoading />
+                            </ChatItem>
+                        )}
+                        {loading && (
+                            <ChatItem className="incoming">
+                                <span>
+                                    <Image className="chatbot-icon" src={images.chatbot} alt="Bot" />
+                                </span>
+                                <SkeletonLoading />
+                            </ChatItem>
+                        )}
                     </Chatbox>
                     <ChatInputContainer>
                         <textarea
-                            placeholder="Enter a message..."
-                            spellCheck="false"
-                            required
+                            rows={1}
                             value={userMessage}
+                            placeholder="Type your message..."
                             onChange={(e) => setUserMessage(e.target.value)}
-                            onKeyDown={(e) => {
-                                if (e.key === 'Enter' && !e.shiftKey && window.innerWidth > 800) {
-                                    e.preventDefault();
-                                    handleChat();
-                                }
-                            }}
+                            onKeyDown={handleEnterPress}
                         />
-                        <span onClick={() => handleChat()}>
+                        <span onClick={handleChat}>
                             <Icons icon="sendMessage" width={24} height={24} color={defaultTheme.color_white} />
                         </span>
                     </ChatInputContainer>
                 </ChatbotContainer>
+            ) : (
+                <ChatbotIcon onClick={() => setShowChatbot(true)}>
+                    <Image className="chatbot-icon" src={images.chatbot} alt="Chatbot" width={70} height={70} />
+                </ChatbotIcon>
             )}
         </>
     );

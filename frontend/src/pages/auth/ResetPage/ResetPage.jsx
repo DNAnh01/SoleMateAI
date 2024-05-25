@@ -12,6 +12,8 @@ import authApi from '~/apis/auth.api';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { getRules } from '~/utils/rules';
+import { useState } from 'react';
+import Icons from '~/components/common/Icons/Icons';
 
 const ResetPageWrapper = styled.section`
     .form-grid-left {
@@ -26,25 +28,43 @@ const ResetPageWrapper = styled.section`
         height: 100%;
         width: auto;
     }
+    .loading-icon {
+        margin-top: 8px;
+        animation: spinner 0.8s linear infinite;
+    }
+    @keyframes spinner {
+        from {
+            transform: translateY(-50%) rotate(0);
+        }
+        to {
+            transform: translateY(-50%) rotate(360deg);
+        }
+    }
 `;
 
 const ResetPage = () => {
     const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(false);
     const handleForgotPassword = async (event) => {
         event.preventDefault();
         try {
+            setIsLoading(true);
             const response = await authApi.forgotPassword({ email: formik.values.email });
             if (response.status === 200) {
+                setIsLoading(false);
                 toast.success('Gửi email thành công, vui lòng kiểm tra email của bạn', { autoClose: 3000 });
                 navigate(configs.roures.auth.signIn);
             }
             if (response.status === 404) {
+                setIsLoading(false);
                 toast.error('Email không tồn tại', { autoClose: 3000 });
             }
             if (response.status === 500) {
+                setIsLoading(false);
                 toast.error('Gửi email không thành công', { autoClose: 3000 });
             }
         } catch (error) {
+            setIsLoading(false);
             toast.error('Gửi email không thành công', { autoClose: 3000 });
         }
     };
@@ -90,7 +110,14 @@ const ResetPage = () => {
                                     />
                                 </FormElement>
                                 <BaseButtonBlack type="submit" className="form-submit-btn">
-                                    Gửi
+                                    {isLoading ?
+                                        (<Icons
+                                        icon="loading"
+                                        className="loading-icon"
+                                        width={16}
+                                        height={16}
+                                        color={defaultTheme.color_white}
+                                    />) :"Gửi"}
                                 </BaseButtonBlack>
                             </form>
                             <p className="flex flex-wrap account-rel-text">

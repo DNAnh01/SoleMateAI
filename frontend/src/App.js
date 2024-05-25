@@ -40,8 +40,7 @@ function App() {
     // Setup axios interceptors
     useAxiosInterceptors(accessToken, setAccessToken);
 
-    const { setPromotions } = useContext(AppContext);
-    const { setProducts } = useAppStore();
+    const { setPromotions, setProducts } = useContext(AppContext);
 
     // Fetch products on mount
     useEffect(() => {

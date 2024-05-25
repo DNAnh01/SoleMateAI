@@ -14,6 +14,8 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { getRules } from '~/utils/rules';
 import { toast } from 'react-toastify';
+import { useState } from 'react';
+import Icons from '~/components/common/Icons/Icons';
 
 const SignUpPageWrapper = styled.section`
     form {
@@ -40,13 +42,27 @@ const SignUpPageWrapper = styled.section`
         height: 100%;
         width: auto;
     }
+    .loading-icon {
+        margin-top: 8px;
+        animation: spinner 0.8s linear infinite;
+    }
+    @keyframes spinner {
+        from {
+            transform: translateY(-50%) rotate(0);
+        }
+        to {
+            transform: translateY(-50%) rotate(360deg);
+        }
+    }
 `;
 
 const SignUpPage = () => {
+    const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
     const handleSignUp = async (event) => {
         event.preventDefault();
         try {
+            setIsLoading(true);
             const res = await authApi.signUp({
                 email: formik.values.email,
                 password: formik.values.password,
@@ -71,6 +87,8 @@ const SignUpPage = () => {
             toast.error('Có lỗi xảy ra', {
                 autoClose: 3000,
             });
+        } finally {
+            setIsLoading(false);
         }
     };
     const validationSchema = yup.object().shape(getRules());
@@ -141,7 +159,17 @@ const SignUpPage = () => {
                                     }
                                 />
                                 <BaseButtonBlack type="submit" className="form-submit-btn">
-                                    Đăng ký
+                                    {isLoading ? (
+                                        <Icons
+                                            icon="loading"
+                                            className="loading-icon"
+                                            width={16}
+                                            height={16}
+                                            color={defaultTheme.color_white}
+                                        />
+                                    ) : (
+                                        'Đăng ký'
+                                    )}
                                 </BaseButtonBlack>
                             </form>
                             <p className="flex flex-wrap account-rel-text">

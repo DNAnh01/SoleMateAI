@@ -19,6 +19,18 @@ const ChangePwdScreenWrapper = styled.section`
         height: 100%;
         width: auto;
     }
+    .loading-icon {
+        margin-top: 8px;
+        animation: spinner 0.8s linear infinite;
+    }
+    @keyframes spinner {
+        from {
+            transform: translateY(-50%) rotate(0);
+        }
+        to {
+            transform: translateY(-50%) rotate(360deg);
+        }
+    }
 `;
 
 const ChangePasswordPage = () => {
