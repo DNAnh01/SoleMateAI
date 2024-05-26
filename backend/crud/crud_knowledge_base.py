@@ -40,6 +40,7 @@ GET_DEFAULT_KN_CHATBOT = f"""
                 AND b.deleted_at IS NULL 
                 AND s.deleted_at IS NULL 
                 AND c.deleted_at IS NULL 
+                AND sp.promotion_id IS NOT NULL 
         ) 
         SELECT 
             rs.shoe_id AS {DefaultKNChatbotSchema.SHOE_ID} ,

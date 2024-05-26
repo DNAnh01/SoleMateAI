@@ -8,8 +8,8 @@ const messageApi = {
     async createMessageWithoutAuth({ message, conversation_id }) {
         return await http.post(configs.baseUrl.message.createWithoutAuth, { message, conversation_id });
     },
-    async getMessageByConversationId(conversation_id) {
-        return await http.get(`${configs.baseUrl.message.getByConversationId}${conversation_id}`);
+    async getMessageByConversationId(conversationId) {
+        return await http.get(`${configs.baseUrl.message.getByConversationId}${conversationId}`);
     },
 };
 

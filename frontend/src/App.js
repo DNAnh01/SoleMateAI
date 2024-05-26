@@ -35,12 +35,12 @@ import useAppStore from '~/store';
 import { useAxiosInterceptors } from '~/utils/http';
 
 function App() {
-    const { accessToken, setAccessToken } = useAppStore();
+    const { accessToken, setAccessToken, setProducts } = useAppStore();
 
     // Setup axios interceptors
     useAxiosInterceptors(accessToken, setAccessToken);
 
-    const { setPromotions, setProducts } = useContext(AppContext);
+    const { setPromotions } = useContext(AppContext);
 
     // Fetch products on mount
     useEffect(() => {

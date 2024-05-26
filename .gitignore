@@ -1,6 +1,4 @@
 # ignore files of project
-/assets
-/research
 /backend/.env.development
 
 # ignore files of backend

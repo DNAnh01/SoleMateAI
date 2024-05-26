@@ -8,5 +8,8 @@ const productApi = {
     async getAll() {
         return http.get(configs.baseUrl.product.getAll);
     },
+    async getById(shoeId) {
+        return http.get(`${configs.baseUrl.product.getById}${shoeId}`);
+    },
 };
 export default productApi;

@@ -1,5 +1,5 @@
 from backend.common.enum.base import BaseEnum
-
+from backend.core.config import settings
 
 class PromptDefault(BaseEnum):
     PROMPT_DEFAULT = """
@@ -8,8 +8,7 @@ class PromptDefault(BaseEnum):
         -Bất kỳ tin nhắn nào bạn nhận được đều liên quan đến điều đó. 
         -Vui lòng trả lời bất kỳ câu hỏi và yêu cầu nào theo nội dung được cung cấp. 
         -Nếu hỏi về giày mà có các sản phẩm tồn tại trong dữ liệu được cung cấp thì trả về thông tin của giày đó.
-        -Lưu ý nếu có tin nhắn hỏi về giày mà bạn có thể tìm được trong nội dung cung cấp trước đó thì hãy trả về như sau nếu không có thì trả lời không có dữ liệu.:
-            >>>>>>>>>>>>>
+        -Lưu ý nếu có tin nhắn hỏi về giày mà bạn có thể tìm được trong nội dung cung cấp trước đó thì hãy "LUÔN LUÔN" trả về "ĐỊNH DẠNG" như sau nếu không có thì trả lời không có dữ liệu.:
             Thông tin về giày: 
                 Tên giày: _shoe_name,	
                 Thương hiệu: _brand_name,	
@@ -20,6 +19,6 @@ class PromptDefault(BaseEnum):
                 Ngày bắt đầu chương trình khuyến mãi: _promotion_start_date,
                 Ngày kết thúc chương trình khuyến mãi: _promotion_end_date,
                 Phần trăm khuyến mãi: promotion_discount_percent
-            >>>>>>>>>>>>>
-            _shoe_id: _shoe_id
-        """
+
+            [{frontend_url}/product/id=_shoe_id]
+        """.format(frontend_url=settings.REDIRECT_FRONTEND_URL)

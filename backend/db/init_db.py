@@ -323,6 +323,7 @@ def init_db():
                     logger.error(f"Promotion {row[0]} not found")
 
                 shoe_name = str(row[1])
+                shoe_counter = 0
                 for shoe in crud_shoe.get_multi_ignore_deleted_and_inactive(
                     db=session,
                     filter_param={"filter": json.dumps({"shoe_name": str(row[1])})},
@@ -330,7 +331,6 @@ def init_db():
                     if shoe is None:
                         logger.error(f"Shoe {row[1]} not found")
                     """update shoe's discounted price"""
-                    # logger.info(f"{shoe.shoe_name}>>>>{promotion_found.discount_percent}>>>>{shoe.display_price - (shoe.display_price * promotion_found.discount_percent / 100)}")
                     if shoe.shoe_name == shoe_name:
                         updated_shoe = crud_shoe.update_one_by(
                             db=session,
@@ -371,6 +371,9 @@ def init_db():
                                 deleted_at=None,
                             ),
                         )
+                        shoe_counter += 1
+                        if shoe_counter >= 10:
+                            break
             logger.warning(
                 "INSERTING DATA INTO THE `reviews` TABLE FROM THE reviews.csv FILE"
             )
