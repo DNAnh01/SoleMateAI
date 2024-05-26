@@ -2,7 +2,6 @@ import { Outlet } from 'react-router-dom';
 import HeaderAdmin from '~/components/headerAdmin/headerAdmin';
 import { MainContainer, PageContainer, Wrapper } from './AdminLayout.style';
 import SideBarAdmin from '~/components/sideBarAdmin/sideBarAdmin';
-// import Chatbot from '~/components/Chatbot';
 
 const AdminLayout = () => {
     return (
@@ -16,7 +15,6 @@ const AdminLayout = () => {
                     </div>
                 </PageContainer>
             </MainContainer>
-            {/*<Chatbot />*/}
         </Wrapper>
     );
 };

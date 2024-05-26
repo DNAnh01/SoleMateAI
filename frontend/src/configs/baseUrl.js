@@ -8,7 +8,11 @@ const baseUrl = {
         createWithAuth: '/conversation/with-auth',
         createWithoutAuth: '/conversation/without-auth',
     },
-
+    cart: {
+        addCartItem: '/cart/add-cart-item',
+        removeCartItem: '/cart/remove-cart-item',
+        getAllCartItem: '/cart/get-all',
+    },
     message: {
         createWithAuth: '/message/with-auth',
         createWithoutAuth: '/message/without-auth',

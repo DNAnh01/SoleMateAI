@@ -150,7 +150,7 @@ def init_db():
                         email="admin@gmail.com",
                         password_hash=utils.hash("admin123"),
                         display_name="admin",
-                        avatar_url="https://avatars.githubusercontent.com/u/96216102?s=400&u=e68b3692ae68ed13fee08b23330cb1bbf4d264bd&v=4P",
+                        avatar_url="https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/AdobeStock_630609726_Preview.png",
                         payment_information="",
                         is_verified=False,
                         is_active=True,

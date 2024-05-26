@@ -20,5 +20,5 @@ class PromptDefault(BaseEnum):
                 Ngày kết thúc chương trình khuyến mãi: _promotion_end_date,
                 Phần trăm khuyến mãi: promotion_discount_percent
 
-            [{frontend_url}/product/id=_shoe_id]
+            [{frontend_url}/product/_shoe_id]
         """.format(frontend_url=settings.REDIRECT_FRONTEND_URL)

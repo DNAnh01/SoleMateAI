@@ -3,8 +3,9 @@ import styled from 'styled-components';
 import Image from '../Image';
 import { defaultTheme } from '~/styles/themes/default';
 import { formatCurrency } from '~/utils/helper';
+import { Link } from 'react-router-dom';
 
-const ShoeItemWrapper = styled.div`
+const ShoeItemWrapper = styled(Link)`
     display: flex;
     align-items: center;
     padding: 6px 16px;
@@ -70,7 +71,7 @@ const ShoeItemWrapper = styled.div`
 
 const ShoeItem = ({ data }) => {
     return (
-        <ShoeItemWrapper>
+        <ShoeItemWrapper to={`/product/${data.id}`}>
             <Image className="shoe-image" src={data?.image_url} alt={data?.shoe_name} />
             <div className="info">
                 <h4>{data?.shoe_name}</h4>

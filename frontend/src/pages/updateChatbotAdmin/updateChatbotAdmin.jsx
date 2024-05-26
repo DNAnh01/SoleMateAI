@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
-import { ChatbotAPI } from '~/apis/chatbot.api';
 import useAppStore from '~/store';
 import { MdDeleteOutline } from 'react-icons/md';
 import { FaRegFilePdf } from 'react-icons/fa6';
@@ -10,6 +9,7 @@ import { Modal, Popconfirm, Table } from 'antd';
 import { toast } from 'react-toastify';
 import { IoMdAdd } from 'react-icons/io';
 import { columnsUpdateChatbot } from '~/data/data.updateChatbot';
+import ChatbotAPI from '~/apis/chatbot.api';
 
 const UpdateChatbotAdmin = () => {
     const { id } = useParams();

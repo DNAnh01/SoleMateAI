@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { ChatbotAPI } from '~/apis/chatbot.api';
+
 import { columnsChatbot } from '~/data/data.chatbot';
 import { FaRegEdit } from 'react-icons/fa';
 import { MdDeleteOutline } from 'react-icons/md';
@@ -7,6 +7,7 @@ import { Modal, Popconfirm, Table, Input } from 'antd';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import useAppStore from '~/store';
+import ChatbotAPI from '~/apis/chatbot.api';
 
 const ChatbotAdmin = () => {
     const navigate = useNavigate();

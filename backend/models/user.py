@@ -21,7 +21,7 @@ class User(Base):
     avatar_url = Column(
         String,
         nullable=False,
-        default="https://avatars.githubusercontent.com/u/96216102?s=400&u=e68b3692ae68ed13fee08b23330cb1bbf4d264bd&v=4",
+        default="https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/default_user_image.png",
     )
     payment_information = Column(String, nullable=True)
     is_verified = Column(Boolean, nullable=False, default=False)

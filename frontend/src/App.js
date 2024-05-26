@@ -33,7 +33,7 @@ import productApi from '~/apis/product.api';
 import promotionApi from '~/apis/promotion.api';
 import useAppStore from '~/store';
 import { useAxiosInterceptors } from '~/utils/http';
-
+import './index.css';
 function App() {
     const { accessToken, setAccessToken, setProducts } = useAppStore();
 

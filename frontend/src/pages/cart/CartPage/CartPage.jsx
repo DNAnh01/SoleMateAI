@@ -5,6 +5,8 @@ import { cartItems } from '~/data/data.mock';
 import CartTable from '~/components/cart/CartTable';
 import { breakpoints } from '~/styles/themes/default';
 import CartSummary from '~/components/cart/CartSummary';
+import { CartContext } from '~/contexts/cart.context';
+import { useContext } from 'react';
 
 const CartPageWrapper = styled.main`
     padding: 48px 0;
@@ -47,9 +49,11 @@ const CartContent = styled.div`
 `;
 
 const CartPage = () => {
+    const { cart } = useContext(CartContext);
+
     const breadcrumbItems = [
-        { label: 'Home', link: '/cart' },
-        { label: 'Add To Cart', link: '' },
+        { label: 'Cá nhân', link: '/user/profile' },
+        { label: 'Giõ hàng', link: '/' },
     ];
     return (
         <CartPageWrapper>
