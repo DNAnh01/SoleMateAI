@@ -73,8 +73,6 @@ const ProductFilter = ({ products }) => {
     useEffect(() => {
         updateMinRange(minRange);
         updateMaxRange(maxRange);
-        console.log('minRange', minRange);
-        console.log('maxRange', maxRange);
     }, [minRange, maxRange, updateMinRange, updateMaxRange]);
 
     return (

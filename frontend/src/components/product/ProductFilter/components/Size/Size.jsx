@@ -11,7 +11,6 @@ const Size = ({ uniqueSizes }) => {
         } else {
             setActiveSizes([...activeSizes, size_number]);
         }
-        console.log('s', activeSizes);
     };
     useEffect(() => {
         setSizes(activeSizes);

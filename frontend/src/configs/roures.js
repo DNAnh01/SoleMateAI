@@ -1,7 +1,7 @@
 const roures = {
     home: '/',
     productList: '/product',
-    productDetail: '/product/detail',
+    productDetail: '/product/:id',
     notFound: '*',
 
     auth: {

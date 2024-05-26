@@ -123,7 +123,6 @@ const Header = () => {
             const res = await authApi.signOut();
             if (res.status === 200) {
                 setIsAuthenticated(false);
-                console.log(isAuthenticated);
                 clearLocalStorage();
                 toast.success('Đăng xuất thành công', {
                     autoClose: 3000,
@@ -142,7 +141,6 @@ const Header = () => {
     };
 
     const toggleSidebar = () => {
-        console.log('isSidebarOpen', isSidebarOpen);
         setIsSidebarOpen(!isSidebarOpen);
     };
 

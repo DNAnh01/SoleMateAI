@@ -217,7 +217,7 @@ const AddToCartButton = styled.button`
 
 const ProductItem = ({ product }) => {
     return (
-        <ProductCardWrapper to="*" circleColor={product.color.hex_value}>
+        <ProductCardWrapper to={`/product/${product.id}`} circleColor={product.color.hex_value}>
             <Rating rating={product.avg_rating} />
             <SizeWrapper>
                 <Size key={product?.size?.size_number} color={product?.color.hex_value}>

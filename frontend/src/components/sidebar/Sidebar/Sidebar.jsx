@@ -110,7 +110,6 @@ const Sidebar = () => {
 
     const { isSidebarOpen, setIsSidebarOpen } = useAppStore();
     const toggleSidebar = () => {
-        console.log('isSidebarOpen', isSidebarOpen);
         setIsSidebarOpen(!isSidebarOpen);
     };
     return (

@@ -12,6 +12,7 @@ import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import { useContext } from 'react';
 import { AppContext } from '~/contexts/app.context';
+import { Link } from 'react-router-dom';
 
 const SectionHeroWrapper = styled.section`
     margin-top: 100px;
@@ -302,7 +303,9 @@ const Hero = () => {
                                                             </TooltipContent>
                                                         }
                                                     >
-                                                        <Image src={shoe.image_url} alt={shoe.shoe_name} />
+                                                        <Link to={`/product/${shoe.id}`}>
+                                                            <Image src={shoe.image_url} alt={shoe.shoe_name} />
+                                                        </Link>
                                                     </Tippy>
                                                     {index === 14 && banner.shoes.length > 15 && (
                                                         <div className="image-count">+{banner.shoes.length - 14}</div>
