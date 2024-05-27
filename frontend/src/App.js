@@ -34,6 +34,8 @@ import promotionApi from '~/apis/promotion.api';
 import useAppStore from '~/store';
 import { useAxiosInterceptors } from '~/utils/http';
 import './index.css';
+import { CartContext } from './contexts/cart.context';
+import cartAPI from './apis/cart.api';
 function App() {
     const { accessToken, setAccessToken, setProducts } = useAppStore();
 
@@ -41,6 +43,7 @@ function App() {
     useAxiosInterceptors(accessToken, setAccessToken);
 
     const { setPromotions } = useContext(AppContext);
+    const { setCart, setTotalCartItem } = useContext(CartContext);
 
     // Fetch products on mount
     useEffect(() => {
@@ -66,6 +69,19 @@ function App() {
         };
         fetchPromotions();
     }, [setPromotions]);
+
+    // Fetch carts on mount
+    useEffect(() => {
+        if (accessToken) {
+            const fetchCart = async () => {
+                const response = await cartAPI.getAllCartItem();
+                setCart(response.data);
+                setTotalCartItem(response.data.total_item);
+            };
+            fetchCart();
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [setCart, setTotalCartItem]);
 
     return (
         <>

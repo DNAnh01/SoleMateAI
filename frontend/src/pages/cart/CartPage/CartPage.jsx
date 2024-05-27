@@ -1,12 +1,11 @@
+import { useContext } from 'react';
 import styled from 'styled-components';
 import { Container } from '~/styles/styles';
 import Breadcrumb from '~/components/common/Breadcrumb';
-import { cartItems } from '~/data/data.mock';
 import CartTable from '~/components/cart/CartTable';
 import { breakpoints } from '~/styles/themes/default';
 import CartSummary from '~/components/cart/CartSummary';
-import { CartContext } from '~/contexts/cart.context';
-import { useContext } from 'react';
+import { CartContext } from '~/contexts/cart.context'; // Assuming you have a CartContext defined
 
 const CartPageWrapper = styled.main`
     padding: 48px 0;
@@ -61,10 +60,13 @@ const CartPage = () => {
                 <Breadcrumb items={breadcrumbItems} />
                 <CartContent className="grid items-start">
                     <div className="cart-content-left">
-                        <CartTable cartItems={cartItems} />
+                        <CartTable cartItems={cart?.cart_items} />
                     </div>
                     <div className="grid cart-content-right">
-                        <CartSummary />
+                        <CartSummary
+                            totalDisplayPrice={cart?.total_display_price}
+                            totalDiscountedPrice={cart?.total_discounted_price}
+                        />
                     </div>
                 </CartContent>
             </Container>

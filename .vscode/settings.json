@@ -68,6 +68,7 @@
         "starlette",
         "tailwindcss",
         "tippyjs",
+        "toastify",
         "userdefault",
         "userinfo",
         "uvicorn",

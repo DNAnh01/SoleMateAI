@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { BaseButtonGreen } from '~/styles/button';
 import { breakpoints, defaultTheme } from '~/styles/themes/default';
+import { formatCurrency } from '~/utils/helper';
 
 const CartSummaryWrapper = styled.div`
     background-color: ${defaultTheme.color_flash_white};
@@ -31,25 +32,29 @@ const CartSummaryWrapper = styled.div`
     }
 `;
 
-const CartSummary = () => {
+const CartSummary = ({ totalDisplayPrice, totalDiscountedPrice }) => {
     return (
         <CartSummaryWrapper>
             <ul className="summary-list">
                 <li className="summary-item flex justify-between">
-                    <span className="font-medium text-outerspace">Tổng phụ</span>
-                    <span className="font-medium text-outerspace">4.500.000VND</span>
+                    <span className="font-medium text-outerspace">Tổng số tiền:</span>
+                    <span className="font-medium text-outerspace">{formatCurrency(totalDisplayPrice)}</span>
                 </li>
                 <li className="summary-item flex justify-between">
-                    <span className="font-medium text-outerspace">Vận chuyển</span>
-                    <span className="font-medium text-outerspace">50.000VND</span>
+                    <span className="font-medium text-outerspace">Tổng phần trăm khuyến mãi:</span>
+                    <span className="font-medium text-outerspace">
+                        {(((totalDisplayPrice - totalDiscountedPrice) / totalDisplayPrice) * 100).toFixed(3)}%
+                    </span>
                 </li>
                 <li className="summary-item flex justify-between">
-                    <span className="font-medium text-outerspace">Tổng cộng</span>
-                    <span className="summary-item-value font-bold text-outerspace">4.550.000VND</span>
+                    <span className="font-medium text-outerspace">Tổng số tiền phải thanh toán:</span>
+                    <span className="summary-item-value font-bold text-outerspace">
+                        {formatCurrency(totalDiscountedPrice)}
+                    </span>
                 </li>
             </ul>
             <BaseButtonGreen type="submit" className="checkout-btn">
-                Tiến hành thanh toán
+                Đặt hàng
             </BaseButtonGreen>
         </CartSummaryWrapper>
     );

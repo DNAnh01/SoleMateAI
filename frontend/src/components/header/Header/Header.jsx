@@ -127,28 +127,37 @@ const CartBadge = styled.div`
 `;
 
 const Header = () => {
-    const { setCart } = useContext(CartContext);
-    const [totalCartItem, setTotalCartItem] = useState(0);
-    const { clearLocalStorage, setIsAuthenticated, isSidebarOpen, setIsSidebarOpen, profile, isAuthenticated } =
-        useAppStore();
+    const { setCart, totalCartItem, setTotalCartItem } = useContext(CartContext);
+    const {
+        clearLocalStorage,
+        setIsAuthenticated,
+        isSidebarOpen,
+        setIsSidebarOpen,
+        profile,
+        isAuthenticated,
+        accessToken,
+    } = useAppStore();
     const location = useLocation();
     const navigate = useNavigate();
     const [activeButton, setActiveButton] = useState('signIn');
 
     useEffect(() => {
-        const fetchAllCartItem = async () => {
-            try {
-                const res = await cartAPI.getAllCartItem();
-                if (res.status === 200) {
-                    setCart(res.data);
-                    setTotalCartItem(res.data.cart_items.length);
+        if (accessToken) {
+            const fetchAllCartItem = async () => {
+                try {
+                    const res = await cartAPI.getAllCartItem();
+                    if (res.status === 200) {
+                        setCart(res.data);
+                        setTotalCartItem(res.data.total_item);
+                    }
+                } catch (error) {
+                    console.log(error);
                 }
-            } catch (error) {
-                console.log(error);
-            }
-        };
-        fetchAllCartItem();
-    }, [setCart, setTotalCartItem]);
+            };
+            fetchAllCartItem();
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [setCart]);
 
     const handleButtonClick = (button) => {
         setActiveButton(button);
@@ -186,14 +195,25 @@ const Header = () => {
                 <div className="header-wrap flex items-center justify-between">
                     <div className="flex items-center">
                         <button type="button" onClick={toggleSidebar}>
-                            <Icons
-                                icon="list"
-                                className={`ml-3 icon-link inline-flex items-center justify-center icon-default ${
-                                    isSidebarOpen ? 'active' : ''
-                                }`}
-                                color={defaultTheme.color_dim_gray}
-                            />
+                            <div
+                                className="mr-3"
+                                style={{
+                                    width: '36px',
+                                    height: '36px',
+                                    borderRadius: '6px',
+                                    position: 'relative',
+                                }}
+                            >
+                                <Icons
+                                    icon="list"
+                                    className={`icon-list ${
+                                        isSidebarOpen ? 'active' : ''
+                                    } inline-flex items-center justify-center icon-default`}
+                                    color={defaultTheme.color_dim_gray}
+                                />
+                            </div>
                         </button>
+
                         <SiteBrandWrapper to={configs.roures.home} className="inline-flex">
                             <div className="brand-img-wrap flex items-center justify-center">
                                 <img src={images.logo} alt="" className="site-brand-img" />

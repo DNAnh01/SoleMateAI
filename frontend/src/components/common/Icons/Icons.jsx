@@ -22,10 +22,13 @@ import {
     InstagramIcon,
     ListIcon,
     LoadingIcon,
+    MinusIcon,
     OptionsIcon,
     OrdersIcon,
     PlayIcon,
+    PlusIcon,
     ProductsIcon,
+    RemoveCartItemIcon,
     ReturnIcon,
     SearchIcon,
     SellPhoneLinkIcon,
@@ -78,6 +81,9 @@ const Icons = (props) => {
         play: PlayIcon,
         close: CloseIcon,
         sendMessage: SendMessageIcon,
+        minus: MinusIcon,
+        plus: PlusIcon,
+        removeCartItem: RemoveCartItemIcon,
     };
 
     const IconComponent = components[props.icon];

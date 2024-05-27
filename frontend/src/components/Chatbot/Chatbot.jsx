@@ -398,7 +398,7 @@ const Chatbot = () => {
         <ChatItem key={message.id} className={message.sender_type === 'guest' ? 'outgoing' : 'incoming'}>
             {message.sender_type === 'bot' && (
                 <span>
-                    <Image className="chatbot-icon" src={images.chatbot} alt="Bot" />
+                    <Image className="chatbot-icon" src={images.chatbot} alt="Bot" width={30} height={30} />
                 </span>
             )}
             <p>{message.message_text}</p>
@@ -436,7 +436,13 @@ const Chatbot = () => {
                         ) : (
                             <ChatItem className="incoming">
                                 <span>
-                                    <Image className="chatbot-icon" src={images.chatbot} alt="Bot" />
+                                    <Image
+                                        className="chatbot-icon"
+                                        src={images.chatbot}
+                                        alt="Bot"
+                                        width={30}
+                                        height={30}
+                                    />
                                 </span>
                                 <SkeletonLoading />
                             </ChatItem>
@@ -444,7 +450,13 @@ const Chatbot = () => {
                         {loading && (
                             <ChatItem className="incoming">
                                 <span>
-                                    <Image className="chatbot-icon" src={images.chatbot} alt="Bot" />
+                                    <Image
+                                        className="chatbot-icon"
+                                        src={images.chatbot}
+                                        alt="Bot"
+                                        width={30}
+                                        height={30}
+                                    />
                                 </span>
                                 <SkeletonLoading />
                             </ChatItem>

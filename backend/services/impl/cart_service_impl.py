@@ -37,10 +37,7 @@ class CartServiceImpl(CartService):
         add_cart_item_req: AddCartItemSchema,
         current_user_role_permission: UserRolePermissionSchema,
     ) -> JSONResponse:
-        if (
-            "create_cart_item"
-            not in current_user_role_permission.u_list_permission_name
-        ):
+        if "create_cart_item" not in current_user_role_permission.u_list_permission_name:
             logger.exception(
                 f"Exception in {__name__}.{self.__class__.__name__}.add_cart_item: User does not have permission to create cart item"
             )
@@ -51,6 +48,7 @@ class CartServiceImpl(CartService):
                     "message": "Add Cart Item failed: User does not have permission to create cart item",
                 },
             )
+        
         try:
             cart_found = self.__crud_cart.get_one_by(
                 db=db, filter={"user_id": current_user_role_permission.u_id}
@@ -60,13 +58,14 @@ class CartServiceImpl(CartService):
                     status_code=404,
                     content={"status": 404, "message": "Cart not found"},
                 )
+
             shoe_found = self.__crud_shoe.get(db=db, id=add_cart_item_req.shoe_id)
             if shoe_found is None:
                 return JSONResponse(
                     status_code=404,
                     content={"status": 404, "message": "Shoe not found"},
                 )
-            """check quantity in stock of shoe before add to cart"""
+
             if shoe_found.quantity_in_stock < add_cart_item_req.quantity:
                 logger.exception(
                     f"Exception in {__name__}.{self.__class__.__name__}.add_cart_item: Quantity in stock of shoe is not enough"
@@ -79,47 +78,49 @@ class CartServiceImpl(CartService):
                     },
                 )
 
-            cart_item_exists: CartItemInDBSchema = (
-                self.__cart_item_service.is_cart_item_exists(
-                    db=db, cart_id=cart_found.id, shoe_id=shoe_found.id
-                )
+            cart_item_exists = self.__cart_item_service.is_cart_item_exists(
+                db=db, cart_id=cart_found.id, shoe_id=shoe_found.id
             )
-            if cart_item_exists is not None:
-                cart_item_update_req = CartItemUpdateSchema(
-                    shoe_id=shoe_found.id, quantity=add_cart_item_req.quantity
-                )
 
-                updated_cart_item = self.__cart_item_service.update_cart_item(
+            if cart_item_exists is not None:
+                new_quantity = cart_item_exists.quantity + add_cart_item_req.quantity
+                if new_quantity <= 0:
+                    new_quantity = 1
+
+                cart_item_update_req = CartItemUpdateSchema(
+                    shoe_id=shoe_found.id,
+                    quantity=new_quantity,
+                )
+                self.__cart_item_service.update_cart_item(
                     db=db,
                     cart_item_update=cart_item_update_req,
                     current_user_role_permission=current_user_role_permission,
                 )
-
             else:
                 cart_item_create_req = CartItemCreateSchema(
                     shoe_id=shoe_found.id, quantity=add_cart_item_req.quantity
                 )
-                created_cart_item = self.__cart_item_service.create_cart_item(
+                self.__cart_item_service.create_cart_item(
                     db=db,
                     cart_item_create=cart_item_create_req,
                     current_user_role_permission=current_user_role_permission,
                 )
-            logger.info(
-                f"cart_found.total_warehouse_price: {cart_found.total_warehouse_price}"
-            )
+
+            logger.info(f"Cart updated successfully, total warehouse price: {cart_found.total_warehouse_price}")
 
             return JSONResponse(
                 status_code=200,
                 content={"status": 200, "message": "Add Cart Item successfully"},
             )
-        except:
-            logger.exception(
-                f"Exception in {__name__}.{self.__class__.__name__}.add_cart_item"
-            )
+
+        except Exception as e:
+            logger.exception(f"Exception in {__name__}.{self.__class__.__name__}.add_cart_item: {str(e)}")
             return JSONResponse(
                 status_code=500,
                 content={"status": 500, "message": "Internal Server Error"},
             )
+
+
 
     def get_cart(
         self, db: Session, current_user_role_permission: UserRolePermissionSchema

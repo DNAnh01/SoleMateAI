@@ -11,6 +11,7 @@ const baseUrl = {
     cart: {
         addCartItem: '/cart/add-cart-item',
         removeCartItem: '/cart/remove-cart-item',
+        removeMultipleCartItem: '/cart/remove-multiple-cart-items',
         getAllCartItem: '/cart/get-all',
     },
     message: {

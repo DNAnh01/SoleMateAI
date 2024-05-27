@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { breakpoints } from '~/styles/themes/default';
+import { breakpoints, defaultTheme } from '~/styles/themes/default';
 
 // common header stylings for both auth & main pages
 export const HeaderMainWrapper = styled.header`
@@ -28,6 +28,15 @@ export const HeaderMainWrapper = styled.header`
         height: 64px;
         line-height: 64px;
         vertical-align: middle;
+    }
+
+    .icon-list {
+        &.active {
+            background-color: ${defaultTheme.color_yellow_green};
+            img {
+                filter: brightness(100);
+            }
+        }
     }
 `;
 
