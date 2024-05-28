@@ -36,6 +36,8 @@ import { useAxiosInterceptors } from '~/utils/http';
 import './index.css';
 import { CartContext } from './contexts/cart.context';
 import cartAPI from './apis/cart.api';
+import { AddressContext } from './contexts/address.context';
+import addressApi from './apis/address.api';
 function App() {
     const { accessToken, setAccessToken, setProducts } = useAppStore();
 
@@ -44,6 +46,7 @@ function App() {
 
     const { setPromotions } = useContext(AppContext);
     const { setCart, setTotalCartItem } = useContext(CartContext);
+    const { setAddress } = useContext(AddressContext);
 
     // Fetch products on mount
     useEffect(() => {
@@ -82,6 +85,17 @@ function App() {
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [setCart, setTotalCartItem]);
+    // Fetch address on mount
+    useEffect(() => {
+        if (accessToken) {
+            const fetchAddress = async () => {
+                const response = await addressApi.getCurrentShippingAddress();
+                setAddress(response.data);
+            };
+            fetchAddress();
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [setAddress]);
 
     return (
         <>

@@ -68,8 +68,6 @@ def remove_multiple_cart_items(
     )
     return response
 
-
-
 @router.get("/get-all", status_code=status.HTTP_200_OK)
 def get_cart(
     current_user_role_permission: UserRolePermissionSchema = Depends(

@@ -1,5 +1,9 @@
 const baseUrl = {
     url: process.env.REACT_APP_BASE_URL,
+    address: {
+        addOrCheckAddress: '/address/',
+        getCurrentShippingAddress: '/address/',
+    },
     product: {
         getAll: '/shoe/get-all',
         getById: '/shoe/shoe-id=',

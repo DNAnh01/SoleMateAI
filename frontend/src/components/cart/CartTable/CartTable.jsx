@@ -72,7 +72,7 @@ const CartTableWrapper = styled.table`
 const CartTable = ({ cartItems }) => {
     const { setCart, setTotalCartItem } = useContext(CartContext);
     const [selectedItems, setSelectedItems] = useState([]);
-    console.log('selectedItems', selectedItems);
+
     const handleSelectCartItem = (shoeId, isSelected) => {
         if (isSelected) {
             setSelectedItems((prevSelectedItems) => [...prevSelectedItems, shoeId]);
@@ -92,9 +92,6 @@ const CartTable = ({ cartItems }) => {
 
         try {
             const response = await cartAPI.removeMultipleCartItem(selectedItems);
-            console.log('selectedItems', selectedItems);
-            console.log('response', response.data);
-
             if (response.status === 200) {
                 toast.success('Xóa sản phẩm thành công!', {
                     position: 'top-center',

@@ -54,8 +54,9 @@ class AddressServiceImpl(AddressService):
                     obj_in=AddressInDBSchema(
                         id=uuid.uuid4(),
                         user_id=current_user_role_permission.u_id,
-                        street=add_address_req.street,
-                        city=add_address_req.city,
+                        province=add_address_req.province,
+                        district=add_address_req.district,
+                        ward=add_address_req.ward,
                         is_active=True,
                         created_at=datetime.now(),
                         updated_at=datetime.now(),
@@ -68,8 +69,9 @@ class AddressServiceImpl(AddressService):
                 db=db,
                 filter={
                     "user_id": current_user_role_permission.u_id,
-                    "street": add_address_req.street,
-                    "city": add_address_req.city,
+                    "province": add_address_req.province,
+                    "district": add_address_req.district,
+                    "ward": add_address_req.ward,
                 },
             )
             if check_address is None:
@@ -81,8 +83,9 @@ class AddressServiceImpl(AddressService):
                     obj_in=AddressInDBSchema(
                         id=uuid.uuid4(),
                         user_id=current_user_role_permission.u_id,
-                        street=add_address_req.street,
-                        city=add_address_req.city,
+                        province=add_address_req.province,
+                        district=add_address_req.district,
+                        ward=add_address_req.ward,
                         is_active=True,
                         created_at=datetime.now(),
                         updated_at=datetime.now(),

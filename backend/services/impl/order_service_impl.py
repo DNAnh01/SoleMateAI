@@ -56,6 +56,7 @@ class OrderServiceImpl(OrderService):
         shipping_address: AddAddressSchema,
         current_user_role_permission: UserRolePermissionSchema,
     ) -> Optional[OrderOutSchema]:
+        """check permission to create order"""
         if "create_order" not in current_user_role_permission.u_list_permission_name:
             logger.exception(
                 f"Exception in {__name__}.{self.__class__.__name__}.create_order: User does not have permission to create order"
@@ -110,7 +111,7 @@ class OrderServiceImpl(OrderService):
 
             for cart_item in cart_found.cart_items:
                 """create order item for each cart item in cart"""
-                if cart_item.is_active is True and cart_item.deleted_at is None:
+                if cart_item.is_active is True and cart_item.deleted_at is None and cart_item.quantity > 0:
                     created_order_item = self.__crud_order_item.create(
                         db=db,
                         obj_in=OrderItemInDBSchema(

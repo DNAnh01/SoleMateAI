@@ -31,6 +31,11 @@ export const HeaderMainWrapper = styled.header`
     }
 
     .icon-list {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 6px;
+        border-radius: 6px;
         &.active {
             background-color: ${defaultTheme.color_yellow_green};
             img {

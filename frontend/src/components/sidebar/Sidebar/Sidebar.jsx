@@ -52,13 +52,14 @@ const SideNavigationWrapper = styled.div`
             padding: 5px 5px 5px 12px;
             border-radius: 4px;
             transition: ${defaultTheme.default_transition};
-
+            transform: scale(1);
             &:hover {
-                background: rgba(0, 0, 0, 0.05);
+                background: ${defaultTheme.color_yellow_green};
+                transform: scale(1.05);
 
                 a {
                     span {
-                        color: ${defaultTheme.color_yellow_green};
+                        color: ${defaultTheme.color_white};
                     }
                 }
             }
@@ -76,6 +77,7 @@ const SideNavigationWrapper = styled.div`
         width: 100%;
     }
 `;
+
 const sideMenuData = [
     {
         id: 'side-menu-1',
@@ -91,13 +93,13 @@ const sideMenuData = [
     },
     {
         id: 'side-menu-4',
-        menuLink: '/account',
+        menuLink: configs.roures.user.profile,
         menuText: 'Tài khoản',
         iconName: 'person-fill',
     },
     {
         id: 'side-menu-5',
-        menuLink: '/cart',
+        menuLink: configs.roures.user.cart,
         menuText: 'Giỏ hàng',
         iconName: 'bag-check-fill',
     },
@@ -105,9 +107,6 @@ const sideMenuData = [
 
 const Sidebar = () => {
     const location = useLocation();
-    // const isSidebarOpen = useSelector(selectIsSidebarOpen);
-    // const dispatch = useDispatch();
-
     const { isSidebarOpen, setIsSidebarOpen } = useAppStore();
     const toggleSidebar = () => {
         setIsSidebarOpen(!isSidebarOpen);

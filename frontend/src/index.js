@@ -4,14 +4,17 @@ import App from '~/App';
 import { AppProvider } from './contexts/app.context';
 import { ProductFilterProvider } from './contexts/productFilter.context';
 import { CartProvider } from './contexts/cart.context';
+import { AddressProvider } from './contexts/address.context';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <AppProvider>
-        <CartProvider>
-            <ProductFilterProvider>
-                <App />
-            </ProductFilterProvider>
-        </CartProvider>
+        <AddressProvider>
+            <CartProvider>
+                <ProductFilterProvider>
+                    <App />
+                </ProductFilterProvider>
+            </CartProvider>
+        </AddressProvider>
     </AppProvider>,
 );

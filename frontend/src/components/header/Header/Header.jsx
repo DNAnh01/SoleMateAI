@@ -195,20 +195,10 @@ const Header = () => {
                 <div className="header-wrap flex items-center justify-between">
                     <div className="flex items-center">
                         <button type="button" onClick={toggleSidebar}>
-                            <div
-                                className="mr-3"
-                                style={{
-                                    width: '36px',
-                                    height: '36px',
-                                    borderRadius: '6px',
-                                    position: 'relative',
-                                }}
-                            >
+                            <div className={`icon-list ${isSidebarOpen ? 'active' : ''}`}>
                                 <Icons
                                     icon="list"
-                                    className={`icon-list ${
-                                        isSidebarOpen ? 'active' : ''
-                                    } inline-flex items-center justify-center icon-default`}
+                                    className="inline-flex items-center justify-center icon-default"
                                     color={defaultTheme.color_dim_gray}
                                 />
                             </div>

@@ -120,7 +120,6 @@ const FooterWrapper = styled.footer`
     }
 `;
 
-
 const footerData = [
     {
         id: 'f_need_help',
@@ -129,7 +128,6 @@ const footerData = [
             { text: 'Liên Hệ Chúng Tôi', url: '/contact' },
             { text: 'Theo Dõi Đơn Hàng', url: '/track_order' },
             { text: 'Trả Hàng & Hoàn Tiền', url: '/returns_refunds' },
-            { text: 'Câu Hỏi Thường Gặp', url: '/faqs' },
         ],
     },
     {
@@ -139,7 +137,6 @@ const footerData = [
             { text: 'Về Chúng Tôi', url: '*' },
             { text: 'Sole Mate AI', url: '*' },
             { text: 'Hợp Tác', url: '*' },
-            { text: 'Truyền Thông', url: '*' },
         ],
     },
     {
@@ -173,9 +170,8 @@ const socialLinksData = [
     {
         id: 'social_link_3',
         icon_name: 'instagram',
-    }
+    },
 ];
-
 
 const Footer = () => {
     return (
@@ -219,7 +215,7 @@ const Footer = () => {
                                     key={socialLink.id}
                                     className="ftr-social-link bg-white flex items-center justify-center"
                                 >
-                                    <div className='social-icon'>
+                                    <div className="social-icon">
                                         <Icons icon={socialLink.icon_name} width={18} height={18} />
                                     </div>
                                 </Link>

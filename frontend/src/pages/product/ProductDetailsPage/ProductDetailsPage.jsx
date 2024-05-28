@@ -369,7 +369,6 @@ const ProductDetailsPage = () => {
                 const response = await productApi.getById(id);
                 if (response.status === 200) {
                     setProduct(response.data);
-                    console.log(response.data);
                     setBrandName(response.data.brand.brand_name);
                 }
             } catch (error) {

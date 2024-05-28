@@ -26,8 +26,6 @@ const useAxiosInterceptors = (accessToken, setAccessToken) => {
             (response) => response,
             (error) => {
                 if (error.response?.status !== 200 && error.response?.status !== 201) {
-                    // setAccessToken('');
-                    // window.location.href = configs.roures.auth.signIn;
                     toast.error('Có lỗi xảy ra, vui lòng thử lại sau.', {
                         autoClose: 5000,
                     });

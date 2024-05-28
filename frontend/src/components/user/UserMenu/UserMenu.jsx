@@ -2,6 +2,8 @@ import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import Icons from '~/components/common/Icons/Icons';
 import Title from '~/components/common/Title';
+import configs from '~/configs';
+import useAppStore from '~/store';
 import { breakpoints, defaultTheme } from '~/styles/themes/default';
 
 const NavMenuWrapper = styled.nav`
@@ -65,45 +67,42 @@ const NavMenuWrapper = styled.nav`
 `;
 
 const UserMenu = () => {
+    const { profile } = useAppStore();
+    // console.log(profile);
+
     const location = useLocation();
     return (
         <div>
-            <Title titleText={'Hello Richard'} />
-            <p className="text-base font-light italic">Welcome to your account.</p>
-
+            <Title titleText={profile.display_name} />
             <NavMenuWrapper>
                 <ul className="nav-menu-list grid">
                     <li className="nav-menu-item">
                         <Link
                             to="/order"
-                            className={`nav-menu-link flex items-center ${location.pathname === '/order' || location.pathname === '/order_detail' ? 'active' : ''
-                                }`}
+                            className={`nav-menu-link flex items-center ${
+                                location.pathname === '/order' || location.pathname === '/order_detail' ? 'active' : ''
+                            }`}
                         >
                             <span className="nav-link-icon flex items-center justify-center">
-                                <img src="./assets/icons/ac_orders.svg" alt="" />
+                                <Icons icon="cart" width={20} height={20} color={defaultTheme.color_gray} />
                             </span>
-                            <span className="text-base font-semibold nav-link-text no-wrap">My orders</span>
+                            <span className="text-base font-semibold nav-link-text no-wrap">Các đơn hàng</span>
                         </Link>
                     </li>
                     <li className="nav-menu-item">
                         <Link
-                            to="/account"
-                            className={`nav-menu-link flex items-center ${location.pathname === '/account' || location.pathname === '/account/add' ? 'active' : ''
-                                }`}
+                            to={configs.roures.user.profile}
+                            className={`nav-menu-link flex items-center ${
+                                location.pathname === `${configs.roures.user.profile}` ||
+                                location.pathname === `${configs.roures.user.addAddress}`
+                                    ? 'active'
+                                    : ''
+                            }`}
                         >
                             <span className="nav-link-icon flex items-center justify-center">
-                                <img src="./assets/icons/ac_user.svg" alt="" />
+                                <Icons icon="user" width={20} height={20} color={defaultTheme.color_gray} />
                             </span>
-                            <span className="text-base font-semibold nav-link-text no-wrap">My Account</span>
-                        </Link>
-                    </li>
-                    <li className="nav-menu-item">
-                        <Link to="/" className={`nav-menu-link flex items-center`}>
-                            <span className="nav-link-icon flex items-center justify-center">
-                                <img src="./assets/icons/ac_sign_out.svg" alt="" />
-                                <Icons icon='signOut' width={25} height={25} />
-                            </span>
-                            <span className="text-base font-semibold nav-link-text no-wrap">Sign out</span>
+                            <span className="text-base font-semibold nav-link-text no-wrap">Tài khoản của tôi</span>
                         </Link>
                     </li>
                 </ul>
