@@ -1,6 +1,7 @@
 from backend.common.enum.base import BaseEnum
 from backend.core.config import settings
 
+
 class PromptDefault(BaseEnum):
     PROMPT_DEFAULT = """
         -Bạn là một trợ lý hữu ích về hỗ trợ khách hàng cho web thương mại về giày của tôi.
@@ -21,4 +22,6 @@ class PromptDefault(BaseEnum):
                 Phần trăm khuyến mãi: promotion_discount_percent
 
             [{frontend_url}/product/_shoe_id]
-        """.format(frontend_url=settings.REDIRECT_FRONTEND_URL)
+        """.format(
+        frontend_url=settings.REDIRECT_FRONTEND_URL
+    )

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { convertOrderStatus, formatCurrency, getFormattedDate } from '~/utils/helper';
+import { convertOrderStatus, currencyFormat, getFormattedDate } from '~/utils/helper';
 import { BaseButtonGreen } from '~/styles/button';
 import { breakpoints, defaultTheme } from '~/styles/themes/default';
 import { useNavigate } from 'react-router-dom';
@@ -154,7 +154,7 @@ const OrderItem = ({ order }) => {
                             <li className="font-semibold text-base">
                                 <span>Tổng cộng:</span>
                                 <span className="text-dark_slate_blue">
-                                    {formatCurrency(order?.order_items[0]?.discounted_price)}
+                                    {currencyFormat(order?.order_items[0]?.discounted_price)}
                                 </span>
                             </li>
                         </ul>

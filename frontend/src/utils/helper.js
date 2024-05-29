@@ -1,8 +1,4 @@
-export function currencyFormat(num) {
-    return '$' + num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
-}
-
-export const formatCurrency = (amount) => {
+export const currencyFormat = (amount) => {
     if (typeof amount !== 'number') return '';
 
     return amount.toLocaleString('vi-VN', {

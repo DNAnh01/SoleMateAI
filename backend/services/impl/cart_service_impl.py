@@ -4,16 +4,15 @@ from sqlalchemy.orm import Session
 from backend.common.logger import setup_logger
 from backend.crud.crud_cart import crud_cart
 from backend.crud.crud_shoe import crud_shoe
-from backend.schemas.cart_item_schema import (
-    AddCartItemSchema,
-    CartItemCreateSchema,
-    CartItemInDBSchema,
-    CartItemOutSchema,
-    CartItemUpdateSchema,
-)
+from backend.schemas.cart_item_schema import (AddCartItemSchema,
+                                              CartItemCreateSchema,
+                                              CartItemInDBSchema,
+                                              CartItemOutSchema,
+                                              CartItemUpdateSchema)
 from backend.schemas.cart_schema import CartOutSchema
 from backend.schemas.shoe_schema import ShoeOutSchema
-from backend.schemas.user_role_permission_schema import UserRolePermissionSchema
+from backend.schemas.user_role_permission_schema import \
+    UserRolePermissionSchema
 from backend.services.abc.cart_item_service import CartItemService
 from backend.services.abc.cart_service import CartService
 from backend.services.abc.shoe_service import ShoeService
@@ -37,7 +36,10 @@ class CartServiceImpl(CartService):
         add_cart_item_req: AddCartItemSchema,
         current_user_role_permission: UserRolePermissionSchema,
     ) -> JSONResponse:
-        if "create_cart_item" not in current_user_role_permission.u_list_permission_name:
+        if (
+            "create_cart_item"
+            not in current_user_role_permission.u_list_permission_name
+        ):
             logger.exception(
                 f"Exception in {__name__}.{self.__class__.__name__}.add_cart_item: User does not have permission to create cart item"
             )
@@ -48,7 +50,7 @@ class CartServiceImpl(CartService):
                     "message": "Add Cart Item failed: User does not have permission to create cart item",
                 },
             )
-        
+
         try:
             cart_found = self.__crud_cart.get_one_by(
                 db=db, filter={"user_id": current_user_role_permission.u_id}
@@ -106,7 +108,9 @@ class CartServiceImpl(CartService):
                     current_user_role_permission=current_user_role_permission,
                 )
 
-            logger.info(f"Cart updated successfully, total warehouse price: {cart_found.total_warehouse_price}")
+            logger.info(
+                f"Cart updated successfully, total warehouse price: {cart_found.total_warehouse_price}"
+            )
 
             return JSONResponse(
                 status_code=200,
@@ -114,13 +118,13 @@ class CartServiceImpl(CartService):
             )
 
         except Exception as e:
-            logger.exception(f"Exception in {__name__}.{self.__class__.__name__}.add_cart_item: {str(e)}")
+            logger.exception(
+                f"Exception in {__name__}.{self.__class__.__name__}.add_cart_item: {str(e)}"
+            )
             return JSONResponse(
                 status_code=500,
                 content={"status": 500, "message": "Internal Server Error"},
             )
-
-
 
     def get_cart(
         self, db: Session, current_user_role_permission: UserRolePermissionSchema

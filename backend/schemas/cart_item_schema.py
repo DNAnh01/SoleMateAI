@@ -1,5 +1,5 @@
 import uuid
-from typing import ClassVar, Optional, List
+from typing import ClassVar, List, Optional
 
 import pydantic
 
@@ -24,8 +24,8 @@ class CartItemUpdateSchema(pydantic.BaseModel):
 
 class CartItemRemoveSchema(pydantic.BaseModel):
     shoe_id: uuid.UUID
-    
-    
+
+
 class CartItemRemoveMultipleSchema(pydantic.BaseModel):
     shoe_ids: List[uuid.UUID]
 

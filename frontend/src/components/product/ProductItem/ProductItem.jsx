@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { formatCurrency } from '~/utils/helper';
+import { currencyFormat } from '~/utils/helper';
 import { breakpoints, defaultTheme } from '~/styles/themes/default';
 import { FaStar } from 'react-icons/fa';
 import { useContext } from 'react';
@@ -274,8 +274,8 @@ const ProductItem = ({ product }) => {
                     <p className="quantity">Số lượng: {product.quantity_in_stock}</p>
                 </div>
                 <div className="prices">
-                    <p className="price">{formatCurrency(product.display_price)}</p>
-                    <p className="discounted-price">{formatCurrency(product.discounted_price)}</p>
+                    <p className="price">{currencyFormat(product.display_price)}</p>
+                    <p className="discounted-price">{currencyFormat(product.discounted_price)}</p>
                 </div>
             </ProductContent>
             <AddToCartButton className="add-to-cart" onClick={handleAddToCart}>

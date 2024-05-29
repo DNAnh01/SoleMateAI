@@ -8,7 +8,7 @@ import { AddressContext } from '~/contexts/address.context';
 import { OrderContext } from '~/contexts/order.context';
 import { BaseButtonGreen } from '~/styles/button';
 import { breakpoints, defaultTheme } from '~/styles/themes/default';
-import { formatCurrency } from '~/utils/helper';
+import { currencyFormat } from '~/utils/helper';
 
 const CartSummaryWrapper = styled.div`
     background-color: ${defaultTheme.color_flash_white};
@@ -108,7 +108,7 @@ const CartSummary = ({ totalDisplayPrice, totalDiscountedPrice }) => {
             <ul className="summary-list">
                 <li className="summary-item flex justify-between">
                     <span className="font-medium text-outerspace">Tổng số tiền:</span>
-                    <span className="font-medium text-outerspace">{formatCurrency(totalDisplayPrice)}</span>
+                    <span className="font-medium text-outerspace">{currencyFormat(totalDisplayPrice)}</span>
                 </li>
                 <li className="summary-item flex justify-between">
                     <span className="font-medium text-outerspace">Tổng phần trăm khuyến mãi:</span>
@@ -119,7 +119,7 @@ const CartSummary = ({ totalDisplayPrice, totalDiscountedPrice }) => {
                 <li className="summary-item flex justify-between">
                     <span className="font-medium text-outerspace">Tổng số tiền phải thanh toán:</span>
                     <span className="summary-item-value font-bold text-outerspace">
-                        {formatCurrency(totalDiscountedPrice)}
+                        {currencyFormat(totalDiscountedPrice)}
                     </span>
                 </li>
             </ul>

@@ -16,19 +16,13 @@ from backend.crud.crud_role import crud_role
 from backend.crud.crud_user import crud_user
 from backend.crud.crud_user_session import crud_user_session
 from backend.models.user import User
-from backend.schemas.auth_schema import (
-    ChangePasswordSchema,
-    EmailSchema,
-    TokenSchema,
-    UserSignInSchema,
-    UserSignUpSchema,
-)
+from backend.schemas.auth_schema import (ChangePasswordSchema, EmailSchema,
+                                         TokenSchema, UserSignInSchema,
+                                         UserSignUpSchema)
 from backend.schemas.cart_schema import CartCreateSchema
 from backend.schemas.user_schema import UserInDBSchema, UserOutSchema
-from backend.schemas.user_session_schema import (
-    UserSessionCreateSchema,
-    UserSessionUpdateSchema,
-)
+from backend.schemas.user_session_schema import (UserSessionCreateSchema,
+                                                 UserSessionUpdateSchema)
 from backend.services.abc.auth_service import AuthService
 
 logger = setup_logger()

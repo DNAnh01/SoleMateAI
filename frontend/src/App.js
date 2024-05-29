@@ -40,6 +40,8 @@ import { AddressContext } from './contexts/address.context';
 import addressApi from './apis/address.api';
 import { ProductFilterProvider } from './contexts/productFilter.context';
 import OrderEmpty from './pages/empty/OrderEmptyPage';
+import { OrderContext } from './contexts/order.context';
+import orderApi from './apis/order.api';
 function App() {
     const { accessToken, setAccessToken, setProducts } = useAppStore();
 
@@ -49,6 +51,7 @@ function App() {
     const { setPromotions } = useContext(AppContext);
     const { setCart, setTotalCartItem } = useContext(CartContext);
     const { setAddress } = useContext(AddressContext);
+    const { setHistoryOrders } = useContext(OrderContext);
 
     // Fetch products on mount
     useEffect(() => {
@@ -96,6 +99,23 @@ function App() {
             fetchAddress();
         }
     }, [setAddress, accessToken]);
+    // Fetch orders on mount
+    useEffect(() => {
+        if (accessToken) {
+            const fetchOrders = async () => {
+                try {
+                    const response = await orderApi.getHistoryOrderByFilter({
+                        status: 'ORDER-PLACED',
+                        orderDate: '',
+                    });
+                    setHistoryOrders(response.data);
+                } catch (error) {
+                    console.log('error', error);
+                }
+            };
+            fetchOrders();
+        }
+    }, [setHistoryOrders, accessToken]);
 
     return (
         <>

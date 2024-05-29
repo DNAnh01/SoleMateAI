@@ -42,11 +42,16 @@ const NavMenuWrapper = styled.nav`
 
         .nav-link-text {
             color: ${defaultTheme.color_gray};
+
+            &.active {
+                color: ${defaultTheme.color_white};
+            }
         }
 
         &.active {
-            border-left: 2px solid ${defaultTheme.color_gray};
+            border-left: 4px solid ${defaultTheme.color_purple};
             background-color: ${defaultTheme.color_yellow_green};
+            color: ${defaultTheme.color_white};
 
             @media (max-width: ${breakpoints.md}) {
                 border-bottom: 2px solid ${defaultTheme.color_gray};
@@ -70,7 +75,6 @@ const NavMenuWrapper = styled.nav`
 
 const UserMenu = () => {
     const { profile } = useAppStore();
-    // console.log(profile);
     const { historyOrders } = useContext(OrderContext);
 
     const location = useLocation();
@@ -90,9 +94,29 @@ const UserMenu = () => {
                             }`}
                         >
                             <span className="nav-link-icon flex items-center justify-center">
-                                <Icons icon="cart" width={20} height={20} color={defaultTheme.color_gray} />
+                                <Icons
+                                    className=""
+                                    icon="cart"
+                                    width={20}
+                                    height={20}
+                                    color={
+                                        location.pathname === configs.roures.user.order ||
+                                        location.pathname === configs.roures.user.orderDetail
+                                            ? defaultTheme.color_white
+                                            : defaultTheme.color_gray
+                                    }
+                                />
                             </span>
-                            <span className="text-base font-semibold nav-link-text no-wrap">Các đơn hàng</span>
+                            <span
+                                className={`text-base font-semibold nav-link-text no-wrap ${
+                                    location.pathname === configs.roures.user.order ||
+                                    location.pathname === configs.roures.user.orderDetail
+                                        ? 'active'
+                                        : ''
+                                }`}
+                            >
+                                Các đơn hàng
+                            </span>
                         </Link>
                     </li>
                     <li className="nav-menu-item">
@@ -106,9 +130,29 @@ const UserMenu = () => {
                             }`}
                         >
                             <span className="nav-link-icon flex items-center justify-center">
-                                <Icons icon="user" width={20} height={20} color={defaultTheme.color_gray} />
+                                <Icons
+                                    className=""
+                                    icon="user"
+                                    width={20}
+                                    height={20}
+                                    color={
+                                        location.pathname === `${configs.roures.user.profile}` ||
+                                        location.pathname === `${configs.roures.user.addAddress}`
+                                            ? defaultTheme.color_white
+                                            : defaultTheme.color_gray
+                                    }
+                                />
                             </span>
-                            <span className="text-base font-semibold nav-link-text no-wrap">Tài khoản của tôi</span>
+                            <span
+                                className={`text-base font-semibold nav-link-text no-wrap ${
+                                    location.pathname === `${configs.roures.user.profile}` ||
+                                    location.pathname === `${configs.roures.user.addAddress}`
+                                        ? 'active'
+                                        : ''
+                                }`}
+                            >
+                                Tài khoản của tôi
+                            </span>
                         </Link>
                     </li>
                 </ul>

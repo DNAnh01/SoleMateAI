@@ -5,9 +5,12 @@ from sqlalchemy.orm import Session
 from backend.api import deps
 from backend.common.logger import setup_logger
 from backend.core import oauth2
-from backend.schemas.cart_item_schema import AddCartItemSchema, CartItemRemoveSchema, CartItemRemoveMultipleSchema
+from backend.schemas.cart_item_schema import (AddCartItemSchema,
+                                              CartItemRemoveMultipleSchema,
+                                              CartItemRemoveSchema)
 from backend.schemas.cart_schema import CartOutSchema
-from backend.schemas.user_role_permission_schema import UserRolePermissionSchema
+from backend.schemas.user_role_permission_schema import \
+    UserRolePermissionSchema
 from backend.services.abc.cart_item_service import CartItemService
 from backend.services.abc.cart_service import CartService
 from backend.services.impl.cart_item_service_impl import CartItemServiceImpl
@@ -67,6 +70,7 @@ def remove_multiple_cart_items(
         current_user_role_permission=current_user_role_permission,
     )
     return response
+
 
 @router.get("/get-all", status_code=status.HTTP_200_OK)
 def get_cart(

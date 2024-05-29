@@ -436,8 +436,7 @@ def init_db():
                 address_ward = str(row[1])
                 address_district = str(row[2])
                 address_province = str(row[3])
-                
-                
+
                 address_is_active = False
                 address_created_at = datetime.strptime(row[4], "%Y-%m-%d").replace(
                     tzinfo=pytz.utc
@@ -474,13 +473,14 @@ def init_db():
                 )
                 if user_found is None:
                     logger.error(f"User {row[0]} not found")
-                    
+
                 address_ward = str(row[1])
                 address_district = str(row[2])
                 address_province = str(row[3])
-                logger.info(f"Address: {address_ward}, {address_district}, {address_province}")
-                
-                
+                logger.info(
+                    f"Address: {address_ward}, {address_district}, {address_province}"
+                )
+
                 order_date = datetime.strptime(row[4], "%Y-%m-%d").replace(
                     tzinfo=pytz.utc
                 )
@@ -518,10 +518,12 @@ def init_db():
                         "user_id": user_found.id,
                         "province": address_province,
                         "district": address_district,
-                        "ward": address_ward
+                        "ward": address_ward,
                     },
                 )
-                logger.info(f"Address found: {address_found.province}, {address_found.district}, {address_found.ward}")
+                logger.info(
+                    f"Address found: {address_found.province}, {address_found.district}, {address_found.ward}"
+                )
                 created_order = crud_order.create(
                     db=session,
                     obj_in=OrderInDBSchema(

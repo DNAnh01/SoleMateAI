@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { breakpoints, defaultTheme } from '~/styles/themes/default';
-import { formatCurrency } from '~/utils/helper';
+import { currencyFormat } from '~/utils/helper';
 import Icons from '~/components/common/Icons/Icons';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { CartContext } from '~/contexts/cart.context';
 import cartAPI from '~/apis/cart.api';
 import { toast } from 'react-toastify';
@@ -71,9 +71,44 @@ const CartTableRowWrapper = styled.tr`
     }
 `;
 
+const StyledCheckbox = styled.input.attrs({ type: 'checkbox' })`
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background-color: ${(props) =>
+        props.checked ? `${defaultTheme.color_yellow_green}` : `${defaultTheme.color_white}`};
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s, box-shadow 0.2s;
+    position: relative;
+
+    &:checked {
+        background-color: ${defaultTheme.color_yellow_green};
+        &::after {
+            content: '✔';
+            color: ${defaultTheme.color_white};
+            font-size: 14px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
+
+    &:hover {
+        box-shadow: 0 0 0 2px ${defaultTheme.color_black_04};
+    }
+
+    &:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px ${defaultTheme.color_dark_slate_blue};
+    }
+`;
+
 const CartItem = ({ cartItem, onSelectCartItem }) => {
     const { setCart, setTotalCartItem } = useContext(CartContext);
-
+    const [checked, setChecked] = useState(false);
     const handleMinusClick = async () => {
         try {
             if (cartItem.quantity > 1) {
@@ -115,6 +150,7 @@ const CartItem = ({ cartItem, onSelectCartItem }) => {
     };
 
     const handleSelect = (e) => {
+        setChecked(e.target.checked);
         onSelectCartItem(cartItem.shoe_id, e.target.checked);
     };
 
@@ -142,12 +178,12 @@ const CartItem = ({ cartItem, onSelectCartItem }) => {
             </td>
             <td>
                 <span className="text-lg font-bold text-outerspace">
-                    {formatCurrency(cartItem?.shoe?.display_price)}
+                    {currencyFormat(cartItem?.shoe?.display_price)}
                 </span>
             </td>
             <td>
                 <span className="text-lg font-bold text-outerspace">
-                    {formatCurrency(cartItem?.shoe?.discounted_price)}
+                    {currencyFormat(cartItem?.shoe?.discounted_price)}
                 </span>
             </td>
             <td>
@@ -164,10 +200,10 @@ const CartItem = ({ cartItem, onSelectCartItem }) => {
                 </div>
             </td>
             <td>
-                <span className="text-lg font-bold text-outerspace">{formatCurrency(cartItem?.discounted_price)}</span>
+                <span className="text-lg font-bold text-outerspace">{currencyFormat(cartItem?.discounted_price)}</span>
             </td>
             <td>
-                <input type="checkbox" onChange={handleSelect} />
+                <StyledCheckbox checked={checked} onChange={handleSelect} />
             </td>
         </CartTableRowWrapper>
     );

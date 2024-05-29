@@ -37,6 +37,5 @@ class AddressInDBSchema(BaseSchema):
     district: str
     ward: str
 
-
     class Config:
         orm_mode = True

@@ -5,7 +5,8 @@ from sqlalchemy.orm import Session
 
 from backend.schemas.cart_item_schema import AddCartItemSchema
 from backend.schemas.cart_schema import CartOutSchema
-from backend.schemas.user_role_permission_schema import UserRolePermissionSchema
+from backend.schemas.user_role_permission_schema import \
+    UserRolePermissionSchema
 
 
 class CartService(ABC):

@@ -8,7 +8,7 @@ import productApi from '~/apis/product.api';
 import ProductSimilar from '~/components/product/ProductSimilar';
 import { FaStar } from 'react-icons/fa';
 import { useParams } from 'react-router-dom';
-import { formatCurrency } from '~/utils/helper';
+import { currencyFormat } from '~/utils/helper';
 import Icons from '~/components/common/Icons/Icons';
 import { CartContext } from '~/contexts/cart.context';
 import cartAPI from '~/apis/cart.api';
@@ -444,9 +444,9 @@ const ProductDetailsPage = () => {
                                 <p className="text-lg font-semibold text-outerspace">Giá cả</p>
                             </div>
                             <div>
-                                <span className="prod-price">{formatCurrency(product.display_price)}</span>
+                                <span className="prod-price">{currencyFormat(product.display_price)}</span>
                                 <span className="prod-discounted-price">
-                                    {formatCurrency(product.discounted_price)}
+                                    {currencyFormat(product.discounted_price)}
                                 </span>
                             </div>
                             <BaseButtonGreen className="prod-add-btn" onClick={handleAddToCart}>
