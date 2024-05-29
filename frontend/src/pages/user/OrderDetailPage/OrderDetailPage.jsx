@@ -3,11 +3,16 @@ import { Container } from '~/styles/styles';
 import Breadcrumb from '~/components/common/Breadcrumb';
 import { UserContent, UserDashboardWrapper } from '~/styles/user';
 import UserMenu from '~/components/user/UserMenu';
-import { Link } from 'react-router-dom';
 import Title from '~/components/common/Title';
 import { orderData } from '~/data/data.mock';
-import { currencyFormat } from '~/utils/helper';
+import { currencyFormat, formatCurrency, getFormattedDate } from '~/utils/helper';
 import { breakpoints, defaultTheme } from '~/styles/themes/default';
+import configs from '~/configs';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { BaseButtonBlack, BaseButtonGreen } from '~/styles/button';
+import orderApi from '~/apis/order.api';
+import { toast } from 'react-toastify';
 
 const OrderDetailPageWrapper = styled.main`
     .btn-and-title-wrapper {
@@ -248,12 +253,97 @@ const OrderDetailListWrapper = styled.div`
 `;
 
 const breadcrumbItems = [
-    { label: 'Home', link: '/' },
-    { label: 'Order', link: '/order' },
-    { label: 'Order Details', link: '/order_detail' },
+    { label: 'Home', link: configs.roures.home },
+    { label: 'Order', link: configs.roures.user.order },
+    { label: 'Order Details', link: configs.roures.user.orderDetail },
 ];
 
+/**
+{
+    "id": "2f6644ad-6db7-4b0c-bbef-aaca3ad26179",
+    "address_id": "22378672-67b4-4604-be86-c48602e20784",
+    "user_id": "4a44ac73-b93e-4d30-8e40-1471b57f4a76",
+    "order_date": "2024-05-29T14:20:29.682646",
+    "delivery_date": "2024-06-05T14:20:29.682646",
+    "status": "ORDER-PLACED",
+    "total_item": 1,
+    "total_display_price": 2000000.0,
+    "total_warehouse_price": 1500000.0,
+    "total_discounted_price": 1800000.0,
+    "shipping_address": {
+        "is_active": false,
+        "created_at": "2024-05-29T13:54:32.402109+07:00",
+        "updated_at": "2024-05-29T18:20:32.133526+07:00",
+        "deleted_at": "2024-05-29T18:20:32.129523+07:00",
+        "id": "22378672-67b4-4604-be86-c48602e20784",
+        "user_id": "4a44ac73-b93e-4d30-8e40-1471b57f4a76",
+        "province": "Thành phố Đà Nẵng",
+        "district": "Quận Liên Chiểu",
+        "ward": "Phường Hòa Khánh Bắc"
+    },
+    "order_items": [
+        {
+            "id": "f5e004a6-e219-471f-a8b5-45a1725d2a5d",
+            "order_id": "2f6644ad-6db7-4b0c-bbef-aaca3ad26179",
+            "shoe_id": "e90a9037-623b-4b2d-a2ac-1b3f8a4ab905",
+            "shoe": {
+                "is_active": true,
+                "created_at": "2024-05-28T18:19:05.951230+07:00",
+                "updated_at": "2024-05-29T18:20:08.850415+07:00",
+                "deleted_at": null,
+                "id": "e90a9037-623b-4b2d-a2ac-1b3f8a4ab905",
+                "brand": {
+                    "brand_name": "Puma",
+                    "brand_logo": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/brand_logo_Puma.png"
+                },
+                "size": {
+                    "size_number": 43
+                },
+                "color": {
+                    "color_name": "Black",
+                    "hex_value": "#2a292b"
+                },
+                "image_url": "https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/shoe8.png",
+                "shoe_name": "Puma Suede Classic+",
+                "description": "Giày thể thao nam Puma Suede Classic+ mang đến sự êm ái, thoải mái cho người sử dụng.",
+                "quantity_in_stock": 90,
+                "display_price": 2000000.0,
+                "warehouse_price": 1500000.0,
+                "discounted_price": 1800000.0
+            },
+            "quantity": 1,
+            "display_price": 2000000.0,
+            "warehouse_price": 1500000.0,
+            "discounted_price": 1800000.0
+        }
+    ]
+}
+ */
+
 const OrderDetailPage = () => {
+    // const { order, setOrder } = useState({});
+    const { id } = useParams();
+    const [activeButton, setActiveButton] = useState('Cancel');
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await orderApi.getOrderById(id);
+                if (response.status === 200) {
+                    // setOrder(response.data);
+                    console.log('order', response.data);
+                }
+            } catch (error) {
+                toast.error('Lỗi khi lấy dữ liệu đơn hàng', {
+                    autoClose: 3000,
+                });
+            }
+        };
+        fetchData();
+    }, [id]);
+
+    const handleButtonClick = (button) => {
+        setActiveButton(button);
+    };
     return (
         <OrderDetailPageWrapper className="page-py-spacing">
             <Container>
@@ -261,21 +351,62 @@ const OrderDetailPage = () => {
                 <UserDashboardWrapper>
                     <UserMenu />
                     <UserContent>
-                        <div className="flex items-center justify-start btn-and-title-wrapper">
-                            <Link to="/order" className="btn-go-back inline-flex items-center justify-center text-xxl">
-                                <i className="bi bi-chevron-left"></i>
-                            </Link>
-                            <Title titleText={'Order Details'} />
+                        <div className="flex items-center justify-between btn-and-title-wrapper">
+                            <Title titleText={'Chi tiết đơn hàng'} />
+                            <div>
+                                {activeButton === 'Cancel' ? (
+                                    <BaseButtonBlack className="mx-1" onClick={() => handleButtonClick('Cancel')}>
+                                        Hủy đơn hàng
+                                    </BaseButtonBlack>
+                                ) : (
+                                    <BaseButtonGreen className="mx-1" onClick={() => handleButtonClick('Cancel')}>
+                                        Hủy đơn hàng
+                                    </BaseButtonGreen>
+                                )}
+                                {activeButton === 'Payment' ? (
+                                    <BaseButtonBlack className="mx-1" onClick={() => handleButtonClick('Payment')}>
+                                        Thanh toán đơn hàng
+                                    </BaseButtonBlack>
+                                ) : (
+                                    <BaseButtonGreen className="mx-1" onClick={() => handleButtonClick('Payment')}>
+                                        Thanh toán đơn hàng
+                                    </BaseButtonGreen>
+                                )}
+                            </div>
                         </div>
 
-                        <div className="order-d-wrapper">
+                        {/*<div className="order-d-wrapper">
                             <div className="order-d-top flex justify-between items-start">
                                 <div className="order-d-top-l">
-                                    <h4 className="text-3xl order-d-no">Order no: #47770098867</h4>
-                                    <p className="text-lg font-medium text-gray">Placed On 2 June 2023 2:40 PM</p>
+                                    <h4 className="text-3xl order-d-no">Đơn hàng: {order?.id}</h4>
+                                    <p className="text-lg font-medium text-gray">
+                                        Đặt hàng vào lúc: {getFormattedDate(order?.order_date)}
+                                    </p>
+                                    <p className="text-lg font-medium text-gray">
+                                        Ngày giao hàng dự kiến: {getFormattedDate(order?.delivery_date)}
+                                    </p>
                                 </div>
                                 <div className="order-d-top-r text-xxl text-gray font-semibold">
-                                    Total: <span className="text-outerspace">$143.00</span>
+                                    Tổng số tiền:{' '}
+                                    <span className="text-outerspace">
+                                        {formatCurrency(order?.total_display_price)}
+                                    </span>
+                                </div>
+                                <div className="order-d-top-r text-xxl text-gray font-semibold">
+                                    Tổng phần trăm khuyến mãi:{' '}
+                                    <span className="text-outerspace">
+                                        {(
+                                            ((order?.total_display_price - order?.total_discounted_price) /
+                                                order?.total_display_price) *
+                                            100
+                                        ).toFixed(3)}
+                                    </span>
+                                </div>
+                                <div className="order-d-top-r text-xxl text-gray font-semibold">
+                                    Tổng số tiền phải thanh toán:{' '}
+                                    <span className="text-outerspace">
+                                        {formatCurrency(order?.total_discounted_price)}
+                                    </span>
                                 </div>
                             </div>
 
@@ -341,7 +472,7 @@ const OrderDetailPage = () => {
                                     );
                                 })}
                             </OrderDetailListWrapper>
-                        </div>
+                            </div>*/}
                     </UserContent>
                 </UserDashboardWrapper>
             </Container>

@@ -2,6 +2,7 @@ const roures = {
     home: '/',
     productList: '/product',
     productDetail: '/product/:id',
+    confirm: '/confirm',
     notFound: '*',
 
     auth: {
@@ -17,7 +18,8 @@ const roures = {
         emptyCart: '/user/empty-cart',
         checkout: '/user/checkout',
         order: '/user/order',
-        orderDetail: '/user/order/detail',
+        emptyOrder: '/user/empty-order',
+        orderDetail: '/user/order/:id',
         confirm: '/user/confirm',
         profile: '/user/profile',
         addAddress: '/user/profile/add-address',

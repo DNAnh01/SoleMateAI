@@ -7,7 +7,6 @@ import UserMenu from '~/components/user/UserMenu';
 import Title from '~/components/common/Title';
 import { FormElement, Input } from '~/styles/form';
 import { BaseLinkGreen } from '~/styles/button';
-import { Link } from 'react-router-dom';
 import { breakpoints, defaultTheme } from '~/styles/themes/default';
 import configs from '~/configs';
 import useAppStore from '~/store';
@@ -65,7 +64,6 @@ const breadcrumbItems = [
 const AccountPage = () => {
     const { profile } = useAppStore();
     const { address } = useContext(AddressContext);
-    // console.log(profile);
     return (
         <AccountPageWrapper className="page-py-spacing">
             <Container>

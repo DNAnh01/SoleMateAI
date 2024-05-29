@@ -4,6 +4,12 @@ const baseUrl = {
         addOrCheckAddress: '/address/',
         getCurrentShippingAddress: '/address/',
     },
+    order: {
+        createOrder: '/order/',
+        getHistoryOrder: '/order/get-all',
+        getOrderById: '/order/order-id=',
+        cancelOrderById: '/order/cancel/order-id=',
+    },
     product: {
         getAll: '/shoe/get-all',
         getById: '/shoe/shoe-id=',

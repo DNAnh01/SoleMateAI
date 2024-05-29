@@ -42,6 +42,7 @@ const BaseButtonGreen = styled(BaseButton)`
 
 const BaseButtonBlack = styled(BaseButton)`
     background-color: ${defaultTheme.color_black};
+    border-color: ${defaultTheme.color_yellow_green};
 `;
 
 const BaseButtonOuterspace = styled(BaseButton)`

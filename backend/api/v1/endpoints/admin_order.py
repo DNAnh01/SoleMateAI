@@ -73,6 +73,19 @@ def cancel_order(
         current_user_role_permission=current_user_role_permission,
     )
 
+@router.patch("/shipping/order-id={order_id}", status_code=status.HTTP_200_OK)
+def shipping_order(
+    order_id: str,
+    current_user_role_permission: UserRolePermissionSchema = Depends(
+        oauth2.get_current_user_role_permission
+    ),
+    db: Session = Depends(deps.get_db),
+) -> JSONResponse:
+    return admin_order_service.shipping_order(
+        db=db,
+        order_id=order_id,
+        current_user_role_permission=current_user_role_permission,
+    )
 
 @router.patch("/deliver/order-id={order_id}", status_code=status.HTTP_200_OK)
 def deliver_order(

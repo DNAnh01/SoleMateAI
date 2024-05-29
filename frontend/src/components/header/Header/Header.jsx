@@ -217,7 +217,11 @@ const Header = () => {
                             <ActionGroupWrapper>
                                 {profile.role_name === 'user' && (
                                     <Link
-                                        to={configs.roures.user.cart}
+                                        to={
+                                            totalCartItem === 0
+                                                ? configs.roures.user.emptyCart
+                                                : configs.roures.user.cart
+                                        }
                                         className={`icon-link ${
                                             location.pathname === configs.roures.user.cart ? 'active' : ''
                                         } inline-flex items-center justify-center`}

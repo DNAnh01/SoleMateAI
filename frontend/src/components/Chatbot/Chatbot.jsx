@@ -7,7 +7,6 @@ import images from '~/assets/images';
 import messageApi from '~/apis/message.api';
 import useAppStore from '~/store';
 import conversationApi from '~/apis/conversation.api';
-import { Link } from 'react-router-dom';
 
 const shakeAnimation = keyframes`
     0% { transform: rotate(0deg); }
@@ -466,7 +465,7 @@ const Chatbot = () => {
                         <textarea
                             rows={1}
                             value={userMessage}
-                            placeholder="Type your message..."
+                            placeholder="Nhập tin nhắn của bạn..."
                             onChange={(e) => setUserMessage(e.target.value)}
                             onKeyDown={handleEnterPress}
                         />

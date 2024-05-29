@@ -16,6 +16,21 @@ export function getFormattedDate(date) {
     return formattedDate.toISOString().split('T')[0];
 }
 
+export function convertOrderStatus(status) {
+    switch (status) {
+        case 'ORDER-PLACED':
+            return 'Đã đặt';
+        case 'ORDER-CANCELLED':
+            return 'Đã hủy';
+        case 'ORDER-SHIPPING':
+            return 'Đang giao';
+        case 'ORDER-DELIVERED':
+            return 'Đã hoàn thành';
+        default:
+            return status;
+    }
+}
+
 export function getUniqueProperties(products) {
     const colorMap = new Map();
     const brandMap = new Map();

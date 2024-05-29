@@ -249,6 +249,15 @@ class AdminOrderServiceImpl(AdminOrderService):
                             "message": "Error occurred while updating shoe",
                         },
                     )
+                    
+            if order_found.status == "ORDER-DELIVERED":
+                logger.exception(
+                    f"Exception in {__name__}.{self.__class__.__name__}.cancel_order: Order already delivered"
+                )
+                return JSONResponse(
+                    status_code=400,
+                    content={"status": 400, "message": "Order already delivered"},
+                )
             updated_order = self.__crud_order.update_one_by(
                 db=db,
                 filter={"id": order_id},
@@ -268,6 +277,90 @@ class AdminOrderServiceImpl(AdminOrderService):
                 status_code=500,
                 content={"status": 500, "message": "Internal server error"},
             )
+
+    def shipping_order(
+        self,
+        db: Session,
+        order_id: uuid.UUID,
+        current_user_role_permission: UserRolePermissionSchema,
+    ) -> JSONResponse:
+        if "update_order" not in current_user_role_permission.u_list_permission_name:
+            logger.exception(
+                f"Exception in {__name__}.{self.__class__.__name__}.shipping_order: User does not have permission to update order"
+            )
+            return JSONResponse(
+                status_code=403,
+                content={
+                    "status": 403,
+                    "message": "User does not have permission to update order",
+                },
+            )
+        if "admin" != current_user_role_permission.u_role_name:
+            logger.exception(
+                f"Exception in {__name__}.{self.__class__.__name__}.shipping_order: User does not have permission to update order"
+            )
+            return JSONResponse(
+                status_code=403,
+                content={
+                    "status": 403,
+                    "message": "User does not have permission to update order",
+                },
+            )
+        try:
+            order_found = self.__crud_order.get(db=db, id=order_id)
+            if order_found is None:
+                logger.exception(
+                    f"Exception in {__name__}.{self.__class__.__name__}.shipping_order: Order not found"
+                )
+                return JSONResponse(
+                    status_code=404,
+                    content={"status": 404, "message": "Order not found"},
+                )
+            if order_found.status == "ORDER-CANCELLED":
+                logger.exception(
+                    f"Exception in {__name__}.{self.__class__.__name__}.shipping_order: Order already cancelled"
+                )
+                return JSONResponse(
+                    status_code=400,
+                    content={"status": 400, "message": "Order already cancelled"},
+                )
+            if order_found.status == "ORDER-DELIVERED":
+                logger.exception(
+                    f"Exception in {__name__}.{self.__class__.__name__}.shipping_order: Order already delivered"
+                )
+                return JSONResponse(
+                    status_code=400,
+                    content={"status": 400, "message": "Order already delivered"},
+                )
+                
+            if order_found.status == "ORDER-SHIPPING":
+                logger.exception(
+                    f"Exception in {__name__}.{self.__class__.__name__}.shipping_order: Order already shipping"
+                )
+                return JSONResponse(
+                    status_code=400,
+                    content={"status": 400, "message": "Order already shipping"},
+                )
+            updated_order = self.__crud_order.update_one_by(
+                db=db,
+                filter={"id": order_id},
+                obj_in=OrderUpdateSchema(
+                    status="ORDER-SHIPPING", updated_at=datetime.now()
+                ),
+            )
+            return JSONResponse(
+                status_code=200,
+                content={"status": 200, "message": "Order shipping successfully"},
+            )
+        except Exception as e:
+            logger.exception(
+                f"Exception in {__name__}.{self.__class__.__name__}.shipping_order: {str(e)}"
+            )
+            return JSONResponse(
+                status_code=500,
+                content={"status": 500, "message": "Internal server error"},
+            )
+
 
     def deliver_order(
         self,

@@ -237,6 +237,10 @@ export const GlobalStyles = createGlobalStyle`
         color: ${defaultTheme.color_silver};
     }
 
+    .text-dark_slate_blue{
+        color: ${defaultTheme.color_dark_slate_blue};
+    }
+
     .text-start {
         text-align: left;
     }

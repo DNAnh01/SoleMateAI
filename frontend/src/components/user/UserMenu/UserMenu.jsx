@@ -1,8 +1,10 @@
+import { useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import Icons from '~/components/common/Icons/Icons';
 import Title from '~/components/common/Title';
 import configs from '~/configs';
+import { OrderContext } from '~/contexts/order.context';
 import useAppStore from '~/store';
 import { breakpoints, defaultTheme } from '~/styles/themes/default';
 
@@ -35,7 +37,7 @@ const NavMenuWrapper = styled.nav`
         border: 1px solid transparent;
 
         &:hover {
-            background-color: ${defaultTheme.color_whitesmoke};
+            background-color: ${defaultTheme.color_yellow_green};
         }
 
         .nav-link-text {
@@ -44,7 +46,7 @@ const NavMenuWrapper = styled.nav`
 
         &.active {
             border-left: 2px solid ${defaultTheme.color_gray};
-            background-color: ${defaultTheme.color_whitesmoke};
+            background-color: ${defaultTheme.color_yellow_green};
 
             @media (max-width: ${breakpoints.md}) {
                 border-bottom: 2px solid ${defaultTheme.color_gray};
@@ -69,6 +71,7 @@ const NavMenuWrapper = styled.nav`
 const UserMenu = () => {
     const { profile } = useAppStore();
     // console.log(profile);
+    const { historyOrders } = useContext(OrderContext);
 
     const location = useLocation();
     return (
@@ -78,9 +81,12 @@ const UserMenu = () => {
                 <ul className="nav-menu-list grid">
                     <li className="nav-menu-item">
                         <Link
-                            to="/order"
+                            to={historyOrders.length === 0 ? configs.roures.user.emptyOrder : configs.roures.user.order}
                             className={`nav-menu-link flex items-center ${
-                                location.pathname === '/order' || location.pathname === '/order_detail' ? 'active' : ''
+                                location.pathname === configs.roures.user.order ||
+                                location.pathname === configs.roures.user.orderDetail
+                                    ? 'active'
+                                    : ''
                             }`}
                         >
                             <span className="nav-link-icon flex items-center justify-center">

@@ -54,6 +54,7 @@ const CartPage = () => {
         { label: 'Cá nhân', link: '/user/profile' },
         { label: 'Giõ hàng', link: '/' },
     ];
+
     return (
         <CartPageWrapper>
             <Container>

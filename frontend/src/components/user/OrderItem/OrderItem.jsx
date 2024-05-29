@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { currencyFormat } from '~/utils/helper';
-import { BaseLinkGreen } from '~/styles/button';
+import { convertOrderStatus, formatCurrency, getFormattedDate } from '~/utils/helper';
+import { BaseButtonGreen } from '~/styles/button';
 import { breakpoints, defaultTheme } from '~/styles/themes/default';
+import { useNavigate } from 'react-router-dom';
 
 const OrderItemWrapper = styled.div`
     margin: 30px 0;
@@ -53,7 +54,23 @@ const OrderItemWrapper = styled.div`
             margin: 2px 0;
         }
     }
+    .order-prod-img {
+        width: 100px;
+        height: 100px;
+        overflow: hidden;
+        border-radius: 8px;
 
+        @media (max-width: ${breakpoints.xl}) {
+            width: 80px;
+            height: 80px;
+        }
+    }
+    .prod-colorbox {
+        border-radius: 100%;
+        width: 16px;
+        height: 16px;
+        display: inline-block;
+    }
     .order-overview {
         margin: 28px 0;
         gap: 12px;
@@ -91,53 +108,59 @@ const OrderItemWrapper = styled.div`
 `;
 
 const OrderItem = ({ order }) => {
+    const navigate = useNavigate();
+    const handleOrderDetailClick = () => {
+        navigate(`/user/order/${order.id}`);
+    };
+
     return (
         <OrderItemWrapper>
             <div className="order-item-details">
-                <h3 className="text-x order-item-title">Order no: {order.order_no}</h3>
+                <h3 className="text-x order-item-title">Đơn hàng: {order?.id}</h3>
                 <div className="order-info-group flex flex-wrap">
                     <div className="order-info-item">
-                        <span className="text-gray font-semibold">Order Date:</span>
-                        <span className="text-silver">{order.order_date}</span>
+                        <span className="text-outerspace font-semibold">Ngày đặt hàng:</span>
+                        <span className="text-dark_slate_blue">{getFormattedDate(order?.order_date)}</span>
                     </div>
                     <div className="order-info-item">
-                        <span className="text-gray font-semibold">Order Status:</span>
-                        <span className="text-silver">{order.status}</span>
+                        <span className="text-outerspace font-semibold">Trạng thái:</span>
+                        <span className="text-dark_slate_blue">{convertOrderStatus(order?.status)}</span>
                     </div>
                     <div className="order-info-item">
-                        <span className="text-gray font-semibold">Estimated Delivery Date:</span>
-                        <span className="text-silver">{order.delivery_date}</span>
-                    </div>
-                    <div className="order-info-item">
-                        <span className="text-gray font-semibold">Method:</span>
-                        <span className="text-silver">{order.payment_method}</span>
+                        <span className="text-outerspace font-semibold">Ngày giao hàng dự kiến:</span>
+                        <span className="text-dark_slate_blue">{getFormattedDate(order?.delivery_date)}</span>
                     </div>
                 </div>
             </div>
             <div className="order-overview flex justify-between">
                 <div className="order-overview-content grid">
                     <div className="order-overview-img">
-                        <img src={order.items[0].imgSource} alt="" className="object-fit-cover" />
+                        <img src={order?.order_items[0]?.shoe?.image_url} alt="" className="order-prod-img" />
                     </div>
                     <div className="order-overview-info">
-                        <h4 className="text-xl">{order.items[0].name}</h4>
+                        <h4 className="text-xl">{order?.order_items[0]?.shoe?.shoe_name}</h4>
                         <ul>
                             <li className="font-semibold text-base">
-                                <span>Colour:</span>
-                                <span className="text-silver">{order.items[0].color}</span>
+                                <span>Màu sắc:</span>
+                                <span
+                                    className="prod-colorbox"
+                                    style={{ background: order?.order_items[0]?.shoe?.color?.hex_value }}
+                                ></span>
                             </li>
                             <li className="font-semibold text-base">
-                                <span>Qty:</span>
-                                <span className="text-silver">{order.items[0].quantity}</span>
+                                <span>Số lượng:</span>
+                                <span className="text-dark_slate_blue">{order?.order_items[0]?.quantity}</span>
                             </li>
                             <li className="font-semibold text-base">
-                                <span>Total:</span>
-                                <span className="text-silver">{currencyFormat(order.items[0].price)}</span>
+                                <span>Tổng cộng:</span>
+                                <span className="text-dark_slate_blue">
+                                    {formatCurrency(order?.order_items[0]?.discounted_price)}
+                                </span>
                             </li>
                         </ul>
                     </div>
                 </div>
-                <BaseLinkGreen to="/order_detail">View Detail</BaseLinkGreen>
+                <BaseButtonGreen onClick={handleOrderDetailClick}>Xem chi tiết</BaseButtonGreen>
             </div>
         </OrderItemWrapper>
     );

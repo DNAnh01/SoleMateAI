@@ -118,6 +118,7 @@ const AddressPage = () => {
             toast.error('Đã có lỗi xảy ra, vui lòng thử lại sau.', {
                 autoClose: 3000,
             });
+            // console.log('error', error);
         }
 
         // After saving, redirect to profile page

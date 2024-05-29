@@ -5,6 +5,8 @@ import { staticImages } from '~/utils/images';
 import { breakpoints, defaultTheme } from '~/styles/themes/default';
 import configs from '~/configs';
 import useAppStore from '~/store';
+import { useContext } from 'react';
+import { CartContext } from '~/contexts/cart.context';
 
 const SideNavigationWrapper = styled.div`
     position: fixed;
@@ -91,23 +93,18 @@ const sideMenuData = [
         menuText: 'Sản phẩm',
         iconName: 'grid-fill',
     },
-    {
-        id: 'side-menu-4',
-        menuLink: configs.roures.user.profile,
-        menuText: 'Tài khoản',
-        iconName: 'person-fill',
-    },
-    {
-        id: 'side-menu-5',
-        menuLink: configs.roures.user.cart,
-        menuText: 'Giỏ hàng',
-        iconName: 'bag-check-fill',
-    },
+    // {
+    //     id: 'side-menu-4',
+    //     menuLink: configs.roures.user.profile,
+    //     menuText: 'Tài khoản',
+    //     iconName: 'person-fill',
+    // },
 ];
 
 const Sidebar = () => {
     const location = useLocation();
-    const { isSidebarOpen, setIsSidebarOpen } = useAppStore();
+    const { isSidebarOpen, setIsSidebarOpen, accessToken } = useAppStore();
+    const { totalCartItem } = useContext(CartContext);
     const toggleSidebar = () => {
         setIsSidebarOpen(!isSidebarOpen);
     };
@@ -139,6 +136,39 @@ const Sidebar = () => {
                             </Link>
                         </li>
                     ))}
+                    {/* Conditional rendering based on accessToken */}
+                    {accessToken && (
+                        <li>
+                            <Link
+                                to={configs.roures.user.profile}
+                                className={`flex items-center text-gray ${
+                                    location.pathname === configs.roures.user.profile ? 'active' : ''
+                                }`}
+                            >
+                                <span className="text-xxl">
+                                    <i className={`bi bi-bag-check-fill`}></i>
+                                </span>
+                                <span className="text-lg font-medium">Tài khoản</span>
+                            </Link>
+                        </li>
+                    )}
+                    {/* Conditional rendering based on totalCartItem */}
+
+                    {accessToken && (
+                        <li>
+                            <Link
+                                to={totalCartItem === 0 ? configs.roures.user.emptyCart : configs.roures.user.cart}
+                                className={`flex items-center text-gray ${
+                                    location.pathname === configs.roures.user.cart ? 'active' : ''
+                                }`}
+                            >
+                                <span className="text-xxl">
+                                    <i className={`bi bi-bag-check-fill`}></i>
+                                </span>
+                                <span className="text-lg font-medium">Giỏ hàng</span>
+                            </Link>
+                        </li>
+                    )}
                 </ul>
             </div>
         </SideNavigationWrapper>

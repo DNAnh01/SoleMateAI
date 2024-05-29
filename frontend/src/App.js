@@ -14,7 +14,7 @@ import NotFound from '~/pages/error/NotFoundPage';
 import ProductList from '~/pages/product/ProductListPage';
 import ProductDetails from '~/pages/product/ProductDetailsPage';
 import Cart from '~/pages/cart/CartPage';
-import CartEmpty from '~/pages/cart/CartEmptyPage';
+import CartEmpty from '~/pages/empty/CartEmptyPage';
 import Checkout from '~/pages/checkout/CheckoutPage';
 import Order from '~/pages/user/OrderListPage';
 import OrderDetail from '~/pages/user/OrderDetailPage';
@@ -38,6 +38,8 @@ import { CartContext } from './contexts/cart.context';
 import cartAPI from './apis/cart.api';
 import { AddressContext } from './contexts/address.context';
 import addressApi from './apis/address.api';
+import { ProductFilterProvider } from './contexts/productFilter.context';
+import OrderEmpty from './pages/empty/OrderEmptyPage';
 function App() {
     const { accessToken, setAccessToken, setProducts } = useAppStore();
 
@@ -83,8 +85,7 @@ function App() {
             };
             fetchCart();
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [setCart, setTotalCartItem]);
+    }, [setCart, setTotalCartItem, accessToken]);
     // Fetch address on mount
     useEffect(() => {
         if (accessToken) {
@@ -94,8 +95,7 @@ function App() {
             };
             fetchAddress();
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [setAddress]);
+    }, [setAddress, accessToken]);
 
     return (
         <>
@@ -104,14 +104,22 @@ function App() {
                 <Routes>
                     <Route path="/" element={<BaseLayout />}>
                         <Route index element={<Home />} />
-                        <Route path={configs.roures.productList} element={<ProductList />} />
+                        <Route
+                            path={configs.roures.productList}
+                            element={
+                                <ProductFilterProvider>
+                                    <ProductList />
+                                </ProductFilterProvider>
+                            }
+                        />
                         <Route path={configs.roures.productDetail} element={<ProductDetails />} />
                         <Route path={configs.roures.user.cart} element={<Cart />} />
-                        <Route path="/empty_cart" element={<CartEmpty />} />
+                        <Route path={configs.roures.user.emptyCart} element={<CartEmpty />} />
                         <Route path="/checkout" element={<Checkout />} />
-                        <Route path="/order" element={<Order />} />
-                        <Route path="/order_detail" element={<OrderDetail />} />
-                        <Route path="/confirm" element={<Confirm />} />
+                        <Route path={configs.roures.user.order} element={<Order />} />
+                        <Route path={configs.roures.user.orderDetail} element={<OrderDetail />} />
+                        <Route path={configs.roures.user.emptyOrder} element={<OrderEmpty />} />
+                        <Route path={configs.roures.confirm} element={<Confirm />} />
                         <Route path={configs.roures.user.profile} element={<Account />} />
                         <Route path={configs.roures.user.addAddress} element={<Address />} />
                     </Route>

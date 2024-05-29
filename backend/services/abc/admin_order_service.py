@@ -39,6 +39,16 @@ class AdminOrderService(ABC):
         pass
 
     @abstractmethod
+    def shipping_order(
+        self,
+        db: Session,
+        order_id: uuid.UUID,
+        current_user_role_permission: UserRolePermissionSchema,
+    ) -> JSONResponse:
+        pass
+
+
+    @abstractmethod
     def deliver_order(
         self,
         db: Session,
