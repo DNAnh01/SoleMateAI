@@ -1,14 +1,17 @@
 import styled from 'styled-components';
 import { Container } from '~/styles/styles';
+import { FaRegEdit } from 'react-icons/fa';
 import Breadcrumb from '~/components/common/Breadcrumb';
 import { UserContent, UserDashboardWrapper } from '~/styles/user';
 import UserMenu from '~/components/user/UserMenu';
 import Title from '~/components/common/Title';
 import { FormElement, Input } from '~/styles/form';
 import { BaseLinkGreen } from '~/styles/button';
-import { Link } from 'react-router-dom';
 import { breakpoints, defaultTheme } from '~/styles/themes/default';
 import configs from '~/configs';
+import useAppStore from '~/store';
+import { useContext } from 'react';
+import { AddressContext } from '~/contexts/address.context';
 
 const AccountPageWrapper = styled.main`
     .address-list {
@@ -53,12 +56,14 @@ const AccountPageWrapper = styled.main`
 const breadcrumbItems = [
     {
         label: 'Home',
-        link: '/',
+        link: configs.roures.home,
     },
-    { label: 'Account', link: '/account' },
+    { label: 'Account', link: configs.roures.user.profile },
 ];
 
 const AccountPage = () => {
+    const { profile } = useAppStore();
+    const { address } = useContext(AddressContext);
     return (
         <AccountPageWrapper className="page-py-spacing">
             <Container>
@@ -66,45 +71,45 @@ const AccountPage = () => {
                 <UserDashboardWrapper>
                     <UserMenu />
                     <UserContent>
-                        <Title titleText={'My Account'} />
-                        <h4 className="title-sm">Contact Details</h4>
+                        <Title titleText={'Tài khoản'} />
+                        <h4 className="title-sm">Thông tin chi tiết</h4>
                         <form>
                             <div className="form-wrapper">
                                 <FormElement className="form-elem">
                                     <label htmlFor="" className="form-label font-semibold text-base">
-                                        Your Name
+                                        Tên hiển thị
                                     </label>
                                     <div className="form-input-wrapper flex items-center">
                                         <Input
                                             type="text"
                                             className="form-elem-control text-outerspace font-semibold"
-                                            value="Richard Doe"
+                                            value={profile?.display_name}
                                             readOnly
                                         />
                                         <button type="button" className="form-control-change-btn">
-                                            Change
+                                            <FaRegEdit fontSize={18} />
                                         </button>
                                     </div>
                                 </FormElement>
                                 <FormElement className="form-elem">
                                     <label htmlFor="" className="form-label font-semibold text-base">
-                                        Email Address
+                                        Email
                                     </label>
                                     <div className="form-input-wrapper flex items-center">
                                         <Input
                                             type="email"
                                             className="form-elem-control text-outerspace font-semibold"
-                                            value="richard@gmail.com"
+                                            value={profile?.email}
                                             readOnly
                                         />
                                         <button type="button" className="form-control-change-btn">
-                                            Change
+                                            <FaRegEdit fontSize={18} />
                                         </button>
                                     </div>
                                 </FormElement>
                                 <FormElement className="form-elem">
                                     <label htmlFor="" className="form-label font-semibold text-base">
-                                        Phone Number
+                                        Số điện thoại
                                     </label>
                                     <div className="form-input-wrapper flex items-center">
                                         <Input
@@ -114,13 +119,13 @@ const AccountPage = () => {
                                             readOnly
                                         />
                                         <button type="button" className="form-control-change-btn">
-                                            Change
+                                            <FaRegEdit fontSize={18} />
                                         </button>
                                     </div>
                                 </FormElement>
                                 <FormElement className="form-elem">
                                     <label htmlFor="" className="form-label font-semibold text-base">
-                                        Password
+                                        Mật khẩu
                                     </label>
                                     <div className="form-input-wrapper flex items-center">
                                         <Input
@@ -130,62 +135,33 @@ const AccountPage = () => {
                                             readOnly
                                         />
                                         <button type="button" className="form-control-change-btn">
-                                            Change
+                                            <FaRegEdit fontSize={18} />
                                         </button>
                                     </div>
                                 </FormElement>
                             </div>
                         </form>
                         <div>
-                            <h4 className="title-sm">My Contact Addresss</h4>
-                            <BaseLinkGreen to={configs.roures.user.addAddress}>Add Address</BaseLinkGreen>
+                            <h4 className="title-sm">Địa chỉ giao hàng</h4>
+                            <BaseLinkGreen to={configs.roures.user.addAddress}>Thêm địa chỉ</BaseLinkGreen>
                             <div className="address-list grid">
                                 <div className="address-item grid">
-                                    <p className="text-outerspace text-lg font-semibold address-title">Richard Doe</p>
-                                    <p className="text-gray text-base font-medium address-description">
-                                        1/4 Watson Street Flat, East Coastal Road, Ohio City
+                                    <p className="text-outerspace text-lg font-semibold address-title">
+                                        {profile?.display_name}
                                     </p>
-                                    <ul className="address-tags flex flex-wrap">
-                                        <li className="text-gray text-base font-medium inline-flex items-center justify-center">
-                                            Home
-                                        </li>
-                                        <li className="text-gray text-base font-medium inline-flex items-center justify-center">
-                                            Default billing address
-                                        </li>
-                                    </ul>
-                                    <div className="address-btns flex">
-                                        <Link to="/" className="text-base text-outerspace font-semibold">
-                                            Remove
-                                        </Link>
-                                        <div className="btn-separator"></div>
-                                        <Link to="/" className="text-base text-outerspace font-semibold">
-                                            Edit
-                                        </Link>
-                                    </div>
-                                </div>
-
-                                <div className="address-item grid">
-                                    <p className="text-outerspace text-lg font-semibold address-title">Richard Doe</p>
-                                    <p className="text-gray text-base font-medium address-description">
-                                        1/4 Watson Street Flat, East Coastal Road, Ohio City
-                                    </p>
-                                    <ul className="address-tags flex flex-wrap">
-                                        <li className="text-gray text-base font-medium inline-flex items-center justify-center">
-                                            Home
-                                        </li>
-                                        <li className="text-gray text-base font-medium inline-flex items-center justify-center">
-                                            Default billing address
-                                        </li>
-                                    </ul>
-                                    <div className="address-btns flex">
-                                        <Link to="/" className="text-base text-outerspace font-semibold">
-                                            Remove
-                                        </Link>
-                                        <div className="btn-separator"></div>
-                                        <Link to="/" className="text-base text-outerspace font-semibold">
-                                            Edit
-                                        </Link>
-                                    </div>
+                                    {address && (
+                                        <>
+                                            <p className="text-gray text-base font-medium address-description">
+                                                {address.province}
+                                            </p>
+                                            <p className="text-gray text-base font-medium address-description">
+                                                {address.district}
+                                            </p>
+                                            <p className="text-gray text-base font-medium address-description">
+                                                {address.ward}
+                                            </p>
+                                        </>
+                                    )}
                                 </div>
                             </div>
                         </div>

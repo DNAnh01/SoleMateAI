@@ -5,8 +5,12 @@ import { UserContent, UserDashboardWrapper } from '~/styles/user';
 import UserMenu from '~/components/user/UserMenu';
 import Title from '~/components/common/Title';
 import { breakpoints, defaultTheme } from '~/styles/themes/default';
-import { orderData } from '~/data/data.mock';
 import OrderItemList from '~/components/user/OrderItemList';
+import configs from '~/configs';
+import { useContext, useEffect, useState } from 'react';
+import { OrderContext } from '~/contexts/order.context';
+import orderApi from '~/apis/order.api';
+import { toast } from 'react-toastify';
 
 const OrderListPageWrapper = styled.div`
     .order-tabs-contents {
@@ -18,7 +22,7 @@ const OrderListPageWrapper = styled.div`
         border-bottom: 3px solid ${defaultTheme.color_whitesmoke};
 
         &.order-tabs-head-active {
-            border-bottom-color: ${defaultTheme.color_outerspace};
+            border-bottom-color: ${defaultTheme.color_yellow_green};
         }
 
         @media (max-width: ${breakpoints.lg}) {
@@ -32,11 +36,43 @@ const OrderListPageWrapper = styled.div`
 `;
 
 const breadcrumbItems = [
-    { label: 'Home', link: '/' },
-    { label: 'Order', link: '/order' },
+    { label: 'Home', link: configs.roures.home },
+    { label: 'Order', link: configs.roures.user.order },
 ];
 
 const OrderListPage = () => {
+    const { historyOrders, setHistoryOrders } = useContext(OrderContext);
+    const [activeTab, setActiveTab] = useState('ORDER-PLACED');
+
+    const fetchOrders = async (status) => {
+        try {
+            const response = await orderApi.getHistoryOrderByFilter({
+                status,
+                orderDate: '',
+            });
+            if (response.status === 200) {
+                setHistoryOrders(response.data);
+            } else {
+                toast.error('Bạn chưa có đơn hàng nào.', {
+                    autoClose: 3000,
+                });
+            }
+        } catch (error) {
+            toast.error('Bạn chưa có đơn hàng nào.', {
+                autoClose: 3000,
+            });
+        }
+    };
+
+    useEffect(() => {
+        fetchOrders(activeTab);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [activeTab]);
+
+    const handleTabClick = (status) => {
+        setActiveTab(status);
+    };
+
     return (
         <OrderListPageWrapper className="page-py-spacing">
             <Container>
@@ -44,33 +80,50 @@ const OrderListPage = () => {
                 <UserDashboardWrapper>
                     <UserMenu />
                     <UserContent>
-                        <Title titleText={'My Orders'} />
+                        <Title titleText={'Các đơn hàng của tôi'} />
                         <div className="order-tabs">
                             <div className="order-tabs-heads">
                                 <button
                                     type="button"
-                                    className="order-tabs-head text-xl italic order-tabs-head-active"
-                                    data-id="active"
+                                    className={`order-tabs-head text-xl italic ${
+                                        activeTab === 'ORDER-PLACED' ? 'order-tabs-head-active' : ''
+                                    }`}
+                                    onClick={() => handleTabClick('ORDER-PLACED')}
                                 >
-                                    Active
+                                    Đã đặt
                                 </button>
-                                <button type="button" className="order-tabs-head text-xl italic" data-id="cancelled">
-                                    Cancelled
+                                <button
+                                    type="button"
+                                    className={`order-tabs-head text-xl italic ${
+                                        activeTab === 'ORDER-CANCELLED' ? 'order-tabs-head-active' : ''
+                                    }`}
+                                    onClick={() => handleTabClick('ORDER-CANCELLED')}
+                                >
+                                    Đã hủy
                                 </button>
-                                <button type="button" className="order-tabs-head text-xl italic" data-id="completed">
-                                    Completed
+                                <button
+                                    type="button"
+                                    className={`order-tabs-head text-xl italic ${
+                                        activeTab === 'ORDER-SHIPPING' ? 'order-tabs-head-active' : ''
+                                    }`}
+                                    onClick={() => handleTabClick('ORDER-SHIPPING')}
+                                >
+                                    Đang giao
+                                </button>
+                                <button
+                                    type="button"
+                                    className={`order-tabs-head text-xl italic ${
+                                        activeTab === 'ORDER-DELIVERED' ? 'order-tabs-head-active' : ''
+                                    }`}
+                                    onClick={() => handleTabClick('ORDER-DELIVERED')}
+                                >
+                                    Đã hoàn thành
                                 </button>
                             </div>
 
                             <div className="order-tabs-contents">
                                 <div className="order-tabs-content" id="active">
-                                    <OrderItemList orders={orderData} />
-                                </div>
-                                <div className="order-tabs-content" id="cancelled">
-                                    Cancelled content
-                                </div>
-                                <div className="order-tabs-content" id="completed">
-                                    Completed content
+                                    {<OrderItemList orders={historyOrders} />}
                                 </div>
                             </div>
                         </div>

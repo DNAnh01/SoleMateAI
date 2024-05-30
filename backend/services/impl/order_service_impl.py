@@ -18,15 +18,14 @@ from backend.crud.crud_size import crud_size
 from backend.schemas.address_schema import AddAddressSchema, AddressInDBSchema
 from backend.schemas.brand_schema import BrandCreateSchema
 from backend.schemas.color_schema import ColorCreateSchema
-from backend.schemas.order_item_schema import OrderItemInDBSchema, OrderItemOutSchema
-from backend.schemas.order_schema import (
-    OrderInDBSchema,
-    OrderOutSchema,
-    OrderUpdateSchema,
-)
+from backend.schemas.order_item_schema import (OrderItemInDBSchema,
+                                               OrderItemOutSchema)
+from backend.schemas.order_schema import (OrderInDBSchema, OrderOutSchema,
+                                          OrderUpdateSchema)
 from backend.schemas.shoe_schema import ShoeOutSchema, ShoeUpdateSchema
 from backend.schemas.size_schema import SizeCreateSchema
-from backend.schemas.user_role_permission_schema import UserRolePermissionSchema
+from backend.schemas.user_role_permission_schema import \
+    UserRolePermissionSchema
 from backend.services.abc.address_service import AddressService
 from backend.services.abc.order_service import OrderService
 from backend.services.abc.shoe_service import ShoeService
@@ -56,6 +55,7 @@ class OrderServiceImpl(OrderService):
         shipping_address: AddAddressSchema,
         current_user_role_permission: UserRolePermissionSchema,
     ) -> Optional[OrderOutSchema]:
+        """check permission to create order"""
         if "create_order" not in current_user_role_permission.u_list_permission_name:
             logger.exception(
                 f"Exception in {__name__}.{self.__class__.__name__}.create_order: User does not have permission to create order"
@@ -110,7 +110,11 @@ class OrderServiceImpl(OrderService):
 
             for cart_item in cart_found.cart_items:
                 """create order item for each cart item in cart"""
-                if cart_item.is_active is True and cart_item.deleted_at is None:
+                if (
+                    cart_item.is_active is True
+                    and cart_item.deleted_at is None
+                    and cart_item.quantity > 0
+                ):
                     created_order_item = self.__crud_order_item.create(
                         db=db,
                         obj_in=OrderItemInDBSchema(

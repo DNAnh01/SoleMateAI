@@ -15,16 +15,15 @@ from backend.crud.crud_shoe_promotion import crud_shoe_promotion
 from backend.crud.crud_size import crud_size
 from backend.schemas.brand_schema import BrandCreateSchema
 from backend.schemas.color_schema import ColorCreateSchema
-from backend.schemas.promotion_schema import (
-    PromotionCreateSchema,
-    PromotionInDBSchema,
-    PromotionOutSchema,
-    PromotionUpdateSchema,
-)
+from backend.schemas.promotion_schema import (PromotionCreateSchema,
+                                              PromotionInDBSchema,
+                                              PromotionOutSchema,
+                                              PromotionUpdateSchema)
 from backend.schemas.shoe_promotion_schema import ShoePromotionInDBSchema
 from backend.schemas.shoe_schema import ShoeInDBSchema, ShoeOutSchema
 from backend.schemas.size_schema import SizeCreateSchema
-from backend.schemas.user_role_permission_schema import UserRolePermissionSchema
+from backend.schemas.user_role_permission_schema import \
+    UserRolePermissionSchema
 from backend.services.abc.admin_promotion_service import AdminPromotionService
 
 logger = setup_logger()

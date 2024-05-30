@@ -14,7 +14,7 @@ import NotFound from '~/pages/error/NotFoundPage';
 import ProductList from '~/pages/product/ProductListPage';
 import ProductDetails from '~/pages/product/ProductDetailsPage';
 import Cart from '~/pages/cart/CartPage';
-import CartEmpty from '~/pages/cart/CartEmptyPage';
+import CartEmpty from '~/pages/empty/CartEmptyPage';
 import Checkout from '~/pages/checkout/CheckoutPage';
 import Order from '~/pages/user/OrderListPage';
 import OrderDetail from '~/pages/user/OrderDetailPage';
@@ -33,7 +33,15 @@ import productApi from '~/apis/product.api';
 import promotionApi from '~/apis/promotion.api';
 import useAppStore from '~/store';
 import { useAxiosInterceptors } from '~/utils/http';
-
+import './index.css';
+import { CartContext } from './contexts/cart.context';
+import cartAPI from './apis/cart.api';
+import { AddressContext } from './contexts/address.context';
+import addressApi from './apis/address.api';
+import { ProductFilterProvider } from './contexts/productFilter.context';
+import OrderEmpty from './pages/empty/OrderEmptyPage';
+import { OrderContext } from './contexts/order.context';
+import orderApi from './apis/order.api';
 function App() {
     const { accessToken, setAccessToken, setProducts } = useAppStore();
 
@@ -41,6 +49,9 @@ function App() {
     useAxiosInterceptors(accessToken, setAccessToken);
 
     const { setPromotions } = useContext(AppContext);
+    const { setCart, setTotalCartItem } = useContext(CartContext);
+    const { setAddress } = useContext(AddressContext);
+    const { setHistoryOrders } = useContext(OrderContext);
 
     // Fetch products on mount
     useEffect(() => {
@@ -67,6 +78,45 @@ function App() {
         fetchPromotions();
     }, [setPromotions]);
 
+    // Fetch carts on mount
+    useEffect(() => {
+        if (accessToken) {
+            const fetchCart = async () => {
+                const response = await cartAPI.getAllCartItem();
+                setCart(response.data);
+                setTotalCartItem(response.data.total_item);
+            };
+            fetchCart();
+        }
+    }, [setCart, setTotalCartItem, accessToken]);
+    // Fetch address on mount
+    useEffect(() => {
+        if (accessToken) {
+            const fetchAddress = async () => {
+                const response = await addressApi.getCurrentShippingAddress();
+                setAddress(response.data);
+            };
+            fetchAddress();
+        }
+    }, [setAddress, accessToken]);
+    // Fetch orders on mount
+    useEffect(() => {
+        if (accessToken) {
+            const fetchOrders = async () => {
+                try {
+                    const response = await orderApi.getHistoryOrderByFilter({
+                        status: 'ORDER-PLACED',
+                        orderDate: '',
+                    });
+                    setHistoryOrders(response.data);
+                } catch (error) {
+                    console.log('error', error);
+                }
+            };
+            fetchOrders();
+        }
+    }, [setHistoryOrders, accessToken]);
+
     return (
         <>
             <Router>
@@ -74,14 +124,22 @@ function App() {
                 <Routes>
                     <Route path="/" element={<BaseLayout />}>
                         <Route index element={<Home />} />
-                        <Route path={configs.roures.productList} element={<ProductList />} />
+                        <Route
+                            path={configs.roures.productList}
+                            element={
+                                <ProductFilterProvider>
+                                    <ProductList />
+                                </ProductFilterProvider>
+                            }
+                        />
                         <Route path={configs.roures.productDetail} element={<ProductDetails />} />
                         <Route path={configs.roures.user.cart} element={<Cart />} />
-                        <Route path="/empty_cart" element={<CartEmpty />} />
+                        <Route path={configs.roures.user.emptyCart} element={<CartEmpty />} />
                         <Route path="/checkout" element={<Checkout />} />
-                        <Route path="/order" element={<Order />} />
-                        <Route path="/order_detail" element={<OrderDetail />} />
-                        <Route path="/confirm" element={<Confirm />} />
+                        <Route path={configs.roures.user.order} element={<Order />} />
+                        <Route path={configs.roures.user.orderDetail} element={<OrderDetail />} />
+                        <Route path={configs.roures.user.emptyOrder} element={<OrderEmpty />} />
+                        <Route path={configs.roures.confirm} element={<Confirm />} />
                         <Route path={configs.roures.user.profile} element={<Account />} />
                         <Route path={configs.roures.user.addAddress} element={<Address />} />
                     </Route>

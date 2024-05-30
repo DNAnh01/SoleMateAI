@@ -6,7 +6,7 @@ import { Container } from '~/styles/styles';
 import { breakpoints, defaultTheme } from '~/styles/themes/default';
 import CustomNextArrow from '~/components/common/CustomNextArrow';
 import CustomPrevArrow from '~/components/common/CustomPrevArrow';
-import { formatCurrency, getFormattedDate } from '~/utils/helper';
+import { currencyFormat, getFormattedDate } from '~/utils/helper';
 import Image from '~/components/common/Image';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
@@ -294,10 +294,10 @@ const Hero = () => {
                                                                 <h4>{shoe.shoe_name}</h4>
                                                                 <div className="price-info">
                                                                     <p className="display-price">
-                                                                        {formatCurrency(shoe.display_price)}
+                                                                        {currencyFormat(shoe.display_price)}
                                                                     </p>
                                                                     <p className="discounted-price">
-                                                                        {formatCurrency(shoe.discounted_price)}
+                                                                        {currencyFormat(shoe.discounted_price)}
                                                                     </p>
                                                                 </div>
                                                             </TooltipContent>

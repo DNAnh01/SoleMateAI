@@ -51,6 +51,7 @@ const images = {
     complete: require('~/assets/images/complete.png'),
     defaultUserAvatar: require('~/assets/images/default_user_avatar.png'),
     emptyBag: require('~/assets/images/empty_bag.png'),
+    emptyOrder: require('~/assets/images/empty_order.png'),
     fail: require('~/assets/images/fail.jpg'),
     noImage: require('~/assets/images/no_image.png'),
     nullRmb: require('~/assets/images/null_rmb.png'),

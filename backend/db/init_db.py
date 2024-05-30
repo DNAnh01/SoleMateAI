@@ -150,7 +150,7 @@ def init_db():
                         email="admin@gmail.com",
                         password_hash=utils.hash("admin123"),
                         display_name="admin",
-                        avatar_url="https://avatars.githubusercontent.com/u/96216102?s=400&u=e68b3692ae68ed13fee08b23330cb1bbf4d264bd&v=4P",
+                        avatar_url="https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/AdobeStock_630609726_Preview.png",
                         payment_information="",
                         is_verified=False,
                         is_active=True,
@@ -433,16 +433,18 @@ def init_db():
                 if user_found is None:
                     logger.error(f"User {row[0]} not found")
 
-                address_street = str(row[1])
-                address_city = str(row[2])
+                address_ward = str(row[1])
+                address_district = str(row[2])
+                address_province = str(row[3])
+
                 address_is_active = False
-                address_created_at = datetime.strptime(row[3], "%Y-%m-%d").replace(
+                address_created_at = datetime.strptime(row[4], "%Y-%m-%d").replace(
                     tzinfo=pytz.utc
                 )
-                address_updated_at = datetime.strptime(row[4], "%Y-%m-%d").replace(
+                address_updated_at = datetime.strptime(row[5], "%Y-%m-%d").replace(
                     tzinfo=pytz.utc
                 )
-                address_deleted_at = datetime.strptime(row[5], "%Y-%m-%d").replace(
+                address_deleted_at = datetime.strptime(row[6], "%Y-%m-%d").replace(
                     tzinfo=pytz.utc
                 )
                 created_address = crud_address.create(
@@ -450,8 +452,9 @@ def init_db():
                     obj_in=AddressInDBSchema(
                         id=uuid.uuid4(),
                         user_id=user_found.id,
-                        street=address_street,
-                        city=address_city,
+                        ward=address_ward,
+                        district=address_district,
+                        province=address_province,
                         is_active=address_is_active,
                         created_at=address_created_at,
                         updated_at=address_updated_at,
@@ -470,41 +473,56 @@ def init_db():
                 )
                 if user_found is None:
                     logger.error(f"User {row[0]} not found")
-                address_street = str(row[1])
-                address_city = str(row[2])
-                order_date = datetime.strptime(row[3], "%Y-%m-%d").replace(
-                    tzinfo=pytz.utc
-                )
-                delivery_date = datetime.strptime(row[4], "%Y-%m-%d").replace(
-                    tzinfo=pytz.utc
-                )
-                status = str(row[5])
-                total_item = int(row[6])
-                total_display_price = float(row[7])
-                total_warehouse_price = float(row[8])
-                total_discounted_price = float(row[9])
 
-                order_created_at = datetime.strptime(row[10], "%Y-%m-%d").replace(
-                    tzinfo=pytz.utc
+                address_ward = str(row[1])
+                address_district = str(row[2])
+                address_province = str(row[3])
+                logger.info(
+                    f"Address: {address_ward}, {address_district}, {address_province}"
                 )
 
-                order_updated_at = datetime.strptime(row[11], "%Y-%m-%d").replace(
+                order_date = datetime.strptime(row[4], "%Y-%m-%d").replace(
                     tzinfo=pytz.utc
                 )
+                delivery_date = datetime.strptime(row[5], "%Y-%m-%d").replace(
+                    tzinfo=pytz.utc
+                )
+                status = str(row[6])
+                total_item = int(row[7])
+                total_display_price = float(row[8])
+                total_warehouse_price = float(row[9])
+                total_discounted_price = float(row[10])
 
-                order_deleted_at = datetime.strptime(row[12], "%Y-%m-%d").replace(
+                order_created_at = datetime.strptime(row[12], "%Y-%m-%d").replace(
                     tzinfo=pytz.utc
                 )
 
+                order_updated_at = datetime.strptime(row[13], "%Y-%m-%d").replace(
+                    tzinfo=pytz.utc
+                )
+
+                # order_deleted_at = datetime.strptime(row[14], "%Y-%m-%d").replace(
+                #     tzinfo=pytz.utc
+                # )
+                try:
+                    order_deleted_at = datetime.strptime(row[14], "%Y-%m-%d").replace(
+                        tzinfo=pytz.utc
+                    )
+                except ValueError:
+                    logger.error(f"Invalid date in row: {row}")
                 order_is_active = False
 
                 address_found = crud_address.get_one_ignore_deleted_and_inactive(
                     db=session,
                     filter={
                         "user_id": user_found.id,
-                        "street": address_street,
-                        "city": address_city,
+                        "province": address_province,
+                        "district": address_district,
+                        "ward": address_ward,
                     },
+                )
+                logger.info(
+                    f"Address found: {address_found.province}, {address_found.district}, {address_found.ward}"
                 )
                 created_order = crud_order.create(
                     db=session,

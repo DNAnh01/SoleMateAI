@@ -9,11 +9,10 @@ from sqlalchemy.orm import Session
 from backend.common.logger import setup_logger
 from backend.crud.crud_chatbot import crud_chatbot
 from backend.crud.crud_knowledge_base import crud_knowledge_base
-from backend.schemas.knowledge_base_schema import (
-    KnowledgeBaseCreateSchema,
-    KnowledgeBaseInDBSchema,
-)
-from backend.schemas.user_role_permission_schema import UserRolePermissionSchema
+from backend.schemas.knowledge_base_schema import (KnowledgeBaseCreateSchema,
+                                                   KnowledgeBaseInDBSchema)
+from backend.schemas.user_role_permission_schema import \
+    UserRolePermissionSchema
 from backend.services.abc.knowledge_base_service import KnowledgeBaseService
 
 logger = setup_logger()

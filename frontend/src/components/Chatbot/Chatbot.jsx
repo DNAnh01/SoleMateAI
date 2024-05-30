@@ -7,7 +7,6 @@ import images from '~/assets/images';
 import messageApi from '~/apis/message.api';
 import useAppStore from '~/store';
 import conversationApi from '~/apis/conversation.api';
-import { Link } from 'react-router-dom';
 
 const shakeAnimation = keyframes`
     0% { transform: rotate(0deg); }
@@ -398,7 +397,7 @@ const Chatbot = () => {
         <ChatItem key={message.id} className={message.sender_type === 'guest' ? 'outgoing' : 'incoming'}>
             {message.sender_type === 'bot' && (
                 <span>
-                    <Image className="chatbot-icon" src={images.chatbot} alt="Bot" />
+                    <Image className="chatbot-icon" src={images.chatbot} alt="Bot" width={30} height={30} />
                 </span>
             )}
             <p>{message.message_text}</p>
@@ -436,7 +435,13 @@ const Chatbot = () => {
                         ) : (
                             <ChatItem className="incoming">
                                 <span>
-                                    <Image className="chatbot-icon" src={images.chatbot} alt="Bot" />
+                                    <Image
+                                        className="chatbot-icon"
+                                        src={images.chatbot}
+                                        alt="Bot"
+                                        width={30}
+                                        height={30}
+                                    />
                                 </span>
                                 <SkeletonLoading />
                             </ChatItem>
@@ -444,7 +449,13 @@ const Chatbot = () => {
                         {loading && (
                             <ChatItem className="incoming">
                                 <span>
-                                    <Image className="chatbot-icon" src={images.chatbot} alt="Bot" />
+                                    <Image
+                                        className="chatbot-icon"
+                                        src={images.chatbot}
+                                        alt="Bot"
+                                        width={30}
+                                        height={30}
+                                    />
                                 </span>
                                 <SkeletonLoading />
                             </ChatItem>
@@ -454,7 +465,7 @@ const Chatbot = () => {
                         <textarea
                             rows={1}
                             value={userMessage}
-                            placeholder="Type your message..."
+                            placeholder="Nhập tin nhắn của bạn..."
                             onChange={(e) => setUserMessage(e.target.value)}
                             onKeyDown={handleEnterPress}
                         />

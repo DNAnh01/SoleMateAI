@@ -15,16 +15,13 @@ from backend.crud.crud_user import crud_user
 from backend.schemas.brand_schema import BrandCreateSchema, BrandInDBSchema
 from backend.schemas.color_schema import ColorCreateSchema, ColorInDBSchema
 from backend.schemas.review_schema import ReviewOutInProductDetailPageSchema
-from backend.schemas.shoe_schema import (
-    ShoeCreateSchema,
-    ShoeInDBSchema,
-    ShoeOutInHomePageSchema,
-    ShoeOutInProductDetailPageSchema,
-    ShoeOutSchema,
-    ShoeUpdateSchema,
-)
+from backend.schemas.shoe_schema import (ShoeCreateSchema, ShoeInDBSchema,
+                                         ShoeOutInHomePageSchema,
+                                         ShoeOutInProductDetailPageSchema,
+                                         ShoeOutSchema, ShoeUpdateSchema)
 from backend.schemas.size_schema import SizeCreateSchema, SizeInDBSchema
-from backend.schemas.user_role_permission_schema import UserRolePermissionSchema
+from backend.schemas.user_role_permission_schema import \
+    UserRolePermissionSchema
 from backend.schemas.user_schema import UserOutInProductDetailPageSchema
 from backend.services.abc.shoe_service import ShoeService
 

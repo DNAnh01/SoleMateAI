@@ -1,15 +1,15 @@
 import { NavLink, Link } from 'react-router-dom';
 import { SideBarAdminList } from './sideBarAdmin.const';
 import { SideBarWrapper } from './sideBarAdmin.style';
-import { staticImages } from '~/utils/images';
+import images from '~/assets/images';
 const SideBarAdmin = () => {
     return (
         <SideBarWrapper>
             <div className="flex gap-2 items-center px-2">
                 <Link to={'/'} className="inline-block">
-                    <img src={staticImages.logo} alt="logo" className="w-16 h-16" />
+                    <img src={images.logo} alt="logo" className="w-16 h-14" />
                 </Link>
-                <h1 className="font-semibold text-3xl">Sole Mate AI</h1>
+                <h1 className="font-semibold text-xl">Sole Mate AI</h1>
             </div>
             <div>
                 <ul className="flex flex-col gap-2 px-1 mt-4">

@@ -13,7 +13,9 @@ import authApi from '~/apis/auth.api';
 import { toast } from 'react-toastify';
 import Search from '~/components/header/Search';
 import useAppStore from '~/store';
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { CartContext } from '~/contexts/cart.context';
+import cartAPI from '~/apis/cart.api';
 
 const IconLinksWrapper = styled.div`
     column-gap: 18px;
@@ -21,6 +23,7 @@ const IconLinksWrapper = styled.div`
         width: 36px;
         height: 36px;
         border-radius: 6px;
+        position: relative;
 
         &.active {
             background-color: ${defaultTheme.color_yellow_green};
@@ -107,12 +110,54 @@ const MenuTippyWrapper = styled.div`
     }
 `;
 
+const CartBadge = styled.div`
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    width: 20px;
+    height: 20px;
+    background-color: ${defaultTheme.color_red};
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+`;
+
 const Header = () => {
-    const { clearLocalStorage, setIsAuthenticated, isSidebarOpen, setIsSidebarOpen, profile, isAuthenticated } =
-        useAppStore();
+    const { setCart, totalCartItem, setTotalCartItem } = useContext(CartContext);
+    const {
+        clearLocalStorage,
+        setIsAuthenticated,
+        isSidebarOpen,
+        setIsSidebarOpen,
+        profile,
+        isAuthenticated,
+        accessToken,
+    } = useAppStore();
     const location = useLocation();
     const navigate = useNavigate();
     const [activeButton, setActiveButton] = useState('signIn');
+
+    useEffect(() => {
+        if (accessToken) {
+            const fetchAllCartItem = async () => {
+                try {
+                    const res = await cartAPI.getAllCartItem();
+                    if (res.status === 200) {
+                        setCart(res.data);
+                        setTotalCartItem(res.data.total_item);
+                    }
+                } catch (error) {
+                    console.log(error);
+                }
+            };
+            fetchAllCartItem();
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [setCart]);
 
     const handleButtonClick = (button) => {
         setActiveButton(button);
@@ -150,14 +195,15 @@ const Header = () => {
                 <div className="header-wrap flex items-center justify-between">
                     <div className="flex items-center">
                         <button type="button" onClick={toggleSidebar}>
-                            <Icons
-                                icon="list"
-                                className={`ml-3 icon-link inline-flex items-center justify-center icon-default ${
-                                    isSidebarOpen ? 'active' : ''
-                                }`}
-                                color={defaultTheme.color_dim_gray}
-                            />
+                            <div className={`icon-list ${isSidebarOpen ? 'active' : ''}`}>
+                                <Icons
+                                    icon="list"
+                                    className="inline-flex items-center justify-center icon-default"
+                                    color={defaultTheme.color_dim_gray}
+                                />
+                            </div>
                         </button>
+
                         <SiteBrandWrapper to={configs.roures.home} className="inline-flex">
                             <div className="brand-img-wrap flex items-center justify-center">
                                 <img src={images.logo} alt="" className="site-brand-img" />
@@ -169,14 +215,25 @@ const Header = () => {
                     <IconLinksWrapper>
                         {isAuthenticated ? (
                             <ActionGroupWrapper>
-                                <Link
-                                    to={configs.roures.user.cart}
-                                    className={`icon-link ${
-                                        location.pathname === configs.roures.user.cart ? 'active' : ''
-                                    } inline-flex items-center justify-center`}
-                                >
-                                    <Icons icon="cart" className={'icon-default'} color={defaultTheme.color_dim_gray} />
-                                </Link>
+                                {profile.role_name === 'user' && (
+                                    <Link
+                                        to={
+                                            totalCartItem === 0
+                                                ? configs.roures.user.emptyCart
+                                                : configs.roures.user.cart
+                                        }
+                                        className={`icon-link ${
+                                            location.pathname === configs.roures.user.cart ? 'active' : ''
+                                        } inline-flex items-center justify-center`}
+                                    >
+                                        <Icons
+                                            icon="cart"
+                                            className={'icon-default'}
+                                            color={defaultTheme.color_dim_gray}
+                                        />
+                                        <CartBadge>{totalCartItem}</CartBadge>
+                                    </Link>
+                                )}
                                 <CustomTippyBox>
                                     <Tippy
                                         delay={[0, 40]}
@@ -184,15 +241,19 @@ const Header = () => {
                                         interactive={true}
                                         content={
                                             <MenuTippyWrapper>
-                                                <Link to={configs.roures.user.profile} className="tippy-item">
-                                                    Cá nhân
-                                                </Link>
+                                                {profile.role_name === 'user' && (
+                                                    <Link to={configs.roures.user.profile} className="tippy-item">
+                                                        Cá nhân
+                                                    </Link>
+                                                )}
                                                 <div className="tippy-item" onClick={handleSignOut}>
                                                     Đăng xuất
                                                 </div>
-                                                <Link to={'/admin/dashboard'} className="tippy-item">
-                                                    Trang quản lý
-                                                </Link>
+                                                {profile.role_name === 'admin' && (
+                                                    <Link to={'/admin/dashboard'} className="tippy-item">
+                                                        Trang quản lý
+                                                    </Link>
+                                                )}
                                             </MenuTippyWrapper>
                                         }
                                     >

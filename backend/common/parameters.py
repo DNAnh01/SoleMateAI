@@ -1,6 +1,7 @@
 from typing import Optional
 
-from backend.common.string_case import convert_filter_to_camel_case, to_snake_case
+from backend.common.string_case import (convert_filter_to_camel_case,
+                                        to_snake_case)
 
 
 async def common_filter_parameters(

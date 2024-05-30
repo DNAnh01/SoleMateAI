@@ -7,7 +7,8 @@ from backend.common.logger import setup_logger
 from backend.crud.base import CRUDBase
 from backend.db.query_builder import get_filter, query_builder
 from backend.models.chatbot import Chatbot
-from backend.schemas.chatbot_schema import ChatbotCreateSchema, ChatbotUpdateSchema
+from backend.schemas.chatbot_schema import (ChatbotCreateSchema,
+                                            ChatbotUpdateSchema)
 
 logger = setup_logger()
 

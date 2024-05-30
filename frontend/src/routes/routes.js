@@ -7,7 +7,7 @@ import ResetPage from '~/pages/auth/ResetPage';
 import SignInPage from '~/pages/auth/SignInPage';
 import SignUpPage from '~/pages/auth/SignUpPage';
 import VerificationPage from '~/pages/auth/VerificationPage';
-import CartEmptyPage from '~/pages/cart/CartEmptyPage';
+import CartEmptyPage from '~/pages/empty/CartEmptyPage';
 import CartPage from '~/pages/cart/CartPage';
 import CheckoutPage from '~/pages/checkout/CheckoutPage';
 import NotFoundPage from '~/pages/error/NotFoundPage';

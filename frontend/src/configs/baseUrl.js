@@ -1,5 +1,15 @@
 const baseUrl = {
     url: process.env.REACT_APP_BASE_URL,
+    address: {
+        addOrCheckAddress: '/address/',
+        getCurrentShippingAddress: '/address/',
+    },
+    order: {
+        createOrder: '/order/',
+        getHistoryOrder: '/order/get-all',
+        getOrderById: '/order/order-id=',
+        cancelOrderById: '/order/cancel/order-id=',
+    },
     product: {
         getAll: '/shoe/get-all',
         getById: '/shoe/shoe-id=',
@@ -8,7 +18,12 @@ const baseUrl = {
         createWithAuth: '/conversation/with-auth',
         createWithoutAuth: '/conversation/without-auth',
     },
-
+    cart: {
+        addCartItem: '/cart/add-cart-item',
+        removeCartItem: '/cart/remove-cart-item',
+        removeMultipleCartItem: '/cart/remove-multiple-cart-items',
+        getAllCartItem: '/cart/get-all',
+    },
     message: {
         createWithAuth: '/message/with-auth',
         createWithoutAuth: '/message/without-auth',

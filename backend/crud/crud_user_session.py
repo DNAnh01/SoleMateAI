@@ -6,10 +6,8 @@ from backend.common import utils
 from backend.core import oauth2
 from backend.crud.base import CRUDBase
 from backend.models.user_session import UserSession
-from backend.schemas.user_session_schema import (
-    UserSessionCreateSchema,
-    UserSessionUpdateSchema,
-)
+from backend.schemas.user_session_schema import (UserSessionCreateSchema,
+                                                 UserSessionUpdateSchema)
 
 
 class CRUDUserSession(

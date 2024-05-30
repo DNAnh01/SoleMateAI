@@ -1,6 +1,14 @@
+import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import styled from 'styled-components';
+import orderApi from '~/apis/order.api';
+import configs from '~/configs';
+import { AddressContext } from '~/contexts/address.context';
+import { OrderContext } from '~/contexts/order.context';
 import { BaseButtonGreen } from '~/styles/button';
 import { breakpoints, defaultTheme } from '~/styles/themes/default';
+import { currencyFormat } from '~/utils/helper';
 
 const CartSummaryWrapper = styled.div`
     background-color: ${defaultTheme.color_flash_white};
@@ -31,25 +39,92 @@ const CartSummaryWrapper = styled.div`
     }
 `;
 
-const CartSummary = () => {
+const CartSummary = ({ totalDisplayPrice, totalDiscountedPrice }) => {
+    const { address } = useContext(AddressContext);
+    const { setHistoryOrders } = useContext(OrderContext);
+    const navigate = useNavigate();
+
+    // handle order
+    const handleOrder = async () => {
+        if (!address) {
+            toast.error('Vui lòng nhập địa chỉ giao hàng', {
+                autoClose: 3000,
+            });
+            return;
+        }
+
+        if (!totalDisplayPrice || !totalDiscountedPrice) {
+            toast.error('Vui lòng thêm sản phẩm vào giỏ hàng', {
+                autoClose: 3000,
+            });
+            return;
+        }
+
+        console.log('handle order');
+        try {
+            const createOrderResponse = await orderApi.createOrder({
+                province: address.province,
+                district: address.district,
+                ward: address.ward,
+            });
+
+            if (createOrderResponse.status === 201) {
+                toast.success('Đặt hàng thành công', {
+                    autoClose: 3000,
+                });
+                const fetchOrders = async () => {
+                    try {
+                        const response = await orderApi.getHistoryOrderByFilter({
+                            status: 'ORDER-PLACED',
+                            orderDate: '',
+                        });
+                        if (response.status === 200) {
+                            setHistoryOrders(response.data);
+                        } else {
+                            toast.error('Bạn chưa có đơn hàng nào.', {
+                                autoClose: 3000,
+                            });
+                        }
+                    } catch (error) {
+                        toast.error('Bạn chưa có đơn hàng nào.', {
+                            autoClose: 3000,
+                        });
+                    }
+                };
+                fetchOrders();
+                // redirect to confirm page
+                navigate(configs.roures.confirm);
+            }
+        } catch (error) {
+            toast.error('Đặt hàng thất bại', {
+                autoClose: 3000,
+            });
+        }
+        console.log('address', address);
+    };
+
     return (
         <CartSummaryWrapper>
             <ul className="summary-list">
                 <li className="summary-item flex justify-between">
-                    <span className="font-medium text-outerspace">Tổng phụ</span>
-                    <span className="font-medium text-outerspace">4.500.000VND</span>
+                    <span className="font-medium text-outerspace">Tổng số tiền:</span>
+                    <span className="font-medium text-outerspace">{currencyFormat(totalDisplayPrice)}</span>
                 </li>
                 <li className="summary-item flex justify-between">
-                    <span className="font-medium text-outerspace">Vận chuyển</span>
-                    <span className="font-medium text-outerspace">50.000VND</span>
+                    <span className="font-medium text-outerspace">Tổng phần trăm khuyến mãi:</span>
+                    <span className="font-medium text-outerspace">
+                        {(((totalDisplayPrice - totalDiscountedPrice) / totalDisplayPrice) * 100).toFixed(3)}%
+                    </span>
                 </li>
                 <li className="summary-item flex justify-between">
-                    <span className="font-medium text-outerspace">Tổng cộng</span>
-                    <span className="summary-item-value font-bold text-outerspace">4.550.000VND</span>
+                    <span className="font-medium text-outerspace">Tổng số tiền phải thanh toán:</span>
+                    <span className="summary-item-value font-bold text-outerspace">
+                        {currencyFormat(totalDiscountedPrice)}
+                    </span>
                 </li>
             </ul>
-            <BaseButtonGreen type="submit" className="checkout-btn">
-                Tiến hành thanh toán
+            <BaseButtonGreen type="submit" className="checkout-btn" onClick={handleOrder}>
+                Đặt hàng
             </BaseButtonGreen>
         </CartSummaryWrapper>
     );

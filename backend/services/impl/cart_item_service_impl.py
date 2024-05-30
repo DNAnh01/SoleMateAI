@@ -9,13 +9,13 @@ from backend.common.logger import setup_logger
 from backend.crud.crud_cart import crud_cart
 from backend.crud.crud_cart_item import crud_cart_item
 from backend.crud.crud_shoe import crud_shoe
-from backend.schemas.cart_item_schema import (
-    CartItemCreateSchema,
-    CartItemInDBSchema,
-    CartItemRemoveSchema,
-    CartItemUpdateSchema,
-)
-from backend.schemas.user_role_permission_schema import UserRolePermissionSchema
+from backend.schemas.cart_item_schema import (CartItemCreateSchema,
+                                              CartItemInDBSchema,
+                                              CartItemRemoveMultipleSchema,
+                                              CartItemRemoveSchema,
+                                              CartItemUpdateSchema)
+from backend.schemas.user_role_permission_schema import \
+    UserRolePermissionSchema
 from backend.services.abc.cart_item_service import CartItemService
 
 logger = setup_logger()
@@ -280,6 +280,78 @@ class CartItemServiceImpl(CartItemService):
         except:
             logger.exception(
                 f"Exception in {__name__}.{self.__class__.__name__}.remove_cart_item"
+            )
+            return JSONResponse(
+                status_code=400,
+                content={"status": 400, "message": "Remove Cart Item failed"},
+            )
+
+    def remove_multiple_cart_items(
+        self,
+        db: Session,
+        cart_item_remove_multiple: CartItemRemoveMultipleSchema,
+        current_user_role_permission: UserRolePermissionSchema,
+    ) -> JSONResponse:
+        if (
+            "delete_cart_item"
+            not in current_user_role_permission.u_list_permission_name
+        ):
+            logger.exception(
+                f"Exception in {__name__}.{self.__class__.__name__}.remove_multiple_cart_items: User does not have permission to remove cart item"
+            )
+            return JSONResponse(
+                status_code=400,
+                content={
+                    "status": 400,
+                    "message": "Remove Cart Item failed: User does not have permission to remove cart item",
+                },
+            )
+        try:
+            cart_found = self.__crud_cart.get_one_by(
+                db=db, filter={"user_id": current_user_role_permission.u_id}
+            )
+            if cart_found is None:
+                logger.exception(
+                    f"Exception in {__name__}.{self.__class__.__name__}.remove_multiple_cart_items: Cart not found"
+                )
+                return JSONResponse(
+                    status_code=400,
+                    content={
+                        "status": 400,
+                        "message": "Remove Cart Item failed: Cart not found",
+                    },
+                )
+
+            for shoe_id in cart_item_remove_multiple.shoe_ids:
+                cart_item_found = self.__crud_cart_item.get_one_by(
+                    db=db,
+                    filter={"cart_id": cart_found.id, "shoe_id": shoe_id},
+                )
+
+                if cart_item_found is None:
+                    logger.exception(
+                        f"Exception in {__name__}.{self.__class__.__name__}.remove_multiple_cart_items: Cart Item not found"
+                    )
+                    return JSONResponse(
+                        status_code=400,
+                        content={
+                            "status": 400,
+                            "message": "Remove Cart Item failed: Cart Item not found",
+                        },
+                    )
+
+                cart_item_found.is_active = False
+                cart_item_found.deleted_at = datetime.now()
+
+            db.commit()
+
+            return JSONResponse(
+                status_code=200,
+                content={"status": 200, "message": "Cart Item removed successfully"},
+            )
+        except:
+            logger.exception(
+                f"Exception in {__name__}.{self.__class__.__name__}.remove_multiple_cart_items"
             )
             return JSONResponse(
                 status_code=400,

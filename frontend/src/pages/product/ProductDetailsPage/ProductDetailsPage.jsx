@@ -1,15 +1,19 @@
 import styled from 'styled-components';
 import { Container } from '~/styles/styles';
 import Breadcrumb from '~/components/common/Breadcrumb';
-import { BaseLinkGreen } from '~/styles/button';
+import { BaseButtonGreen } from '~/styles/button';
 import { breakpoints, defaultTheme } from '~/styles/themes/default';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import productApi from '~/apis/product.api';
 import ProductSimilar from '~/components/product/ProductSimilar';
 import { FaStar } from 'react-icons/fa';
 import { useParams } from 'react-router-dom';
-import { formatCurrency } from '~/utils/helper';
+import { currencyFormat } from '~/utils/helper';
 import Icons from '~/components/common/Icons/Icons';
+import { CartContext } from '~/contexts/cart.context';
+import cartAPI from '~/apis/cart.api';
+import { toast } from 'react-toastify';
+import useAppStore from '~/store';
 
 const DetailsScreenWrapper = styled.main`
     margin: 40px 0;
@@ -328,9 +332,36 @@ const SmallRating = ({ rating }) => {
 };
 
 const ProductDetailsPage = () => {
+    const { accessToken } = useAppStore();
+    const { setCart, setTotalCartItem } = useContext(CartContext);
     const [product, setProduct] = useState(null);
     const [brandName, setBrandName] = useState('');
     const { id } = useParams();
+
+    const handleAddToCart = async () => {
+        if (accessToken) {
+            try {
+                const res = await cartAPI.addCartItem({ shoeId: product.id, quantity: 1 });
+                if (res.status === 200) {
+                    toast.success('Thêm vào giỏ hàng thành công', {
+                        position: 'top-center',
+                        autoClose: 2000,
+                    });
+                    const cart = await cartAPI.getAllCartItem();
+                    setCart(cart.data);
+                    setTotalCartItem(cart.data.total_item);
+                }
+            } catch (error) {
+                toast.error('Thêm vào giỏ hàng thất bại');
+                console.log(error);
+            }
+        } else {
+            toast.error('Vui lòng đăng nhập để thêm vào giỏ hàng', {
+                position: 'top-center',
+                autoClose: 2000,
+            });
+        }
+    };
 
     useEffect(() => {
         const fetchData = async () => {
@@ -338,7 +369,6 @@ const ProductDetailsPage = () => {
                 const response = await productApi.getById(id);
                 if (response.status === 200) {
                     setProduct(response.data);
-                    console.log(response.data);
                     setBrandName(response.data.brand.brand_name);
                 }
             } catch (error) {
@@ -414,17 +444,17 @@ const ProductDetailsPage = () => {
                                 <p className="text-lg font-semibold text-outerspace">Giá cả</p>
                             </div>
                             <div>
-                                <span className="prod-price">{formatCurrency(product.display_price)}</span>
+                                <span className="prod-price">{currencyFormat(product.display_price)}</span>
                                 <span className="prod-discounted-price">
-                                    {formatCurrency(product.discounted_price)}
+                                    {currencyFormat(product.discounted_price)}
                                 </span>
                             </div>
-                            <BaseLinkGreen to="/cart" className="prod-add-btn">
+                            <BaseButtonGreen className="prod-add-btn" onClick={handleAddToCart}>
                                 <span className="prod-add-btn-icon">
-                                    <i className="bi bi-cart2"></i>
+                                    <Icons icon="cart" width={20} height={20} color={defaultTheme.color_white} />
                                 </span>
                                 <span className="prod-add-btn-text">Thêm vào giỏ hàng</span>
-                            </BaseLinkGreen>
+                            </BaseButtonGreen>
                         </div>
                     </ProductDetailsWrapper>
                 </DetailsContent>

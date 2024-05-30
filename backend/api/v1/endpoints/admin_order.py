@@ -9,9 +9,11 @@ from backend.common import parameters
 from backend.common.logger import setup_logger
 from backend.core import oauth2
 from backend.schemas.order_schema import OrderOutSchema
-from backend.schemas.user_role_permission_schema import UserRolePermissionSchema
+from backend.schemas.user_role_permission_schema import \
+    UserRolePermissionSchema
 from backend.services.abc.admin_order_service import AdminOrderService
-from backend.services.impl.admin_order_service_impl import AdminOrderServiceImpl
+from backend.services.impl.admin_order_service_impl import \
+    AdminOrderServiceImpl
 
 logger = setup_logger()
 
@@ -68,6 +70,21 @@ def cancel_order(
     db: Session = Depends(deps.get_db),
 ) -> JSONResponse:
     return admin_order_service.cancel_order(
+        db=db,
+        order_id=order_id,
+        current_user_role_permission=current_user_role_permission,
+    )
+
+
+@router.patch("/shipping/order-id={order_id}", status_code=status.HTTP_200_OK)
+def shipping_order(
+    order_id: str,
+    current_user_role_permission: UserRolePermissionSchema = Depends(
+        oauth2.get_current_user_role_permission
+    ),
+    db: Session = Depends(deps.get_db),
+) -> JSONResponse:
+    return admin_order_service.shipping_order(
         db=db,
         order_id=order_id,
         current_user_role_permission=current_user_role_permission,

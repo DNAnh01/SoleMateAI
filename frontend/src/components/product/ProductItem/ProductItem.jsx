@@ -1,8 +1,13 @@
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { formatCurrency } from '~/utils/helper';
+import { currencyFormat } from '~/utils/helper';
 import { breakpoints, defaultTheme } from '~/styles/themes/default';
 import { FaStar } from 'react-icons/fa';
+import { useContext } from 'react';
+import { CartContext } from '~/contexts/cart.context';
+import cartAPI from '~/apis/cart.api';
+import { toast } from 'react-toastify';
+import useAppStore from '~/store';
 
 const getColor = (rating, index) => {
     if (rating >= index) {
@@ -14,7 +19,7 @@ const getColor = (rating, index) => {
     }
 };
 
-const ProductCardWrapper = styled(Link)`
+const ProductCardWrapper = styled.div`
     width: 280px;
     display: flex;
     flex-direction: column;
@@ -216,8 +221,43 @@ const AddToCartButton = styled.button`
 `;
 
 const ProductItem = ({ product }) => {
+    const { accessToken } = useAppStore();
+    const { setCart, setTotalCartItem } = useContext(CartContext);
+    const navigate = useNavigate();
+
+    const handleAddToCart = async (e) => {
+        e.stopPropagation();
+        if (accessToken) {
+            try {
+                const res = await cartAPI.addCartItem({ shoeId: product.id, quantity: 1 });
+                if (res.status === 200) {
+                    toast.success('Thêm vào giỏ hàng thành công', {
+                        position: 'top-center',
+                        autoClose: 2000,
+                    });
+
+                    const cart = await cartAPI.getAllCartItem();
+                    setCart(cart.data);
+                    setTotalCartItem(cart.data.total_item);
+                }
+            } catch (error) {
+                toast.error('Thêm vào giỏ hàng thất bại');
+                console.log(error);
+            }
+        } else {
+            toast.error('Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng', {
+                position: 'top-center',
+                autoClose: 2000,
+            });
+        }
+    };
+
+    const handleCardClick = () => {
+        navigate(`/product/${product.id}`);
+    };
+
     return (
-        <ProductCardWrapper to={`/product/${product.id}`} circleColor={product.color.hex_value}>
+        <ProductCardWrapper onClick={handleCardClick} circleColor={product.color.hex_value}>
             <Rating rating={product.avg_rating} />
             <SizeWrapper>
                 <Size key={product?.size?.size_number} color={product?.color.hex_value}>
@@ -234,11 +274,13 @@ const ProductItem = ({ product }) => {
                     <p className="quantity">Số lượng: {product.quantity_in_stock}</p>
                 </div>
                 <div className="prices">
-                    <p className="price">{formatCurrency(product.display_price)}</p>
-                    <p className="discounted-price">{formatCurrency(product.discounted_price)}</p>
+                    <p className="price">{currencyFormat(product.display_price)}</p>
+                    <p className="discounted-price">{currencyFormat(product.discounted_price)}</p>
                 </div>
             </ProductContent>
-            <AddToCartButton className="add-to-cart">Thêm giỏ hàng</AddToCartButton>
+            <AddToCartButton className="add-to-cart" onClick={handleAddToCart}>
+                Thêm giỏ hàng
+            </AddToCartButton>
         </ProductCardWrapper>
     );
 };

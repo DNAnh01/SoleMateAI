@@ -1,11 +1,12 @@
 import axios from 'axios';
 import { useEffect } from 'react';
+import { toast } from 'react-toastify';
 import configs from '~/configs';
 
 // Create an instance of axios outside the class
 const instance = axios.create({
     baseURL: configs.baseUrl.url,
-    timeout: 100000,
+    timeout: 20000,
 });
 
 // Interceptor logic that will be used in a functional component
@@ -24,11 +25,12 @@ const useAxiosInterceptors = (accessToken, setAccessToken) => {
         const responseInterceptor = instance.interceptors.response.use(
             (response) => response,
             (error) => {
-                // if (error.response?.status !== 200 && error.response?.status !== 201) {
-                //     setAccessToken('');
-                //     window.location.href = configs.roures.auth.signIn;
-                // }
-                // return Promise.reject(error);
+                if (error.response?.status !== 200 && error.response?.status !== 201) {
+                    toast.error('Có lỗi xảy ra, vui lòng thử lại sau.', {
+                        autoClose: 5000,
+                    });
+                }
+                return Promise.reject(error);
             },
         );
 

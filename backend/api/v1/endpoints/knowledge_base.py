@@ -8,13 +8,13 @@ from backend.api import deps
 from backend.common import utils
 from backend.common.logger import setup_logger
 from backend.core import oauth2
-from backend.schemas.knowledge_base_schema import (
-    KnowledgeBaseCreateSchema,
-    KnowledgeBaseInDBSchema,
-)
-from backend.schemas.user_role_permission_schema import UserRolePermissionSchema
+from backend.schemas.knowledge_base_schema import (KnowledgeBaseCreateSchema,
+                                                   KnowledgeBaseInDBSchema)
+from backend.schemas.user_role_permission_schema import \
+    UserRolePermissionSchema
 from backend.services.abc.knowledge_base_service import KnowledgeBaseService
-from backend.services.impl.knowledge_base_service_impl import KnowledgeBaseServiceImpl
+from backend.services.impl.knowledge_base_service_impl import \
+    KnowledgeBaseServiceImpl
 
 logger = setup_logger()
 

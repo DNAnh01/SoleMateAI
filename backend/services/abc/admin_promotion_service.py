@@ -5,12 +5,11 @@ from typing import List, Optional
 from fastapi.responses import JSONResponse
 from sqlalchemy.orm import Session
 
-from backend.schemas.promotion_schema import (
-    PromotionCreateSchema,
-    PromotionOutSchema,
-    PromotionUpdateSchema,
-)
-from backend.schemas.user_role_permission_schema import UserRolePermissionSchema
+from backend.schemas.promotion_schema import (PromotionCreateSchema,
+                                              PromotionOutSchema,
+                                              PromotionUpdateSchema)
+from backend.schemas.user_role_permission_schema import \
+    UserRolePermissionSchema
 
 
 class AdminPromotionService(ABC):

@@ -17,7 +17,6 @@ const AdminLayout = () => {
                     </div>
                 </PageContainer>
             </MainContainer>
-            {/*<Chatbot />*/}
         </Wrapper>
     );
 };

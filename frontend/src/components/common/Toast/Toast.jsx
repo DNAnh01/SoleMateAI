@@ -1,7 +1,7 @@
 import { Slide, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const Toast = ({ position = 'top-right', autoClose = 5000, hideProgressBar = false }) => {
+const Toast = ({ position = 'top-center', autoClose = 5000, hideProgressBar = false }) => {
     return (
         <ToastContainer
             position={position}
