@@ -3,6 +3,7 @@ import HeaderAdmin from '~/components/headerAdmin/headerAdmin';
 import { MainContainer, PageContainer, Wrapper } from './AdminLayout.style';
 import SideBarAdmin from '~/components/sideBarAdmin/sideBarAdmin';
 // import Chatbot from '~/components/Chatbot';
+import '../../../index.css';
 
 const AdminLayout = () => {
     return (

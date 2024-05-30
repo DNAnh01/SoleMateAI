@@ -265,7 +265,7 @@ export const dataSource = [
 export const columns = [
     {
         title: 'Id',
-        dataIndex: 'shoe_id_uuid',
+        dataIndex: 'id',
         key: 'id',
         width: '10px',
     },
@@ -274,6 +274,15 @@ export const columns = [
         dataIndex: 'brand_id_uuid',
         key: 'brand',
         width: '10px',
+        render: (text, record, index) => {
+            return (
+                <div>
+                    <img src={record.brand.brand_logo} alt={record.brand.brand_name} className="w-[50px]" />
+
+                    <p>{record.brand.brand_name}</p>
+                </div>
+            );
+        },
     },
     {
         title: 'Color',
@@ -285,7 +294,7 @@ export const columns = [
                     <div
                         className="w-[20px] h-[20px] rounded-full"
                         style={{
-                            backgroundColor: getRandomColor(),
+                            backgroundColor: record.color.hex_value,
                         }}
                     ></div>
                 </div>
@@ -299,15 +308,15 @@ export const columns = [
         render: (text, record, index) => {
             return (
                 <div className="flex items-center justify-center z-50">
-                    <img src={record.image} alt={record.name} className="w-[80px] rounded-lg" />
+                    <img src={record.image_url} alt={record.shoe_name} className="w-[80px] rounded-lg" />
                 </div>
             );
         },
     },
     {
         title: 'Name',
-        dataIndex: 'name',
-        key: 'name',
+        dataIndex: 'shoe_name',
+        key: 'shoe_name',
         width: '10%',
     },
     {
@@ -317,24 +326,32 @@ export const columns = [
         width: '20%',
     },
     {
+        title: 'Size',
+        dataIndex: 'size',
+        key: 'size',
+        render: (text, record, index) => {
+            return <p className="text-center">{record.size.size_number}</p>;
+        },
+    },
+    {
         title: 'Quantity',
-        dataIndex: 'quantity',
-        key: 'quantity',
+        dataIndex: 'quantity_in_stock',
+        key: 'quantity_in_stock',
     },
     {
         title: 'Display Price',
-        dataIndex: 'price',
-        key: 'price',
+        dataIndex: 'display_price',
+        key: 'display_price',
     },
     {
         title: 'Warehouse Price',
-        dataIndex: 'warehouse',
-        key: 'warehouse',
+        dataIndex: 'warehouse_price',
+        key: 'warehouse_price',
     },
     {
         title: 'Discount',
-        dataIndex: 'discount',
-        key: 'discount',
+        dataIndex: 'discounted_price',
+        key: 'discounted_price',
     },
     {
         title: 'Active',
@@ -343,7 +360,7 @@ export const columns = [
         render: (text, record, index) => {
             return (
                 <div className="flex items-center justify-center z-50">
-                    {record.active ? (
+                    {record.is_active ? (
                         <div className="bg-green-400  font-semibold px-2 py-1 rounded-full">
                             <h5 className="text-sm text-white">Active</h5>
                         </div>

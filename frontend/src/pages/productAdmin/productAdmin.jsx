@@ -1,9 +1,13 @@
 import { Table, Modal, Select, Space, Input, InputNumber, Popconfirm } from 'antd';
-import { BRAND, STATUS, columns, dataSource } from '~/data/data.product';
+import { BRAND, STATUS, columns } from '~/data/data.product';
+import { MdEdit } from 'react-icons/md';
+import { IoClose } from 'react-icons/io5';
 import { FaRegEdit } from 'react-icons/fa';
 import { MdDeleteOutline } from 'react-icons/md';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { colors } from '~/utils/common';
+import productApi from '~/apis/product.api';
+import useAppStore from '~/store';
 const { TextArea } = Input;
 
 const formattedColors = colors.map((color) => ({
@@ -12,9 +16,14 @@ const formattedColors = colors.map((color) => ({
 }));
 
 const ProductAdmin = () => {
+    const { setIsLoadingAPI } = useAppStore();
     const [isOpenModalEdit, setIsOpenModalEdit] = useState(false);
     const [confirmLoading, setConfirmLoading] = useState(false);
     const [itemSelected, setItemSelected] = useState();
+    const [previewUrl, setPreviewUrl] = useState(null);
+    const [image, setImage] = useState(null);
+
+    const [productList, setProductList] = useState([]);
     const timeoutRef = useRef();
     const handleOk = () => {
         setConfirmLoading(true);
@@ -31,6 +40,7 @@ const ProductAdmin = () => {
     };
 
     const handleClickProductEdit = useCallback((item) => {
+        console.log(item);
         setItemSelected(item);
         setIsOpenModalEdit(true);
     }, []);
@@ -69,6 +79,20 @@ const ProductAdmin = () => {
         ];
     }, [handleClickProductEdit]);
 
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const url = URL.createObjectURL(file);
+            setImage(file);
+            setPreviewUrl(url);
+        }
+    };
+
+    const handleClearImage = () => {
+        setImage();
+        setPreviewUrl();
+    };
+
     useEffect(() => {
         return () => {
             if (timeoutRef.current) {
@@ -76,10 +100,29 @@ const ProductAdmin = () => {
             }
         };
     }, []);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                setIsLoadingAPI(true);
+                const res = await productApi.getAll();
+                if (res.status === 200) {
+                    setProductList(res.data);
+                } else {
+                    setProductList([]);
+                }
+            } catch (err) {
+                console.log('product', err);
+            } finally {
+                setIsLoadingAPI(false);
+            }
+        };
+        fetchData();
+    }, [setIsLoadingAPI]);
     return (
         <>
             <div className="p-2">
-                <Table dataSource={dataSource} columns={convertColumns} className="w-full" />
+                <Table dataSource={productList} columns={convertColumns} className="w-full" />
             </div>
             <Modal
                 title="Edit Product"
@@ -180,11 +223,35 @@ const ProductAdmin = () => {
                                 className="mt-1"
                             />
                         </div>
-                        <div className="w-2/5 pl-4">
+                        <div className="w-2/5 pl-4 relative">
                             <img
-                                src={itemSelected?.image}
+                                src={previewUrl ? previewUrl : itemSelected?.image_url}
                                 alt={itemSelected?.name}
-                                className="w-full max-h-[250px] object-cover rounded-xl"
+                                className="w-full max-h-[200px] object-contain rounded-xl"
+                            />
+                            {image ? (
+                                <button
+                                    onClick={handleClearImage}
+                                    className="absolute top-4 cursor-poiter right-4 p-1 rounded-full hover:bg-slate-300"
+                                >
+                                    <IoClose fontSize={20} />
+                                </button>
+                            ) : (
+                                <label
+                                    htmlFor="product-image"
+                                    className="absolute top-4 cursor-poiter right-4 p-1 rounded-full hover:bg-slate-300"
+                                >
+                                    <MdEdit fontSize={20} />
+                                </label>
+                            )}
+
+                            <input
+                                onChange={handleImageChange}
+                                type="file"
+                                id="product-image"
+                                className="hidden"
+                                name="image"
+                                accept="image/png, image/gif, image/jpeg"
                             />
                         </div>
                     </div>

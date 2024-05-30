@@ -24,11 +24,11 @@ const useAxiosInterceptors = (accessToken, setAccessToken) => {
         const responseInterceptor = instance.interceptors.response.use(
             (response) => response,
             (error) => {
-                if (error.response?.status !== 200 && error.response?.status !== 201) {
-                    setAccessToken('');
-                    window.location.href = configs.roures.auth.signIn;
-                }
-                return Promise.reject(error);
+                // if (error.response?.status !== 200 && error.response?.status !== 201) {
+                //     setAccessToken('');
+                //     window.location.href = configs.roures.auth.signIn;
+                // }
+                // return Promise.reject(error);
             },
         );
 
