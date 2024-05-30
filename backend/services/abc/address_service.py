@@ -4,8 +4,7 @@ from typing import Optional
 from sqlalchemy.orm import Session
 
 from backend.schemas.address_schema import AddAddressSchema, AddressInDBSchema
-from backend.schemas.user_role_permission_schema import \
-    UserRolePermissionSchema
+from backend.schemas.user_role_permission_schema import UserRolePermissionSchema
 
 
 class AddressService(ABC):

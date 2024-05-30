@@ -8,11 +8,12 @@ from sqlalchemy.orm import Session
 
 from backend.common.logger import setup_logger
 from backend.crud.crud_chatbot import crud_chatbot
-from backend.schemas.chatbot_schema import (ChatbotCreateSchema,
-                                            ChatbotInDBSchema,
-                                            ChatbotUpdateSchema)
-from backend.schemas.user_role_permission_schema import \
-    UserRolePermissionSchema
+from backend.schemas.chatbot_schema import (
+    ChatbotCreateSchema,
+    ChatbotInDBSchema,
+    ChatbotUpdateSchema,
+)
+from backend.schemas.user_role_permission_schema import UserRolePermissionSchema
 from backend.services.abc.chatbot_service import ChatbotService
 
 logger = setup_logger()

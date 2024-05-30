@@ -17,8 +17,7 @@ from backend.crud.crud_conversation import crud_conversation
 from backend.crud.crud_knowledge_base import crud_knowledge_base
 from backend.crud.crud_message import crud_message
 from backend.schemas.message_schema import MessageInDBSchema
-from backend.schemas.user_role_permission_schema import \
-    UserRolePermissionSchema
+from backend.schemas.user_role_permission_schema import UserRolePermissionSchema
 from backend.services.abc.message_service import MessageService
 
 logger = setup_logger()

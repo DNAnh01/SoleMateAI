@@ -5,9 +5,13 @@ from sqlalchemy.orm import Session
 from starlette.requests import Request
 
 from backend.models.user import User
-from backend.schemas.auth_schema import (ChangePasswordSchema, EmailSchema,
-                                         TokenSchema, UserSignInSchema,
-                                         UserSignUpSchema)
+from backend.schemas.auth_schema import (
+    ChangePasswordSchema,
+    EmailSchema,
+    TokenSchema,
+    UserSignInSchema,
+    UserSignUpSchema,
+)
 from backend.schemas.user_schema import UserInDBSchema
 
 

@@ -8,14 +8,14 @@ from backend.api import deps
 from backend.common import parameters
 from backend.common.logger import setup_logger
 from backend.core import oauth2
-from backend.schemas.promotion_schema import (PromotionCreateSchema,
-                                              PromotionOutSchema,
-                                              PromotionUpdateSchema)
-from backend.schemas.user_role_permission_schema import \
-    UserRolePermissionSchema
+from backend.schemas.promotion_schema import (
+    PromotionCreateSchema,
+    PromotionOutSchema,
+    PromotionUpdateSchema,
+)
+from backend.schemas.user_role_permission_schema import UserRolePermissionSchema
 from backend.services.abc.admin_promotion_service import AdminPromotionService
-from backend.services.impl.admin_promotion_service_impl import \
-    AdminPromotionServiceImpl
+from backend.services.impl.admin_promotion_service_impl import AdminPromotionServiceImpl
 
 logger = setup_logger()
 

@@ -20,6 +20,7 @@
         "authlib",
         "autoflake",
         "autoflush",
+        "billpayment",
         "camelcase",
         "cellspacing",
         "Chatbox",
@@ -35,6 +36,7 @@
         "fastapi",
         "formik",
         "heroicons",
+        "hmacsha",
         "horiz",
         "hzne",
         "ilike",
@@ -79,9 +81,11 @@
         "tailwindcss",
         "tippyjs",
         "toastify",
+        "tunaasd",
         "userdefault",
         "userinfo",
         "uvicorn",
+        "VNPAY",
         "whitesmoke"
     ]
 }

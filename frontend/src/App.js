@@ -15,7 +15,6 @@ import ProductList from '~/pages/product/ProductListPage';
 import ProductDetails from '~/pages/product/ProductDetailsPage';
 import Cart from '~/pages/cart/CartPage';
 import CartEmpty from '~/pages/empty/CartEmptyPage';
-import Checkout from '~/pages/checkout/CheckoutPage';
 import Order from '~/pages/user/OrderListPage';
 import OrderDetail from '~/pages/user/OrderDetailPage';
 import Confirm from '~/pages/user/ConfirmPage';
@@ -42,6 +41,8 @@ import { ProductFilterProvider } from './contexts/productFilter.context';
 import OrderEmpty from './pages/empty/OrderEmptyPage';
 import { OrderContext } from './contexts/order.context';
 import orderApi from './apis/order.api';
+import PaymentSuccess from './pages/checkout/PaymentSuccessPage';
+import PaymentFailure from './pages/checkout/PaymentFailurePage';
 function App() {
     const { accessToken, setAccessToken, setProducts } = useAppStore();
 
@@ -135,9 +136,10 @@ function App() {
                         <Route path={configs.roures.productDetail} element={<ProductDetails />} />
                         <Route path={configs.roures.user.cart} element={<Cart />} />
                         <Route path={configs.roures.user.emptyCart} element={<CartEmpty />} />
-                        <Route path="/checkout" element={<Checkout />} />
                         <Route path={configs.roures.user.order} element={<Order />} />
                         <Route path={configs.roures.user.orderDetail} element={<OrderDetail />} />
+                        <Route path={configs.roures.user.paymentSuccess} element={<PaymentSuccess />} />
+                        <Route path={configs.roures.user.paymentFailure} element={<PaymentFailure />} />
                         <Route path={configs.roures.user.emptyOrder} element={<OrderEmpty />} />
                         <Route path={configs.roures.confirm} element={<Confirm />} />
                         <Route path={configs.roures.user.profile} element={<Account />} />

@@ -1,7 +1,9 @@
 from fastapi_mail import FastMail, MessageSchema
 
-from backend.common.email_template import (email_forgot_password_template,
-                                           email_verify_template)
+from backend.common.email_template import (
+    email_forgot_password_template,
+    email_verify_template,
+)
 from backend.common.logger import setup_logger
 from backend.core.email_connection import conf
 

@@ -5,8 +5,7 @@ from sqlalchemy import text
 from sqlalchemy.orm import Session
 
 from backend.common.logger import setup_logger
-from backend.schemas.user_role_permission_schema import \
-    UserRolePermissionSchema
+from backend.schemas.user_role_permission_schema import UserRolePermissionSchema
 
 logger = setup_logger()
 

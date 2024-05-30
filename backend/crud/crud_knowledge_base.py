@@ -7,8 +7,10 @@ from backend.common.logger import setup_logger
 from backend.crud.base import CRUDBase
 from backend.models.knowledge_base import KnowledgeBase
 from backend.schemas.default_kn_chatbot import DefaultKNChatbotSchema
-from backend.schemas.knowledge_base_schema import (KnowledgeBaseCreateSchema,
-                                                   KnowledgeBaseUpdateSchema)
+from backend.schemas.knowledge_base_schema import (
+    KnowledgeBaseCreateSchema,
+    KnowledgeBaseUpdateSchema,
+)
 
 logger = setup_logger()
 

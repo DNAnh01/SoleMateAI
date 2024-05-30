@@ -77,7 +77,7 @@ const StyledCheckbox = styled.input.attrs({ type: 'checkbox' })`
     height: 20px;
     background-color: ${(props) =>
         props.checked ? `${defaultTheme.color_yellow_green}` : `${defaultTheme.color_white}`};
-    border: none;
+    border: 1px solid ${defaultTheme.color_gray};
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.2s, box-shadow 0.2s;

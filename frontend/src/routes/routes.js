@@ -9,7 +9,6 @@ import SignUpPage from '~/pages/auth/SignUpPage';
 import VerificationPage from '~/pages/auth/VerificationPage';
 import CartEmptyPage from '~/pages/empty/CartEmptyPage';
 import CartPage from '~/pages/cart/CartPage';
-import CheckoutPage from '~/pages/checkout/CheckoutPage';
 import NotFoundPage from '~/pages/error/NotFoundPage';
 import HomePage from '~/pages/home/HomePage';
 import ProductDetailsPage from '~/pages/product/ProductDetailsPage';
@@ -28,7 +27,6 @@ const publicRoutes = [
     { path: configs.roures.productDetail, component: ProductDetailsPage, layout: BaseLayout },
     { path: configs.roures.user.cart, component: CartPage, layout: BaseLayout },
     { path: configs.roures.user.emptyCart, component: CartEmptyPage, layout: BaseLayout },
-    { path: configs.roures.user.checkout, component: CheckoutPage, layout: BaseLayout },
     { path: configs.roures.user.order, component: OrderListPage, layout: BaseLayout },
     { path: configs.roures.user.orderDetail, component: OrderDetailPage, layout: BaseLayout },
     { path: configs.roures.user.confirm, component: ConfirmPage, layout: BaseLayout },

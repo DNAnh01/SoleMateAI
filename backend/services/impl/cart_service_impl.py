@@ -4,15 +4,15 @@ from sqlalchemy.orm import Session
 from backend.common.logger import setup_logger
 from backend.crud.crud_cart import crud_cart
 from backend.crud.crud_shoe import crud_shoe
-from backend.schemas.cart_item_schema import (AddCartItemSchema,
-                                              CartItemCreateSchema,
-                                              CartItemInDBSchema,
-                                              CartItemOutSchema,
-                                              CartItemUpdateSchema)
+from backend.schemas.cart_item_schema import (
+    AddCartItemSchema,
+    CartItemCreateSchema,
+    CartItemOutSchema,
+    CartItemUpdateSchema,
+)
 from backend.schemas.cart_schema import CartOutSchema
 from backend.schemas.shoe_schema import ShoeOutSchema
-from backend.schemas.user_role_permission_schema import \
-    UserRolePermissionSchema
+from backend.schemas.user_role_permission_schema import UserRolePermissionSchema
 from backend.services.abc.cart_item_service import CartItemService
 from backend.services.abc.cart_service import CartService
 from backend.services.abc.shoe_service import ShoeService

@@ -6,9 +6,11 @@ from sqlalchemy.orm import Session
 
 from backend.crud.base import CRUDBase
 from backend.models.review import Review
-from backend.schemas.review_schema import (ReviewCreateSchema,
-                                           ReviewInDBSchema,
-                                           ReviewUpdateSchema)
+from backend.schemas.review_schema import (
+    ReviewCreateSchema,
+    ReviewInDBSchema,
+    ReviewUpdateSchema,
+)
 
 GET_ALL_REVIEWS_BY_SHOE_ID = f"""
     SELECT

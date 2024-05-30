@@ -9,10 +9,16 @@ import { breakpoints, defaultTheme } from '~/styles/themes/default';
 import configs from '~/configs';
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { BaseButtonGreen, BaseButtonOuterspace } from '~/styles/button';
+import {
+    BaseButtonGreen,
+    BaseButtonOuterspace,
+    BaseExternalLinkButtonOuterspace,
+    BaseExternalLinkGreen,
+} from '~/styles/button';
 import orderApi from '~/apis/order.api';
 import { toast } from 'react-toastify';
 import { OrderContext } from '~/contexts/order.context';
+import paymentApi from '~/apis/payment.api';
 
 const OrderDetailPageWrapper = styled.main`
     .btn-and-title-wrapper {
@@ -194,6 +200,7 @@ const OrderDetailPage = () => {
     const navigate = useNavigate();
     const { id } = useParams();
     const [activeButton, setActiveButton] = useState('Cancel');
+    console.log(order);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -242,8 +249,6 @@ const OrderDetailPage = () => {
                     navigate(configs.roures.user.order);
                 }
             } catch (error) {}
-        } else if (button === 'Payment') {
-            console.log('Call API to payment order');
         }
         setActiveButton(button);
     };
@@ -280,19 +285,29 @@ const OrderDetailPage = () => {
                                             </BaseButtonOuterspace>
                                         )}
                                         {activeButton === 'Payment' ? (
-                                            <BaseButtonGreen
+                                            <BaseExternalLinkGreen
+                                                href={paymentApi.initiatePayment({
+                                                    vnp_Amount: order.total_discounted_price * 100,
+                                                    vnp_OrderInfo: `Thanh toán đơn hàng ${order.id}`,
+                                                    vnp_TxnRef: order.id,
+                                                })}
                                                 className="mx-1"
                                                 onClick={() => handleButtonClick('Payment')}
                                             >
                                                 Thanh toán đơn hàng
-                                            </BaseButtonGreen>
+                                            </BaseExternalLinkGreen>
                                         ) : (
-                                            <BaseButtonOuterspace
+                                            <BaseExternalLinkButtonOuterspace
+                                                href={paymentApi.initiatePayment({
+                                                    vnp_Amount: order.total_discounted_price * 100,
+                                                    vnp_OrderInfo: `Thanh toán đơn hàng ${order.id}`,
+                                                    vnp_TxnRef: order.id,
+                                                })}
                                                 className="mx-1"
                                                 onClick={() => handleButtonClick('Payment')}
                                             >
                                                 Thanh toán đơn hàng
-                                            </BaseButtonOuterspace>
+                                            </BaseExternalLinkButtonOuterspace>
                                         )}
                                     </div>
                                 ) : null}

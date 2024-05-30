@@ -7,8 +7,7 @@ from backend.api import deps
 from backend.common.logger import setup_logger
 from backend.core import oauth2
 from backend.schemas.address_schema import AddAddressSchema, AddressInDBSchema
-from backend.schemas.user_role_permission_schema import \
-    UserRolePermissionSchema
+from backend.schemas.user_role_permission_schema import UserRolePermissionSchema
 from backend.services.abc.address_service import AddressService
 from backend.services.impl.address_service_impl import AddressServiceImpl
 

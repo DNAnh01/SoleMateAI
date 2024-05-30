@@ -24,6 +24,19 @@ const commonButtonStyles = css`
         transform: scale(0.97);
     }
 `;
+const BaseExternalLink = styled.a`
+    ${commonButtonStyles}
+    color: ${defaultTheme.color_white};
+    cursor: pointer;
+`;
+const BaseExternalLinkGreen = styled(BaseExternalLink)`
+    background-color: ${defaultTheme.color_yellow_green};
+    border-color: ${defaultTheme.color_yellow_green};
+`;
+
+const BaseExternalLinkButtonOuterspace = styled(BaseExternalLink)`
+    background-color: ${defaultTheme.color_outerspace};
+`;
 
 const BaseButton = styled.button`
     ${commonButtonStyles}
@@ -89,6 +102,8 @@ const BaseLinkOutlinePlatinum = styled(BaseLink)`
 `;
 
 export {
+    BaseExternalLinkGreen,
+    BaseExternalLinkButtonOuterspace,
     BaseButton,
     BaseLink,
     BaseButtonGreen,

@@ -21,8 +21,7 @@ from backend.schemas.order_item_schema import OrderItemOutSchema
 from backend.schemas.order_schema import OrderOutSchema, OrderUpdateSchema
 from backend.schemas.shoe_schema import ShoeOutSchema, ShoeUpdateSchema
 from backend.schemas.size_schema import SizeCreateSchema
-from backend.schemas.user_role_permission_schema import \
-    UserRolePermissionSchema
+from backend.schemas.user_role_permission_schema import UserRolePermissionSchema
 from backend.services.abc.admin_order_service import AdminOrderService
 
 logger = setup_logger()

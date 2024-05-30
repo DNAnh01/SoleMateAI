@@ -9,11 +9,9 @@ from backend.common import parameters
 from backend.common.logger import setup_logger
 from backend.core import oauth2
 from backend.schemas.order_schema import OrderOutSchema
-from backend.schemas.user_role_permission_schema import \
-    UserRolePermissionSchema
+from backend.schemas.user_role_permission_schema import UserRolePermissionSchema
 from backend.services.abc.admin_order_service import AdminOrderService
-from backend.services.impl.admin_order_service_impl import \
-    AdminOrderServiceImpl
+from backend.services.impl.admin_order_service_impl import AdminOrderServiceImpl
 
 logger = setup_logger()
 

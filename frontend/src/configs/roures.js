@@ -16,7 +16,8 @@ const roures = {
     user: {
         cart: '/user/cart',
         emptyCart: '/user/empty-cart',
-        checkout: '/user/checkout',
+        paymentSuccess: '/user/payment-success',
+        paymentFailure: '/user/payment-failure',
         order: '/user/order',
         emptyOrder: '/user/empty-order',
         orderDetail: '/user/order/:id',
