@@ -412,6 +412,10 @@ const ProductDetailsPage = () => {
                             <p className="text-lg font-semibold text-outerspace">Mô tả</p>
                             <p>{product.description}</p>
                         </div>
+                        <div className="prod-description">
+                            <p className="text-lg font-semibold text-outerspace">Số lượng trong kho</p>
+                            <p>{product.quantity_in_stock}</p>
+                        </div>
                         <ProductSizeWrapper>
                             <div className="prod-size-top flex items-center flex-wrap">
                                 <p className="text-lg font-semibold text-outerspace">Kích thước</p>

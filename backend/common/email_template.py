@@ -35,7 +35,7 @@ def email_verify_template(user_name: str, redirect_url: str, mode: int) -> str:
                                 </tr>
                                 <tr>
                                     <td style="padding: 20px 0 30px 0; color: #153643; font-size: 16px; line-height: 20px;">
-                                        Cảm ơn bạn đã đăng ký tài khoản trên SoleMateAI! Trước khi bắt đầu, chúng tôi chỉ cần xác nhận rằng đây là bạn. Nhấp vào liên kết dưới đây để xác nhận địa chỉ email của bạn:
+                                        Cảm ơn bạn đã đăng ký tài khoản trên SoleMateAI! Hy vọng rằng bạn sẽ tìm thấy những sản phẩm phù hợp với bản thân mình.:
                                     </td>
                                 </tr>
                                 <tr>

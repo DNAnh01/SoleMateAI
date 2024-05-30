@@ -41,22 +41,34 @@ const breadcrumbItems = [
 ];
 
 const OrderListPage = () => {
-    const { historyOrders, setHistoryOrders } = useContext(OrderContext);
-    const [activeTab, setActiveTab] = useState('ORDER-PLACED');
+    const { historyOrders, setHistoryOrders, historyOrdersByFilter, setHistoryOrdersByFilter } =
+        useContext(OrderContext);
+
+    const [activeTab, setActiveTab] = useState('ALL');
 
     const fetchOrders = async (status) => {
-        try {
-            const response = await orderApi.getHistoryOrderByFilter({
-                status,
-                orderDate: '',
-            });
-            if (response.status === 200) {
-                setHistoryOrders(response.data);
-            } else {
+        if (status !== 'ALL') {
+            try {
+                const response = await orderApi.getHistoryOrderByFilter({
+                    status,
+                    orderDate: '',
+                });
+                if (response.status === 200) {
+                    setHistoryOrdersByFilter(response.data);
+                } else {
+                    toast.error('Bạn chưa có đơn hàng nào.', {
+                        autoClose: 3000,
+                    });
+                }
+            } catch (error) {
                 toast.error('Bạn chưa có đơn hàng nào.', {
                     autoClose: 3000,
                 });
             }
+        }
+        try {
+            const response = await orderApi.getHistoryOrder();
+            setHistoryOrders(response.data);
         } catch (error) {
             toast.error('Bạn chưa có đơn hàng nào.', {
                 autoClose: 3000,
@@ -83,6 +95,15 @@ const OrderListPage = () => {
                         <Title titleText={'Các đơn hàng của tôi'} />
                         <div className="order-tabs">
                             <div className="order-tabs-heads">
+                                <button
+                                    type="button"
+                                    className={`order-tabs-head text-xl italic ${
+                                        activeTab === 'ALL' ? 'order-tabs-head-active' : ''
+                                    }`}
+                                    onClick={() => handleTabClick('ALL')}
+                                >
+                                    Tất cả
+                                </button>
                                 <button
                                     type="button"
                                     className={`order-tabs-head text-xl italic ${
@@ -123,7 +144,11 @@ const OrderListPage = () => {
 
                             <div className="order-tabs-contents">
                                 <div className="order-tabs-content" id="active">
-                                    {<OrderItemList orders={historyOrders} />}
+                                    {
+                                        <OrderItemList
+                                            orders={activeTab !== 'ALL' ? historyOrdersByFilter : historyOrders}
+                                        />
+                                    }
                                 </div>
                             </div>
                         </div>

@@ -1,7 +1,6 @@
 import React, { useEffect, useContext } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import GlobalStyles from '~/styles/global/GlobalStyles';
-import { toast } from 'react-toastify';
 import Home from '~/pages/home/HomePage';
 import BaseLayout from '~/components/layout/BaseLayout';
 import AuthLayout from '~/components/layout/AuthLayout';
@@ -44,7 +43,7 @@ import orderApi from './apis/order.api';
 import PaymentSuccess from './pages/checkout/PaymentSuccessPage';
 import PaymentFailure from './pages/checkout/PaymentFailurePage';
 function App() {
-    const { accessToken, setAccessToken, setProducts } = useAppStore();
+    const { accessToken, setAccessToken, setProducts, profile } = useAppStore();
 
     // Setup axios interceptors
     useAxiosInterceptors(accessToken, setAccessToken);
@@ -52,7 +51,7 @@ function App() {
     const { setPromotions } = useContext(AppContext);
     const { setCart, setTotalCartItem } = useContext(CartContext);
     const { setAddress } = useContext(AddressContext);
-    const { setHistoryOrders } = useContext(OrderContext);
+    const { setHistoryOrdersByFilter } = useContext(OrderContext);
 
     // Fetch products on mount
     useEffect(() => {
@@ -71,9 +70,7 @@ function App() {
                 const response = await promotionApi.getAllPromotion();
                 setPromotions(response.data);
             } catch (error) {
-                toast.error('Không có chương trình khuyến mãi nào.', {
-                    autoClose: 3000,
-                });
+                console.log('error', error);
             }
         };
         fetchPromotions();
@@ -81,25 +78,42 @@ function App() {
 
     // Fetch carts on mount
     useEffect(() => {
-        if (accessToken) {
+        if (accessToken && profile.role_name !== 'admin') {
             const fetchCart = async () => {
-                const response = await cartAPI.getAllCartItem();
-                setCart(response.data);
-                setTotalCartItem(response.data.total_item);
+                try {
+                    const response = await cartAPI.getAllCartItem();
+                    setCart(response.data);
+                    setTotalCartItem(response.data.total_item);
+                } catch (error) {
+                    if (error.response && error.response.status !== 200) {
+                        console.log('No cart found');
+                        setCart({});
+                        setTotalCartItem(0);
+                    }
+                }
             };
             fetchCart();
         }
-    }, [setCart, setTotalCartItem, accessToken]);
+    }, [setCart, setTotalCartItem, accessToken, profile.role_name]);
     // Fetch address on mount
     useEffect(() => {
-        if (accessToken) {
+        if (accessToken && profile.role_name !== 'admin') {
             const fetchAddress = async () => {
-                const response = await addressApi.getCurrentShippingAddress();
-                setAddress(response.data);
+                try {
+                    const response = await addressApi.getCurrentShippingAddress();
+                    setAddress(response.data);
+                } catch (error) {
+                    if (error.response && error.response.status === 400) {
+                        console.log('No shipping address found');
+                        setAddress({});
+                    } else {
+                        console.error(error);
+                    }
+                }
             };
             fetchAddress();
         }
-    }, [setAddress, accessToken]);
+    }, [setAddress, accessToken, profile.role_name]);
     // Fetch orders on mount
     useEffect(() => {
         if (accessToken) {
@@ -109,14 +123,14 @@ function App() {
                         status: 'ORDER-PLACED',
                         orderDate: '',
                     });
-                    setHistoryOrders(response.data);
+                    setHistoryOrdersByFilter(response.data);
                 } catch (error) {
                     console.log('error', error);
                 }
             };
             fetchOrders();
         }
-    }, [setHistoryOrders, accessToken]);
+    }, [setHistoryOrdersByFilter, accessToken]);
 
     return (
         <>

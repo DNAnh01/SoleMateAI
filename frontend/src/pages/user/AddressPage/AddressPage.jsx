@@ -11,9 +11,9 @@ import { defaultTheme } from '~/styles/themes/default';
 import configs from '~/configs';
 import addresses from '~/assets/json/addresses';
 import addressApi from '~/apis/address.api';
-import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { AddressContext } from '~/contexts/address.context';
+import { toast } from 'react-toastify';
 
 const AddressPageWrapper = styled.main`
     .form-elem-control {
@@ -97,29 +97,19 @@ const AddressPage = () => {
     const handleSave = async (event) => {
         event.preventDefault();
         // API call can be done here to save the address
-        try {
-            const response = await addressApi.addOrCheckAddress({
-                province: provinceName,
-                district: districtName,
-                ward: communeName,
-            });
 
-            if (response.status === 201) {
-                setAddress(response.data);
-                toast.success('Địa chỉ đã được thêm vào danh sách.', {
-                    autoClose: 3000,
-                });
-            } else if (response.status === 400) {
-                toast.error('Thêm địa chỉ không thành công.', {
-                    autoClose: 3000,
-                });
-            }
-        } catch (error) {
-            toast.error('Đã có lỗi xảy ra, vui lòng thử lại sau.', {
-                autoClose: 3000,
-            });
-            // console.log('error', error);
+        const response = await addressApi.addOrCheckAddress({
+            province: provinceName,
+            district: districtName,
+            ward: communeName,
+        });
+        if (response.status !== 200) {
+            setAddress({});
         }
+        toast.success('Đã thêm địa chỉ mới', {
+            autoClose: 2000,
+        });
+        setAddress(response.data);
 
         // After saving, redirect to profile page
         navigate(configs.roures.user.profile);

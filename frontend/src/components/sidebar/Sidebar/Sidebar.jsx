@@ -103,7 +103,7 @@ const sideMenuData = [
 
 const Sidebar = () => {
     const location = useLocation();
-    const { isSidebarOpen, setIsSidebarOpen, accessToken } = useAppStore();
+    const { isSidebarOpen, setIsSidebarOpen, accessToken, profile } = useAppStore();
     const { totalCartItem } = useContext(CartContext);
     const toggleSidebar = () => {
         setIsSidebarOpen(!isSidebarOpen);
@@ -137,7 +137,7 @@ const Sidebar = () => {
                         </li>
                     ))}
                     {/* Conditional rendering based on accessToken */}
-                    {accessToken && (
+                    {accessToken && profile.role_name !== 'admin' && (
                         <li>
                             <Link
                                 to={configs.roures.user.profile}
@@ -154,7 +154,7 @@ const Sidebar = () => {
                     )}
                     {/* Conditional rendering based on totalCartItem */}
 
-                    {accessToken && (
+                    {accessToken && profile.role_name !== 'admin' && (
                         <li>
                             <Link
                                 to={totalCartItem === 0 ? configs.roures.user.emptyCart : configs.roures.user.cart}

@@ -196,7 +196,7 @@ const breadcrumbItems = [
 
 const OrderDetailPage = () => {
     const [order, setOrder] = useState(null);
-    const { setHistoryOrders } = useContext(OrderContext);
+    const { setHistoryOrdersByFilter } = useContext(OrderContext);
     const navigate = useNavigate();
     const { id } = useParams();
     const [activeButton, setActiveButton] = useState('Cancel');
@@ -233,7 +233,7 @@ const OrderDetailPage = () => {
                                 orderDate: '',
                             });
                             if (response.status === 200) {
-                                setHistoryOrders(response.data);
+                                setHistoryOrdersByFilter(response.data);
                             } else {
                                 toast.error('Bạn chưa có đơn hàng nào.', {
                                     autoClose: 3000,
@@ -324,6 +324,10 @@ const OrderDetailPage = () => {
                                 </span>
                                 <span>
                                     <strong>Trạng thái đơn hàng:</strong> {convertOrderStatus(order?.status)}
+                                </span>
+                                <span>
+                                    <strong>Địa chỉ giao hàng:</strong> {order?.shipping_address?.ward} -{' '}
+                                    {order?.shipping_address?.district} - {order?.shipping_address?.province}
                                 </span>
                                 <span>
                                     <strong>Tổng tiền:</strong> {currencyFormat(order?.total_display_price)}

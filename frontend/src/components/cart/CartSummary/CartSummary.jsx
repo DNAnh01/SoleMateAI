@@ -74,17 +74,8 @@ const CartSummary = ({ totalDisplayPrice, totalDiscountedPrice }) => {
                 });
                 const fetchOrders = async () => {
                     try {
-                        const response = await orderApi.getHistoryOrderByFilter({
-                            status: 'ORDER-PLACED',
-                            orderDate: '',
-                        });
-                        if (response.status === 200) {
-                            setHistoryOrders(response.data);
-                        } else {
-                            toast.error('Bạn chưa có đơn hàng nào.', {
-                                autoClose: 3000,
-                            });
-                        }
+                        const response = await orderApi.getHistoryOrder();
+                        setHistoryOrders(response.data);
                     } catch (error) {
                         toast.error('Bạn chưa có đơn hàng nào.', {
                             autoClose: 3000,

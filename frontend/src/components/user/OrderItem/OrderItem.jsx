@@ -117,7 +117,15 @@ const OrderItem = ({ order }) => {
         <OrderItemWrapper>
             <div className="order-item-details">
                 <h3 className="text-x order-item-title">Đơn hàng: {order?.id}</h3>
+
                 <div className="order-info-group flex flex-wrap">
+                    <div className="order-info-item">
+                        <span className="text-outerspace font-semibold">Địa chỉ giao hàng:</span>
+                        <span className="text-dark_slate_blue">
+                            {order?.shipping_address?.ward} - {order?.shipping_address?.district} -{' '}
+                            {order?.shipping_address?.province}
+                        </span>
+                    </div>
                     <div className="order-info-item">
                         <span className="text-outerspace font-semibold">Ngày đặt hàng:</span>
                         <span className="text-dark_slate_blue">{getFormattedDate(order?.order_date)}</span>

@@ -1,6 +1,8 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import styled from 'styled-components';
+import orderApi from '~/apis/order.api';
 import Icons from '~/components/common/Icons/Icons';
 import Title from '~/components/common/Title';
 import configs from '~/configs';
@@ -75,7 +77,21 @@ const NavMenuWrapper = styled.nav`
 
 const UserMenu = () => {
     const { profile } = useAppStore();
-    const { historyOrders } = useContext(OrderContext);
+    const { historyOrders, setHistoryOrders } = useContext(OrderContext);
+
+    useEffect(() => {
+        const fetchOrders = async () => {
+            try {
+                const response = await orderApi.getHistoryOrder();
+                setHistoryOrders(response.data);
+            } catch (error) {
+                toast.error('Bạn chưa có đơn hàng nào.', {
+                    autoClose: 3000,
+                });
+            }
+        };
+        fetchOrders();
+    }, [setHistoryOrders]);
 
     const location = useLocation();
     return (

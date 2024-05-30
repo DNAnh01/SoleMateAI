@@ -144,15 +144,27 @@ class OrderServiceImpl(OrderService):
                         status_code=404,
                         content={"status": 404, "message": "Shoe not found"},
                     )
-                updated_shoe = self.__crud_shoe.update_one_by(
-                    db=db,
-                    filter={"id": cart_item.shoe_id},
-                    obj_in=ShoeUpdateSchema(
-                        quantity_in_stock=shoe_found.quantity_in_stock
-                        - cart_item.quantity,
-                        updated_at=datetime.now(),
-                    ),
-                )
+                if shoe_found.quantity_in_stock < cart_item.quantity:
+                    logger.exception(
+                        f"Exception in {__name__}.{self.__class__.__name__}.__create_new_order: Not enough quantity in stock"
+                    )
+                    return JSONResponse(
+                        status_code=400,
+                        content={
+                            "status": 400,
+                            "message": "Not enough quantity in stock",
+                        },
+                    )
+                else:
+                    updated_shoe = self.__crud_shoe.update_one_by(
+                        db=db,
+                        filter={"id": cart_item.shoe_id},
+                        obj_in=ShoeUpdateSchema(
+                            quantity_in_stock=shoe_found.quantity_in_stock
+                            - cart_item.quantity,
+                            updated_at=datetime.now(),
+                        ),
+                    )
                 if updated_shoe is None:
                     logger.exception(
                         f"Exception in {__name__}.{self.__class__.__name__}.__create_new_order: Error occurred while updating shoe"
@@ -379,7 +391,7 @@ class OrderServiceImpl(OrderService):
                 shipping_address=AddressInDBSchema(**shipping_address.__dict__),
                 order_items=order_items,
             )
-
+            logger.info(f"order_out: {order_out}")
             return order_out
         except Exception as e:
             logger.exception(
