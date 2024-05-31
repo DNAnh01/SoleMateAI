@@ -5,6 +5,7 @@ from sqlalchemy.orm import Session
 
 from backend.common.logger import setup_logger
 from backend.schemas.chart_data_schema import ChartDataSchema
+from backend.schemas.total_data_schema import TotalDataSchema
 
 logger = setup_logger()
 
@@ -185,6 +186,177 @@ GET_STATISTIC_REVENUE_PROFIT_CAPITAL_BY_HOUR_OF_SPECIFIC_YEAR = f"""
     ORDER BY 
         mr.month_of_year;
 """
+# Total revenue, profit, capital, item sold of a specific day
+GET_TOTAL_REVENUE_PROFIT_CAPITAL_ITEM_SOLD_OF_SPECIFIC_DAY = f"""
+    WITH revenue_profit_warehouse AS ( 
+        SELECT 
+            COALESCE(SUM(revenue_subquery.total_revenue), 0) AS revenue_cost, 
+            COALESCE(SUM(profit_subquery.total_profit), 0) AS profit_cost, 
+            COALESCE(SUM(warehouse_subquery.total_warehouse_price), 0) AS warehouse_cost 
+        FROM 
+            ( 
+                SELECT 
+                    SUM(o1.total_discounted_price) AS total_revenue 
+                FROM 
+                    orders o1 
+                WHERE 
+                    TO_CHAR(o1.order_date, 'YYYY-MM-DD') = :date 
+                    AND o1.status = 'ORDER-DELIVERED' 
+            ) revenue_subquery, 
+            ( 
+                SELECT 
+                    SUM(o2.total_discounted_price - o2.total_warehouse_price) AS total_profit 
+                FROM 
+                    orders o2 
+                WHERE 
+                    TO_CHAR(o2.order_date, 'YYYY-MM-DD') = :date 
+                    AND o2.status = 'ORDER-DELIVERED' 
+            ) profit_subquery, 
+            ( 
+                SELECT 
+                    SUM(o3.total_warehouse_price) AS total_warehouse_price 
+                FROM 
+                    orders o3 
+                WHERE 
+                    TO_CHAR(o3.order_date, 'YYYY-MM-DD') = :date 
+                    AND o3.status = 'ORDER-DELIVERED' 
+            ) warehouse_subquery 
+    ) 
+    SELECT 
+        rp.revenue_cost AS {TotalDataSchema.REVENUE_COST}, 
+        rp.profit_cost AS {TotalDataSchema.PROFIT_COST}, 
+        rp.warehouse_cost AS {TotalDataSchema.WAREHOUSE_COST}, 
+        TO_CHAR(o.order_date, 'YYYY-MM-DD') AS selected_day, 
+        SUM(o.total_item) AS {TotalDataSchema.TOTAL_ITEMS_SOLD} 
+    FROM 
+        orders o 
+    CROSS JOIN 
+        revenue_profit_warehouse rp 
+    WHERE 
+        TO_CHAR(o.order_date, 'YYYY-MM-DD') = :date 
+        AND o.status = 'ORDER-DELIVERED' 
+    GROUP BY 
+        TO_CHAR(o.order_date, 'YYYY-MM-DD'), 
+        rp.revenue_cost, 
+        rp.profit_cost, 
+        rp.warehouse_cost 
+    ORDER BY 
+        selected_day;
+"""
+# Total revenue, profit, capital, item sold of a specific month
+GET_TOTAL_REVENUE_PROFIT_CAPITAL_ITEM_SOLD_OF_SPECIFIC_MONTH = f"""
+    WITH revenue_profit_warehouse AS (
+        SELECT 
+            COALESCE(SUM(revenue_subquery.total_revenue), 0) AS revenue_cost, 
+            COALESCE(SUM(profit_subquery.total_profit), 0) AS profit_cost, 
+            COALESCE(SUM(warehouse_subquery.total_warehouse_price), 0) AS warehouse_cost 
+        FROM 
+            ( 
+                SELECT 
+                    SUM(o1.total_discounted_price) AS total_revenue 
+                FROM 
+                    orders o1 
+                WHERE 
+                    TO_CHAR(o1.order_date, 'YYYY-MM') = :month 
+                    AND o1.status = 'ORDER-DELIVERED' 
+            ) revenue_subquery, 
+            ( 
+                SELECT 
+                    SUM(o2.total_discounted_price - o2.total_warehouse_price) AS total_profit 
+                FROM 
+                    orders o2 
+                WHERE 
+                    TO_CHAR(o2.order_date, 'YYYY-MM') = :month 
+                    AND o2.status = 'ORDER-DELIVERED' 
+            ) profit_subquery, 
+            ( 
+                SELECT 
+                    SUM(o3.total_warehouse_price) AS total_warehouse_price 
+                FROM 
+                    orders o3 
+                WHERE 
+                    TO_CHAR(o3.order_date, 'YYYY-MM') = :month 
+                    AND o3.status = 'ORDER-DELIVERED' 
+            ) warehouse_subquery 
+    )
+    SELECT
+        rp.revenue_cost AS {TotalDataSchema.REVENUE_COST},
+        rp.profit_cost AS {TotalDataSchema.PROFIT_COST},
+        rp.warehouse_cost AS {TotalDataSchema.WAREHOUSE_COST},
+        TO_CHAR(o.order_date, 'YYYY-MM') AS selected_month,
+        SUM(o.total_item) AS {TotalDataSchema.TOTAL_ITEMS_SOLD}
+    FROM
+        orders o
+    CROSS JOIN
+        revenue_profit_warehouse rp
+    WHERE
+        TO_CHAR(o.order_date, 'YYYY-MM') = :month
+        AND o.status = 'ORDER-DELIVERED'
+    GROUP BY
+        TO_CHAR(o.order_date, 'YYYY-MM'),
+        rp.revenue_cost,
+        rp.profit_cost,
+        rp.warehouse_cost
+    ORDER BY
+        selected_month;
+"""
+# Total revenue, profit, capital, item sold of a specific year
+GET_TOTAL_REVENUE_PROFIT_CAPITAL_ITEM_SOLD_OF_SPECIFIC_YEAR = f"""
+    WITH revenue_profit_warehouse AS (
+        SELECT 
+            COALESCE(SUM(revenue_subquery.total_revenue), 0) AS revenue_cost, 
+            COALESCE(SUM(profit_subquery.total_profit), 0) AS profit_cost, 
+            COALESCE(SUM(warehouse_subquery.total_warehouse_price), 0) AS warehouse_cost 
+        FROM 
+            ( 
+                SELECT 
+                    SUM(o1.total_discounted_price) AS total_revenue 
+                FROM 
+                    orders o1 
+                WHERE 
+                    TO_CHAR(o1.order_date, 'YYYY') = :year 
+                    AND o1.status = 'ORDER-DELIVERED' 
+            ) revenue_subquery, 
+            ( 
+                SELECT 
+                    SUM(o2.total_discounted_price - o2.total_warehouse_price) AS total_profit 
+                FROM 
+                    orders o2 
+                WHERE 
+                    TO_CHAR(o2.order_date, 'YYYY') = :year 
+                    AND o2.status = 'ORDER-DELIVERED' 
+            ) profit_subquery, 
+            ( 
+                SELECT 
+                    SUM(o3.total_warehouse_price) AS total_warehouse_price 
+                FROM 
+                    orders o3 
+                WHERE 
+                    TO_CHAR(o3.order_date, 'YYYY') = :year 
+                    AND o3.status = 'ORDER-DELIVERED' 
+            ) warehouse_subquery 
+    )
+    SELECT
+        rp.revenue_cost AS {TotalDataSchema.REVENUE_COST},
+        rp.profit_cost AS {TotalDataSchema.PROFIT_COST},
+        rp.warehouse_cost AS {TotalDataSchema.WAREHOUSE_COST},
+        TO_CHAR(o.order_date, 'YYYY') AS selected_year,
+        SUM(o.total_item) AS {TotalDataSchema.TOTAL_ITEMS_SOLD}
+    FROM
+        orders o
+    CROSS JOIN
+        revenue_profit_warehouse rp
+    WHERE
+        TO_CHAR(o.order_date, 'YYYY') = :year
+        AND o.status = 'ORDER-DELIVERED'
+    GROUP BY
+        TO_CHAR(o.order_date, 'YYYY'),
+        rp.revenue_cost,
+        rp.profit_cost,
+        rp.warehouse_cost
+    ORDER BY
+        selected_year;
+"""
 
 
 class CRUDAdminDashboard:
@@ -227,6 +399,44 @@ class CRUDAdminDashboard:
             f"Get statistic revenue, profit, capital by {filter} {value} successfully with: {len(list_result)}"
         )
         return list_result
+    
+    def get_total_revenue_profit_capital_item_sold_by_filter(
+        self, db: Session, filter: str, value: str
+    ) -> Optional[TotalDataSchema]:
+        if filter == "day":
+            result_proxy = db.execute(
+                text(GET_TOTAL_REVENUE_PROFIT_CAPITAL_ITEM_SOLD_OF_SPECIFIC_DAY),
+                {"date": value},
+            )
+        elif filter == "month":
+            result_proxy = db.execute(
+                text(GET_TOTAL_REVENUE_PROFIT_CAPITAL_ITEM_SOLD_OF_SPECIFIC_MONTH),
+                {"month": value},
+            )
+        elif filter == "year":
+            result_proxy = db.execute(
+                text(GET_TOTAL_REVENUE_PROFIT_CAPITAL_ITEM_SOLD_OF_SPECIFIC_YEAR),
+                {"year": value},
+            )
+        else:
+            logger.error(f"Filter {filter} is not valid")
+            return None
+
+        column_names = result_proxy.keys()
+        results = result_proxy.fetchone()
+        if results is None:
+            return None
+        result_dict = dict(zip(column_names, results))
+        total_data = TotalDataSchema(
+            revenue_cost=result_dict[TotalDataSchema.REVENUE_COST],
+            profit_cost=result_dict[TotalDataSchema.PROFIT_COST],
+            warehouse_cost=result_dict[TotalDataSchema.WAREHOUSE_COST],
+            total_items_sold=result_dict[TotalDataSchema.TOTAL_ITEMS_SOLD],
+        )
+        logger.info(
+            f"Get total revenue, profit, capital, item sold by {filter} {value} successfully"
+        )
+        return total_data
 
 
 crud_admin_dashboard = CRUDAdminDashboard()
