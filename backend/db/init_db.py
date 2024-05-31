@@ -4,7 +4,6 @@ import random
 import uuid
 from datetime import datetime, timedelta
 
-
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
 
@@ -462,8 +461,12 @@ def init_db():
                         deleted_at=address_deleted_at,
                     ),
                 )
-            logger.warning("INSERTING DATA INTO THE `orders` TABLE FROM THE orders.csv FILE")
-            for row in utils.read_csv(os.path.join(script_dir, "raw_data", "orders.csv")):
+            logger.warning(
+                "INSERTING DATA INTO THE `orders` TABLE FROM THE orders.csv FILE"
+            )
+            for row in utils.read_csv(
+                os.path.join(script_dir, "raw_data", "orders.csv")
+            ):
                 user_found = crud_user.get_one_ignore_deleted_and_inactive(
                     db=session,
                     filter={"email": str(row[0])},
@@ -489,18 +492,18 @@ def init_db():
                 total_warehouse_price = float(row[9])
                 total_discounted_price = float(row[10])
 
-                order_created_at = datetime.strptime(row[12], "%Y-%m-%d %H:%M:%S").replace(
-                    tzinfo=pytz.utc
-                )
+                order_created_at = datetime.strptime(
+                    row[12], "%Y-%m-%d %H:%M:%S"
+                ).replace(tzinfo=pytz.utc)
 
-                order_updated_at = datetime.strptime(row[13], "%Y-%m-%d %H:%M:%S").replace(
-                    tzinfo=pytz.utc
-                )
+                order_updated_at = datetime.strptime(
+                    row[13], "%Y-%m-%d %H:%M:%S"
+                ).replace(tzinfo=pytz.utc)
 
                 try:
-                    order_deleted_at = datetime.strptime(row[14], "%Y-%m-%d %H:%M:%S").replace(
-                        tzinfo=pytz.utc
-                    )
+                    order_deleted_at = datetime.strptime(
+                        row[14], "%Y-%m-%d %H:%M:%S"
+                    ).replace(tzinfo=pytz.utc)
                 except ValueError:
                     logger.error(f"Invalid date in row: {row}")
 

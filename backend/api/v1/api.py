@@ -2,6 +2,7 @@ from fastapi import APIRouter
 
 from backend.api.v1.endpoints import (
     address,
+    admin_dashboard,
     admin_order,
     admin_promotion,
     auth,
@@ -18,6 +19,9 @@ from backend.api.v1.endpoints import (
 )
 
 api_router = APIRouter()
+api_router.include_router(
+    admin_dashboard.router, prefix="/admin-dashboard", tags=["admin-dashboard"]
+)
 api_router.include_router(auth.router, prefix="/auth", tags=["authentications"])
 api_router.include_router(chatbot.router, prefix="/chatbot", tags=["chatbots"])
 api_router.include_router(

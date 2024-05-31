@@ -43,11 +43,14 @@ import orderApi from './apis/order.api';
 import PaymentSuccess from './pages/checkout/PaymentSuccessPage';
 import PaymentFailure from './pages/checkout/PaymentFailurePage';
 function App() {
-    const { accessToken, setAccessToken, setProducts, profile } = useAppStore();
+    const { clearLocalStorage, accessToken, setAccessToken, setProducts, profile } = useAppStore();
 
+    useEffect(() => {
+        clearLocalStorage();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
     // Setup axios interceptors
     useAxiosInterceptors(accessToken, setAccessToken);
-
     const { setPromotions } = useContext(AppContext);
     const { setCart, setTotalCartItem } = useContext(CartContext);
     const { setAddress } = useContext(AddressContext);

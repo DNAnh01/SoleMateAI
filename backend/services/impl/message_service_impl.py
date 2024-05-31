@@ -248,9 +248,11 @@ class MessageServiceImpl(MessageService):
             # response = self.__client_openai.chat.completions.create(
             #     model="gpt-4", messages=temp_knowledge_base
             # )
-            logger.info(f"chatbot_found: model: {chatbot_found.model}, temperature: {chatbot_found.temperature}, max_tokens:{chatbot_found.max_token}")
+            logger.info(
+                f"chatbot_found: model: {chatbot_found.model}, temperature: {chatbot_found.temperature}, max_tokens:{chatbot_found.max_token}"
+            )
             response = self.__client_openai.chat.completions.create(
-                model=chatbot_found.model, 
+                model=chatbot_found.model,
                 messages=temp_knowledge_base,
                 # temperature=chatbot_found.temperature,
                 # max_tokens=chatbot_found.max_token,

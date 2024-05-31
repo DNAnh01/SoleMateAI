@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { useEffect } from 'react';
-import { toast } from 'react-toastify';
 import configs from '~/configs';
 
 // Create an instance of axios outside the class
@@ -26,9 +25,7 @@ const useAxiosInterceptors = (accessToken, setAccessToken) => {
             (response) => response,
             (error) => {
                 if (error.response?.status !== 200 && error.response?.status !== 201) {
-                    toast.error('Có lỗi xảy ra, vui lòng thử lại sau.', {
-                        autoClose: 5000,
-                    });
+                    console.log('error', error);
                 }
                 return Promise.reject(error);
             },
