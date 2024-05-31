@@ -6,6 +6,7 @@ const defaultTheme = {
     color_jet: '#333333',
     color_yellow: '#fdc419',
     color_yellow_green: '#7ad005',
+    color_blue: '#007bff',
     color_sea_green: '#10b9b0',
     color_sea_green_v1: '#14c4b5',
     color_flash_white: '#eef4f4',

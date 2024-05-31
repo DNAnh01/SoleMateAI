@@ -35,7 +35,8 @@ def get_statistic_revenue_profit_capital_by_filter(
         value=value,
         current_user_role_permission=current_user_role_permission,
     )
-    
+
+
 @router.get("/total/{filter}/{value}", response_model=Optional[TotalDataSchema])
 def get_total_revenue_profit_capital_item_sold_by_filter(
     filter: str,
@@ -51,4 +52,3 @@ def get_total_revenue_profit_capital_item_sold_by_filter(
         value=value,
         current_user_role_permission=current_user_role_permission,
     )
-

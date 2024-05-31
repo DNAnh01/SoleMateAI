@@ -4,7 +4,7 @@ import GlobalStyles from '~/styles/global/GlobalStyles';
 import Home from '~/pages/home/HomePage';
 import BaseLayout from '~/components/layout/BaseLayout';
 import AuthLayout from '~/components/layout/AuthLayout';
-import AdminLayout from '~/components/layout/AdminLayout/AdminLayout';
+import AdminLayout from '~/components/layout/AdminLayout';
 import SignIn from '~/pages/auth/SignInPage';
 import SignUp from '~/pages/auth/SignUpPage';
 import Reset from '~/pages/auth/ResetPage';
@@ -19,7 +19,7 @@ import OrderDetail from '~/pages/user/OrderDetailPage';
 import Confirm from '~/pages/user/ConfirmPage';
 import Account from '~/pages/user/AccountPage';
 import Address from '~/pages/user/AddressPage';
-import DashboardAdmin from '~/pages/dashboardAdmin/dashboardAdmin';
+
 import ProductAdmin from '~/pages/productAdmin/productAdmin';
 import ChatbotAdmin from '~/pages/chatbotAdmin/chatbotAdmin';
 import UpdateChatbotAdmin from '~/pages/updateChatbotAdmin/updateChatbotAdmin';
@@ -42,13 +42,15 @@ import { OrderContext } from './contexts/order.context';
 import orderApi from './apis/order.api';
 import PaymentSuccess from './pages/checkout/PaymentSuccessPage';
 import PaymentFailure from './pages/checkout/PaymentFailurePage';
+import DashboardAdmin from './pages/dashboardAdmin';
+
 function App() {
     const { clearLocalStorage, accessToken, setAccessToken, setProducts, profile } = useAppStore();
 
-    useEffect(() => {
-        clearLocalStorage();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    // useEffect(() => {
+    //     clearLocalStorage();
+    //     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, []);
     // Setup axios interceptors
     useAxiosInterceptors(accessToken, setAccessToken);
     const { setPromotions } = useContext(AppContext);

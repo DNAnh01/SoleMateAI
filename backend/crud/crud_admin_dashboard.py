@@ -77,7 +77,7 @@ GET_STATISTIC_REVENUE_PROFIT_CAPITAL_BY_DAY_OF_SPECIFIC_MONTH = f"""
         UNION ALL 
         SELECT day_of_month + 1 
         FROM DayReference 
-        WHERE day_of_month < EXTRACT(DAY FROM DATE_TRUNC('month', TO_DATE('05/2024', 'MM/YYYY')) + INTERVAL '1 month' - INTERVAL '1 day') 
+        WHERE day_of_month < EXTRACT(DAY FROM DATE_TRUNC('month', TO_DATE('2024-05', 'YYYY-MM')) + INTERVAL '1 month' - INTERVAL '1 day') 
     ) 
     SELECT 
         dr.day_of_month AS {ChartDataSchema.TIME_POINT}, 
@@ -399,7 +399,7 @@ class CRUDAdminDashboard:
             f"Get statistic revenue, profit, capital by {filter} {value} successfully with: {len(list_result)}"
         )
         return list_result
-    
+
     def get_total_revenue_profit_capital_item_sold_by_filter(
         self, db: Session, filter: str, value: str
     ) -> Optional[TotalDataSchema]:

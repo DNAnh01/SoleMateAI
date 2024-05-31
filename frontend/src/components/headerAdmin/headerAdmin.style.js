@@ -1,3 +1,5 @@
+import { defaultTheme } from '~/styles/themes/default';
+
 const { default: styled } = require('styled-components');
 
 export const HeaderWrapper = styled.header`
@@ -8,5 +10,5 @@ export const HeaderWrapper = styled.header`
 `;
 
 export const PathLocation = styled.span`
-    color: rgb(14 165 233) !important;
+    color: ${defaultTheme.color_dim_gray} !important;
 `;

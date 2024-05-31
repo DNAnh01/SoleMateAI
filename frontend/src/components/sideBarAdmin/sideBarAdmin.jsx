@@ -5,9 +5,9 @@ import images from '~/assets/images';
 const SideBarAdmin = () => {
     return (
         <SideBarWrapper>
-            <div className="flex gap-2 items-center px-2">
+            <div className="flex gap-2 items-center px-2 mt-1">
                 <Link to={'/'} className="inline-block">
-                    <img src={images.logo} alt="logo" className="w-16 h-14" />
+                    <img src={images.logo} alt="logo" className="w-14 h-14" />
                 </Link>
                 <h1 className="font-semibold text-xl">Sole Mate AI</h1>
             </div>
@@ -21,8 +21,8 @@ const SideBarAdmin = () => {
                                     to={item.url}
                                     className={({ isActive }) =>
                                         isActive
-                                            ? 'w-full inline-block transition bg-red-200 px-2 py-3 border-l-4 border-red-500'
-                                            : 'w-full inline-block transition hover:bg-red-200 px-2 py-3 hover:border-l-4 hover:border-red-500'
+                                            ? `w-full inline-block transition bg-green-200 px-2 py-3 border-l-4 border-green-500`
+                                            : 'w-full inline-block transition hover:bg-green-200 px-2 py-3 hover:border-l-4 hover:border-green-500'
                                     }
                                 >
                                     <div className="flex items-center gap-2">

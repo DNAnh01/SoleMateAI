@@ -37,7 +37,7 @@ class AdminDashboardServiceImpl(AdminDashboardService):
                 f"Exception in {__name__}.{self.__class__.__name__}.get_statistic_revenue_profit_capital_by_filter: {e}"
             )
             return []
-        
+
     def get_total_revenue_profit_capital_item_sold_by_filter(
         self,
         db: Session,
@@ -59,4 +59,3 @@ class AdminDashboardServiceImpl(AdminDashboardService):
                 f"Exception in {__name__}.{self.__class__.__name__}.get_total_revenue_profit_capital_item_sold_by_filter: {e}"
             )
             return []
-        

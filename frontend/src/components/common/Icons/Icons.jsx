@@ -28,6 +28,7 @@ import {
     PlayIcon,
     PlusIcon,
     ProductsIcon,
+    ProfitIcon,
     RemoveCartItemIcon,
     ReturnIcon,
     SearchIcon,
@@ -38,9 +39,11 @@ import {
     SizeIcon,
     StatsIcon,
     TasksIcon,
+    TotalItemsIcon,
     UptrendIcon,
     UsdIcon,
     UserIcon,
+    WareHouseIcon,
 } from '~/assets/icons';
 
 const Icons = (props) => {
@@ -84,6 +87,10 @@ const Icons = (props) => {
         minus: MinusIcon,
         plus: PlusIcon,
         removeCartItem: RemoveCartItemIcon,
+        cell_phone_link: SellPhoneLinkIcon,
+        profit: ProfitIcon,
+        warehouse: WareHouseIcon,
+        total_items: TotalItemsIcon,
     };
 
     const IconComponent = components[props.icon];

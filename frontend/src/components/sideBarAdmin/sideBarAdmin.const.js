@@ -7,32 +7,32 @@ import { FaRegUser } from 'react-icons/fa6';
 export const SideBarAdminList = [
     {
         url: '/admin/dashboard',
-        label: 'Dashboard',
+        label: 'Thống kê',
         icon: MdOutlineSpaceDashboard,
     },
     {
         url: '/admin/chatbot',
-        label: 'ChatBot',
+        label: 'Chatbot',
         icon: TbMessageChatbot,
     },
     {
         url: '/admin/order',
-        label: 'Order',
+        label: 'Đơn hàng',
         icon: MdOutlineAddShoppingCart,
     },
     {
         url: '/admin/product',
-        label: 'Product',
+        label: 'Sản phẩm',
         icon: LiaProductHunt,
     },
     {
         url: '/admin/promotion',
-        label: 'Promotion',
+        label: 'Khuyến mãi',
         icon: PiUserSoundLight,
     },
     {
         url: '/admin/user',
-        label: 'User',
+        label: 'Người dùng',
         icon: FaRegUser,
     },
 ];
