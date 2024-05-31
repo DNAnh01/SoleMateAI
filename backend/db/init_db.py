@@ -2,7 +2,8 @@ import json
 import os
 import random
 import uuid
-from datetime import datetime
+from datetime import datetime, timedelta
+
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
@@ -461,12 +462,8 @@ def init_db():
                         deleted_at=address_deleted_at,
                     ),
                 )
-            logger.warning(
-                "INSERTING DATA INTO THE `orders` TABLE FROM THE orders.csv FILE"
-            )
-            for row in utils.read_csv(
-                os.path.join(script_dir, "raw_data", "orders.csv")
-            ):
+            logger.warning("INSERTING DATA INTO THE `orders` TABLE FROM THE orders.csv FILE")
+            for row in utils.read_csv(os.path.join(script_dir, "raw_data", "orders.csv")):
                 user_found = crud_user.get_one_ignore_deleted_and_inactive(
                     db=session,
                     filter={"email": str(row[0])},
@@ -477,39 +474,36 @@ def init_db():
                 address_ward = str(row[1])
                 address_district = str(row[2])
                 address_province = str(row[3])
-                # logger.info(
-                #     f"Address: {address_ward}, {address_district}, {address_province}"
-                # )
 
-                order_date = datetime.strptime(row[4], "%Y-%m-%d").replace(
+                order_date = datetime.strptime(row[4], "%Y-%m-%d %H:%M:%S").replace(
                     tzinfo=pytz.utc
                 )
-                delivery_date = datetime.strptime(row[5], "%Y-%m-%d").replace(
+                # Thay đổi cách tính delivery_date
+                delivery_date = datetime.strptime(row[5], "%Y-%m-%d %H:%M:%S").replace(
                     tzinfo=pytz.utc
-                )
+                ) + timedelta(days=7)
+
                 status = str(row[6])
                 total_item = int(row[7])
                 total_display_price = float(row[8])
                 total_warehouse_price = float(row[9])
                 total_discounted_price = float(row[10])
 
-                order_created_at = datetime.strptime(row[12], "%Y-%m-%d").replace(
+                order_created_at = datetime.strptime(row[12], "%Y-%m-%d %H:%M:%S").replace(
                     tzinfo=pytz.utc
                 )
 
-                order_updated_at = datetime.strptime(row[13], "%Y-%m-%d").replace(
+                order_updated_at = datetime.strptime(row[13], "%Y-%m-%d %H:%M:%S").replace(
                     tzinfo=pytz.utc
                 )
 
-                # order_deleted_at = datetime.strptime(row[14], "%Y-%m-%d").replace(
-                #     tzinfo=pytz.utc
-                # )
                 try:
-                    order_deleted_at = datetime.strptime(row[14], "%Y-%m-%d").replace(
+                    order_deleted_at = datetime.strptime(row[14], "%Y-%m-%d %H:%M:%S").replace(
                         tzinfo=pytz.utc
                     )
                 except ValueError:
                     logger.error(f"Invalid date in row: {row}")
+
                 order_is_active = False
 
                 address_found = crud_address.get_one_ignore_deleted_and_inactive(
@@ -521,9 +515,7 @@ def init_db():
                         "ward": address_ward,
                     },
                 )
-                # logger.info(
-                #     f"Address found: {address_found.province}, {address_found.district}, {address_found.ward}"
-                # )
+
                 created_order = crud_order.create(
                     db=session,
                     obj_in=OrderInDBSchema(
@@ -553,6 +545,7 @@ def init_db():
                     id=uuid.uuid4(),
                     user_id=user_found.id,
                     chatbot_name="Chatbot mặc định.",
+                    # model="gpt-3.5-turbo-16k",
                     model="gpt-4",
                     is_public=True,
                     description="Chatbot mặc định khi khởi chạy dự án.",

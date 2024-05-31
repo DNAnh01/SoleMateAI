@@ -47,6 +47,8 @@ class PaymentVnPayServiceImpl(PaymentVnPayService):
 
     def read_item(self, request: Request, db: Session) -> RedirectResponse:
         response = dict(request.query_params)
+        
+        
         res_vnp_Amount = str(int(response.get("vnp_Amount")) / 100)
 
         if not self.__vnpay.validate_response(response):

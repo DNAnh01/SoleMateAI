@@ -13,6 +13,8 @@ class Chatbot(Base):
     )
     chatbot_name = Column(String, nullable=False)
     model = Column(String, default="gpt-4")
+    # model = Column(String, default="gpt-3.5-turbo-16k")
+    
     is_public = Column(Boolean, default=False)
     description = Column(String, nullable=True, default="description not provided")
     temperature = Column(Double, default=0.5)

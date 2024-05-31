@@ -78,6 +78,7 @@
         "softmax",
         "sqlalchemy",
         "starlette",
+        "subquery",
         "tailwindcss",
         "tippyjs",
         "toastify",
