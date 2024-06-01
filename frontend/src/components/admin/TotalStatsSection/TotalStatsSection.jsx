@@ -34,19 +34,19 @@ const TotalStatsSection = () => {
     const responseData = totalStatsByFilter;
     const transformData = {
         revenue_cost: {
-            title: 'Doanh thu',
+            title: 'Tổng doanh thu',
             icon: 'uptrend',
             value: responseData?.revenue_cost || 0,
             color: defaultTheme.color_blue,
         },
         profit_cost: {
-            title: 'Lợi nhuận',
+            title: 'Tổng lợi nhuận',
             icon: 'profit',
             value: responseData?.profit_cost || 0,
             color: defaultTheme.color_yellow_green,
         },
         warehouse_cost: {
-            title: 'Chi phí kho',
+            title: 'Tổng chi phí kho',
             icon: 'warehouse',
             value: responseData?.warehouse_cost || 0,
             color: defaultTheme.color_yellow,

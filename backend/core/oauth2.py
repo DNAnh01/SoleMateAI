@@ -11,7 +11,8 @@ from backend.common.logger import setup_logger
 from backend.core.config import settings
 from backend.crud.crud_user import crud_user
 from backend.crud.crud_user_role_permision import crud_user_role_permission
-from backend.schemas.user_role_permission_schema import UserRolePermissionSchema
+from backend.schemas.user_role_permission_schema import \
+    UserRolePermissionSchema
 
 logger = setup_logger()
 

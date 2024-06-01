@@ -1,0 +1,93 @@
+{
+   "intents": [
+      {
+         "tag": "greeting",
+         "patterns": [
+            "Xin chào",
+            ".",
+            "Chào shop",
+            "Này",
+            "Hi",
+            "Xin chào",
+            "Hello",
+            "Alo"
+         ],
+         "responses": [
+            "Xin chào, Shop có thể giúp gì cho bạn?"
+         ],
+         "context": [
+            ""
+         ]
+      },
+      {
+         "tag": "goodbye",
+         "patterns": [
+            "Hẹn gặp lại",
+            "Tạm biệt",
+            "Bye",
+            "Rất vui được trò chuyện với bạn, tạm biệt"
+         ],
+         "responses": [
+            "Tạm biệt! Cảm ơn bạn hẹn gặp lại."
+         ],
+         "context": [
+            ""
+         ]
+      },
+      {
+         "tag": "thanks",
+         "patterns": [
+            "Thanks",
+            "Cảm ơn",
+            "Cảm ơn shop ạ",
+            "Tuyệt vời, cảm ơn",
+            "Cảm ơn vì đã giúp tôi"
+         ],
+         "responses": [
+            "Cảm ơn bạn! Hẹn sớm gặp lại bạn"
+         ],
+         "context": [
+            ""
+         ]
+      },
+      {
+         "tag": "noanswer",
+         "patterns": [],
+         "responses": [
+            "Xin vui lòng cho tôi thêm thông tin"
+         ],
+         "context": [
+            ""
+         ]
+      },
+      {
+         "tag": "options",
+         "patterns": [
+            "Shop có thể giúp gì?",
+            "Bạn có thể giúp tôi về gì?",
+            "Hỗ trợ gì được cung cấp"
+         ],
+         "responses": [
+            "Tôi có thể giúp bạn tư vấn và giới thiệu các sản phẩm mà shop có ạ!"
+         ],
+         "context": [
+            ""
+         ]
+      },
+      {
+         "tag": "product",
+         "patterns": [
+            "Giới thiệu cho tôi một số sản phẩm hot của bên mình",
+            "Các đôi giày có trong shop",
+            "Các đôi giày bán nhiều nhất",
+            "Các đôi giày đẹp có trong shop"
+         ],
+         "responses": [
+            "Sau đây là một số sản phẩm shop gợi ý cho bạn: /n Giày thể thao nam Nike Air Max 90 Essential. /n Giày thể thao nữ Reebok Classic. /n Giày thể thao nam Puma Suede Classic+. /n Giày thể thao nam Adidas Superstar."
+         ],
+         "context": [
+            ""
+         ]
+      }
+   ]
+}

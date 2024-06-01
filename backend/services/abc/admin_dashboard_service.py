@@ -5,7 +5,8 @@ from sqlalchemy.orm import Session
 
 from backend.schemas.chart_data_schema import ChartDataSchema
 from backend.schemas.total_data_schema import TotalDataSchema
-from backend.schemas.user_role_permission_schema import UserRolePermissionSchema
+from backend.schemas.user_role_permission_schema import \
+    UserRolePermissionSchema
 
 
 class AdminDashboardService(ABC):

@@ -8,9 +8,11 @@ from backend.common.logger import setup_logger
 from backend.core import oauth2
 from backend.schemas.chart_data_schema import ChartDataSchema
 from backend.schemas.total_data_schema import TotalDataSchema
-from backend.schemas.user_role_permission_schema import UserRolePermissionSchema
+from backend.schemas.user_role_permission_schema import \
+    UserRolePermissionSchema
 from backend.services.abc.admin_dashboard_service import AdminDashboardService
-from backend.services.impl.admin_dashboard_service_impl import AdminDashboardServiceImpl
+from backend.services.impl.admin_dashboard_service_impl import \
+    AdminDashboardServiceImpl
 
 logger = setup_logger()
 

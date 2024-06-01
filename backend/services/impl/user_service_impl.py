@@ -8,7 +8,8 @@ from sqlalchemy.orm import Session
 from backend.common.logger import setup_logger
 from backend.crud.crud_role import crud_role
 from backend.crud.crud_user import crud_user
-from backend.schemas.user_role_permission_schema import UserRolePermissionSchema
+from backend.schemas.user_role_permission_schema import \
+    UserRolePermissionSchema
 from backend.schemas.user_schema import UserOutSchema, UserUpdateSchema
 from backend.services.abc.user_service import UserService
 

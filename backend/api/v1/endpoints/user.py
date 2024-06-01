@@ -7,7 +7,8 @@ from backend.api import deps
 from backend.common import parameters
 from backend.common.logger import setup_logger
 from backend.core import oauth2
-from backend.schemas.user_role_permission_schema import UserRolePermissionSchema
+from backend.schemas.user_role_permission_schema import \
+    UserRolePermissionSchema
 from backend.schemas.user_schema import UserOutSchema, UserUpdateSchema
 from backend.services.abc.user_service import UserService
 from backend.services.impl.user_service_impl import UserServiceImpl

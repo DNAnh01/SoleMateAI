@@ -3,10 +3,10 @@ import sys
 
 sys.path.insert(0, os.getcwd())
 
-import uvicorn
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
-from starlette.middleware.sessions import SessionMiddleware
+import uvicorn  # type: ignore
+from fastapi import FastAPI  # type: ignore
+from fastapi.middleware.cors import CORSMiddleware  # type: ignore
+from starlette.middleware.sessions import SessionMiddleware  # type: ignore
 
 from backend.api.v1.api import api_router
 from backend.core.config import settings

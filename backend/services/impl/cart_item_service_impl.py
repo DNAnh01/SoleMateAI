@@ -9,14 +9,13 @@ from backend.common.logger import setup_logger
 from backend.crud.crud_cart import crud_cart
 from backend.crud.crud_cart_item import crud_cart_item
 from backend.crud.crud_shoe import crud_shoe
-from backend.schemas.cart_item_schema import (
-    CartItemCreateSchema,
-    CartItemInDBSchema,
-    CartItemRemoveMultipleSchema,
-    CartItemRemoveSchema,
-    CartItemUpdateSchema,
-)
-from backend.schemas.user_role_permission_schema import UserRolePermissionSchema
+from backend.schemas.cart_item_schema import (CartItemCreateSchema,
+                                              CartItemInDBSchema,
+                                              CartItemRemoveMultipleSchema,
+                                              CartItemRemoveSchema,
+                                              CartItemUpdateSchema)
+from backend.schemas.user_role_permission_schema import \
+    UserRolePermissionSchema
 from backend.services.abc.cart_item_service import CartItemService
 
 logger = setup_logger()
