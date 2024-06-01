@@ -7,8 +7,12 @@ from starlette.requests import Request
 from backend.api import deps
 from backend.core import oauth2
 from backend.core.google_auth import oauth
-from backend.schemas.auth_schema import (ChangePasswordSchema, EmailSchema,
-                                         UserSignInSchema, UserSignUpSchema)
+from backend.schemas.auth_schema import (
+    ChangePasswordSchema,
+    EmailSchema,
+    UserSignInSchema,
+    UserSignUpSchema,
+)
 from backend.schemas.user_schema import UserInDBSchema
 from backend.services.abc.auth_service import AuthService
 from backend.services.impl.auth_service_impl import AuthServiceImpl

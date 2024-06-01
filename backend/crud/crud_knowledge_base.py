@@ -7,12 +7,14 @@ from backend.common.logger import setup_logger
 from backend.crud.base import CRUDBase
 from backend.models.knowledge_base import KnowledgeBase
 from backend.schemas.default_kn_chatbot import DefaultKNChatbotSchema
-from backend.schemas.knowledge_base_schema import (KnowledgeBaseCreateSchema,
-                                                   KnowledgeBaseUpdateSchema)
+from backend.schemas.knowledge_base_schema import (
+    KnowledgeBaseCreateSchema,
+    KnowledgeBaseUpdateSchema,
+)
 
 logger = setup_logger()
 
-GET_DEFAULT_KN_CHATBOT = f"""
+GET_DEFAULT_KN_CHATBOT = """
         WITH ranked_shoes AS ( 
             SELECT 
                 sho.id AS shoe_id, 
@@ -41,30 +43,43 @@ GET_DEFAULT_KN_CHATBOT = f"""
                 AND sp.promotion_id IS NOT NULL 
         ) 
         SELECT 
-            rs.shoe_id AS {DefaultKNChatbotSchema.SHOE_ID} ,
-            rs.shoe_name AS {DefaultKNChatbotSchema.SHOE_NAME} ,
-            rs.brand_name AS {DefaultKNChatbotSchema.BRAND_NAME} ,
-            rs.size_number AS {DefaultKNChatbotSchema.SIZE_NUMBER} ,
-            rs.color_name AS {DefaultKNChatbotSchema.COLOR_NAME} ,
-            rs.discounted_price AS {DefaultKNChatbotSchema.DISCOUNTED_PRICE} ,
-            p.promotion_name AS {DefaultKNChatbotSchema.PROMOTION_NAME} ,
-            p.start_date AS {DefaultKNChatbotSchema.PROMOTION_START_DATE} ,
-            p.end_date AS {DefaultKNChatbotSchema.PROMOTION_END_DATE} ,
-            p.discount_percent AS {DefaultKNChatbotSchema.PROMOTION_DISCOUNT_PERCENT}
+            rs.shoe_id AS {shoe_id},
+            rs.shoe_name AS {shoe_name},
+            rs.brand_name AS {brand_name},
+            rs.size_number AS {size_number},
+            rs.color_name AS {color_name},
+            rs.discounted_price AS {discounted_price},
+            p.promotion_name AS {promotion_name},
+            p.start_date AS {promotion_start_date},
+            p.end_date AS {promotion_end_date},
+            p.discount_percent AS {promotion_discount_percent}
         FROM 
             ranked_shoes AS rs 
         LEFT JOIN 
             promotions AS p ON rs.promotion_id = p.id AND p.deleted_at IS NULL 
         WHERE 
-            rs.rn <= 1;
-    """
+            rs.rn <= :limit;
+    """.format(
+    shoe_id=DefaultKNChatbotSchema.SHOE_ID,
+    shoe_name=DefaultKNChatbotSchema.SHOE_NAME,
+    brand_name=DefaultKNChatbotSchema.BRAND_NAME,
+    size_number=DefaultKNChatbotSchema.SIZE_NUMBER,
+    color_name=DefaultKNChatbotSchema.COLOR_NAME,
+    discounted_price=DefaultKNChatbotSchema.DISCOUNTED_PRICE,
+    promotion_name=DefaultKNChatbotSchema.PROMOTION_NAME,
+    promotion_start_date=DefaultKNChatbotSchema.PROMOTION_START_DATE,
+    promotion_end_date=DefaultKNChatbotSchema.PROMOTION_END_DATE,
+    promotion_discount_percent=DefaultKNChatbotSchema.PROMOTION_DISCOUNT_PERCENT,
+)
 
 
 class CRUDKnowledgeBase(
     CRUDBase[KnowledgeBase, KnowledgeBaseCreateSchema, KnowledgeBaseUpdateSchema]
 ):
-    def get_default_kn_chatbot(self, db: Session) -> List[DefaultKNChatbotSchema]:
-        result_proxy = db.execute(text(GET_DEFAULT_KN_CHATBOT))
+    def get_default_kn_chatbot(
+        self, db: Session, limit: int = 1
+    ) -> List[DefaultKNChatbotSchema]:
+        result_proxy = db.execute(text(GET_DEFAULT_KN_CHATBOT), {"limit": limit})
         column_names = result_proxy.keys()
         results = result_proxy.fetchall()
         default_kn_chatbots = []

@@ -18,14 +18,15 @@ from backend.crud.crud_size import crud_size
 from backend.schemas.address_schema import AddAddressSchema, AddressInDBSchema
 from backend.schemas.brand_schema import BrandCreateSchema
 from backend.schemas.color_schema import ColorCreateSchema
-from backend.schemas.order_item_schema import (OrderItemInDBSchema,
-                                               OrderItemOutSchema)
-from backend.schemas.order_schema import (OrderInDBSchema, OrderOutSchema,
-                                          OrderUpdateSchema)
+from backend.schemas.order_item_schema import OrderItemInDBSchema, OrderItemOutSchema
+from backend.schemas.order_schema import (
+    OrderInDBSchema,
+    OrderOutSchema,
+    OrderUpdateSchema,
+)
 from backend.schemas.shoe_schema import ShoeOutSchema, ShoeUpdateSchema
 from backend.schemas.size_schema import SizeCreateSchema
-from backend.schemas.user_role_permission_schema import \
-    UserRolePermissionSchema
+from backend.schemas.user_role_permission_schema import UserRolePermissionSchema
 from backend.services.abc.address_service import AddressService
 from backend.services.abc.order_service import OrderService
 from backend.services.abc.shoe_service import ShoeService

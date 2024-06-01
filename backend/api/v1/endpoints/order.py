@@ -10,8 +10,7 @@ from backend.common.logger import setup_logger
 from backend.core import oauth2
 from backend.schemas.address_schema import AddAddressSchema
 from backend.schemas.order_schema import OrderOutSchema
-from backend.schemas.user_role_permission_schema import \
-    UserRolePermissionSchema
+from backend.schemas.user_role_permission_schema import UserRolePermissionSchema
 from backend.services.abc.order_service import OrderService
 from backend.services.impl.order_service_impl import OrderServiceImpl
 

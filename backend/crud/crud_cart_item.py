@@ -7,9 +7,11 @@ from sqlalchemy.orm import Session
 from backend.common.logger import setup_logger
 from backend.crud.base import CRUDBase
 from backend.models.cart_item import CartItem
-from backend.schemas.cart_item_schema import (CartItemCreateSchema,
-                                              CartItemInDBSchema,
-                                              CartItemUpdateSchema)
+from backend.schemas.cart_item_schema import (
+    CartItemCreateSchema,
+    CartItemInDBSchema,
+    CartItemUpdateSchema,
+)
 
 logger = setup_logger()
 

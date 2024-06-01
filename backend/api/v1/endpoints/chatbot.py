@@ -6,11 +6,12 @@ from sqlalchemy.orm import Session
 from backend.api import deps
 from backend.common.logger import setup_logger
 from backend.core import oauth2
-from backend.schemas.chatbot_schema import (ChatbotCreateSchema,
-                                            ChatbotInDBSchema,
-                                            ChatbotUpdateSchema)
-from backend.schemas.user_role_permission_schema import \
-    UserRolePermissionSchema
+from backend.schemas.chatbot_schema import (
+    ChatbotCreateSchema,
+    ChatbotInDBSchema,
+    ChatbotUpdateSchema,
+)
+from backend.schemas.user_role_permission_schema import UserRolePermissionSchema
 from backend.services.abc.chatbot_service import ChatbotService
 from backend.services.impl.chatbot_service_impl import ChatbotServiceImpl
 

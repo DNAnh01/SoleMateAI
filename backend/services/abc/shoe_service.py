@@ -4,12 +4,14 @@ from typing import List, Optional
 
 from sqlalchemy.orm import Session
 
-from backend.schemas.shoe_schema import (ShoeCreateSchema,
-                                         ShoeOutInHomePageSchema,
-                                         ShoeOutInProductDetailPageSchema,
-                                         ShoeOutSchema, ShoeUpdateSchema)
-from backend.schemas.user_role_permission_schema import \
-    UserRolePermissionSchema
+from backend.schemas.shoe_schema import (
+    ShoeCreateSchema,
+    ShoeOutInHomePageSchema,
+    ShoeOutInProductDetailPageSchema,
+    ShoeOutSchema,
+    ShoeUpdateSchema,
+)
+from backend.schemas.user_role_permission_schema import UserRolePermissionSchema
 
 
 class ShoeService(ABC):

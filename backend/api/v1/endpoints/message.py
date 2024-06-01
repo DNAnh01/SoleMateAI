@@ -7,8 +7,7 @@ from backend.api import deps
 from backend.common.logger import setup_logger
 from backend.core import oauth2
 from backend.schemas.message_schema import MessageInDBSchema
-from backend.schemas.user_role_permission_schema import \
-    UserRolePermissionSchema
+from backend.schemas.user_role_permission_schema import UserRolePermissionSchema
 from backend.services.abc.message_service import MessageService
 from backend.services.impl.message_service_impl import MessageServiceImpl
 

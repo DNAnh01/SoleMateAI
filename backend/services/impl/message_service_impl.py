@@ -17,8 +17,7 @@ from backend.crud.crud_conversation import crud_conversation
 from backend.crud.crud_knowledge_base import crud_knowledge_base
 from backend.crud.crud_message import crud_message
 from backend.schemas.message_schema import MessageInDBSchema
-from backend.schemas.user_role_permission_schema import \
-    UserRolePermissionSchema
+from backend.schemas.user_role_permission_schema import UserRolePermissionSchema
 from backend.services.abc.message_service import MessageService
 
 logger = setup_logger()
@@ -221,9 +220,12 @@ class MessageServiceImpl(MessageService):
                     )
 
             """add data in DB to knowledge base"""
-            default_kn_chatbots = self.__crud_knowledge_base.get_default_kn_chatbot(db)
+            default_kn_chatbots = self.__crud_knowledge_base.get_default_kn_chatbot(
+                db=db, limit=2
+            )
             # logger.error(f"default_kn_chatbots: {default_kn_chatbots.__dict__}")
             # logger.info(f"default_kn_chatbots: {[default_kn_chatbot.__dict__ for default_kn_chatbot in default_kn_chatbots]}")
+            logger.error(f"len(default_kn_chatbots): {len(default_kn_chatbots)}")
             temp_knowledge_base.append(
                 {
                     "role": "system",

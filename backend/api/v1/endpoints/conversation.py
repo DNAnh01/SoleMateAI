@@ -5,11 +5,9 @@ from backend.api import deps
 from backend.common.logger import setup_logger
 from backend.core import oauth2
 from backend.schemas.conversation_schema import ConversationInDBSchema
-from backend.schemas.user_role_permission_schema import \
-    UserRolePermissionSchema
+from backend.schemas.user_role_permission_schema import UserRolePermissionSchema
 from backend.services.abc.conversation_service import ConversationService
-from backend.services.impl.conversation_service_impl import \
-    ConversationServiceImpl
+from backend.services.impl.conversation_service_impl import ConversationServiceImpl
 
 logger = setup_logger()
 

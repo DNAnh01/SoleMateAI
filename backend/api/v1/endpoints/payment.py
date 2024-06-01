@@ -5,8 +5,7 @@ from sqlalchemy.orm import Session
 from backend.api import deps
 from backend.common.logger import setup_logger
 from backend.services.abc.payment_vnpay_service import PaymentVnPayService
-from backend.services.impl.payment_vnpay_service_impl import \
-    PaymentVnPayServiceImpl
+from backend.services.impl.payment_vnpay_service_impl import PaymentVnPayServiceImpl
 
 logger = setup_logger()
 

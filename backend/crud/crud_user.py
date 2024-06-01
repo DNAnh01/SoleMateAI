@@ -2,8 +2,11 @@ from sqlalchemy.orm import Session
 
 from backend.crud.base import CRUDBase
 from backend.models.user import User
-from backend.schemas.user_schema import (UserCreateSchema, UserInDBSchema,
-                                         UserUpdateSchema)
+from backend.schemas.user_schema import (
+    UserCreateSchema,
+    UserInDBSchema,
+    UserUpdateSchema,
+)
 
 
 class CRUDUser(CRUDBase[User, UserCreateSchema, UserUpdateSchema]):

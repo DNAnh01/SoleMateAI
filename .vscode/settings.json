@@ -26,6 +26,7 @@
         "Chatbox",
         "colorlog",
         "crossentropy",
+        "csvfile",
         "decamelization",
         "decamelize",
         "decamelized",

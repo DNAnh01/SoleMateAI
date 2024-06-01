@@ -7,6 +7,9 @@ import images from '~/assets/images';
 import messageApi from '~/apis/message.api';
 import useAppStore from '~/store';
 import conversationApi from '~/apis/conversation.api';
+import { Link } from 'react-router-dom';
+import productApi from '~/apis/product.api';
+import configs from '~/configs';
 
 const shakeAnimation = keyframes`
     0% { transform: rotate(0deg); }
@@ -205,6 +208,17 @@ const ChatItem = styled.li`
         color: #ccc;
         margin-top: 5px;
     }
+
+    .product-image {
+        margin-top: 10px;
+        width: 90%;
+        height: auto;
+        &:hover {
+            cursor: pointer;
+            transform: scale(1.05);
+            filter: brightness(1.2);
+        }
+    }
 `;
 
 const ChatInputContainer = styled.div`
@@ -308,7 +322,7 @@ const Chatbot = () => {
             setConversationId(conversationId);
 
             const resMessages = await messageApi.getMessageByConversationId(conversationId);
-            const messages =
+            let messages =
                 resMessages.data.length > 0
                     ? resMessages.data
                     : [
@@ -319,8 +333,26 @@ const Chatbot = () => {
                               created_at: new Date().toISOString(),
                           },
                       ];
+
+            messages = await Promise.all(
+                messages.map(async (message) => {
+                    if (message.message_text.includes('http')) {
+                        const productId = message.message_text.split('http')[1].split('/').pop();
+                        try {
+                            const responseProduct = await productApi.getById(productId);
+                            message.image_url = responseProduct.data.image_url;
+                        } catch (error) {
+                            console.error('Failed to fetch product image:', error);
+                            message.image_url = images.noImage;
+                        }
+                    }
+                    return message;
+                }),
+            );
+
             // Sort messages by created_at
             messages.sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
+
             setChatMessages(messages);
         };
 
@@ -362,15 +394,26 @@ const Chatbot = () => {
                     conversation_id: conversationId,
                 });
             }
-            setChatMessages((prevMessages) => [
-                ...prevMessages,
-                {
-                    id: response.data.id,
-                    sender_type: 'bot',
-                    message_text: response.data.message_text,
-                    created_at: response.data.created_at,
-                },
-            ]);
+
+            const botMessage = {
+                id: response.data.id,
+                sender_type: 'bot',
+                message_text: response.data.message_text,
+                created_at: response.data.created_at,
+            };
+
+            if (response.data.message_text.includes('http')) {
+                const productId = response.data.message_text.split('http')[1].split('/').pop();
+                try {
+                    const responseProduct = await productApi.getById(productId);
+                    botMessage.image_url = responseProduct.data.image_url;
+                } catch (error) {
+                    console.error('Failed to fetch product image:', error);
+                    botMessage.image_url = images.noImage;
+                }
+            }
+
+            setChatMessages((prevMessages) => [...prevMessages, botMessage]);
         } catch (error) {
             setChatMessages((prevMessages) => [
                 ...prevMessages,
@@ -400,7 +443,19 @@ const Chatbot = () => {
                     <Image className="chatbot-icon" src={images.chatbot} alt="Bot" width={30} height={30} />
                 </span>
             )}
-            <p>{message.message_text}</p>
+            {message.message_text.includes('http') ? (
+                <p>
+                    {message.message_text.split('http')[0]}
+                    <br />
+                    <Link
+                        to={`${configs.roures.productList}/${message.message_text.split('http')[1].split('/').pop()}`}
+                    >
+                        <Image className="product-image" src={message.image_url || images.noImage} alt="Product" />
+                    </Link>
+                </p>
+            ) : (
+                <p>{message.message_text}</p>
+            )}
             <div className="timestamp">{new Date(message.created_at).toLocaleTimeString()}</div>
             {message.sender_type === 'guest' && (
                 <span>

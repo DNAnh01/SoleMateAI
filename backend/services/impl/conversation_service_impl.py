@@ -11,8 +11,7 @@ from backend.crud.crud_chatbot import crud_chatbot
 from backend.crud.crud_conversation import crud_conversation
 from backend.crud.crud_user import crud_user
 from backend.schemas.conversation_schema import ConversationInDBSchema
-from backend.schemas.user_role_permission_schema import \
-    UserRolePermissionSchema
+from backend.schemas.user_role_permission_schema import UserRolePermissionSchema
 from backend.services.abc.conversation_service import ConversationService
 
 logger = setup_logger()

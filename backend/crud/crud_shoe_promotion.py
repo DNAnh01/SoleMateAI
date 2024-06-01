@@ -1,7 +1,9 @@
 from backend.crud.base import CRUDBase
 from backend.models.shoe_promotion import ShoePromotion
-from backend.schemas.shoe_promotion_schema import (ShoePromotionCreateSchema,
-                                                   ShoePromotionUpdateSchema)
+from backend.schemas.shoe_promotion_schema import (
+    ShoePromotionCreateSchema,
+    ShoePromotionUpdateSchema,
+)
 
 
 class CRUDShoePromotion(

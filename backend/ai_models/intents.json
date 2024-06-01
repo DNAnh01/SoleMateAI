@@ -1,93 +1,825 @@
 {
-   "intents": [
-      {
-         "tag": "greeting",
-         "patterns": [
-            "Xin chào",
-            ".",
-            "Chào shop",
-            "Này",
-            "Hi",
-            "Xin chào",
-            "Hello",
-            "Alo"
-         ],
-         "responses": [
-            "Xin chào, Shop có thể giúp gì cho bạn?"
-         ],
-         "context": [
-            ""
-         ]
-      },
-      {
-         "tag": "goodbye",
-         "patterns": [
-            "Hẹn gặp lại",
-            "Tạm biệt",
-            "Bye",
-            "Rất vui được trò chuyện với bạn, tạm biệt"
-         ],
-         "responses": [
-            "Tạm biệt! Cảm ơn bạn hẹn gặp lại."
-         ],
-         "context": [
-            ""
-         ]
-      },
-      {
-         "tag": "thanks",
-         "patterns": [
-            "Thanks",
-            "Cảm ơn",
-            "Cảm ơn shop ạ",
-            "Tuyệt vời, cảm ơn",
-            "Cảm ơn vì đã giúp tôi"
-         ],
-         "responses": [
-            "Cảm ơn bạn! Hẹn sớm gặp lại bạn"
-         ],
-         "context": [
-            ""
-         ]
-      },
-      {
-         "tag": "noanswer",
-         "patterns": [],
-         "responses": [
-            "Xin vui lòng cho tôi thêm thông tin"
-         ],
-         "context": [
-            ""
-         ]
-      },
-      {
-         "tag": "options",
-         "patterns": [
-            "Shop có thể giúp gì?",
-            "Bạn có thể giúp tôi về gì?",
-            "Hỗ trợ gì được cung cấp"
-         ],
-         "responses": [
-            "Tôi có thể giúp bạn tư vấn và giới thiệu các sản phẩm mà shop có ạ!"
-         ],
-         "context": [
-            ""
-         ]
-      },
-      {
-         "tag": "product",
-         "patterns": [
-            "Giới thiệu cho tôi một số sản phẩm hot của bên mình",
-            "Các đôi giày có trong shop",
-            "Các đôi giày bán nhiều nhất",
-            "Các đôi giày đẹp có trong shop"
-         ],
-         "responses": [
-            "Sau đây là một số sản phẩm shop gợi ý cho bạn: /n Giày thể thao nam Nike Air Max 90 Essential. /n Giày thể thao nữ Reebok Classic. /n Giày thể thao nam Puma Suede Classic+. /n Giày thể thao nam Adidas Superstar."
-         ],
-         "context": [
-            ""
-         ]
-      }
-   ]
+    "intents": [
+        {
+            "tag": "greeting",
+            "patterns": [
+                "Xin chào",
+                ".",
+                "Chào shop",
+                "Này",
+                "Hi",
+                "Xin chào",
+                "Hello",
+                "Alo"
+            ],
+            "responses": [
+                "Xin chào, Shop có thể giúp gì cho bạn"
+            ],
+            "context": [
+                ""
+            ]
+        },
+        {
+            "tag": "goodbye",
+            "patterns": [
+                "Hẹn gặp lại",
+                "Tạm biệt",
+                "Bye",
+                "Rất vui được trò chuyện với bạn, tạm biệt"
+            ],
+            "responses": [
+                "Tạm biệt! Cảm ơn bạn hẹn gặp lại."
+            ],
+            "context": [
+                ""
+            ]
+        },
+        {
+            "tag": "thanks",
+            "patterns": [
+                "Thanks",
+                "Cảm ơn",
+                "Cảm ơn shop ạ",
+                "Tuyệt vời, cảm ơn",
+                "Cảm ơn vì đã giúp tôi"
+            ],
+            "responses": [
+                "Cảm ơn bạn! Hẹn sớm gặp lại bạn"
+            ],
+            "context": [
+                ""
+            ]
+        },
+        {
+            "tag": "noanswer",
+            "patterns": [],
+            "responses": [
+                "Xin vui lòng cho tôi thêm thông tin"
+            ],
+            "context": [
+                ""
+            ]
+        },
+        {
+            "tag": "options",
+            "patterns": [
+                "Shop có thể giúp gì",
+                "Bạn có thể giúp tôi cái gì",
+                "Hỗ trợ gì được cung cấp"
+            ],
+            "responses": [
+                "Tôi có thể giúp bạn tư vấn và giới thiệu các sản phẩm mà shop có ạ!"
+            ],
+            "context": [
+                ""
+            ]
+        },
+        {
+            "tag": "có_tất_cả_bao_nhiêu_mặc_hàng",
+            "patterns": [
+                [
+                    "Có tất cả bao nhiêu mặc hàng",
+                    "giày"
+                ]
+            ],
+            "responses": [
+                "Tổng số giày hiện có là 4. Danh sách các giày: Nike Air Max 90 Essential, Puma Suede Classic+, Adidas Superstar, Reebok Classic."
+            ],
+            "context": [
+                "Thông tin về số lượng giày hiện có."
+            ]
+        },
+        {
+            "tag": "có_tất_cả_bao_nhiêu_thương_hiệu_giày",
+            "patterns": [
+                [
+                    "Có tất cả bao nhiêu thương hiệu giày",
+                    "thương hiệu"
+                ]
+            ],
+            "responses": [
+                "Tổng số thương hiệu giày hiện có là 4. Danh sách các thương hiệu giày: Reebok, Puma, Nike, Adidas."
+            ],
+            "context": [
+                "Thông tin về số lượng thương hiệu giày hiện có."
+            ]
+        },
+        {
+            "tag": "có_tất_cả_bao_nhiêu_màu_giày",
+            "patterns": [
+                [
+                    "Có tất cả bao nhiêu màu giày",
+                    "màu"
+                ]
+            ],
+            "responses": [
+                "Tổng số màu giày hiện có là 7. Danh sách các màu giày: Grey, Black, Red, Light Blue, Blue, Yellow, Orange."
+            ],
+            "context": [
+                "Thông tin về số lượng màu giày hiện có."
+            ]
+        },
+        {
+            "tag": "có_tất_cả_bao_nhiêu_kích_thước_giày",
+            "patterns": [
+                [
+                    "Có tất cả bao nhiêu kích thước giày",
+                    "size"
+                ]
+            ],
+            "responses": [
+                "Tổng số size giày hiện có là 2. Danh sách các size giày: 42, 43."
+            ],
+            "context": [
+                "Thông tin về số lượng size giày hiện có."
+            ]
+        },
+        {
+            "tag": "có_tất_cả_bao_nhiêu_khuyến_mãi",
+            "patterns": [
+                [
+                    "Có tất cả bao nhiêu khuyến mãi",
+                    "khuyến mãi"
+                ]
+            ],
+            "responses": [
+                "Tổng số khuyến mãi hiện có là 2. Danh sách các khuyến mãi: Mùa Hè Sale cùng Sole Mate AI, Quay Trở Lại Trường Học."
+            ],
+            "context": [
+                "Thông tin về số lượng khuyến mãi hiện có."
+            ]
+        },
+        {
+            "tag": "có_nike_không",
+            "patterns": [
+                [
+                    "Có Nike không",
+                    "Nike"
+                ]
+            ],
+            "responses": [
+                "Có, chúng tôi có Nike Air Max 90 Essential từ thương hiệu Nike."
+            ],
+            "context": [
+                "Thông tin về Nike Air Max 90 Essential từ thương hiệu Nike."
+            ]
+        },
+        {
+            "tag": "bạn_có_nike_air_max_90_essential_không",
+            "patterns": [
+                [
+                    "Bạn có Nike Air Max 90 Essential không",
+                    "có Nike Air Max 90 Essential không",
+                    "Nike Air Max 90 Essential có không",
+                    "Nike Air Max 90 Essential"
+                ]
+            ],
+            "responses": [
+                "Có, chúng tôi có Nike Air Max 90 Essential với màu Light Blue và size 43."
+            ],
+            "context": [
+                "Thông tin về Nike Air Max 90 Essential với màu Light Blue và size 43."
+            ]
+        },
+        {
+            "tag": "giày_nike_air_max_90_essential_màu_grey_có_đẹp_không",
+            "patterns": [
+                [
+                    "Giày Nike Air Max 90 Essential màu Grey có đẹp không",
+                    "Nike Air Max 90 Essential màu Grey đẹp không",
+                    "Nike Air Max 90 Essential màu Grey"
+                ]
+            ],
+            "responses": [
+                "Có, giày Nike Air Max 90 Essential màu Grey là một trong những màu được ưa chuộng."
+            ],
+            "context": [
+                "Thông tin về giày Nike Air Max 90 Essential màu Grey."
+            ]
+        },
+        {
+            "tag": "giày_nike_air_max_90_essential_giá_bao_nhiêu",
+            "patterns": [
+                [
+                    "giày Nike Air Max 90 Essential giá bao nhiêu",
+                    "Nike Air Max 90 Essential giá bao nhiêu",
+                    "Nike Air Max 90 Essential giá"
+                ]
+            ],
+            "responses": [
+                "Giày Nike Air Max 90 Essential giá 1600000.0 VNĐ."
+            ],
+            "context": [
+                "Thông tin về giày Nike Air Max 90 Essential giá 1600000.0 VNĐ."
+            ]
+        },
+        {
+            "tag": "khuyến_mãi",
+            "patterns": [
+                [
+                    "khuyến mãi",
+                    "khuyến mãi Mùa Hè Sale cùng Sole Mate AIMùa Hè Sale cùng Sole Mate AI",
+                    "Mùa Hè Sale cùng Sole Mate AI"
+                ]
+            ],
+            "responses": [
+                "khuyến mãi Mùa Hè Sale cùng Sole Mate AI bắt đầu từ ngày 01-06-2024."
+            ],
+            "context": [
+                "thông tin về khuyến mãi Mùa Hè Sale cùng Sole Mate AI bắt đầu từ ngày 01-06-2024 kết thúc vào ngày 31-08-2024 với giá giảm 20%."
+            ]
+        },
+        {
+            "tag": "giày_nike_air_max_90_essential_màu_black_có_đẹp_không",
+            "patterns": [
+                [
+                    "Giày Nike Air Max 90 Essential màu Black có đẹp không",
+                    "Nike Air Max 90 Essential màu Black đẹp không",
+                    "Nike Air Max 90 Essential màu Black"
+                ]
+            ],
+            "responses": [
+                "Có, giày Nike Air Max 90 Essential màu Black là một trong những màu được ưa chuộng."
+            ],
+            "context": [
+                "Thông tin về giày Nike Air Max 90 Essential màu Black."
+            ]
+        },
+        {
+            "tag": "giày_nike_air_max_90_essential_màu_red_có_đẹp_không",
+            "patterns": [
+                [
+                    "Giày Nike Air Max 90 Essential màu Red có đẹp không",
+                    "Nike Air Max 90 Essential màu Red đẹp không",
+                    "Nike Air Max 90 Essential màu Red"
+                ]
+            ],
+            "responses": [
+                "Có, giày Nike Air Max 90 Essential màu Red là một trong những màu được ưa chuộng."
+            ],
+            "context": [
+                "Thông tin về giày Nike Air Max 90 Essential màu Red."
+            ]
+        },
+        {
+            "tag": "giày_nike_air_max_90_essential_màu_yellow_có_đẹp_không",
+            "patterns": [
+                [
+                    "Giày Nike Air Max 90 Essential màu Yellow có đẹp không",
+                    "Nike Air Max 90 Essential màu Yellow đẹp không",
+                    "Nike Air Max 90 Essential màu Yellow"
+                ]
+            ],
+            "responses": [
+                "Có, giày Nike Air Max 90 Essential màu Yellow là một trong những màu được ưa chuộng."
+            ],
+            "context": [
+                "Thông tin về giày Nike Air Max 90 Essential màu Yellow."
+            ]
+        },
+        {
+            "tag": "giày_nike_air_max_90_essential_màu_blue_có_đẹp_không",
+            "patterns": [
+                [
+                    "Giày Nike Air Max 90 Essential màu Blue có đẹp không",
+                    "Nike Air Max 90 Essential màu Blue đẹp không",
+                    "Nike Air Max 90 Essential màu Blue"
+                ]
+            ],
+            "responses": [
+                "Có, giày Nike Air Max 90 Essential màu Blue là một trong những màu được ưa chuộng."
+            ],
+            "context": [
+                "Thông tin về giày Nike Air Max 90 Essential màu Blue."
+            ]
+        },
+        {
+            "tag": "giày_nike_air_max_90_essential_màu_orange_có_đẹp_không",
+            "patterns": [
+                [
+                    "Giày Nike Air Max 90 Essential màu Orange có đẹp không",
+                    "Nike Air Max 90 Essential màu Orange đẹp không",
+                    "Nike Air Max 90 Essential màu Orange"
+                ]
+            ],
+            "responses": [
+                "Có, giày Nike Air Max 90 Essential màu Orange là một trong những màu được ưa chuộng."
+            ],
+            "context": [
+                "Thông tin về giày Nike Air Max 90 Essential màu Orange."
+            ]
+        },
+        {
+            "tag": "giày_nike_air_max_90_essential_màu_light_blue_có_đẹp_không",
+            "patterns": [
+                [
+                    "Giày Nike Air Max 90 Essential màu Light Blue có đẹp không",
+                    "Nike Air Max 90 Essential màu Light Blue đẹp không",
+                    "Nike Air Max 90 Essential màu Light Blue"
+                ]
+            ],
+            "responses": [
+                "Có, giày Nike Air Max 90 Essential màu Light Blue là một trong những màu được ưa chuộng."
+            ],
+            "context": [
+                "Thông tin về giày Nike Air Max 90 Essential màu Light Blue."
+            ]
+        },
+        {
+            "tag": "có_reebok_không",
+            "patterns": [
+                [
+                    "Có Reebok không",
+                    "Reebok"
+                ]
+            ],
+            "responses": [
+                "Có, chúng tôi có Reebok Classic từ thương hiệu Reebok."
+            ],
+            "context": [
+                "Thông tin về Reebok Classic từ thương hiệu Reebok."
+            ]
+        },
+        {
+            "tag": "bạn_có_reebok_classic_không",
+            "patterns": [
+                [
+                    "Bạn có Reebok Classic không",
+                    "có Reebok Classic không",
+                    "Reebok Classic có không",
+                    "Reebok Classic"
+                ]
+            ],
+            "responses": [
+                "Có, chúng tôi có Reebok Classic với màu Orange và size 43."
+            ],
+            "context": [
+                "Thông tin về Reebok Classic với màu Orange và size 43."
+            ]
+        },
+        {
+            "tag": "giày_reebok_classic_màu_red_có_đẹp_không",
+            "patterns": [
+                [
+                    "Giày Reebok Classic màu Red có đẹp không",
+                    "Reebok Classic màu Red đẹp không",
+                    "Reebok Classic màu Red"
+                ]
+            ],
+            "responses": [
+                "Có, giày Reebok Classic màu Red là một trong những màu được ưa chuộng."
+            ],
+            "context": [
+                "Thông tin về giày Reebok Classic màu Red."
+            ]
+        },
+        {
+            "tag": "giày_reebok_classic_giá_bao_nhiêu",
+            "patterns": [
+                [
+                    "giày Reebok Classic giá bao nhiêu",
+                    "Reebok Classic giá bao nhiêu",
+                    "Reebok Classic giá"
+                ]
+            ],
+            "responses": [
+                "Giày Reebok Classic giá 1600000.0 VNĐ."
+            ],
+            "context": [
+                "Thông tin về giày Reebok Classic giá 1600000.0 VNĐ."
+            ]
+        },
+        {
+            "tag": "giày_reebok_classic_màu_grey_có_đẹp_không",
+            "patterns": [
+                [
+                    "Giày Reebok Classic màu Grey có đẹp không",
+                    "Reebok Classic màu Grey đẹp không",
+                    "Reebok Classic màu Grey"
+                ]
+            ],
+            "responses": [
+                "Có, giày Reebok Classic màu Grey là một trong những màu được ưa chuộng."
+            ],
+            "context": [
+                "Thông tin về giày Reebok Classic màu Grey."
+            ]
+        },
+        {
+            "tag": "giày_reebok_classic_màu_black_có_đẹp_không",
+            "patterns": [
+                [
+                    "Giày Reebok Classic màu Black có đẹp không",
+                    "Reebok Classic màu Black đẹp không",
+                    "Reebok Classic màu Black"
+                ]
+            ],
+            "responses": [
+                "Có, giày Reebok Classic màu Black là một trong những màu được ưa chuộng."
+            ],
+            "context": [
+                "Thông tin về giày Reebok Classic màu Black."
+            ]
+        },
+        {
+            "tag": "giày_reebok_classic_màu_yellow_có_đẹp_không",
+            "patterns": [
+                [
+                    "Giày Reebok Classic màu Yellow có đẹp không",
+                    "Reebok Classic màu Yellow đẹp không",
+                    "Reebok Classic màu Yellow"
+                ]
+            ],
+            "responses": [
+                "Có, giày Reebok Classic màu Yellow là một trong những màu được ưa chuộng."
+            ],
+            "context": [
+                "Thông tin về giày Reebok Classic màu Yellow."
+            ]
+        },
+        {
+            "tag": "giày_reebok_classic_màu_blue_có_đẹp_không",
+            "patterns": [
+                [
+                    "Giày Reebok Classic màu Blue có đẹp không",
+                    "Reebok Classic màu Blue đẹp không",
+                    "Reebok Classic màu Blue"
+                ]
+            ],
+            "responses": [
+                "Có, giày Reebok Classic màu Blue là một trong những màu được ưa chuộng."
+            ],
+            "context": [
+                "Thông tin về giày Reebok Classic màu Blue."
+            ]
+        },
+        {
+            "tag": "giày_reebok_classic_màu_light_blue_có_đẹp_không",
+            "patterns": [
+                [
+                    "Giày Reebok Classic màu Light Blue có đẹp không",
+                    "Reebok Classic màu Light Blue đẹp không",
+                    "Reebok Classic màu Light Blue"
+                ]
+            ],
+            "responses": [
+                "Có, giày Reebok Classic màu Light Blue là một trong những màu được ưa chuộng."
+            ],
+            "context": [
+                "Thông tin về giày Reebok Classic màu Light Blue."
+            ]
+        },
+        {
+            "tag": "giày_reebok_classic_màu_orange_có_đẹp_không",
+            "patterns": [
+                [
+                    "Giày Reebok Classic màu Orange có đẹp không",
+                    "Reebok Classic màu Orange đẹp không",
+                    "Reebok Classic màu Orange"
+                ]
+            ],
+            "responses": [
+                "Có, giày Reebok Classic màu Orange là một trong những màu được ưa chuộng."
+            ],
+            "context": [
+                "Thông tin về giày Reebok Classic màu Orange."
+            ]
+        },
+        {
+            "tag": "có_puma_không",
+            "patterns": [
+                [
+                    "Có Puma không",
+                    "Puma"
+                ]
+            ],
+            "responses": [
+                "Có, chúng tôi có Puma Suede Classic+ từ thương hiệu Puma."
+            ],
+            "context": [
+                "Thông tin về Puma Suede Classic+ từ thương hiệu Puma."
+            ]
+        },
+        {
+            "tag": "bạn_có_puma_suede_classic+_không",
+            "patterns": [
+                [
+                    "Bạn có Puma Suede Classic+ không",
+                    "có Puma Suede Classic+ không",
+                    "Puma Suede Classic+ có không",
+                    "Puma Suede Classic+"
+                ]
+            ],
+            "responses": [
+                "Có, chúng tôi có Puma Suede Classic+ với màu Grey và size 43."
+            ],
+            "context": [
+                "Thông tin về Puma Suede Classic+ với màu Grey và size 43."
+            ]
+        },
+        {
+            "tag": "giày_puma_suede_classic+_màu_blue_có_đẹp_không",
+            "patterns": [
+                [
+                    "Giày Puma Suede Classic+ màu Blue có đẹp không",
+                    "Puma Suede Classic+ màu Blue đẹp không",
+                    "Puma Suede Classic+ màu Blue"
+                ]
+            ],
+            "responses": [
+                "Có, giày Puma Suede Classic+ màu Blue là một trong những màu được ưa chuộng."
+            ],
+            "context": [
+                "Thông tin về giày Puma Suede Classic+ màu Blue."
+            ]
+        },
+        {
+            "tag": "giày_puma_suede_classic+_giá_bao_nhiêu",
+            "patterns": [
+                [
+                    "giày Puma Suede Classic+ giá bao nhiêu",
+                    "Puma Suede Classic+ giá bao nhiêu",
+                    "Puma Suede Classic+ giá"
+                ]
+            ],
+            "responses": [
+                "Giày Puma Suede Classic+ giá 1800000.0 VNĐ."
+            ],
+            "context": [
+                "Thông tin về giày Puma Suede Classic+ giá 1800000.0 VNĐ."
+            ]
+        },
+        {
+            "tag": "khuyến_mãi",
+            "patterns": [
+                [
+                    "khuyến mãi",
+                    "khuyến mãi Quay Trở Lại Trường HọcQuay Trở Lại Trường Học",
+                    "Quay Trở Lại Trường Học"
+                ]
+            ],
+            "responses": [
+                "khuyến mãi Quay Trở Lại Trường Học bắt đầu từ ngày 01-09-2024."
+            ],
+            "context": [
+                "thông tin về khuyến mãi Quay Trở Lại Trường Học bắt đầu từ ngày 01-09-2024 kết thúc vào ngày 30-09-2024 với giá giảm 10%."
+            ]
+        },
+        {
+            "tag": "giày_puma_suede_classic+_màu_light_blue_có_đẹp_không",
+            "patterns": [
+                [
+                    "Giày Puma Suede Classic+ màu Light Blue có đẹp không",
+                    "Puma Suede Classic+ màu Light Blue đẹp không",
+                    "Puma Suede Classic+ màu Light Blue"
+                ]
+            ],
+            "responses": [
+                "Có, giày Puma Suede Classic+ màu Light Blue là một trong những màu được ưa chuộng."
+            ],
+            "context": [
+                "Thông tin về giày Puma Suede Classic+ màu Light Blue."
+            ]
+        },
+        {
+            "tag": "giày_puma_suede_classic+_màu_black_có_đẹp_không",
+            "patterns": [
+                [
+                    "Giày Puma Suede Classic+ màu Black có đẹp không",
+                    "Puma Suede Classic+ màu Black đẹp không",
+                    "Puma Suede Classic+ màu Black"
+                ]
+            ],
+            "responses": [
+                "Có, giày Puma Suede Classic+ màu Black là một trong những màu được ưa chuộng."
+            ],
+            "context": [
+                "Thông tin về giày Puma Suede Classic+ màu Black."
+            ]
+        },
+        {
+            "tag": "giày_puma_suede_classic+_màu_yellow_có_đẹp_không",
+            "patterns": [
+                [
+                    "Giày Puma Suede Classic+ màu Yellow có đẹp không",
+                    "Puma Suede Classic+ màu Yellow đẹp không",
+                    "Puma Suede Classic+ màu Yellow"
+                ]
+            ],
+            "responses": [
+                "Có, giày Puma Suede Classic+ màu Yellow là một trong những màu được ưa chuộng."
+            ],
+            "context": [
+                "Thông tin về giày Puma Suede Classic+ màu Yellow."
+            ]
+        },
+        {
+            "tag": "giày_puma_suede_classic+_màu_red_có_đẹp_không",
+            "patterns": [
+                [
+                    "Giày Puma Suede Classic+ màu Red có đẹp không",
+                    "Puma Suede Classic+ màu Red đẹp không",
+                    "Puma Suede Classic+ màu Red"
+                ]
+            ],
+            "responses": [
+                "Có, giày Puma Suede Classic+ màu Red là một trong những màu được ưa chuộng."
+            ],
+            "context": [
+                "Thông tin về giày Puma Suede Classic+ màu Red."
+            ]
+        },
+        {
+            "tag": "giày_puma_suede_classic+_màu_orange_có_đẹp_không",
+            "patterns": [
+                [
+                    "Giày Puma Suede Classic+ màu Orange có đẹp không",
+                    "Puma Suede Classic+ màu Orange đẹp không",
+                    "Puma Suede Classic+ màu Orange"
+                ]
+            ],
+            "responses": [
+                "Có, giày Puma Suede Classic+ màu Orange là một trong những màu được ưa chuộng."
+            ],
+            "context": [
+                "Thông tin về giày Puma Suede Classic+ màu Orange."
+            ]
+        },
+        {
+            "tag": "giày_puma_suede_classic+_màu_grey_có_đẹp_không",
+            "patterns": [
+                [
+                    "Giày Puma Suede Classic+ màu Grey có đẹp không",
+                    "Puma Suede Classic+ màu Grey đẹp không",
+                    "Puma Suede Classic+ màu Grey"
+                ]
+            ],
+            "responses": [
+                "Có, giày Puma Suede Classic+ màu Grey là một trong những màu được ưa chuộng."
+            ],
+            "context": [
+                "Thông tin về giày Puma Suede Classic+ màu Grey."
+            ]
+        },
+        {
+            "tag": "có_adidas_không",
+            "patterns": [
+                [
+                    "Có Adidas không",
+                    "Adidas"
+                ]
+            ],
+            "responses": [
+                "Có, chúng tôi có Adidas Superstar từ thương hiệu Adidas."
+            ],
+            "context": [
+                "Thông tin về Adidas Superstar từ thương hiệu Adidas."
+            ]
+        },
+        {
+            "tag": "bạn_có_adidas_superstar_không",
+            "patterns": [
+                [
+                    "Bạn có Adidas Superstar không",
+                    "có Adidas Superstar không",
+                    "Adidas Superstar có không",
+                    "Adidas Superstar"
+                ]
+            ],
+            "responses": [
+                "Có, chúng tôi có Adidas Superstar với màu Blue và size 43."
+            ],
+            "context": [
+                "Thông tin về Adidas Superstar với màu Blue và size 43."
+            ]
+        },
+        {
+            "tag": "giày_adidas_superstar_màu_black_có_đẹp_không",
+            "patterns": [
+                [
+                    "Giày Adidas Superstar màu Black có đẹp không",
+                    "Adidas Superstar màu Black đẹp không",
+                    "Adidas Superstar màu Black"
+                ]
+            ],
+            "responses": [
+                "Có, giày Adidas Superstar màu Black là một trong những màu được ưa chuộng."
+            ],
+            "context": [
+                "Thông tin về giày Adidas Superstar màu Black."
+            ]
+        },
+        {
+            "tag": "giày_adidas_superstar_giá_bao_nhiêu",
+            "patterns": [
+                [
+                    "giày Adidas Superstar giá bao nhiêu",
+                    "Adidas Superstar giá bao nhiêu",
+                    "Adidas Superstar giá"
+                ]
+            ],
+            "responses": [
+                "Giày Adidas Superstar giá 1800000.0 VNĐ."
+            ],
+            "context": [
+                "Thông tin về giày Adidas Superstar giá 1800000.0 VNĐ."
+            ]
+        },
+        {
+            "tag": "giày_adidas_superstar_màu_red_có_đẹp_không",
+            "patterns": [
+                [
+                    "Giày Adidas Superstar màu Red có đẹp không",
+                    "Adidas Superstar màu Red đẹp không",
+                    "Adidas Superstar màu Red"
+                ]
+            ],
+            "responses": [
+                "Có, giày Adidas Superstar màu Red là một trong những màu được ưa chuộng."
+            ],
+            "context": [
+                "Thông tin về giày Adidas Superstar màu Red."
+            ]
+        },
+        {
+            "tag": "giày_adidas_superstar_màu_grey_có_đẹp_không",
+            "patterns": [
+                [
+                    "Giày Adidas Superstar màu Grey có đẹp không",
+                    "Adidas Superstar màu Grey đẹp không",
+                    "Adidas Superstar màu Grey"
+                ]
+            ],
+            "responses": [
+                "Có, giày Adidas Superstar màu Grey là một trong những màu được ưa chuộng."
+            ],
+            "context": [
+                "Thông tin về giày Adidas Superstar màu Grey."
+            ]
+        },
+        {
+            "tag": "giày_adidas_superstar_màu_yellow_có_đẹp_không",
+            "patterns": [
+                [
+                    "Giày Adidas Superstar màu Yellow có đẹp không",
+                    "Adidas Superstar màu Yellow đẹp không",
+                    "Adidas Superstar màu Yellow"
+                ]
+            ],
+            "responses": [
+                "Có, giày Adidas Superstar màu Yellow là một trong những màu được ưa chuộng."
+            ],
+            "context": [
+                "Thông tin về giày Adidas Superstar màu Yellow."
+            ]
+        },
+        {
+            "tag": "giày_adidas_superstar_màu_light_blue_có_đẹp_không",
+            "patterns": [
+                [
+                    "Giày Adidas Superstar màu Light Blue có đẹp không",
+                    "Adidas Superstar màu Light Blue đẹp không",
+                    "Adidas Superstar màu Light Blue"
+                ]
+            ],
+            "responses": [
+                "Có, giày Adidas Superstar màu Light Blue là một trong những màu được ưa chuộng."
+            ],
+            "context": [
+                "Thông tin về giày Adidas Superstar màu Light Blue."
+            ]
+        },
+        {
+            "tag": "giày_adidas_superstar_màu_blue_có_đẹp_không",
+            "patterns": [
+                [
+                    "Giày Adidas Superstar màu Blue có đẹp không",
+                    "Adidas Superstar màu Blue đẹp không",
+                    "Adidas Superstar màu Blue"
+                ]
+            ],
+            "responses": [
+                "Có, giày Adidas Superstar màu Blue là một trong những màu được ưa chuộng."
+            ],
+            "context": [
+                "Thông tin về giày Adidas Superstar màu Blue."
+            ]
+        },
+        {
+            "tag": "giày_adidas_superstar_màu_orange_có_đẹp_không",
+            "patterns": [
+                [
+                    "Giày Adidas Superstar màu Orange có đẹp không",
+                    "Adidas Superstar màu Orange đẹp không",
+                    "Adidas Superstar màu Orange"
+                ]
+            ],
+            "responses": [
+                "Có, giày Adidas Superstar màu Orange là một trong những màu được ưa chuộng."
+            ],
+            "context": [
+                "Thông tin về giày Adidas Superstar màu Orange."
+            ]
+        }
+    ]
 }

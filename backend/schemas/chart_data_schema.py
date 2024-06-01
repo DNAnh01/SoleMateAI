@@ -1,6 +1,6 @@
 from typing import ClassVar
 
-import pydantic
+import pydantic  # type: ignore
 
 
 class ChartDataSchema(pydantic.BaseModel):
