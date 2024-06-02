@@ -13,6 +13,7 @@ const useAppStore = createWithEqualityFn(
             isLoadingAPI: false,
             isShowOverlay: false,
             products: [],
+            brands: [],
             conversationId: '',
             setIsAuthenticated: (isAuthenticated) => set((state) => ({ ...state, isAuthenticated })),
             setProfile: (profile) => set((state) => ({ ...state, profile })),
@@ -22,6 +23,7 @@ const useAppStore = createWithEqualityFn(
             setIsLoadingAPI: (isLoadingAPI) => set((state) => ({ ...state, isLoadingAPI })),
             setIsShowOverlay: (isShowOverlay) => set((state) => ({ ...state, isShowOverlay })),
             setProducts: (products) => set((state) => ({ ...state, products })),
+            setBrands: (brands) => set((state) => ({ ...state, brands })),
             setConversationId: (conversationId) => set((state) => ({ ...state, conversationId })),
             clearCurrentUser: () => set((state) => ({ ...state, profile: {} })),
             clearLocalStorage: () =>

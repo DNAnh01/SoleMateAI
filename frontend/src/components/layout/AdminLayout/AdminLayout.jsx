@@ -5,6 +5,10 @@ import SideBarAdmin from '~/components/sideBarAdmin/sideBarAdmin';
 import '../../../index.css';
 import styled from 'styled-components';
 import { DashboardProvider } from '~/contexts/dashboard.context';
+import useFetchData from '~/hooks/useFetchData';
+import brandAPI from '~/apis/brand.api';
+import useAppStore from '~/store';
+import { useEffect } from 'react';
 
 export const Wrapper = styled.div`
     height: 100vh;
@@ -28,6 +32,20 @@ export const PageContainer = styled.div`
 `;
 
 const AdminLayout = () => {
+    const { setBrands } = useAppStore();
+    const { data: brands } = useFetchData(brandAPI.getAll);
+    useEffect(() => {
+        if (brands) {
+            const formatedBrands = brands.map((item) => ({
+                value: item.id,
+                label: item.brand_name,
+                isActive: item.is_active,
+                logo: item.brand_logo,
+            }));
+            setBrands(formatedBrands);
+        }
+    }, [brands, setBrands]);
+
     return (
         <Wrapper>
             <SideBarAdmin />

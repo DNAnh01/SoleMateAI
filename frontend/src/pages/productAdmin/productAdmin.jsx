@@ -1,14 +1,16 @@
-import { Table, Modal, Select, Space, Input, InputNumber, Popconfirm } from 'antd';
-import { BRAND, STATUS, columns } from '~/data/data.product';
-import { MdEdit } from 'react-icons/md';
-import { IoClose } from 'react-icons/io5';
+import { Table, Popconfirm } from 'antd';
+import { columns } from '~/data/data.product';
 import { FaRegEdit } from 'react-icons/fa';
 import { MdDeleteOutline } from 'react-icons/md';
+import { IoMdAdd } from 'react-icons/io';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { colors } from '~/utils/common';
 import productApi from '~/apis/product.api';
 import useAppStore from '~/store';
-const { TextArea } = Input;
+import { toast } from 'react-toastify';
+
+import ProductModal from './components/productModal';
+import { DEFAULT_PRODUCT } from '~/constants/product';
 
 const formattedColors = colors.map((color) => ({
     value: color,
@@ -25,6 +27,24 @@ const ProductAdmin = () => {
 
     const [productList, setProductList] = useState([]);
     const timeoutRef = useRef();
+
+    const fetchProductList = useCallback(async () => {
+        try {
+            setIsLoadingAPI(true);
+            const res = await productApi.getAll();
+            if (res.status === 200) {
+                setProductList(res.data);
+                console.log(res.data.length);
+            } else {
+                setProductList([]);
+            }
+        } catch (err) {
+            console.log('product', err);
+        } finally {
+            setIsLoadingAPI(false);
+        }
+    }, [setIsLoadingAPI]);
+
     const handleOk = () => {
         setConfirmLoading(true);
         timeoutRef.current = setTimeout(() => {
@@ -44,6 +64,22 @@ const ProductAdmin = () => {
         setItemSelected(item);
         setIsOpenModalEdit(true);
     }, []);
+    const handeDeleteProduct = useCallback(
+        async (shoeId) => {
+            try {
+                const res = await productApi.delete(shoeId);
+                if (res.status === 200) {
+                    await toast.success('Xóa sản phẩm thành công', {
+                        autoClose: 3000,
+                    });
+                    fetchProductList();
+                }
+            } catch (err) {
+                console.log(err);
+            }
+        },
+        [fetchProductList],
+    );
 
     const convertColumns = useMemo(() => {
         return [
@@ -67,6 +103,7 @@ const ProductAdmin = () => {
                                 okText="Yes"
                                 cancelText="No"
                                 placement="bottomRight"
+                                onConfirm={() => handeDeleteProduct(record.id)}
                             >
                                 <button className="p-1 rounded text-red-600 hover:bg-red-600 hover:text-white">
                                     <MdDeleteOutline fontSize={18} />
@@ -77,7 +114,7 @@ const ProductAdmin = () => {
                 },
             },
         ];
-    }, [handleClickProductEdit]);
+    }, [handeDeleteProduct, handleClickProductEdit]);
 
     const handleImageChange = (e) => {
         const file = e.target.files[0];
@@ -93,6 +130,11 @@ const ProductAdmin = () => {
         setPreviewUrl();
     };
 
+    const handleCreateNewProduct = useCallback(() => {
+        setItemSelected(DEFAULT_PRODUCT);
+        setIsOpenModalEdit(true);
+    }, []);
+
     useEffect(() => {
         return () => {
             if (timeoutRef.current) {
@@ -102,161 +144,37 @@ const ProductAdmin = () => {
     }, []);
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                setIsLoadingAPI(true);
-                const res = await productApi.getAll();
-                if (res.status === 200) {
-                    setProductList(res.data);
-                } else {
-                    setProductList([]);
-                }
-            } catch (err) {
-                console.log('product', err);
-            } finally {
-                setIsLoadingAPI(false);
-            }
-        };
-        fetchData();
-    }, [setIsLoadingAPI]);
+        if (productList.length === 0) {
+            fetchProductList();
+        }
+    }, [fetchProductList, productList.length]);
     return (
         <>
             <div className="p-2">
+                <div className="flex justify-end py-2">
+                    <button
+                        onClick={handleCreateNewProduct}
+                        className="flex gap-2 items-center font-semibold bg-green-400 hover:bg-green-500 text-white px-4 py-2 rounded-lg"
+                    >
+                        <IoMdAdd />
+                        Create new product
+                    </button>
+                </div>
                 <Table dataSource={productList} columns={convertColumns} className="w-full" />
             </div>
-            <Modal
+            <ProductModal
                 title="Edit Product"
-                open={isOpenModalEdit}
-                onOk={handleOk}
+                handleOk={handleOk}
                 confirmLoading={confirmLoading}
-                onCancel={handleCancel}
-                className="min-w-[1000px]"
-            >
-                <div className="max-h-[420px] flex flex-col gap-4 overflow-y-auto min-h-[400px] py-4">
-                    <div className="flex">
-                        <div className="flex items-center gap-2 w-[30%]">
-                            <label className="font-semibold w-[30%]" htmlFor="brand">
-                                Brand:
-                            </label>
-                            <Select
-                                id="brand"
-                                name="brand"
-                                options={BRAND}
-                                className="w-[100px]"
-                                value={BRAND[0].value}
-                            />
-                        </div>
-                        <div className="flex items-center gap-2 w-[30%]">
-                            <label className="font-semibold w-[30%]" htmlFor="color">
-                                Color:
-                            </label>
-                            <Select
-                                id="color"
-                                name="color"
-                                options={formattedColors}
-                                className="w-[100px]"
-                                value={formattedColors[0].value}
-                                optionRender={(option) => (
-                                    <Space>
-                                        <span
-                                            className="w-[10px] h-[10px] rounded-full inline-block"
-                                            style={{
-                                                backgroundColor: option.value,
-                                            }}
-                                        ></span>
-                                    </Space>
-                                )}
-                            />
-                        </div>
-                        <div className="flex items-center gap-2 w-[30%]">
-                            <label className="font-semibold w-[30%]" htmlFor="active">
-                                Status:
-                            </label>
-                            <Select
-                                id="active"
-                                name="active"
-                                options={STATUS}
-                                className="w-[100px]"
-                                value={STATUS[0].value}
-                            />
-                        </div>
-                    </div>
-                    <div className="flex">
-                        <div className="flex items-center gap-2 w-[30%]">
-                            <label className="font-semibold w-[30%]" htmlFor="quantity">
-                                Quantity:
-                            </label>
-                            <InputNumber id="quantity" className="w-[100px]" min={1} max={1000} defaultValue={3} />
-                        </div>
-                        <div className="flex items-center gap-2 w-[30%]">
-                            <label className="font-semibold w-[30%]" htmlFor="displayPrice">
-                                Display:
-                            </label>
-                            <InputNumber id="displayPrice" className="w-[100px]" min={1} max={1000} defaultValue={3} />
-                        </div>
-                        <div className="flex items-center gap-2 w-[30%]">
-                            <label className="font-semibold w-[30%]" htmlFor="warehouse">
-                                Warehouse:
-                            </label>
-                            <InputNumber id="warehouse" className="w-[100px]" min={1} max={1000} defaultValue={3} />
-                        </div>
-                    </div>
-                    <div>
-                        <div className="flex items-center gap-2 w-[30%]">
-                            <label className="font-semibold w-[30%]" htmlFor="discount">
-                                Discount:
-                            </label>
-                            <InputNumber id="discount" className="w-[100px]" min={1} max={100} defaultValue={3} />
-                        </div>
-                    </div>
-                    <div className="flex">
-                        <div className="w-3/5">
-                            <label className="font-semibold" htmlFor="description">
-                                Description:
-                            </label>
-                            <TextArea
-                                id="description"
-                                name="description"
-                                type="text"
-                                value={itemSelected?.description}
-                                rows={4}
-                                className="mt-1"
-                            />
-                        </div>
-                        <div className="w-2/5 pl-4 relative">
-                            <img
-                                src={previewUrl ? previewUrl : itemSelected?.image_url}
-                                alt={itemSelected?.name}
-                                className="w-full max-h-[200px] object-contain rounded-xl"
-                            />
-                            {image ? (
-                                <button
-                                    onClick={handleClearImage}
-                                    className="absolute top-4 cursor-poiter right-4 p-1 rounded-full hover:bg-slate-300"
-                                >
-                                    <IoClose fontSize={20} />
-                                </button>
-                            ) : (
-                                <label
-                                    htmlFor="product-image"
-                                    className="absolute top-4 cursor-poiter right-4 p-1 rounded-full hover:bg-slate-300"
-                                >
-                                    <MdEdit fontSize={20} />
-                                </label>
-                            )}
-
-                            <input
-                                onChange={handleImageChange}
-                                type="file"
-                                id="product-image"
-                                className="hidden"
-                                name="image"
-                                accept="image/png, image/gif, image/jpeg"
-                            />
-                        </div>
-                    </div>
-                </div>
-            </Modal>
+                handleCancel={handleCancel}
+                isOpenModalEdit={isOpenModalEdit}
+                formattedColors={formattedColors}
+                itemSelected={itemSelected}
+                previewUrl={previewUrl}
+                handleClearImage={handleClearImage}
+                handleImageChange={handleImageChange}
+                image={image}
+            />
         </>
     );
 };

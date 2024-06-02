@@ -5,7 +5,7 @@ import configs from '~/configs';
 // Create an instance of axios outside the class
 const instance = axios.create({
     baseURL: configs.baseUrl.url,
-    timeout: 20000,
+    timeout: 200000,
 });
 
 // Interceptor logic that will be used in a functional component
