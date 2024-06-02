@@ -55,3 +55,12 @@ class AdminOrderService(ABC):
         current_user_role_permission: UserRolePermissionSchema,
     ) -> JSONResponse:
         pass
+    
+    @abstractmethod
+    def remove_order(
+        self,
+        db: Session,
+        order_id: uuid.UUID,
+        current_user_role_permission: UserRolePermissionSchema,
+    ) -> JSONResponse:
+        pass

@@ -51,7 +51,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"shoe_id\": \"5594f253-754c-4c98-b5b8-daa909b746a2\",\r\n    \"quantity\": 5\r\n}",
+					"raw": "{\r\n    \"shoe_id\": \"d4c819e1-797d-4076-94de-51ccbb3a6946\",\r\n    \"quantity\": 8\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -103,6 +103,43 @@
 					"path": [
 						"cart",
 						"remove-cart-item"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "remove multiple cart items",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"shoe_ids\": [\r\n        \"8f779fed-db4b-41ca-9457-1744d13fa768\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/cart/remove-multiple-cart-items",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"cart",
+						"remove-multiple-cart-items"
 					]
 				}
 			},

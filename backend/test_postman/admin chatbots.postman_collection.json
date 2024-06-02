@@ -29,7 +29,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZWE2MWU5M2UtMWI0MC00NzQ3LTk4YjUtYWY1NmQxZDZkNGRlIiwiZXhwIjoxNzE0NzMzODkxfQ.pJ4rOmC6IsDHDi5LK9tkapogbvuRZhBx3YYDYfEA_4g",
+							"value": "{{JWT}}",
 							"type": "string"
 						}
 					]
@@ -37,13 +37,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{URL}}/chatbot/id=beb94816-2094-445c-bbf8-c25029911f10",
+					"raw": "{{URL}}/chatbot/id=ed3e18f9-c4e6-4474-885b-70340c9e54bb",
 					"host": [
 						"{{URL}}"
 					],
 					"path": [
 						"chatbot",
-						"id=beb94816-2094-445c-bbf8-c25029911f10"
+						"id=ed3e18f9-c4e6-4474-885b-70340c9e54bb"
 					]
 				},
 				"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."

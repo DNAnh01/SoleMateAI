@@ -12,13 +12,19 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{URL}}/brand/get-all",
+					"raw": "{{URL}}/brand/get-all?filter={\"brand_name__like\":\"%Reebok%\"}",
 					"host": [
 						"{{URL}}"
 					],
 					"path": [
 						"brand",
 						"get-all"
+					],
+					"query": [
+						{
+							"key": "filter",
+							"value": "{\"brand_name__like\":\"%Reebok%\"}"
+						}
 					]
 				}
 			},

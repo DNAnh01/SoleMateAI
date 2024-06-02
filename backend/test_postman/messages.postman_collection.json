@@ -8,7 +8,7 @@
 	},
 	"item": [
 		{
-			"name": "create",
+			"name": "create with auth",
 			"event": [
 				{
 					"listen": "test",
@@ -39,7 +39,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"message\": \"tôi muốn biết về một đôi giày Nike\",\n    \"conversation_id\": \"001dad0d-989e-409d-bfb0-b23073b2ffc3\"\n}",
+					"raw": "{\n    \"message\": \"tôi muốn tìm một đôi giày Nike\",\n    \"conversation_id\": \"b085e079-2d09-4af3-9238-788c4b456266\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -47,16 +47,64 @@
 					}
 				},
 				"url": {
-					"raw": "{{URL}}/message/",
+					"raw": "{{URL}}/message/with-auth",
 					"host": [
 						"{{URL}}"
 					],
 					"path": [
 						"message",
-						""
+						"with-auth"
 					]
 				},
 				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+			},
+			"response": []
+		},
+		{
+			"name": "get all by conversation id",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/message/conversation-id=e670f009-26c2-4497-b189-75f5a78defec",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"message",
+						"conversation-id=e670f009-26c2-4497-b189-75f5a78defec"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create without auth",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"message\": \"tôi muốn tìm một đôi giày Nike\",\r\n    \"conversation_id\": \"26a2213d-0401-423b-84de-9e5b85b0a032\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/message/without-auth",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"message",
+						"without-auth"
+					]
+				}
 			},
 			"response": []
 		}

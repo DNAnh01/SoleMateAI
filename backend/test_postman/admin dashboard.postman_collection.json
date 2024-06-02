@@ -1,13 +1,13 @@
 {
 	"info": {
-		"_postman_id": "a0c9258c-6b94-46ea-9314-d1dc6d710507",
-		"name": "conversations",
+		"_postman_id": "17511a34-461c-4276-9648-dc3338485d78",
+		"name": "admin dashboard",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "26335300"
 	},
 	"item": [
 		{
-			"name": "create with auth",
+			"name": "charts",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -22,31 +22,45 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{URL}}/conversation/",
+					"raw": "{{URL}}/admin-dashboard/chart/month/2024-04",
 					"host": [
 						"{{URL}}"
 					],
 					"path": [
-						"conversation",
-						""
+						"admin-dashboard",
+						"chart",
+						"month",
+						"2024-04"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "create without auth",
+			"name": "totals",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT}}",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{URL}}/conversation/without-auth",
+					"raw": "{{URL}}/admin-dashboard/total/month/2024-05",
 					"host": [
 						"{{URL}}"
 					],
 					"path": [
-						"conversation",
-						"without-auth"
+						"admin-dashboard",
+						"total",
+						"month",
+						"2024-05"
 					]
 				}
 			},

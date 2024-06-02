@@ -22,13 +22,19 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{URL}}/admin-order/get-all",
+					"raw": "{{URL}}/admin-order/get-all?filter={\"status__like\":\"%ORDER-PLACED%\", \"order_date__like\":\"2024-06-02%\"}",
 					"host": [
 						"{{URL}}"
 					],
 					"path": [
 						"admin-order",
 						"get-all"
+					],
+					"query": [
+						{
+							"key": "filter",
+							"value": "{\"status__like\":\"%ORDER-PLACED%\", \"order_date__like\":\"2024-06-02%\"}"
+						}
 					]
 				}
 			},
@@ -50,13 +56,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{URL}}/admin-order/order-id=3aff75ac-d78d-4ae4-a7d0-741cc1817237",
+					"raw": "{{URL}}/admin-order/order-id=983c8e67-6c24-4b3c-a64a-13fb8c837f1e",
 					"host": [
 						"{{URL}}"
 					],
 					"path": [
 						"admin-order",
-						"order-id=3aff75ac-d78d-4ae4-a7d0-741cc1817237"
+						"order-id=983c8e67-6c24-4b3c-a64a-13fb8c837f1e"
 					]
 				}
 			},
@@ -115,6 +121,35 @@
 						"admin-order",
 						"cancel",
 						"order-id=3aff75ac-d78d-4ae4-a7d0-741cc1817237"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "remove order",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/admin-order/remove/order-id=575537ea-aae2-42a0-9bc2-0844cd4c9e20",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"admin-order",
+						"remove",
+						"order-id=575537ea-aae2-42a0-9bc2-0844cd4c9e20"
 					]
 				}
 			},

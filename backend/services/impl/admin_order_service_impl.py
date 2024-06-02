@@ -434,3 +434,66 @@ class AdminOrderServiceImpl(AdminOrderService):
                 status_code=500,
                 content={"status": 500, "message": "Internal server error"},
             )
+            
+    def remove_order(
+        self,
+        db: Session,
+        order_id: uuid.UUID,
+        current_user_role_permission: UserRolePermissionSchema,
+    ) -> JSONResponse:
+        if 'delete_order' not in current_user_role_permission.u_list_permission_name:
+            logger.exception(
+                f"Exception in {__name__}.{self.__class__.__name__}.remove_order: User does not have permission to delete order"
+            )
+            return JSONResponse(
+                status_code=403,
+                content={
+                    "status": 403,
+                    "message": "User does not have permission to delete order",
+                },
+            )
+        if "admin" != current_user_role_permission.u_role_name:
+            logger.exception(
+                f"Exception in {__name__}.{self.__class__.__name__}.remove_order: User does not have permission to delete order"
+            )
+            return JSONResponse(
+                status_code=403,
+                content={
+                    "status": 403,
+                    "message": "User does not have permission to delete order",
+                },
+            )
+        try:
+            order_found = self.__crud_order.get(db=db, id=order_id)
+            if order_found is None:
+                logger.exception(
+                    f"Exception in {__name__}.{self.__class__.__name__}.remove_order: Order not found"
+                )
+                return JSONResponse(
+                    status_code=404,
+                    content={"status": 404, "message": "Order not found"},
+                )
+            deleted_order = self.__crud_order.remove(db=db, id=order_id)
+            if deleted_order is None:
+                logger.exception(
+                    f"Exception in {__name__}.{self.__class__.__name__}.remove_order: Error occurred while deleting order"
+                )
+                return JSONResponse(
+                    status_code=500,
+                    content={
+                        "status": 500,
+                        "message": "Error occurred while deleting order",
+                    },
+                )
+            return JSONResponse(
+                status_code=200,
+                content={"status": 200, "message": "Order deleted successfully"},
+            )
+        except Exception as e:
+            logger.exception(
+                f"Exception in {__name__}.{self.__class__.__name__}.remove_order: {str(e)}"
+            )
+            return JSONResponse(
+                status_code=500,
+                content={"status": 500, "message": "Internal server error"},
+            )

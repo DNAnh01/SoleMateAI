@@ -32,13 +32,13 @@
 					]
 				},
 				"url": {
-					"raw": "{{URL}}/knowledge-base/chatbot-id=a2048445-16f1-4192-9270-24dbb62a2561",
+					"raw": "{{URL}}/knowledge-base/chatbot-id=dbe35711-8647-4c20-8874-e644eab7bb56",
 					"host": [
 						"{{URL}}"
 					],
 					"path": [
 						"knowledge-base",
-						"chatbot-id=a2048445-16f1-4192-9270-24dbb62a2561"
+						"chatbot-id=dbe35711-8647-4c20-8874-e644eab7bb56"
 					]
 				}
 			},
@@ -60,13 +60,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{URL}}/knowledge-base/chatbot-id=a2048445-16f1-4192-9270-24dbb62a2561/get-all",
+					"raw": "{{URL}}/knowledge-base/chatbot-id=9678354c-6963-43c7-9421-c7aaf39a8ca7/get-all",
 					"host": [
 						"{{URL}}"
 					],
 					"path": [
 						"knowledge-base",
-						"chatbot-id=a2048445-16f1-4192-9270-24dbb62a2561",
+						"chatbot-id=9678354c-6963-43c7-9421-c7aaf39a8ca7",
 						"get-all"
 					]
 				}

@@ -110,7 +110,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{URL}}/shoe/get-all?filter={\"shoe_name__like\":\"%%\"}&limit=1",
+					"raw": "{{URL}}/shoe/get-all?filter={\"shoe_name__like\":\"%Nike%\"}&limit=10",
 					"host": [
 						"{{URL}}"
 					],
@@ -121,11 +121,11 @@
 					"query": [
 						{
 							"key": "filter",
-							"value": "{\"shoe_name__like\":\"%%\"}"
+							"value": "{\"shoe_name__like\":\"%Nike%\"}"
 						},
 						{
 							"key": "limit",
-							"value": "1"
+							"value": "10"
 						}
 					]
 				}
