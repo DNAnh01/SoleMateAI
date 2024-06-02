@@ -10,6 +10,7 @@ import conversationApi from '~/apis/conversation.api';
 import { Link } from 'react-router-dom';
 import productApi from '~/apis/product.api';
 import configs from '~/configs';
+import { extractProductId } from '~/utils/helper';
 
 const shakeAnimation = keyframes`
     0% { transform: rotate(0deg); }
@@ -337,7 +338,9 @@ const Chatbot = () => {
             messages = await Promise.all(
                 messages.map(async (message) => {
                     if (message.message_text.includes('http')) {
-                        const productId = message.message_text.split('http')[1].split('/').pop();
+                        // [{frontend_url}/product/_shoe_id]
+
+                        const productId = extractProductId(message);
                         try {
                             const responseProduct = await productApi.getById(productId);
                             message.image_url = responseProduct.data.image_url;
@@ -403,7 +406,7 @@ const Chatbot = () => {
             };
 
             if (response.data.message_text.includes('http')) {
-                const productId = response.data.message_text.split('http')[1].split('/').pop();
+                const productId = extractProductId(response.data);
                 try {
                     const responseProduct = await productApi.getById(productId);
                     botMessage.image_url = responseProduct.data.image_url;
@@ -445,11 +448,9 @@ const Chatbot = () => {
             )}
             {message.message_text.includes('http') ? (
                 <p>
-                    {message.message_text.split('http')[0]}
+                    {message.message_text.split('http')[0].split('[')[0]}
                     <br />
-                    <Link
-                        to={`${configs.roures.productList}/${message.message_text.split('http')[1].split('/').pop()}`}
-                    >
+                    <Link to={`${configs.roures.productList}/${extractProductId(message)}`}>
                         <Image className="product-image" src={message.image_url || images.noImage} alt="Product" />
                     </Link>
                 </p>
