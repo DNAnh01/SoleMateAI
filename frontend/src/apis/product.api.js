@@ -11,5 +11,8 @@ const productApi = {
     async getById(shoeId) {
         return http.get(`${configs.baseUrl.product.getById}${shoeId}`);
     },
+    async delete(shoeId) {
+        return http.delete(`${configs.baseUrl.product.delete}${shoeId}`);
+    },
 };
 export default productApi;

@@ -13,6 +13,7 @@ const baseUrl = {
     product: {
         getAll: '/shoe/get-all',
         getById: '/shoe/shoe-id=',
+        delete: '/shoe/shoe-id=',
     },
     conversation: {
         createWithAuth: '/conversation/with-auth',
