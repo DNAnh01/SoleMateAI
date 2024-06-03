@@ -552,7 +552,7 @@ def init_db():
                     model="gpt-4",
                     is_public=True,
                     description="Chatbot mặc định khi khởi chạy dự án.",
-                    temperature=0.5,
+                    temperature=0.2,
                     max_token=100,
                     is_default=True,
                     prompt=PromptDefault.PROMPT_DEFAULT.value,

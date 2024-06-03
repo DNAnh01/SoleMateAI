@@ -77,7 +77,7 @@ class CRUDKnowledgeBase(
     CRUDBase[KnowledgeBase, KnowledgeBaseCreateSchema, KnowledgeBaseUpdateSchema]
 ):
     def get_default_kn_chatbot(
-        self, db: Session, limit: int = 1
+        self, db: Session, limit: int
     ) -> List[DefaultKNChatbotSchema]:
         result_proxy = db.execute(text(GET_DEFAULT_KN_CHATBOT), {"limit": limit})
         column_names = result_proxy.keys()

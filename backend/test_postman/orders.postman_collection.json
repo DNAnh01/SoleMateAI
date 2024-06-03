@@ -23,7 +23,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"street\": \"Thanh Binh\",\r\n  \"city\": \"Quảng Nam\"\r\n}",
+					"raw": "{\r\n  \"province\": \"Đà Nẵng\",\r\n  \"district\": \"Hải Châu\",\r\n  \"ward\": \"Lê Duẩn\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -59,7 +59,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{URL}}/order/get-all?filter={\"status__like\":\"%%\"}&order_by={\"created_at\":\"asc\"}",
+					"raw": "{{URL}}/order/get-all?filter={\"status__like\":\"%%\",\"order_date__like\":\"2024-05-29%\"}",
 					"host": [
 						"{{URL}}"
 					],
@@ -70,11 +70,7 @@
 					"query": [
 						{
 							"key": "filter",
-							"value": "{\"status__like\":\"%%\"}"
-						},
-						{
-							"key": "order_by",
-							"value": "{\"created_at\":\"asc\"}"
+							"value": "{\"status__like\":\"%%\",\"order_date__like\":\"2024-05-29%\"}"
 						}
 					]
 				}
@@ -97,13 +93,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{URL}}/order/order-id=5afe7ecb-5b47-4cff-a795-1ade4e1a2e91",
+					"raw": "{{URL}}/order/order-id=2f6644ad-6db7-4b0c-bbef-aaca3ad26179",
 					"host": [
 						"{{URL}}"
 					],
 					"path": [
 						"order",
-						"order-id=5afe7ecb-5b47-4cff-a795-1ade4e1a2e91"
+						"order-id=2f6644ad-6db7-4b0c-bbef-aaca3ad26179"
 					]
 				}
 			},
@@ -125,14 +121,14 @@
 				"method": "PATCH",
 				"header": [],
 				"url": {
-					"raw": "{{URL}}/order/cancel/order-id=5afe7ecb-5b47-4cff-a795-1ade4e1a2e91",
+					"raw": "{{URL}}/order/cancel/order-id=0aa792db-bb3b-44e7-9254-22ab78022534",
 					"host": [
 						"{{URL}}"
 					],
 					"path": [
 						"order",
 						"cancel",
-						"order-id=5afe7ecb-5b47-4cff-a795-1ade4e1a2e91"
+						"order-id=0aa792db-bb3b-44e7-9254-22ab78022534"
 					]
 				}
 			},

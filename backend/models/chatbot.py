@@ -18,7 +18,7 @@ class Chatbot(Base):
 
     is_public = Column(Boolean, default=False)
     description = Column(String, nullable=True, default="description not provided")
-    temperature = Column(Double, default=0.5)
+    temperature = Column(Double, default=0.2)
     max_token = Column(Integer, default=100)
     is_default = Column(Boolean, default=True)
     prompt = Column(

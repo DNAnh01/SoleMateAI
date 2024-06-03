@@ -9,7 +9,11 @@ class PromptDefault(BaseEnum):
         -Bất kỳ tin nhắn nào bạn nhận được đều liên quan đến điều đó. 
         -Vui lòng trả lời bất kỳ câu hỏi và yêu cầu nào theo nội dung được cung cấp. 
         -Nếu hỏi về giày mà có các sản phẩm tồn tại trong dữ liệu được cung cấp thì trả về thông tin của giày đó.
-        -Lưu ý nếu có tin nhắn hỏi về giày mà bạn có thể tìm được trong nội dung cung cấp trước đó các (_shoe_name, _brand_name, _size_number, _color_name, _discounted_price, _promotion_name, _promotion_start_date, _promotion_end_date, _promotion_discount_percent, _shoe_id) là giá trị thật được cung cấp ở trên và hãy "LUÔN LUÔN" trả về "ĐỊNH DẠNG" như sau nếu không có thì trả lời không có dữ liệu.:
+        -Lưu ý nếu có tin nhắn hỏi về giày mà bạn có thể tìm được trong nội dung cung cấp trước đó và "TRẢ VỀ MỘT ĐÔI DUY NHẤT" các hãy "LUÔN LUÔN" trả về "ĐỊNH DẠNG" như sau nếu không có thì trả lời không có dữ liệu.
+        -Lưu ý link giày sẽ trả về "PHẢI" có định dạng sau và phía sau link không có text nào cả ví dụ dấu [http://localhost:3000/product/22f0893e-8545-4a8b-a3b5-ffed9f338373]
+        
+        
+        
             Thông tin về giày: 
                 Tên giày: _shoe_name,	
                 Thương hiệu: _brand_name,	
@@ -22,7 +26,7 @@ class PromptDefault(BaseEnum):
                 Phần trăm khuyến mãi: _promotion_discount_percent
                 
                 
-            {frontend_url}/product/_shoe_id
+            [{frontend_url}/product/_shoe_id]
         """.format(
         frontend_url=settings.REDIRECT_FRONTEND_URL
     )

@@ -15,13 +15,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{URL}}/shoe/shoe-id=78028fc5-d83e-450c-b5d4-e15838f5ede6",
+					"raw": "{{URL}}/shoe/shoe-id=fd2b2066-210c-4482-9918-4b202b139c37",
 					"host": [
 						"{{URL}}"
 					],
 					"path": [
 						"shoe",
-						"shoe-id=78028fc5-d83e-450c-b5d4-e15838f5ede6"
+						"shoe-id=fd2b2066-210c-4482-9918-4b202b139c37"
 					]
 				}
 			},
@@ -36,7 +36,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{URL}}/shoe/get-all?filter={\"shoe_name__like\":\"%%\"}&limit=1",
+					"raw": "{{URL}}/shoe/get-all?filter={\"updated_at__like\":\"\"}&limit=5",
 					"host": [
 						"{{URL}}"
 					],
@@ -47,11 +47,11 @@
 					"query": [
 						{
 							"key": "filter",
-							"value": "{\"shoe_name__like\":\"%%\"}"
+							"value": "{\"updated_at__like\":\"\"}"
 						},
 						{
 							"key": "limit",
-							"value": "1"
+							"value": "5"
 						}
 					]
 				}

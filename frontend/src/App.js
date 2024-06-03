@@ -45,7 +45,12 @@ import PaymentFailure from './pages/checkout/PaymentFailurePage';
 import DashboardAdmin from './pages/dashboardAdmin';
 
 function App() {
-    const { accessToken, setAccessToken, setProducts, profile, setIsLoadingAPI } = useAppStore();
+    const { accessToken, setAccessToken, setProducts, profile, clearLocalStorage, setIsLoadingAPI } = useAppStore();
+
+    useEffect(() => {
+        clearLocalStorage();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     // Setup axios interceptors
     useAxiosInterceptors(accessToken, setAccessToken);

@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "d86dae33-4327-4477-a8dd-23015db7d6b4",
-		"name": "brands",
+		"_postman_id": "fdb255d5-81c8-4e76-89df-6613df7741ce",
+		"name": "colors",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "26335300"
 	},
@@ -12,19 +12,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{URL}}/brand/get-all?filter={\"brand_name__like\":\"%Reebok%\"}",
+					"raw": "{{URL}}/color/get-all",
 					"host": [
 						"{{URL}}"
 					],
 					"path": [
-						"brand",
+						"color",
 						"get-all"
-					],
-					"query": [
-						{
-							"key": "filter",
-							"value": "{\"brand_name__like\":\"%Reebok%\"}"
-						}
 					]
 				}
 			},

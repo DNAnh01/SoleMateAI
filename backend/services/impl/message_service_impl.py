@@ -223,6 +223,7 @@ class MessageServiceImpl(MessageService):
             default_kn_chatbots = self.__crud_knowledge_base.get_default_kn_chatbot(
                 db=db, limit=2
             )
+            logger.warning(f"default_kn_chatbots: {default_kn_chatbots}")
             # logger.error(f"default_kn_chatbots: {default_kn_chatbots.__dict__}")
             # logger.info(f"default_kn_chatbots: {[default_kn_chatbot.__dict__ for default_kn_chatbot in default_kn_chatbots]}")
             logger.error(f"len(default_kn_chatbots): {len(default_kn_chatbots)}")
@@ -257,7 +258,7 @@ class MessageServiceImpl(MessageService):
             response = self.__client_openai.chat.completions.create(
                 model=chatbot_found.model,
                 messages=temp_knowledge_base,
-                # temperature=chatbot_found.temperature,
+                temperature=chatbot_found.temperature,
                 # max_tokens=chatbot_found.max_token,
             )
             response_rs = response.choices[0].message.content

@@ -70,7 +70,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"email\": \"admin@gmail.com\",\n  \"password\": \"admin\"\n}",
+					"raw": "{\n  \"email\": \"admin@gmail.com\",\n  \"password\": \"admin123\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -98,7 +98,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"email\": \"donguyenanh2k1@gmail.com\",\r\n  \"password\": \"donguyenanh123\"\r\n}",
+					"raw": "{\r\n  \"email\": \"donguyenanh2k1@gmail.com\",\r\n  \"password\": \"donguyenanh2k1\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"

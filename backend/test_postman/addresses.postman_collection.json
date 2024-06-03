@@ -51,7 +51,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"street\": \"string 2\",\r\n  \"city\": \"string 2\"\r\n}",
+					"raw": "{\r\n    \"province\": \"Thành phố Đà Nẵng\",\r\n    \"district\": \"Quận Liên Chiểu\",\r\n    \"ward\": \"Phường Hòa Khánh Bắc\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"

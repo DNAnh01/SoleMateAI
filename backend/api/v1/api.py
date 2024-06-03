@@ -9,6 +9,7 @@ from backend.api.v1.endpoints import (
     brand,
     cart,
     chatbot,
+    color,
     conversation,
     knowledge_base,
     message,
@@ -45,3 +46,4 @@ api_router.include_router(
 )
 
 api_router.include_router(payment.router, prefix="/payment", tags=["payments"])
+api_router.include_router(color.router, prefix="/color", tags=["colors"])
