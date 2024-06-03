@@ -102,7 +102,8 @@ def deliver_order(
         order_id=order_id,
         current_user_role_permission=current_user_role_permission,
     )
-    
+
+
 @router.delete("/remove/order-id={order_id}", status_code=status.HTTP_200_OK)
 def remove_order(
     order_id: str,

@@ -55,7 +55,7 @@ class AdminOrderService(ABC):
         current_user_role_permission: UserRolePermissionSchema,
     ) -> JSONResponse:
         pass
-    
+
     @abstractmethod
     def remove_order(
         self,

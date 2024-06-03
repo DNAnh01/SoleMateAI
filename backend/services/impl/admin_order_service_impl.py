@@ -434,14 +434,14 @@ class AdminOrderServiceImpl(AdminOrderService):
                 status_code=500,
                 content={"status": 500, "message": "Internal server error"},
             )
-            
+
     def remove_order(
         self,
         db: Session,
         order_id: uuid.UUID,
         current_user_role_permission: UserRolePermissionSchema,
     ) -> JSONResponse:
-        if 'delete_order' not in current_user_role_permission.u_list_permission_name:
+        if "delete_order" not in current_user_role_permission.u_list_permission_name:
             logger.exception(
                 f"Exception in {__name__}.{self.__class__.__name__}.remove_order: User does not have permission to delete order"
             )

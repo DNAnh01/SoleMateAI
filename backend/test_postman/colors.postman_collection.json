@@ -1,0 +1,28 @@
+{
+	"info": {
+		"_postman_id": "fdb255d5-81c8-4e76-89df-6613df7741ce",
+		"name": "colors",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26335300"
+	},
+	"item": [
+		{
+			"name": "get all",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/color/get-all",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"color",
+						"get-all"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
