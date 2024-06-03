@@ -11,6 +11,12 @@ const productApi = {
     async getById(shoeId) {
         return http.get(`${configs.baseUrl.product.getById}${shoeId}`);
     },
+    async createNewProduct(params) {
+        return http.post(`${configs.baseUrl.product.create}`, params);
+    },
+    async updateProduct(shoeID, params) {
+        return http.patch(`${configs.baseUrl.product.update}${shoeID}`, params);
+    },
     async delete(shoeId) {
         return http.delete(`${configs.baseUrl.product.delete}${shoeId}`);
     },

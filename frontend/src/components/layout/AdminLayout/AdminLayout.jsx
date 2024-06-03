@@ -37,7 +37,8 @@ const AdminLayout = () => {
     useEffect(() => {
         if (brands) {
             const formatedBrands = brands.map((item) => ({
-                value: item.id,
+                value: item.brand_name,
+                id: item.id,
                 label: item.brand_name,
                 isActive: item.is_active,
                 logo: item.brand_logo,

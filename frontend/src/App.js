@@ -45,7 +45,7 @@ import PaymentFailure from './pages/checkout/PaymentFailurePage';
 import DashboardAdmin from './pages/dashboardAdmin';
 
 function App() {
-    const { accessToken, setAccessToken, setProducts, profile } = useAppStore();
+    const { accessToken, setAccessToken, setProducts, profile, setIsLoadingAPI } = useAppStore();
 
     // Setup axios interceptors
     useAxiosInterceptors(accessToken, setAccessToken);
@@ -59,10 +59,11 @@ function App() {
         const fetchProducts = async () => {
             const result = await productApi.getAll();
             setProducts(result.data);
+            setIsLoadingAPI(false);
         };
 
         fetchProducts();
-    }, [setProducts]);
+    }, [setIsLoadingAPI, setProducts]);
 
     // Fetch promotions on mount
     useEffect(() => {
@@ -70,12 +71,14 @@ function App() {
             try {
                 const response = await promotionApi.getAllPromotion();
                 setPromotions(response.data);
+                setIsLoadingAPI(false);
             } catch (error) {
                 console.log('error', error);
+                setIsLoadingAPI(false);
             }
         };
         fetchPromotions();
-    }, [setPromotions]);
+    }, [setIsLoadingAPI, setPromotions]);
 
     // Fetch carts on mount
     useEffect(() => {

@@ -14,6 +14,8 @@ const baseUrl = {
         getAll: '/shoe/get-all',
         getById: '/shoe/shoe-id=',
         delete: '/shoe/shoe-id=',
+        create: '/shoe/',
+        update: '/shoe/shoe-id=',
     },
     conversation: {
         createWithAuth: '/conversation/with-auth',
