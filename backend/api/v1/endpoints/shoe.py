@@ -13,6 +13,7 @@ from backend.schemas.shoe_schema import (
     ShoeOutInProductDetailPageSchema,
     ShoeOutSchema,
     ShoeUpdateSchema,
+    AdminUpdateShoeSchema,
 )
 from backend.schemas.user_role_permission_schema import UserRolePermissionSchema
 from backend.services.abc.shoe_service import ShoeService
@@ -100,7 +101,7 @@ def get_all_shoes(
 )
 def update_shoe(
     shoe_id: str,
-    shoe_data: ShoeUpdateSchema,
+    shoe_data: AdminUpdateShoeSchema,
     current_user_role_permission: UserRolePermissionSchema = Depends(
         oauth2.get_current_user_role_permission
     ),
