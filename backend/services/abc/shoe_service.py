@@ -5,12 +5,11 @@ from typing import List, Optional
 from sqlalchemy.orm import Session
 
 from backend.schemas.shoe_schema import (
+    AdminUpdateShoeSchema,
     ShoeCreateSchema,
     ShoeOutInHomePageSchema,
     ShoeOutInProductDetailPageSchema,
     ShoeOutSchema,
-    ShoeUpdateSchema,
-    AdminUpdateShoeSchema
 )
 from backend.schemas.user_role_permission_schema import UserRolePermissionSchema
 

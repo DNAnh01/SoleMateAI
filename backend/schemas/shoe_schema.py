@@ -24,7 +24,6 @@ class ShoeCreateSchema(pydantic.BaseModel):
     discounted_price: Optional[float] = None
 
 
-
 """
 {
     is_active: true,
@@ -49,6 +48,7 @@ class ShoeCreateSchema(pydantic.BaseModel):
 }
 """
 
+
 class AdminUpdateShoeSchema(pydantic.BaseModel):
     id: uuid.UUID
     brand: BrandCreateSchema
@@ -66,6 +66,7 @@ class AdminUpdateShoeSchema(pydantic.BaseModel):
     created_at: str
     updated_at: str
     deleted_at: Optional[str] = None
+
 
 class ShoeUpdateSchema(BaseSchema):
     brand: Optional[BrandCreateSchema] = None

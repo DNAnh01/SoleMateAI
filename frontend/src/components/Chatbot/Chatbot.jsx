@@ -387,10 +387,15 @@ const Chatbot = () => {
         try {
             let response;
             if (isAuthenticated) {
+                // console.log('send mess: >>>>>', {
+                //     message: userMessage,
+                //     conversation_id: conversationId,
+                // });
                 response = await messageApi.createMessageWithAuth({
-                    message: userMessage,
+                    message: userMessage.trim(),
                     conversation_id: conversationId,
                 });
+                // console.log('receive mess: >>>>>', response.data);
             } else {
                 response = await messageApi.createMessageWithoutAuth({
                     message: userMessage,

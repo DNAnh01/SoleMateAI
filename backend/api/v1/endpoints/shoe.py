@@ -8,12 +8,11 @@ from backend.common import parameters
 from backend.common.logger import setup_logger
 from backend.core import oauth2
 from backend.schemas.shoe_schema import (
+    AdminUpdateShoeSchema,
     ShoeCreateSchema,
     ShoeOutInHomePageSchema,
     ShoeOutInProductDetailPageSchema,
     ShoeOutSchema,
-    ShoeUpdateSchema,
-    AdminUpdateShoeSchema,
 )
 from backend.schemas.user_role_permission_schema import UserRolePermissionSchema
 from backend.services.abc.shoe_service import ShoeService

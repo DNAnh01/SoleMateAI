@@ -16,13 +16,12 @@ from backend.schemas.brand_schema import BrandCreateSchema, BrandInDBSchema
 from backend.schemas.color_schema import ColorCreateSchema, ColorInDBSchema
 from backend.schemas.review_schema import ReviewOutInProductDetailPageSchema
 from backend.schemas.shoe_schema import (
+    AdminUpdateShoeSchema,
     ShoeCreateSchema,
     ShoeInDBSchema,
     ShoeOutInHomePageSchema,
     ShoeOutInProductDetailPageSchema,
     ShoeOutSchema,
-    ShoeUpdateSchema,
-    AdminUpdateShoeSchema,
 )
 from backend.schemas.size_schema import SizeCreateSchema, SizeInDBSchema
 from backend.schemas.user_role_permission_schema import UserRolePermissionSchema
@@ -392,8 +391,8 @@ class ShoeServiceImpl(ShoeService):
                     status_code=404,
                     content={"status": 404, "message": "Shoe not found"},
                 )
-            
-            shoe_found.id = shoe.id    
+
+            shoe_found.id = shoe.id
             shoe_found.brand.brand_name = shoe.brand.brand_name
             shoe_found.brand.brand_logo = shoe.brand.brand_logo
             shoe_found.size.size_number = shoe.size.size_number
@@ -435,7 +434,7 @@ class ShoeServiceImpl(ShoeService):
             #     shoe_found.warehouse_price = shoe.warehouse_price
             # if shoe.discounted_price:
             #     shoe_found.discounted_price = shoe.discounted_price
-                
+
             # if shoe.is_active:
             #     shoe_found.is_active = shoe.is_active
             # if shoe.deleted_at:
@@ -444,7 +443,7 @@ class ShoeServiceImpl(ShoeService):
             #     shoe_found.created_at = shoe.created_at
             # if shoe.updated_at:
             #     shoe_found.updated_at = shoe.updated_at
-            
+
             # shoe_found.updated_at = datetime.now()
 
             db.commit()

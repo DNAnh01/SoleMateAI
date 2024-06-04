@@ -542,20 +542,36 @@ def init_db():
             user_found = crud_user.get_one_ignore_deleted_and_inactive(
                 db=session, filter={"email": "admin@gmail.com"}
             )
-            created_chatbot = crud_chatbot.create(
+            created_chatbot_gpt4 = crud_chatbot.create(
                 db=session,
                 obj_in=ChatbotInDBSchema(
                     id=uuid.uuid4(),
                     user_id=user_found.id,
-                    chatbot_name="Chatbot mặc định.",
-                    # model="gpt-3.5-turbo-16k",
+                    chatbot_name="Chatbot model gpt4.",
                     model="gpt-4",
                     is_public=True,
-                    description="Chatbot mặc định khi khởi chạy dự án.",
+                    description="Chatbot model gpt4 mặc định khi khởi chạy dự án.",
                     temperature=0.2,
                     max_token=100,
-                    is_default=True,
                     prompt=PromptDefault.PROMPT_DEFAULT.value,
+                    is_active=True,
+                    created_at=datetime.now(),
+                    updated_at=datetime.now(),
+                    deleted_at=None,
+                ),
+            )
+            created_chatbot_train = crud_chatbot.create(
+                db=session,
+                obj_in=ChatbotInDBSchema(
+                    id=uuid.uuid4(),
+                    user_id=user_found.id,
+                    chatbot_name="Chatbot model train.",
+                    model="train",
+                    is_public=False,
+                    description="Chatbot model train từ dữ liệu của SoleMateAI.",
+                    temperature=0,
+                    max_token=0,
+                    prompt="",
                     is_active=True,
                     created_at=datetime.now(),
                     updated_at=datetime.now(),
