@@ -108,3 +108,7 @@ export function getUniqueProperties(products) {
     const uniqueBrands = Array.from(brandMap, ([brand_name, brand_logo]) => ({ brand_name, brand_logo }));
     return { uniqueColors, uniqueBrands, uniqueSizes, minPrice, maxPrice };
 }
+
+export function bytesToMB(bytes) {
+    return bytes / Math.pow(1024, 2);
+}
