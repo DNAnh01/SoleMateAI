@@ -8,7 +8,6 @@ export const currencyFormat = (amount) => {
 };
 
 export function extractProductId(message) {
-    console.log('message:', message);
     /*
     "Thông tin về giày: 
     Tên giày: Nike Air Max 90 Essential,    
@@ -43,7 +42,7 @@ export function extractProductId(message) {
 
         let productId = productUrl.split('/').slice(-1)[0];
         productId = productId.replace(/[^a-zA-Z0-9\-]/g, '');
-        console.log('productId:', productId);
+
         return productId;
     } catch (error) {
         console.error('Error extracting product ID:', error);

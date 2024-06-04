@@ -2,12 +2,13 @@ import { useEffect, useMemo, useState } from 'react';
 
 import { columnsChatbot } from '~/data/data.chatbot';
 import { FaRegEdit } from 'react-icons/fa';
-import { MdDeleteOutline } from 'react-icons/md';
+import { MdDeleteOutline, MdOutlinePublic, MdOutlinePublicOff } from 'react-icons/md';
 import { Modal, Popconfirm, Table, Input } from 'antd';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import useAppStore from '~/store';
 import ChatbotAPI from '~/apis/chatbot.api';
+import { defaultTheme } from '~/styles/themes/default';
 
 const ChatbotAdmin = () => {
     const navigate = useNavigate();
@@ -30,39 +31,116 @@ const ChatbotAdmin = () => {
         setChatbotName(e.target.value);
     };
 
+    const handlePublicChatbot = async (id) => {
+        try {
+            setIsLoadingAPI(true);
+            const res = await ChatbotAPI.publicChatbot(id);
+            if (res.status === 200) {
+                fetchDataChatbot();
+                console.log('chatbot was public', res.data);
+                // toast.success('Công khai chatbot thành công.', {
+                //     autoClose: 3000,
+                // });
+            } else {
+                toast.error('Công khai chatbot thất bại. Vui lòng thử lại sau.', {
+                    autoClose: 3000,
+                });
+            }
+        } catch (_) {
+            toast.error('Công khai chatbot thất bại. Vui lòng thử lại sau.', {
+                autoClose: 3000,
+            });
+        } finally {
+            setIsLoadingAPI(false);
+        }
+    };
+
+    const handleDeleteChatbot = async (id) => {
+        try {
+            setIsLoadingAPI(true);
+            const res = await ChatbotAPI.deleteChatbot(id);
+            if (res.status === 200) {
+                fetchDataChatbot();
+                // toast.success('Xoá chatbot thành công.', {
+                //     autoClose: 2000,
+                // });
+            } else {
+                toast.error('Xoá chatbot thất bại. Vui lòng thử lại sau.', {
+                    autoClose: 2000,
+                });
+            }
+        } catch (_) {
+            toast.error('Xoá chatbot thất bại. Vui lòng thử lại sau.', {
+                autoClose: 2000,
+            });
+        } finally {
+            setIsLoadingAPI(false);
+        }
+    };
+
     const convertColumns = useMemo(() => {
         return [
             ...columnsChatbot,
             {
-                title: 'Action',
+                title: 'Công khai',
+                dataIndex: 'is_public',
+                key: 'is_public',
+                render: (text, record, index) => {
+                    return (
+                        <div className="flex items-center justify-center z-50">
+                            {record.is_public ? (
+                                <MdOutlinePublic
+                                    fontSize={28}
+                                    style={{ color: `${defaultTheme.color_yellow_green}` }}
+                                />
+                            ) : (
+                                <MdOutlinePublicOff
+                                    style={{ color: `${defaultTheme.color_red}` }}
+                                    fontSize={28}
+                                    onClick={() => handlePublicChatbot(record.id)}
+                                ></MdOutlinePublicOff>
+                            )}
+                        </div>
+                    );
+                },
+            },
+            {
+                title: 'Hành động',
                 dataIndex: '',
                 key: 'action',
                 render: (text, record, index) => {
                     return (
                         <div className="flex items-center gap-1 z-50">
-                            <button
-                                onClick={() => navigate(`/admin/chatbot/${record.id}`)}
-                                className="p-1 rounded hover:bg-slate-400 hover:text-white"
-                            >
-                                <FaRegEdit fontSize={18} />
-                            </button>
-                            <Popconfirm
-                                title="Delete this product"
-                                description="Are you sure to delete this product?"
-                                okText="Yes"
-                                cancelText="No"
-                                placement="bottomRight"
-                            >
-                                <button className="p-1 rounded text-red-600 hover:bg-red-600 hover:text-white">
-                                    <MdDeleteOutline fontSize={18} />
+                            {record.model === 'gpt-4' && (
+                                <button
+                                    onClick={() => navigate(`/admin/chatbot/${record.id}`)}
+                                    className="p-1 rounded hover:bg-slate-400 hover:text-white"
+                                >
+                                    <FaRegEdit fontSize={18} />
                                 </button>
-                            </Popconfirm>
+                            )}
+                            {record.model === 'gpt-4' && (
+                                <Popconfirm
+                                    title="Xoá chatbot?"
+                                    description="Bạn chắc chắn muốn xoá chatbot này?"
+                                    okText="Chấp nhận"
+                                    cancelText="Huỷ"
+                                    placement="bottomRight"
+                                    onConfirm={() => handleDeleteChatbot(record.id)}
+                                >
+                                    <button className="p-1 rounded text-red-600 hover:bg-red-600 hover:text-white">
+                                        <MdDeleteOutline fontSize={18} />
+                                    </button>
+                                </Popconfirm>
+                            )}
                         </div>
                     );
                 },
             },
         ];
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [navigate]);
+
     const fetchDataChatbot = async () => {
         try {
             setIsLoadingAPI(true);

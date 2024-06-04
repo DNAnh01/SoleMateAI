@@ -1,6 +1,6 @@
 # ignore files of project
 /backend/.env.development
-_report
+report
 
 # ignore files of backend
 **/__pycache__

@@ -16,6 +16,7 @@ from backend.crud.crud_chatbot import crud_chatbot
 from backend.crud.crud_conversation import crud_conversation
 from backend.crud.crud_knowledge_base import crud_knowledge_base
 from backend.crud.crud_message import crud_message
+from backend.nn_model.chatbot_nn_model import chatbot_nn_model
 from backend.schemas.message_schema import MessageInDBSchema
 from backend.schemas.user_role_permission_schema import UserRolePermissionSchema
 from backend.services.abc.message_service import MessageService
@@ -30,7 +31,10 @@ class MessageServiceImpl(MessageService):
         self.__crud_message = crud_message
         self.__crud_knowledge_base = crud_knowledge_base
         self.__crud_chatbot = crud_chatbot
+        # model gpt-4
         self.__client_openai = OpenAI(api_key=f"{settings.OPENAI_API_KEY}")
+        # model train
+        self.__chatbot_nn_model = chatbot_nn_model
 
     def create_message_with_auth(
         self,
@@ -44,6 +48,9 @@ class MessageServiceImpl(MessageService):
                 db=db,
                 filter={"is_public": True},
             )
+            logger.info(
+                f"chatbot_found: {chatbot_found.id}-{chatbot_found.chatbot_name}- {chatbot_found.model}- {chatbot_found.is_public}"
+            )
             if chatbot_found is None:
                 return JSONResponse(
                     status_code=400,
@@ -52,6 +59,7 @@ class MessageServiceImpl(MessageService):
                         "message": "Create message failed: No public chatbot found",
                     },
                 )
+
             conversation_found = self.__crud_conversation.get(
                 db=db, id=str(conversation_id)
             )
@@ -77,28 +85,49 @@ class MessageServiceImpl(MessageService):
                     deleted_at=None,
                 ),
             )
-            """Handle response and add to message"""
-            response, chatbot_id = self.handle_message(
-                db=db,
-                chatbot_id=chatbot_found.id,
-                conversation_id=conversation_found.id,
-            )
-            """create a new message with the bot's response"""
-            message_added = self.__crud_message.create(
-                db=db,
-                obj_in=MessageInDBSchema(
-                    id=uuid.uuid4(),
+            if chatbot_found.model == "gpt-4":
+                """Handle response and add to message"""
+                response, chatbot_id = self.handle_message_gpt(
+                    db=db,
+                    chatbot_id=chatbot_found.id,
                     conversation_id=conversation_found.id,
-                    sender_id=str(chatbot_id),
-                    sender_type="bot",
-                    message_text=response,
-                    is_active=True,
-                    created_at=datetime.now(),
-                    updated_at=datetime.now(),
-                    deleted_at=None,
-                ),
-            )
-            return message_added
+                )
+                """create a new message with the bot's response"""
+                message_added = self.__crud_message.create(
+                    db=db,
+                    obj_in=MessageInDBSchema(
+                        id=uuid.uuid4(),
+                        conversation_id=conversation_found.id,
+                        sender_id=str(chatbot_id),
+                        sender_type="bot",
+                        message_text=response,
+                        is_active=True,
+                        created_at=datetime.now(),
+                        updated_at=datetime.now(),
+                        deleted_at=None,
+                    ),
+                )
+                return message_added
+
+            if chatbot_found.model == "train":
+                """Handle response and add to message"""
+                response = self.__chatbot_nn_model.chatbot_response(message)
+                """create a new message with the bot's response"""
+                message_added = self.__crud_message.create(
+                    db=db,
+                    obj_in=MessageInDBSchema(
+                        id=uuid.uuid4(),
+                        conversation_id=conversation_found.id,
+                        sender_id=str(chatbot_found.id),
+                        sender_type="bot",
+                        message_text=response,
+                        is_active=True,
+                        created_at=datetime.now(),
+                        updated_at=datetime.now(),
+                        deleted_at=None,
+                    ),
+                )
+                return message_added
 
         except:
             logger.exception(
@@ -160,28 +189,50 @@ class MessageServiceImpl(MessageService):
                     deleted_at=None,
                 ),
             )
-            """Handle response and add to message"""
-            response, chatbot_id = self.handle_message(
-                db=db,
-                chatbot_id=chatbot_found.id,
-                conversation_id=conversation_found.id,
-            )
-            """create a new message with the bot's response"""
-            message_added = self.__crud_message.create(
-                db=db,
-                obj_in=MessageInDBSchema(
-                    id=uuid.uuid4(),
+            if chatbot_found.model == "gpt-4":
+                """Handle response and add to message"""
+                response, chatbot_id = self.handle_message_gpt(
+                    db=db,
+                    chatbot_id=chatbot_found.id,
                     conversation_id=conversation_found.id,
-                    sender_id=str(chatbot_id),
-                    sender_type="bot",
-                    message_text=response,
-                    is_active=True,
-                    created_at=datetime.now(),
-                    updated_at=datetime.now(),
-                    deleted_at=None,
-                ),
-            )
-            return message_added
+                )
+                # logger.info(f"response: {response}")
+                """create a new message with the bot's response"""
+                message_added = self.__crud_message.create(
+                    db=db,
+                    obj_in=MessageInDBSchema(
+                        id=uuid.uuid4(),
+                        conversation_id=conversation_found.id,
+                        sender_id=str(chatbot_id),
+                        sender_type="bot",
+                        message_text=response,
+                        is_active=True,
+                        created_at=datetime.now(),
+                        updated_at=datetime.now(),
+                        deleted_at=None,
+                    ),
+                )
+                return message_added
+            if chatbot_found.model == "train":
+                """Handle response and add to message"""
+                response = self.__chatbot_nn_model.chatbot_response(message)
+                logger.info(f"response: {response}")
+                """create a new message with the bot's response"""
+                message_added = self.__crud_message.create(
+                    db=db,
+                    obj_in=MessageInDBSchema(
+                        id=uuid.uuid4(),
+                        conversation_id=conversation_found.id,
+                        sender_id=str(chatbot_found.id),
+                        sender_type="bot",
+                        message_text=response,
+                        is_active=True,
+                        created_at=datetime.now(),
+                        updated_at=datetime.now(),
+                        deleted_at=None,
+                    ),
+                )
+                return message_added
         except:
             logger.exception(
                 f"Exception in {__name__}.{self.__class__.__name__}.create_message_without_auth"
@@ -191,7 +242,7 @@ class MessageServiceImpl(MessageService):
                 content={"status": 400, "message": "Create message failed"},
             )
 
-    def handle_message(self, db: Session, chatbot_id: str, conversation_id: str):
+    def handle_message_gpt(self, db: Session, chatbot_id: str, conversation_id: str):
         try:
             temp_knowledge_base = []
             messages = self.__crud_message.get_multi(

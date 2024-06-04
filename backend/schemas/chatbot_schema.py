@@ -14,7 +14,6 @@ class ChatbotCreateSchema(pydantic.BaseModel):
     description: Optional[str] = None
     temperature: Optional[float] = None
     max_token: Optional[int] = None
-    is_default: Optional[bool] = None
     prompt: Optional[str] = None
 
 
@@ -25,7 +24,6 @@ class ChatbotUpdateSchema(BaseSchema):
     description: Optional[str] = None
     temperature: Optional[float] = None
     max_token: Optional[int] = None
-    is_default: Optional[bool] = None
     prompt: Optional[str] = None
 
 
@@ -39,7 +37,6 @@ class ChatbotInDBSchema(BaseSchema):
     description: Optional[str]
     temperature: Optional[float]
     max_token: Optional[int]
-    is_default: Optional[bool]
     prompt: Optional[str]
 
     class Config:
