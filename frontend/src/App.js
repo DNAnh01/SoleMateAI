@@ -46,12 +46,7 @@ import DashboardAdmin from './pages/dashboardAdmin';
 import OrderAdmin from './pages/orderAdmin/orderAdmin';
 
 function App() {
-    const { accessToken, setAccessToken, setProducts, profile, clearLocalStorage, setIsLoadingAPI } = useAppStore();
-
-    useEffect(() => {
-        clearLocalStorage();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    const { accessToken, setAccessToken, setProducts, profile, setProfile, setRole, setIsLoadingAPI } = useAppStore();
 
     // Setup axios interceptors
     useAxiosInterceptors(accessToken, setAccessToken);
@@ -94,17 +89,20 @@ function App() {
                     const response = await cartAPI.getAllCartItem();
                     setCart(response.data);
                     setTotalCartItem(response.data.total_item);
+                    setIsLoadingAPI(false);
                 } catch (error) {
                     if (error.response && error.response.status !== 200) {
                         console.log('No cart found');
                         setCart({});
                         setTotalCartItem(0);
+                        setRole('');
+                        setIsLoadingAPI(false);
                     }
                 }
             };
             fetchCart();
         }
-    }, [setCart, setTotalCartItem, accessToken, profile.role_name]);
+    }, [setCart, setTotalCartItem, accessToken, profile.role_name, setProfile, setRole, setIsLoadingAPI]);
     // Fetch address on mount
     useEffect(() => {
         if (accessToken && profile.role_name !== 'admin') {
@@ -113,17 +111,17 @@ function App() {
                     const response = await addressApi.getCurrentShippingAddress();
                     setAddress(response.data);
                 } catch (error) {
-                    if (error.response && error.response.status === 400) {
+                    if (error.response && error.response.status !== 200) {
                         console.log('No shipping address found');
                         setAddress({});
-                    } else {
-                        console.error(error);
+                        setRole('');
+                        setIsLoadingAPI(false);
                     }
                 }
             };
             fetchAddress();
         }
-    }, [setAddress, accessToken, profile.role_name]);
+    }, [setAddress, accessToken, profile.role_name, setRole, setIsLoadingAPI]);
     // Fetch orders on mount
     useEffect(() => {
         if (accessToken) {
@@ -135,6 +133,9 @@ function App() {
                     });
                     setHistoryOrdersByFilter(response.data);
                 } catch (error) {
+                    // if (error.response && error.response.status !== 200) {
+
+                    // }
                     console.log('error', error);
                 }
             };
@@ -170,13 +171,13 @@ function App() {
                         <Route path={configs.roures.user.emptyOrder} element={<OrderEmpty />} />
                         <Route path={configs.roures.confirm} element={<Confirm />} />
                         <Route path={configs.roures.user.profile} element={<Account />} />
+                        <Route path={configs.roures.user.changePassword} element={<ChangePassword />} />
                         <Route path={configs.roures.user.addAddress} element={<Address />} />
                     </Route>
                     <Route path="/" element={<AuthLayout />}>
                         <Route path={configs.roures.auth.signIn} element={<SignIn />} />
                         <Route path={configs.roures.auth.signUp} element={<SignUp />} />
                         <Route path={configs.roures.auth.forgetPassword} element={<Reset />} />
-                        <Route path="change_password" element={<ChangePassword />} />
                     </Route>
                     <Route path="admin" element={<AdminLayout />}>
                         <Route path="dashboard" element={<DashboardAdmin />} />

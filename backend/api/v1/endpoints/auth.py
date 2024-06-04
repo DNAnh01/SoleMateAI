@@ -75,7 +75,7 @@ async def forgot_password(
     return await auth_service.forgot_password(db=db, email=email)
 
 
-@router.post("/change-password")
+@router.post("/change-password", status_code=status.HTTP_200_OK)
 async def change_password(
     change_password: ChangePasswordSchema,
     current_user=Depends(oauth2.get_current_user),

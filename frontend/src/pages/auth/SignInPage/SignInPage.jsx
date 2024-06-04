@@ -101,38 +101,41 @@ const SignInPage = () => {
                 toast.error('Email không tồn tại', {
                     autoClose: 5000,
                 });
-                setProfile(null);
+                setProfile({});
                 setAccessToken('');
                 setIsAuthenticated(false);
-                setRole('user');
+                setRole('');
             } else if (res.status === 400) {
                 setIsLoading(false);
                 toast.error('Mật khẩu không đúng', {
                     autoClose: 5000,
                 });
-                setProfile(null);
+                setProfile({});
                 setAccessToken('');
                 setIsAuthenticated(false);
-                setRole('user');
+                setRole('');
             } else {
                 setIsLoading(false);
                 toast.error('Đăng nhập thất bại', {
                     autoClose: 5000,
                 });
-                setProfile(null);
+                setProfile({});
                 setAccessToken('');
                 setIsAuthenticated(false);
-                setRole('user');
+                setRole('');
             }
         } catch (error) {
             setIsLoading(false);
             toast.error('Đăng nhập thất bại', {
                 autoClose: 5000,
             });
-            setProfile(null);
+            setProfile({});
             setAccessToken('');
             setIsAuthenticated(false);
-            setRole('user');
+            setRole('');
+        } finally {
+            setRole('');
+            setIsLoading(false);
         }
     };
 

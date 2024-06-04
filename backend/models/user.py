@@ -23,6 +23,7 @@ class User(Base):
         nullable=False,
         default="https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/default_user_image.png",
     )
+    phone_number = Column(String, nullable=True)
     payment_information = Column(String, nullable=True)
     is_verified = Column(Boolean, nullable=False, default=False)
 

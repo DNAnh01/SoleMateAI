@@ -9,7 +9,7 @@ const roures = {
         signIn: '/auth/sign-in',
         signUp: '/auth/sign-up',
         forgetPassword: '/auth/forgot-password',
-        changePassword: '/auth/change-password',
+
         resetPassword: '/auth/reset-password',
         signOut: '/auth/sign-out',
     },
@@ -23,6 +23,7 @@ const roures = {
         orderDetail: '/user/order/:id',
         confirm: '/user/confirm',
         profile: '/user/profile',
+        changePassword: '/user/change-password',
         addAddress: '/user/profile/add-address',
     },
     admin: {

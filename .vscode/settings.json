@@ -90,6 +90,7 @@
         "uvicorn",
         "VNPAY",
         "whitesmoke",
-        "wordnet"
+        "wordnet",
+        "zustand"
     ]
 }

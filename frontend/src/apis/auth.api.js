@@ -11,6 +11,12 @@ const authApi = {
     async forgotPassword({ email }) {
         return await http.post(configs.baseUrl.auth.forgotPassword, { email });
     },
+    async changePassword({ passwordOld, passwordNew }) {
+        return await http.post(configs.baseUrl.auth.changePassword, {
+            password_old: passwordOld,
+            password_new: passwordNew,
+        });
+    },
     async signOut() {
         return await http.get(configs.baseUrl.auth.signOut);
     },

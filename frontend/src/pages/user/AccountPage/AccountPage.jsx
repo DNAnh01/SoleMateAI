@@ -6,12 +6,14 @@ import { UserContent, UserDashboardWrapper } from '~/styles/user';
 import UserMenu from '~/components/user/UserMenu';
 import Title from '~/components/common/Title';
 import { FormElement, Input } from '~/styles/form';
-import { BaseLinkGreen } from '~/styles/button';
+import { BaseButtonBlack, BaseLinkGreen } from '~/styles/button';
 import { breakpoints, defaultTheme } from '~/styles/themes/default';
 import configs from '~/configs';
 import useAppStore from '~/store';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { AddressContext } from '~/contexts/address.context';
+import { useNavigate } from 'react-router-dom';
+import profileApi from '~/apis/profile.api';
 
 const AccountPageWrapper = styled.main`
     .address-list {
@@ -62,8 +64,36 @@ const breadcrumbItems = [
 ];
 
 const AccountPage = () => {
-    const { profile } = useAppStore();
+    const navigate = useNavigate();
+    const { profile, setProfile } = useAppStore();
     const { address } = useContext(AddressContext);
+    const [isEditing, setIsEditing] = useState(false);
+    const [formData, setFormData] = useState({
+        displayName: profile?.display_name || '',
+        email: profile?.email || '',
+        phoneNumber: profile?.phone_number || '',
+    });
+
+    const updateProfile = async (displayName, email, phoneNumber) => {
+        try {
+            const res = await profileApi.updateProfile({ displayName, email, phoneNumber });
+            setProfile(res.data);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const onSubmit = (event) => {
+        event.preventDefault();
+        updateProfile(formData.displayName, formData.email, formData.phoneNumber);
+        setIsEditing(false);
+    };
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prevData) => ({ ...prevData, [name]: value }));
+    };
+
     return (
         <AccountPageWrapper className="page-py-spacing">
             <Container>
@@ -73,74 +103,98 @@ const AccountPage = () => {
                     <UserContent>
                         <Title titleText={'Tài khoản'} />
                         <h4 className="title-sm">Thông tin chi tiết</h4>
-                        <form>
-                            <div className="form-wrapper">
+                        <div className="form-wrapper">
+                            <form onSubmit={onSubmit}>
                                 <FormElement className="form-elem">
-                                    <label htmlFor="" className="form-label font-semibold text-base">
+                                    <label htmlFor="displayName" className="form-label font-semibold text-base">
                                         Tên hiển thị
                                     </label>
                                     <div className="form-input-wrapper flex items-center">
                                         <Input
                                             type="text"
+                                            name="displayName"
                                             className="form-elem-control text-outerspace font-semibold"
-                                            value={profile?.display_name}
-                                            readOnly
+                                            value={formData.displayName}
+                                            onChange={handleInputChange}
+                                            readOnly={!isEditing}
                                         />
-                                        <button type="button" className="form-control-change-btn">
+                                        <button
+                                            type="button"
+                                            className="form-control-change-btn"
+                                            onClick={() => setIsEditing(true)}
+                                        >
                                             <FaRegEdit fontSize={18} />
                                         </button>
                                     </div>
                                 </FormElement>
                                 <FormElement className="form-elem">
-                                    <label htmlFor="" className="form-label font-semibold text-base">
+                                    <label htmlFor="email" className="form-label font-semibold text-base">
                                         Email
                                     </label>
                                     <div className="form-input-wrapper flex items-center">
                                         <Input
                                             type="email"
+                                            name="email"
                                             className="form-elem-control text-outerspace font-semibold"
-                                            value={profile?.email}
-                                            readOnly
+                                            value={formData.email}
+                                            onChange={handleInputChange}
+                                            readOnly={!isEditing}
                                         />
-                                        <button type="button" className="form-control-change-btn">
+                                        <button
+                                            type="button"
+                                            className="form-control-change-btn"
+                                            onClick={() => setIsEditing(true)}
+                                        >
                                             <FaRegEdit fontSize={18} />
                                         </button>
                                     </div>
                                 </FormElement>
                                 <FormElement className="form-elem">
-                                    <label htmlFor="" className="form-label font-semibold text-base">
+                                    <label htmlFor="phoneNumber" className="form-label font-semibold text-base">
                                         Số điện thoại
                                     </label>
                                     <div className="form-input-wrapper flex items-center">
                                         <Input
                                             type="text"
+                                            name="phoneNumber"
                                             className="form-elem-control text-outerspace font-semibold"
-                                            value="+9686 6864 3434"
-                                            readOnly
+                                            value={formData.phoneNumber}
+                                            onChange={handleInputChange}
+                                            readOnly={!isEditing}
                                         />
-                                        <button type="button" className="form-control-change-btn">
+                                        <button
+                                            type="button"
+                                            className="form-control-change-btn"
+                                            onClick={() => setIsEditing(true)}
+                                        >
                                             <FaRegEdit fontSize={18} />
                                         </button>
                                     </div>
                                 </FormElement>
-                                <FormElement className="form-elem">
-                                    <label htmlFor="" className="form-label font-semibold text-base">
-                                        Mật khẩu
-                                    </label>
-                                    <div className="form-input-wrapper flex items-center">
-                                        <Input
-                                            type="password"
-                                            className="form-elem-control text-outerspace font-semibold"
-                                            value="Pass Key"
-                                            readOnly
-                                        />
-                                        <button type="button" className="form-control-change-btn">
-                                            <FaRegEdit fontSize={18} />
-                                        </button>
-                                    </div>
-                                </FormElement>
-                            </div>
-                        </form>
+                                {isEditing && <BaseButtonBlack type="submit">Lưu thông tin</BaseButtonBlack>}
+                            </form>
+                            <FormElement className="form-elem">
+                                <label htmlFor="password" className="form-label font-semibold text-base">
+                                    Mật khẩu
+                                </label>
+                                <div className="form-input-wrapper flex items-center">
+                                    <Input
+                                        type="password"
+                                        className="form-elem-control text-outerspace font-semibold"
+                                        value="Pass Key"
+                                        readOnly
+                                    />
+                                    <button
+                                        type="button"
+                                        className="form-control-change-btn"
+                                        onClick={() => navigate(configs.roures.user.changePassword)}
+                                    >
+                                        <FaRegEdit fontSize={18} />
+                                    </button>
+                                </div>
+                            </FormElement>
+                        </div>
+
                         <div>
                             <h4 className="title-sm">Địa chỉ giao hàng</h4>
                             <BaseLinkGreen to={configs.roures.user.addAddress}>Thêm địa chỉ</BaseLinkGreen>
