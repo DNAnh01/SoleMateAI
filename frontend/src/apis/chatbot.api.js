@@ -9,6 +9,8 @@ const ChatbotAPI = {
     publicChatbot: (id) => http.patch(`/chatbot/id=${id}`, { is_public: true }),
     deleteChatbot: (id) => http.delete(`/chatbot/id=${id}`),
     createKnowledgeChatbot: (id, params) => http.post(`/knowledge-base/chatbot-id=${id}`, params),
+    deleteKnowledgeChatbot: (chatbotId, knowledgeBaseId) =>
+        http.delete(`/knowledge-base/chatbot-id=${chatbotId}/knowledge-base-id=${knowledgeBaseId}`),
 };
 
 export default ChatbotAPI;

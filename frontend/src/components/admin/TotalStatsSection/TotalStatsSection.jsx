@@ -66,7 +66,7 @@ const TotalStatsSection = () => {
                     headline={title}
                     children={
                         <ContentWrapper color={color}>
-                            <Icons icon={icon} width={24} className="mr-2" />
+                            <Icons icon={icon} width={30} className="mr-2" color={color} />
                             {icon !== 'total_items' ? currencyFormat(value) : value}
                         </ContentWrapper>
                     }

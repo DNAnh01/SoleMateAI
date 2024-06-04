@@ -288,7 +288,7 @@ const Star = styled(FaStar)`
     transition: transform 0.5s ease-in-out;
 
     &:hover {
-        transform: scale(1.5);
+        transform: scale(2);
     }
 `;
 
@@ -298,7 +298,7 @@ const SmallStar = styled(FaStar)`
     font-size: 14px;
 
     &:hover {
-        transform: scale(1.2);
+        transform: scale(2);
     }
 `;
 

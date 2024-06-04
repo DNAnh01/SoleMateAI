@@ -1,5 +1,4 @@
 import { convertISOToDateTime } from '~/utils/common';
-import { MdOutlinePublic, MdOutlinePublicOff } from 'react-icons/md';
 
 export const columnsUpdateChatbot = [
     {
@@ -8,23 +7,23 @@ export const columnsUpdateChatbot = [
         key: 'id',
     },
     {
-        title: 'Knowledge-base Name',
+        title: 'Tên Cơ sở tri thức',
         dataIndex: 'knowledge_base_name',
         key: 'knowledge_base_name',
         width: '20%',
     },
     {
-        title: 'File Size',
+        title: 'Kích thước tệp',
         dataIndex: 'file_size',
         key: 'file_size',
     },
     {
-        title: 'Content type',
+        title: 'Loại nội dung',
         dataIndex: 'content_type',
         key: 'content_type',
     },
     {
-        title: 'Active',
+        title: 'Hoạt động',
         dataIndex: 'is_active',
         key: 'is_active',
         render: (text, record, index) => {
@@ -32,11 +31,11 @@ export const columnsUpdateChatbot = [
                 <div className="flex items-center justify-center z-50">
                     {record.is_active ? (
                         <div className="bg-green-400  font-semibold px-2 py-1 rounded-full">
-                            <h5 className="text-sm text-white">Active</h5>
+                            <h5 className="text-sm text-white">Hoạt động</h5>
                         </div>
                     ) : (
                         <div className="bg-red-400  font-semibold px-2 py-1 rounded-full">
-                            <h5 className="text-sm text-white">Inactive</h5>
+                            <h5 className="text-sm text-white">Không hoạt động</h5>
                         </div>
                     )}
                 </div>
@@ -44,19 +43,7 @@ export const columnsUpdateChatbot = [
         },
     },
     {
-        title: 'Public',
-        dataIndex: 'is_public',
-        key: 'is_public',
-        render: (text, record, index) => {
-            return (
-                <div className="flex items-center justify-center z-50">
-                    {record.is_public ? <MdOutlinePublic fontSize={28} /> : <MdOutlinePublicOff fontSize={28} />}
-                </div>
-            );
-        },
-    },
-    {
-        title: 'Created at',
+        title: 'Ngày tạo',
         dataIndex: 'created_at',
         key: 'created_at',
         render: (text, record, index) => {
