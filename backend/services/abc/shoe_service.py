@@ -10,6 +10,7 @@ from backend.schemas.shoe_schema import (
     ShoeOutInProductDetailPageSchema,
     ShoeOutSchema,
     ShoeUpdateSchema,
+    AdminUpdateShoeSchema
 )
 from backend.schemas.user_role_permission_schema import UserRolePermissionSchema
 
@@ -55,7 +56,7 @@ class ShoeService(ABC):
         self,
         db: Session,
         shoe_id: uuid.UUID,
-        shoe: ShoeUpdateSchema,
+        shoe: AdminUpdateShoeSchema,
         current_user_role_permission: UserRolePermissionSchema,
     ) -> Optional[ShoeOutSchema]:
         pass

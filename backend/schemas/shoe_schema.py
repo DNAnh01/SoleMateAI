@@ -24,6 +24,49 @@ class ShoeCreateSchema(pydantic.BaseModel):
     discounted_price: Optional[float] = None
 
 
+
+"""
+{
+    is_active: true,
+    created_at: '2024-05-22T00:07:57.887748Z',
+    updated_at: '2024-05-22T00:11:57.343553Z',
+    deleted_at: null,
+    id: 'fbf3f990-650e-43b4-9797-95a2398978ad',
+    brand: {
+        brand_name: 'Puma',
+        brand_logo: 'https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/brand_logo_Puma.png',
+    },
+    size: { size_number: 43 },
+    color: { color_name: 'Light Blue', hex_value: '#71c1dd' },
+    image_url: 'https://raw.githubusercontent.com/DNAnh01/assets/main/SoleMateAI/shoe4.png',
+    shoe_name: 'Nike Air Max 90 Essential',
+    description: 'Giày thể thao nam Nike Air Max 90 Essential mang đến sự êm ái, thoải mái cho người sử dụng.',
+    quantity_in_stock: 1,
+    display_price: 2000000,
+    warehouse_price: 1500000,
+    discounted_price: 1600000,
+    avg_rating: 4.5,
+}
+"""
+
+class AdminUpdateShoeSchema(pydantic.BaseModel):
+    id: uuid.UUID
+    brand: BrandCreateSchema
+    size: SizeCreateSchema
+    color: ColorCreateSchema
+    image_url: str
+    shoe_name: str
+    description: str
+    quantity_in_stock: int
+    display_price: float
+    warehouse_price: float
+    discounted_price: float
+    avg_rating: Optional[float] = None
+    is_active: bool
+    created_at: str
+    updated_at: str
+    deleted_at: Optional[str] = None
+
 class ShoeUpdateSchema(BaseSchema):
     brand: Optional[BrandCreateSchema] = None
     size: Optional[SizeCreateSchema] = None
