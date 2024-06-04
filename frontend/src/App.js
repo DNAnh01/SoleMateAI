@@ -44,6 +44,7 @@ import PaymentSuccess from './pages/checkout/PaymentSuccessPage';
 import PaymentFailure from './pages/checkout/PaymentFailurePage';
 import DashboardAdmin from './pages/dashboardAdmin';
 import OrderAdmin from './pages/orderAdmin/orderAdmin';
+import { Toaster } from 'react-hot-toast';
 
 function App() {
     const { accessToken, setAccessToken, setProducts, profile, clearLocalStorage, setIsLoadingAPI } = useAppStore();
@@ -104,7 +105,7 @@ function App() {
             };
             fetchCart();
         }
-    }, [setCart, setTotalCartItem, accessToken, profile.role_name]);
+    }, [setCart, setTotalCartItem, accessToken, profile?.role_name]);
     // Fetch address on mount
     useEffect(() => {
         if (accessToken && profile.role_name !== 'admin') {
@@ -123,7 +124,7 @@ function App() {
             };
             fetchAddress();
         }
-    }, [setAddress, accessToken, profile.role_name]);
+    }, [setAddress, accessToken, profile?.role_name]);
     // Fetch orders on mount
     useEffect(() => {
         if (accessToken) {
@@ -190,6 +191,7 @@ function App() {
             </Router>
             <Loading />
             <Overlay />
+            <Toaster position="top-center" />
         </>
     );
 }
