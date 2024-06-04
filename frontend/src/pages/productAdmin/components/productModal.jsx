@@ -4,6 +4,7 @@ import { MdEdit } from 'react-icons/md';
 import { IoClose } from 'react-icons/io5';
 import { RiImageAddLine } from 'react-icons/ri';
 import useAppStore from '~/store';
+import { useEffect, useState } from 'react';
 const { TextArea } = Input;
 const ProductModal = ({
     title,
@@ -17,8 +18,65 @@ const ProductModal = ({
     handleClearImage,
     handleImageChange,
     image,
+    setItemSelected,
 }) => {
     const { brands } = useAppStore();
+
+    const [brand, setBrand] = useState(brands[0]);
+
+    const handleChangeSelect = (value, name) => {
+        if (name === 'brand') {
+            setBrand(value);
+            const brandData = brands.find((brand) => brand.label === value);
+            setItemSelected((pre) => ({
+                ...pre,
+                [name]: {
+                    brand_name: value,
+                    brand_logo: brandData.logo,
+                },
+            }));
+            return;
+        }
+        if (name === 'is_active') {
+            setItemSelected((pre) => ({
+                ...pre,
+                is_active: value === STATUS[0].value,
+            }));
+            return;
+        }
+        if (name === 'color') {
+            setItemSelected((pre) => ({
+                ...pre,
+                [name]: {
+                    color_name: 'Yellow',
+                    hex_value: '#e3a338',
+                },
+            }));
+            return;
+        }
+    };
+
+    const handeChangeNumber = (value, name) => {
+        setItemSelected((pre) => ({
+            ...pre,
+            [name]: value,
+        }));
+    };
+
+    const handleChange = (e) => {
+        setItemSelected((pre) => ({
+            ...pre,
+            [e.target.name]: e.target.value,
+        }));
+    };
+    useEffect(() => {
+        if (isOpenModalEdit) {
+            const initBrand = itemSelected
+                ? brands.filter((brand) => brand.label === itemSelected?.brand?.brand_name)[0]
+                : brands[0];
+            setBrand(initBrand);
+        }
+    }, [brands, isOpenModalEdit, itemSelected]);
     return (
         <Modal
             title={title}
@@ -37,9 +95,10 @@ const ProductModal = ({
                         <Select
                             id="brand"
                             name="brand"
+                            onChange={(e) => handleChangeSelect(e, 'brand')}
                             options={brands || BRAND}
                             className="w-[100px]"
-                            value={BRAND[0].value}
+                            value={brand?.label}
                         />
                     </div>
                     <div className="flex items-center gap-2 w-[30%]">
@@ -49,6 +108,7 @@ const ProductModal = ({
                         <Select
                             id="color"
                             name="color"
+                            onChange={(e) => handleChangeSelect(e, 'color')}
                             options={formattedColors}
                             className="w-[100px]"
                             value={formattedColors[0].value}
@@ -70,8 +130,9 @@ const ProductModal = ({
                         </label>
                         <Select
                             id="active"
-                            name="active"
+                            name="is_active"
                             options={STATUS}
+                            onChange={(e) => handleChangeSelect(e, 'is_active')}
                             className="w-[100px]"
                             value={STATUS[0].value}
                         />
@@ -82,19 +143,37 @@ const ProductModal = ({
                         <label className="font-semibold w-[30%]" htmlFor="quantity">
                             Quantity:
                         </label>
-                        <InputNumber id="quantity" className="w-[100px]" min={1} max={1000} defaultValue={3} />
+                        <InputNumber
+                            onChange={(value) => handeChangeNumber(value, 'quantity_in_stock')}
+                            id="quantity"
+                            className="w-[100px]"
+                            min={1}
+                            value={itemSelected?.quantity_in_stock}
+                        />
                     </div>
                     <div className="flex items-center gap-2 w-[30%]">
                         <label className="font-semibold w-[30%]" htmlFor="displayPrice">
                             Display:
                         </label>
-                        <InputNumber id="displayPrice" className="w-[100px]" min={1} max={1000} defaultValue={3} />
+                        <InputNumber
+                            onChange={(value) => handeChangeNumber(value, 'display_price')}
+                            id="displayPrice"
+                            className="w-[100px]"
+                            min={1}
+                            value={itemSelected?.display_price}
+                        />
                     </div>
                     <div className="flex items-center gap-2 w-[30%]">
                         <label className="font-semibold w-[30%]" htmlFor="warehouse">
                             Warehouse:
                         </label>
-                        <InputNumber id="warehouse" className="w-[100px]" min={1} max={1000} defaultValue={3} />
+                        <InputNumber
+                            onChange={(value) => handeChangeNumber(value, 'warehouse_price')}
+                            id="warehouse"
+                            className="w-[100px]"
+                            min={1}
+                            value={itemSelected?.warehouse_price}
+                        />
                     </div>
                 </div>
                 <div>
@@ -102,9 +181,29 @@ const ProductModal = ({
                         <label className="font-semibold w-[30%]" htmlFor="discount">
                             Discount:
                         </label>
-                        <InputNumber id="discount" className="w-[100px]" min={1} max={100} defaultValue={3} />
+                        <InputNumber
+                            onChange={(value) => handeChangeNumber(value, 'discounted_price')}
+                            id="discount"
+                            className="w-[100px]"
+                            min={1}
+                            value={itemSelected?.discounted_price}
+                        />
                     </div>
                 </div>
+                <div>
+                    <div className="w-3/5">
+                        <label className="font-semibold" htmlFor="shoe_name">
+                            Name:
+                        </label>
+                        <Input
+                            value={itemSelected?.shoe_name}
+                            name="shoe_name"
+                            id="shoe_name"
+                            onChange={handleChange}
+                        />
+                    </div>
+                </div>
+
                 <div className="flex">
                     <div className="w-3/5">
                         <label className="font-semibold" htmlFor="description">
@@ -114,6 +213,7 @@ const ProductModal = ({
                             id="description"
                             name="description"
                             type="text"
+                            onChange={handleChange}
                             value={itemSelected?.description}
                             rows={4}
                             className="mt-1"

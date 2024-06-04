@@ -9,11 +9,14 @@ const baseUrl = {
         getHistoryOrder: '/order/get-all',
         getOrderById: '/order/order-id=',
         cancelOrderById: '/order/cancel/order-id=',
+        getAll: '/admin-order/get-all',
     },
     product: {
         getAll: '/shoe/get-all',
         getById: '/shoe/shoe-id=',
         delete: '/shoe/shoe-id=',
+        create: '/shoe/',
+        update: '/shoe/shoe-id=',
     },
     conversation: {
         createWithAuth: '/conversation/with-auth',

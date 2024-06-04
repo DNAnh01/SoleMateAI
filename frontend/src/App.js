@@ -43,9 +43,15 @@ import orderApi from './apis/order.api';
 import PaymentSuccess from './pages/checkout/PaymentSuccessPage';
 import PaymentFailure from './pages/checkout/PaymentFailurePage';
 import DashboardAdmin from './pages/dashboardAdmin';
+import OrderAdmin from './pages/orderAdmin/orderAdmin';
 
 function App() {
-    const { accessToken, setAccessToken, setProducts, profile } = useAppStore();
+    const { accessToken, setAccessToken, setProducts, profile, clearLocalStorage, setIsLoadingAPI } = useAppStore();
+
+    useEffect(() => {
+        clearLocalStorage();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     // Setup axios interceptors
     useAxiosInterceptors(accessToken, setAccessToken);
@@ -59,10 +65,11 @@ function App() {
         const fetchProducts = async () => {
             const result = await productApi.getAll();
             setProducts(result.data);
+            setIsLoadingAPI(false);
         };
 
         fetchProducts();
-    }, [setProducts]);
+    }, [setIsLoadingAPI, setProducts]);
 
     // Fetch promotions on mount
     useEffect(() => {
@@ -70,12 +77,14 @@ function App() {
             try {
                 const response = await promotionApi.getAllPromotion();
                 setPromotions(response.data);
+                setIsLoadingAPI(false);
             } catch (error) {
                 console.log('error', error);
+                setIsLoadingAPI(false);
             }
         };
         fetchPromotions();
-    }, [setPromotions]);
+    }, [setIsLoadingAPI, setPromotions]);
 
     // Fetch carts on mount
     useEffect(() => {
@@ -131,7 +140,10 @@ function App() {
             };
             fetchOrders();
         }
-    }, [setHistoryOrdersByFilter, accessToken]);
+        return () => {
+            setIsLoadingAPI(false);
+        };
+    }, [setHistoryOrdersByFilter, accessToken, setIsLoadingAPI]);
 
     return (
         <>
@@ -171,6 +183,7 @@ function App() {
                         <Route path="product" element={<ProductAdmin />} />
                         <Route path="chatbot" element={<ChatbotAdmin />} />
                         <Route path="chatbot/:id" element={<UpdateChatbotAdmin />} />
+                        <Route path="order" element={<OrderAdmin />} />
                     </Route>
                     <Route path="*" element={<NotFound />} />
                 </Routes>
