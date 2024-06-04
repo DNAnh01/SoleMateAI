@@ -10,6 +10,7 @@ const baseUrl = {
         getOrderById: '/order/order-id=',
         cancelOrderById: '/order/cancel/order-id=',
         getAll: '/admin-order/get-all',
+        deliveOrder: '/admin-order/deliver/order-id=',
     },
     product: {
         getAll: '/shoe/get-all',
