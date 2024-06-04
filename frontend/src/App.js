@@ -43,6 +43,7 @@ import orderApi from './apis/order.api';
 import PaymentSuccess from './pages/checkout/PaymentSuccessPage';
 import PaymentFailure from './pages/checkout/PaymentFailurePage';
 import DashboardAdmin from './pages/dashboardAdmin';
+import OrderAdmin from './pages/orderAdmin/orderAdmin';
 
 function App() {
     const { accessToken, setAccessToken, setProducts, profile, clearLocalStorage, setIsLoadingAPI } = useAppStore();
@@ -139,7 +140,10 @@ function App() {
             };
             fetchOrders();
         }
-    }, [setHistoryOrdersByFilter, accessToken]);
+        return () => {
+            setIsLoadingAPI(false);
+        };
+    }, [setHistoryOrdersByFilter, accessToken, setIsLoadingAPI]);
 
     return (
         <>
@@ -179,6 +183,7 @@ function App() {
                         <Route path="product" element={<ProductAdmin />} />
                         <Route path="chatbot" element={<ChatbotAdmin />} />
                         <Route path="chatbot/:id" element={<UpdateChatbotAdmin />} />
+                        <Route path="order" element={<OrderAdmin />} />
                     </Route>
                     <Route path="*" element={<NotFound />} />
                 </Routes>

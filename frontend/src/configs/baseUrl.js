@@ -9,6 +9,7 @@ const baseUrl = {
         getHistoryOrder: '/order/get-all',
         getOrderById: '/order/order-id=',
         cancelOrderById: '/order/cancel/order-id=',
+        getAll: '/admin-order/get-all',
     },
     product: {
         getAll: '/shoe/get-all',
