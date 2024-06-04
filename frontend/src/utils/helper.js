@@ -41,7 +41,7 @@ export function extractProductId(message) {
         }
 
         let productId = productUrl.split('/').slice(-1)[0];
-        productId = productId.replace(/[^a-zA-Z0-9\-]/g, '');
+        productId = productId.replace(/[^a-zA-Z0-9-]/g, '');
 
         return productId;
     } catch (error) {

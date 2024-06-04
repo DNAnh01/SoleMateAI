@@ -1,5 +1,8 @@
-import { LuWarehouse } from 'react-icons/lu';
-import { FaLocationPinLock } from 'react-icons/fa6';
+import { IoHomeOutline } from 'react-icons/io5';
+import { FaFlagCheckered } from 'react-icons/fa';
+import { TiCancel } from 'react-icons/ti';
+import { BsClipboardCheck } from 'react-icons/bs';
+import { AiOutlineDeliveredProcedure } from 'react-icons/ai';
 
 export const orderColumns = [
     {
@@ -92,11 +95,11 @@ export const orderColumns = [
             return (
                 <>
                     <div className="flex items-center gap-1 ">
-                        <LuWarehouse fontSize={30} />
+                        <IoHomeOutline fontSize={30} />
                         <div className="flex-1">
                             <div className="h-[2px]  bg-black"></div>
                         </div>
-                        <FaLocationPinLock fontSize={30} />
+                        {DestinationIcon(record.status)}
                     </div>
                     <div className="mt-2">
                         <h3 className="text-sm">
@@ -109,3 +112,16 @@ export const orderColumns = [
         },
     },
 ];
+
+const DestinationIcon = (status) => {
+    switch (status) {
+        case 'ORDER-DELIVERED':
+            return <FaFlagCheckered fill="#0bc023" fontSize={30} />;
+        case 'ORDER-PLACED':
+            return <BsClipboardCheck fill="#f1c232" fontSize={30} />;
+        case 'ORDER-SHIPPING':
+            return <AiOutlineDeliveredProcedure fill="#3899f0" fontSize={30} />;
+        default:
+            return <TiCancel fill="#fb2414" fontSize={30} />;
+    }
+};
