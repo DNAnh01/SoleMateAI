@@ -6,11 +6,11 @@ import { IoMdAdd } from 'react-icons/io';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { colors } from '~/utils/common';
 import productApi from '~/apis/product.api';
-import useAppStore from '~/store';
 import { toast } from 'react-toastify';
 
 import ProductModal from './components/productModal';
 import { DEFAULT_PRODUCT } from '~/constants/product';
+import Loading from '~/components/loading/loading';
 
 const formattedColors = colors.map((color) => ({
     value: color,
@@ -18,7 +18,8 @@ const formattedColors = colors.map((color) => ({
 }));
 
 const ProductAdmin = () => {
-    const { setIsLoadingAPI } = useAppStore();
+    const [isLoading, setIsLoading] = useState(false);
+
     const [isOpenModalEdit, setIsOpenModalEdit] = useState(false);
     const [confirmLoading, setConfirmLoading] = useState(false);
     const [itemSelected, setItemSelected] = useState();
@@ -29,7 +30,7 @@ const ProductAdmin = () => {
     const [productList, setProductList] = useState([]);
     const fetchProductList = useCallback(async () => {
         try {
-            setIsLoadingAPI(true);
+            setIsLoading(true);
             const res = await productApi.getAll();
             if (res.status === 200) {
                 setProductList(res.data);
@@ -40,9 +41,9 @@ const ProductAdmin = () => {
         } catch (err) {
             console.log('product', err);
         } finally {
-            setIsLoadingAPI(false);
+            setIsLoading(false);
         }
-    }, [setIsLoadingAPI]);
+    }, []);
 
     const handleSubmit = async () => {
         try {
@@ -193,6 +194,7 @@ const ProductAdmin = () => {
                 handleImageChange={handleImageChange}
                 image={image}
             />
+            <Loading isLoading={isLoading} />
         </>
     );
 };

@@ -5,12 +5,13 @@ import useFetchData from '~/hooks/useFetchData';
 import { FaTimes } from 'react-icons/fa';
 import { TbTruckDelivery } from 'react-icons/tb';
 import { useCallback, useEffect, useState } from 'react';
-import useAppStore from '~/store';
 import { toast } from 'react-hot-toast';
+import Loading from '~/components/loading/loading';
 
 const OrderAdmin = () => {
     const [orderList, setOrderList] = useState([]);
-    const { setIsLoadingAPI } = useAppStore();
+    const [isLoading, setIsLoading] = useState(false);
+
     const { data, refresh } = useFetchData(adminOrderAPI.getAll);
 
     const handleCancelOrder = useCallback(
@@ -78,19 +79,19 @@ const OrderAdmin = () => {
     ];
 
     useEffect(() => {
-        setIsLoadingAPI(true);
+        setIsLoading(true);
         if (data) {
             setOrderList(data);
-            setIsLoadingAPI(false);
+            setIsLoading(false);
         }
-        return () => {
-            setIsLoadingAPI(false);
-        };
-    }, [data, setIsLoadingAPI]);
+    }, [data]);
     return (
-        <div>
-            <Table columns={columns} dataSource={orderList} />
-        </div>
+        <>
+            <div>
+                <Table columns={columns} dataSource={orderList} />
+            </div>
+            <Loading isLoading={isLoading} />
+        </>
     );
 };
 export default OrderAdmin;

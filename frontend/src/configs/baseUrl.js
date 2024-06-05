@@ -47,6 +47,7 @@ const baseUrl = {
     admin: {
         promotion: {
             getAll: '/admin-promotion/get-all',
+            getById: '/admin-promotion/promotion-id=',
         },
         dashboard: {
             getChartStatsByDay: '/admin-dashboard/chart/day/',
