@@ -11,6 +11,7 @@ import { useContext, useEffect, useState } from 'react';
 import { OrderContext } from '~/contexts/order.context';
 import orderApi from '~/apis/order.api';
 import { toast } from 'react-toastify';
+import useAppStore from '~/store';
 
 const OrderListPageWrapper = styled.div`
     .order-tabs-contents {
@@ -41,6 +42,7 @@ const breadcrumbItems = [
 ];
 
 const OrderListPage = () => {
+    const { setIsLoadingAPI } = useAppStore();
     const { historyOrders, setHistoryOrders, historyOrdersByFilter, setHistoryOrdersByFilter } =
         useContext(OrderContext);
 
@@ -49,6 +51,7 @@ const OrderListPage = () => {
     const fetchOrders = async (status) => {
         if (status !== 'ALL') {
             try {
+                setIsLoadingAPI(true);
                 const response = await orderApi.getHistoryOrderByFilter({
                     status,
                     orderDate: '',
@@ -64,15 +67,20 @@ const OrderListPage = () => {
                 toast.error('Bạn chưa có đơn hàng nào.', {
                     autoClose: 3000,
                 });
+            } finally {
+                setIsLoadingAPI(false);
             }
         }
         try {
+            setIsLoadingAPI(true);
             const response = await orderApi.getHistoryOrder();
             setHistoryOrders(response.data);
         } catch (error) {
             toast.error('Bạn chưa có đơn hàng nào.', {
                 autoClose: 3000,
             });
+        } finally {
+            setIsLoadingAPI(false);
         }
     };
 

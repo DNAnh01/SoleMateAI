@@ -332,7 +332,7 @@ const SmallRating = ({ rating }) => {
 };
 
 const ProductDetailsPage = () => {
-    const { accessToken } = useAppStore();
+    const { accessToken, setIsLoadingAPI } = useAppStore();
     const { setCart, setTotalCartItem } = useContext(CartContext);
     const [product, setProduct] = useState(null);
     const [brandName, setBrandName] = useState('');
@@ -341,6 +341,7 @@ const ProductDetailsPage = () => {
     const handleAddToCart = async () => {
         if (accessToken) {
             try {
+                setIsLoadingAPI(true);
                 const res = await cartAPI.addCartItem({ shoeId: product.id, quantity: 1 });
                 if (res.status === 200) {
                     toast.success('Thêm vào giỏ hàng thành công', {
@@ -354,6 +355,8 @@ const ProductDetailsPage = () => {
             } catch (error) {
                 toast.error('Thêm vào giỏ hàng thất bại');
                 console.log(error);
+            } finally {
+                setIsLoadingAPI(false);
             }
         } else {
             toast.error('Vui lòng đăng nhập để thêm vào giỏ hàng', {
@@ -366,6 +369,7 @@ const ProductDetailsPage = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
+                setIsLoadingAPI(true);
                 const response = await productApi.getById(id);
                 if (response.status === 200) {
                     setProduct(response.data);
@@ -373,10 +377,12 @@ const ProductDetailsPage = () => {
                 }
             } catch (error) {
                 console.error(error);
+            } finally {
+                setIsLoadingAPI(false);
             }
         };
         fetchData();
-    }, [id]);
+    }, [id, setIsLoadingAPI]);
 
     if (!product) return null;
 

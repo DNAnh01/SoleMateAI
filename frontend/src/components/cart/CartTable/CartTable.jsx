@@ -7,6 +7,7 @@ import { useContext, useState } from 'react';
 import cartAPI from '~/apis/cart.api';
 import { toast } from 'react-toastify';
 import { CartContext } from '~/contexts/cart.context';
+import useAppStore from '~/store';
 
 const ScrollbarXWrapper = styled.div`
     max-height: 400px;
@@ -70,6 +71,7 @@ const CartTableWrapper = styled.table`
 `;
 
 const CartTable = ({ cartItems }) => {
+    const { setIsLoadingAPI } = useAppStore();
     const { setCart, setTotalCartItem } = useContext(CartContext);
     const [selectedItems, setSelectedItems] = useState([]);
 
@@ -91,6 +93,7 @@ const CartTable = ({ cartItems }) => {
         }
 
         try {
+            setIsLoadingAPI(true);
             const response = await cartAPI.removeMultipleCartItem(selectedItems);
             if (response.status === 200) {
                 toast.success('Xóa sản phẩm thành công!', {
@@ -114,6 +117,8 @@ const CartTable = ({ cartItems }) => {
                 position: 'top-center',
                 autoClose: 3000,
             });
+        } finally {
+            setIsLoadingAPI(false);
         }
     };
 

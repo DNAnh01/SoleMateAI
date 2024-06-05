@@ -19,6 +19,7 @@ import orderApi from '~/apis/order.api';
 import { toast } from 'react-toastify';
 import { OrderContext } from '~/contexts/order.context';
 import paymentApi from '~/apis/payment.api';
+import useAppStore from '~/store';
 
 const OrderDetailPageWrapper = styled.main`
     .btn-and-title-wrapper {
@@ -195,6 +196,7 @@ const breadcrumbItems = [
 ];
 
 const OrderDetailPage = () => {
+    const { setIsLoadingAPI } = useAppStore();
     const [order, setOrder] = useState(null);
     const { setHistoryOrdersByFilter } = useContext(OrderContext);
     const navigate = useNavigate();
@@ -205,6 +207,7 @@ const OrderDetailPage = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
+                setIsLoadingAPI(true);
                 const response = await orderApi.getOrderById(id);
                 if (response.status === 200) {
                     setOrder(response.data);
@@ -213,14 +216,17 @@ const OrderDetailPage = () => {
                 toast.error('Lỗi khi lấy dữ liệu đơn hàng', {
                     autoClose: 3000,
                 });
+            } finally {
+                setIsLoadingAPI(false);
             }
         };
         fetchData();
-    }, [id]);
+    }, [id, setIsLoadingAPI]);
 
     const handleButtonClick = async (button) => {
         if (button === 'Cancel') {
             try {
+                setIsLoadingAPI(true);
                 const response = await orderApi.cancelOrderById(id);
                 if (response.status === 200) {
                     toast.success('Hủy đơn hàng thành công', {
@@ -248,7 +254,10 @@ const OrderDetailPage = () => {
                     fetchOrders();
                     navigate(configs.roures.user.order);
                 }
-            } catch (error) {}
+            } catch (error) {
+            } finally {
+                setIsLoadingAPI(false);
+            }
         }
         setActiveButton(button);
     };

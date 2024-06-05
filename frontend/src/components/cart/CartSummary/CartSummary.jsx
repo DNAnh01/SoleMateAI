@@ -6,6 +6,7 @@ import orderApi from '~/apis/order.api';
 import configs from '~/configs';
 import { AddressContext } from '~/contexts/address.context';
 import { OrderContext } from '~/contexts/order.context';
+import useAppStore from '~/store';
 import { BaseButtonGreen } from '~/styles/button';
 import { breakpoints, defaultTheme } from '~/styles/themes/default';
 import { currencyFormat } from '~/utils/helper';
@@ -40,6 +41,7 @@ const CartSummaryWrapper = styled.div`
 `;
 
 const CartSummary = ({ totalDisplayPrice, totalDiscountedPrice }) => {
+    const { setIsLoadingAPI } = useAppStore();
     const { address } = useContext(AddressContext);
     const { setHistoryOrders } = useContext(OrderContext);
     const navigate = useNavigate();
@@ -62,6 +64,7 @@ const CartSummary = ({ totalDisplayPrice, totalDiscountedPrice }) => {
 
         console.log('handle order');
         try {
+            setIsLoadingAPI(true);
             const createOrderResponse = await orderApi.createOrder({
                 province: address.province,
                 district: address.district,
@@ -90,6 +93,8 @@ const CartSummary = ({ totalDisplayPrice, totalDiscountedPrice }) => {
             toast.error('Đặt hàng thất bại', {
                 autoClose: 3000,
             });
+        } finally {
+            setIsLoadingAPI(false);
         }
         console.log('address', address);
     };

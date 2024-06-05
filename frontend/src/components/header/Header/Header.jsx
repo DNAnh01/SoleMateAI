@@ -136,6 +136,7 @@ const Header = () => {
         profile,
         isAuthenticated,
         accessToken,
+        setIsLoadingAPI,
     } = useAppStore();
     const location = useLocation();
     const navigate = useNavigate();
@@ -145,6 +146,7 @@ const Header = () => {
         if (accessToken) {
             const fetchAllCartItem = async () => {
                 try {
+                    setIsLoadingAPI(true);
                     const res = await cartAPI.getAllCartItem();
                     if (res.status === 200) {
                         setCart(res.data);
@@ -152,6 +154,8 @@ const Header = () => {
                     }
                 } catch (error) {
                     console.log(error);
+                } finally {
+                    setIsLoadingAPI(false);
                 }
             };
             fetchAllCartItem();

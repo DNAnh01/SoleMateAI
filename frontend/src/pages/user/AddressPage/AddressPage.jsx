@@ -14,6 +14,7 @@ import addressApi from '~/apis/address.api';
 import { useNavigate } from 'react-router-dom';
 import { AddressContext } from '~/contexts/address.context';
 import { toast } from 'react-toastify';
+import useAppStore from '~/store';
 
 const AddressPageWrapper = styled.main`
     .form-elem-control {
@@ -33,6 +34,7 @@ const breadcrumbItems = [
 ];
 
 const AddressPage = () => {
+    const { setIsLoadingAPI } = useAppStore();
     const [districtList, setDistrictList] = useState([]);
     const [communeList, setCommuneList] = useState([]);
     const [selectedProvince, setSelectedProvince] = useState('');
@@ -97,22 +99,26 @@ const AddressPage = () => {
     const handleSave = async (event) => {
         event.preventDefault();
         // API call can be done here to save the address
-
-        const response = await addressApi.addOrCheckAddress({
-            province: provinceName,
-            district: districtName,
-            ward: communeName,
-        });
-        if (response.status !== 200) {
-            setAddress({});
+        try {
+            setIsLoadingAPI(true);
+            const response = await addressApi.addOrCheckAddress({
+                province: provinceName,
+                district: districtName,
+                ward: communeName,
+            });
+            if (response.status !== 200) {
+                setAddress({});
+            }
+            toast.success('Đã thêm địa chỉ mới', {
+                autoClose: 2000,
+            });
+            setAddress(response.data);
+            // After saving, redirect to profile page
+            navigate(configs.roures.user.profile);
+        } catch (error) {
+        } finally {
+            setIsLoadingAPI(false);
         }
-        toast.success('Đã thêm địa chỉ mới', {
-            autoClose: 2000,
-        });
-        setAddress(response.data);
-
-        // After saving, redirect to profile page
-        navigate(configs.roures.user.profile);
     };
 
     const handleCancel = () => {

@@ -65,7 +65,7 @@ const breadcrumbItems = [
 
 const AccountPage = () => {
     const navigate = useNavigate();
-    const { profile, setProfile } = useAppStore();
+    const { profile, setProfile, setIsLoadingAPI } = useAppStore();
     const { address } = useContext(AddressContext);
     const [isEditing, setIsEditing] = useState(false);
     const [formData, setFormData] = useState({
@@ -76,10 +76,13 @@ const AccountPage = () => {
 
     const updateProfile = async (displayName, email, phoneNumber) => {
         try {
+            setIsLoadingAPI(true);
             const res = await profileApi.updateProfile({ displayName, email, phoneNumber });
             setProfile(res.data);
         } catch (error) {
             console.log(error);
+        } finally {
+            setIsLoadingAPI(false);
         }
     };
 

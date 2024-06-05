@@ -7,6 +7,7 @@ import { useContext, useState } from 'react';
 import { CartContext } from '~/contexts/cart.context';
 import cartAPI from '~/apis/cart.api';
 import { toast } from 'react-toastify';
+import useAppStore from '~/store';
 
 const CartTableRowWrapper = styled.tr`
     .cart-tbl {
@@ -107,11 +108,13 @@ const StyledCheckbox = styled.input.attrs({ type: 'checkbox' })`
 `;
 
 const CartItem = ({ cartItem, onSelectCartItem }) => {
+    const { setIsLoadingAPI } = useAppStore();
     const { setCart, setTotalCartItem } = useContext(CartContext);
     const [checked, setChecked] = useState(false);
     const handleMinusClick = async () => {
         try {
             if (cartItem.quantity > 1) {
+                setIsLoadingAPI(true);
                 const response = await cartAPI.addCartItem({
                     shoeId: cartItem.shoe_id,
                     quantity: -1, // Decrease by 1
@@ -127,11 +130,14 @@ const CartItem = ({ cartItem, onSelectCartItem }) => {
                 position: 'top-center',
                 autoClose: 3000,
             });
+        } finally {
+            setIsLoadingAPI(false);
         }
     };
 
     const handlePlusClick = async () => {
         try {
+            setIsLoadingAPI(true);
             const response = await cartAPI.addCartItem({
                 shoeId: cartItem.shoe_id,
                 quantity: 1, // Increase by 1
@@ -146,6 +152,8 @@ const CartItem = ({ cartItem, onSelectCartItem }) => {
                 position: 'top-center',
                 autoClose: 3000,
             });
+        } finally {
+            setIsLoadingAPI(false);
         }
     };
 

@@ -67,7 +67,7 @@ const UpdateChatbotAdmin = () => {
 
     const handleDeleteKnowledgeChatbot = async (chatbotId, knowledgeBaseId) => {
         try {
-            setIsLoadingAPI(true);
+            setIsLoading(true);
             const res = await ChatbotAPI.deleteKnowledgeChatbot(chatbotId, knowledgeBaseId);
             if (res.status === 200) {
                 fetchDataChatbotDetails();
@@ -78,7 +78,7 @@ const UpdateChatbotAdmin = () => {
         } catch (_) {
             toast.error('Xoá cơ sở kiến thức thất bại. Vui lòng thử lại sau.', { autoClose: 3000 });
         } finally {
-            setIsLoadingAPI(false);
+            setIsLoading(false);
         }
     };
 

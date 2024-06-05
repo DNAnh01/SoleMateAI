@@ -76,22 +76,25 @@ const NavMenuWrapper = styled.nav`
 `;
 
 const UserMenu = () => {
-    const { profile } = useAppStore();
+    const { profile, setIsLoadingAPI } = useAppStore();
     const { historyOrders, setHistoryOrders } = useContext(OrderContext);
 
     useEffect(() => {
         const fetchOrders = async () => {
             try {
+                setIsLoadingAPI(true);
                 const response = await orderApi.getHistoryOrder();
                 setHistoryOrders(response.data);
             } catch (error) {
                 toast.error('Bạn chưa có đơn hàng nào.', {
                     autoClose: 3000,
                 });
+            } finally {
+                setIsLoadingAPI(false);
             }
         };
         fetchOrders();
-    }, [setHistoryOrders]);
+    }, [setHistoryOrders, setIsLoadingAPI]);
 
     const location = useLocation();
     return (

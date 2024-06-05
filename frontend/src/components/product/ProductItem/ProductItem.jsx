@@ -221,7 +221,7 @@ const AddToCartButton = styled.button`
 `;
 
 const ProductItem = ({ product }) => {
-    const { accessToken } = useAppStore();
+    const { accessToken, setIsLoadingAPI } = useAppStore();
     const { setCart, setTotalCartItem } = useContext(CartContext);
     const navigate = useNavigate();
 
@@ -229,6 +229,7 @@ const ProductItem = ({ product }) => {
         e.stopPropagation();
         if (accessToken) {
             try {
+                setIsLoadingAPI(true);
                 const res = await cartAPI.addCartItem({ shoeId: product.id, quantity: 1 });
                 if (res.status === 200) {
                     toast.success('Thêm vào giỏ hàng thành công', {
@@ -243,6 +244,8 @@ const ProductItem = ({ product }) => {
             } catch (error) {
                 toast.error('Thêm vào giỏ hàng thất bại');
                 console.log(error);
+            } finally {
+                setIsLoadingAPI(false);
             }
         } else {
             toast.error('Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng', {
