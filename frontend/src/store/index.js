@@ -7,7 +7,7 @@ const useAppStore = createWithEqualityFn(
         (set) => ({
             isAuthenticated: false,
             profile: {},
-            role: 'user',
+            role: '',
             isSidebarOpen: false,
             accessToken: '',
             isLoadingAPI: false,
@@ -28,7 +28,7 @@ const useAppStore = createWithEqualityFn(
                 set(() => ({
                     isAuthenticated: false,
                     profile: {},
-                    role: 'user',
+                    role: '',
                     isSidebarOpen: false,
                     accessToken: '',
                     isLoadingAPI: false,

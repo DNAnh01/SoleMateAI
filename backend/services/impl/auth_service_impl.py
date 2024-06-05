@@ -77,6 +77,7 @@ class AuthServiceImpl(AuthService):
                         id=uuid.uuid4(),
                         role_id=user_role_found.id,
                         email=user.email,
+                        phone_number="",
                         password_hash=hashed_password,
                         display_name=display_name,
                         avatar_url="https://avatars.githubusercontent.com/u/96216102?s=400&u=e68b3692ae68ed13fee08b23330cb1bbf4d264bd&v=4P",
@@ -107,6 +108,7 @@ class AuthServiceImpl(AuthService):
                     id=created_user.id,
                     role_id=created_user.role_id,
                     email=created_user.email,
+                    phone_number=created_user.phone_number,
                     password_hash=created_user.password_hash,
                     display_name=created_user.display_name,
                     avatar_url=created_user.avatar_url,
@@ -179,10 +181,12 @@ class AuthServiceImpl(AuthService):
             return JSONResponse(
                 status_code=404, content={"status": 404, "message": "Role not found"}
             )
+            
         user_out = UserOutSchema(
             id=user_found.id,
             role_name=role_found.role_name,
             email=user_found.email,
+            phone_number=user_found.phone_number,
             display_name=user_found.display_name,
             avatar_url=user_found.avatar_url,
             payment_information=user_found.payment_information,
@@ -285,6 +289,7 @@ class AuthServiceImpl(AuthService):
                         id=uuid.uuid4(),
                         role_id=user_role_found.id,
                         email=user_info["email"],
+                        phone_number="",
                         password_hash=user_info["at_hash"],
                         display_name=user_info["name"],
                         avatar_url=user_info["picture"],

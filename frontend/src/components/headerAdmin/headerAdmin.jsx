@@ -26,6 +26,8 @@ const HeaderAdmin = () => {
         setShowCalendar(false);
     };
 
+    console.log('location.pathname', location.pathname);
+
     useEffect(() => {
         let isMounted = true;
         if (location.pathname.split('/').pop() === 'dashboard' && accessToken && profile?.role_name === 'admin') {
@@ -76,6 +78,7 @@ const HeaderAdmin = () => {
                 }
             }
         }
+        // chatbot
 
         return () => {
             isMounted = false;
@@ -98,31 +101,36 @@ const HeaderAdmin = () => {
                     );
                 })}
             </h1>
-            <div className="flex items-center justify-center">
-                <span className="mr-3">{selectedTime}</span>
-                <HeadlessTippy
-                    interactive
-                    visible={showCalendar}
-                    onClickOutside={() => setShowCalendar(false)}
-                    render={() => (
-                        <div className="mr-4">
-                            <Calendar selectedTimeCurrent={selectedTime} setSelectedTimeCurrent={handleDateChange} />
+            {!location.pathname.startsWith('/admin/chatbot/') && location.pathname !== '/admin/chatbot' && (
+                <div className="flex items-center justify-center">
+                    <span className="mr-3">{selectedTime}</span>
+                    <HeadlessTippy
+                        interactive
+                        visible={showCalendar}
+                        onClickOutside={() => setShowCalendar(false)}
+                        render={() => (
+                            <div className="mr-4">
+                                <Calendar
+                                    selectedTimeCurrent={selectedTime}
+                                    setSelectedTimeCurrent={handleDateChange}
+                                />
+                            </div>
+                        )}
+                        placement="bottom-end"
+                    >
+                        <div>
+                            <Icons
+                                icon="calendar"
+                                className="mr-4 cursor-pointer"
+                                width={20}
+                                height={20}
+                                color={defaultTheme.color_dim_gray}
+                                onClick={toggleCalendar}
+                            />
                         </div>
-                    )}
-                    placement="bottom-end"
-                >
-                    <div>
-                        <Icons
-                            icon="calendar"
-                            className="mr-4 cursor-pointer"
-                            width={20}
-                            height={20}
-                            color={defaultTheme.color_dim_gray}
-                            onClick={toggleCalendar}
-                        />
-                    </div>
-                </HeadlessTippy>
-            </div>
+                    </HeadlessTippy>
+                </div>
+            )}
         </HeaderWrapper>
     );
 };

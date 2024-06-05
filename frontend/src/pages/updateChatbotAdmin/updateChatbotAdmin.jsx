@@ -20,6 +20,7 @@ const UpdateChatbotAdmin = () => {
     const [isOpenModalEdit, setIsOpenModalEdit] = useState(false);
     const [chatbotDetails, setChatbotDetails] = useState([]);
     const [isLoadingForm, setIsLoadingForm] = useState(false);
+    console.log('chatbotDetails', chatbotDetails);
 
     const [fileSelected, setFileSelected] = useState(null);
 
@@ -34,7 +35,7 @@ const UpdateChatbotAdmin = () => {
 
             if (res.status === 200) {
                 fetchDataChatbotDetails();
-                toast.success('Tạo cơ sở kiến thức thành công!', { autoClose: 3000 });
+                // toast.success('Tạo cơ sở kiến thức thành công!', { autoClose: 3000 });
                 setIsOpenModalEdit(false);
             } else {
                 toast.error('Tạo cơ sở kiến thức thất bại. Vui lòng thử lại sau.', { autoClose: 3000 });
@@ -64,6 +65,23 @@ const UpdateChatbotAdmin = () => {
         setFileSelected(null);
     };
 
+    const handleDeleteKnowledgeChatbot = async (chatbotId, knowledgeBaseId) => {
+        try {
+            setIsLoadingAPI(true);
+            const res = await ChatbotAPI.deleteKnowledgeChatbot(chatbotId, knowledgeBaseId);
+            if (res.status === 200) {
+                fetchDataChatbotDetails();
+                // toast.success('Xoá cơ sở kiến thức thành công!', { autoClose: 3000 });
+            } else {
+                toast.error('Xoá cơ sở kiến thức thất bại. Vui lòng thử lại sau.', { autoClose: 3000 });
+            }
+        } catch (_) {
+            toast.error('Xoá cơ sở kiến thức thất bại. Vui lòng thử lại sau.', { autoClose: 3000 });
+        } finally {
+            setIsLoadingAPI(false);
+        }
+    };
+
     const fetchDataChatbotDetails = useCallback(async () => {
         try {
             setIsLoading(true);
@@ -88,18 +106,19 @@ const UpdateChatbotAdmin = () => {
         return [
             ...columnsUpdateChatbot,
             {
-                title: 'Action',
+                title: 'Hành động',
                 dataIndex: '',
                 key: 'action',
                 render: (text, record, index) => {
                     return (
                         <div className="flex items-center gap-1 z-50">
                             <Popconfirm
-                                title="Delete this file"
-                                description="Are you sure to delete this file?"
-                                okText="Yes"
-                                cancelText="No"
+                                title="Xoá tập tin?"
+                                description="Bạn chắc chắn muốn xóa tập tin này?"
+                                okText="Chấp nhận"
+                                cancelText="Hủy"
                                 placement="bottomRight"
+                                onConfirm={() => handleDeleteKnowledgeChatbot(id, record.id)}
                             >
                                 <button className="p-1 rounded text-red-600 hover:bg-red-600 hover:text-white">
                                     <MdDeleteOutline fontSize={18} />

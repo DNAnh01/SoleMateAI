@@ -4,7 +4,17 @@ import { Container } from '~/styles/styles';
 import PasswordInput from '~/components/auth/PasswordInput';
 import { BaseButtonBlack } from '~/styles/button';
 import { defaultTheme } from '~/styles/themes/default';
+import { useFormik } from 'formik';
+import * as yup from 'yup';
+import { getRules } from '~/utils/rules';
 import images from '~/assets/images';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import authApi from '~/apis/auth.api';
+import configs from '~/configs';
+import useAppStore from '~/store';
+import { toast } from 'react-toastify';
+import Icons from '~/components/common/Icons/Icons';
 
 const ChangePwdScreenWrapper = styled.section`
     .form-grid-left {
@@ -34,6 +44,43 @@ const ChangePwdScreenWrapper = styled.section`
 `;
 
 const ChangePasswordPage = () => {
+    const { clearLocalStorage } = useAppStore();
+    const [isLoading, setIsLoading] = useState(false);
+    const navigate = useNavigate();
+
+    const handleChangePassword = async (event) => {
+        event.preventDefault();
+        try {
+            setIsLoading(true);
+            const res = await authApi.changePassword({
+                passwordOld: formik.values.password_old,
+                passwordNew: formik.values.password_new,
+            });
+            console.log('handleChangePassword', res.data);
+            if (res.status === 200) {
+                toast.success('Đổi mật khẩu thành công');
+                clearLocalStorage();
+                navigate(configs.roures.auth.signIn);
+            }
+        } catch (error) {
+            toast.error('Đổi mật khẩu thất bại');
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    const validationSchema = yup.object().shape(getRules());
+
+    const formik = useFormik({
+        initialValues: {
+            password_old: '',
+            password_new: '',
+            confirm_password_new: '',
+        },
+        validationSchema: validationSchema,
+        onSubmit: handleChangePassword,
+    });
+
     return (
         <ChangePwdScreenWrapper>
             <FormGridWrapper>
@@ -47,15 +94,55 @@ const ChangePasswordPage = () => {
                                 <h3>Tạo mật khẩu mới</h3>
                                 <p>Mật khẩu mới của bạn phải khác với mật khẩu đã sử dụng trước đó.</p>
                             </FormTitle>
-                            <form>
-                                <PasswordInput fieldName="Mật khẩu" name="password" />
+                            <form onSubmit={handleChangePassword}>
                                 <PasswordInput
-                                    fieldName="Nhập lại mật khẩu"
-                                    name="confirm_password"
-                                    errorMsg="Mật khẩu mới và mật khẩu xác nhận không khớp"
+                                    fieldName="Mật khẩu cũ"
+                                    name="password_old"
+                                    onChange={formik.handleChange}
+                                    value={formik.values.password_old}
+                                    onBlur={formik.handleBlur}
+                                    errorMsg={
+                                        formik.touched.password_old && formik.errors.password_old
+                                            ? formik.errors.password_old
+                                            : ''
+                                    }
+                                />
+                                <PasswordInput
+                                    fieldName="Mật khẩu mới"
+                                    name="password_new"
+                                    onChange={formik.handleChange}
+                                    value={formik.values.password_new}
+                                    onBlur={formik.handleBlur}
+                                    errorMsg={
+                                        formik.touched.password_new && formik.errors.password_new
+                                            ? formik.errors.password_new
+                                            : ''
+                                    }
+                                />
+                                <PasswordInput
+                                    fieldName="Nhập lại mật khẩu mới"
+                                    name="confirm_password_new"
+                                    onChange={formik.handleChange}
+                                    value={formik.values.confirm_password_new}
+                                    onBlur={formik.handleBlur}
+                                    errorMsg={
+                                        formik.touched.confirm_password_new && formik.errors.confirm_password_new
+                                            ? formik.errors.confirm_password_new
+                                            : ''
+                                    }
                                 />
                                 <BaseButtonBlack type="submit" className="form-submit-btn">
-                                    Đặt lại mật khẩu
+                                    {isLoading ? (
+                                        <Icons
+                                            icon="loading"
+                                            className="loading-icon"
+                                            width={16}
+                                            height={16}
+                                            color={defaultTheme.color_white}
+                                        />
+                                    ) : (
+                                        'Đặt lại mật khẩu'
+                                    )}
                                 </BaseButtonBlack>
                             </form>
                         </div>

@@ -4,6 +4,9 @@ const baseUrl = {
         addOrCheckAddress: '/address/',
         getCurrentShippingAddress: '/address/',
     },
+    user: {
+        updateProfile: '/user/profile',
+    },
     order: {
         createOrder: '/order/',
         getHistoryOrder: '/order/get-all',
@@ -38,6 +41,7 @@ const baseUrl = {
         signIn: '/auth/sign-in',
         signUp: '/auth/sign-up',
         forgotPassword: '/auth/forgot-password',
+        changePassword: '/auth/change-password',
         signOut: '/auth/sign-out',
     },
     admin: {

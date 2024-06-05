@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import promotionApi from '~/apis/promotion.api';
 import Loading from '~/components/loading/loading';
+import { formatDate } from '~/data/data.promotion';
 import useFetchData from '~/hooks/useFetchData';
 
 const PromotionDetails = () => {
@@ -21,6 +22,8 @@ const PromotionDetails = () => {
     return (
         <>
             <div>
+                <h1>{promotion?.promotion_name}</h1>
+                <h1>{formatDate(promotion?.start_date)}</h1>
                 <h1>{JSON.stringify(promotion)}</h1>
             </div>
             <Loading isLoading={isLoading} />

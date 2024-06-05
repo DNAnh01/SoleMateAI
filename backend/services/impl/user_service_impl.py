@@ -58,6 +58,7 @@ class UserServiceImpl(UserService):
                         id=user.id,
                         role_name=role_found.role_name,
                         email=user.email,
+                        phone_number=user.phone_number,
                         display_name=user.display_name,
                         avatar_url=user.avatar_url,
                         payment_information=user.payment_information,
@@ -110,6 +111,7 @@ class UserServiceImpl(UserService):
                 id=user_found.id,
                 role_name=role_found.role_name,
                 email=user_found.email,
+                phone_number=user_found.phone_number,
                 display_name=user_found.display_name,
                 avatar_url=user_found.avatar_url,
                 payment_information=user_found.payment_information,
@@ -195,6 +197,8 @@ class UserServiceImpl(UserService):
             role_found = self.__crud_role.get(db=db, id=user_found.role_id)
             if user.email is not None:
                 user_found.email = user.email
+            if user.phone_number is not None:
+                user_found.phone_number = user.phone_number
             if user.display_name is not None:
                 user_found.display_name = user.display_name
             if user.avatar_url is not None:
@@ -209,6 +213,7 @@ class UserServiceImpl(UserService):
                 id=user_found.id,
                 role_name=role_found.role_name,
                 email=user_found.email,
+                phone_number=user_found.phone_number,
                 display_name=user_found.display_name,
                 avatar_url=user_found.avatar_url,
                 payment_information=user_found.payment_information,
@@ -260,6 +265,7 @@ class UserServiceImpl(UserService):
                 id=user_found.id,
                 role_name=role_found.role_name,
                 email=user_found.email,
+                phone_number=user_found.phone_number,
                 display_name=user_found.display_name,
                 avatar_url=user_found.avatar_url,
                 payment_information=user_found.payment_information,

@@ -15,6 +15,7 @@ class UserUpdateSchema(BaseSchema):
     # role_id: Optional[uuid.UUID] = None
     email: Optional[pydantic.EmailStr] = None
     # password_hash: Optional[str] = None
+    phone_number: Optional[str] = None
     display_name: Optional[str] = None
     avatar_url: Optional[str] = None
     payment_information: Optional[str] = None
@@ -25,6 +26,7 @@ class UserOutSchema(BaseSchema):
     id: uuid.UUID
     role_name: str
     email: pydantic.EmailStr
+    phone_number: str
     display_name: str
     avatar_url: str
     payment_information: str
@@ -45,6 +47,7 @@ class UserInDBSchema(BaseSchema):
     role_id: uuid.UUID
     email: pydantic.EmailStr
     password_hash: str
+    phone_number: str
     display_name: str
     avatar_url: str
     payment_information: str

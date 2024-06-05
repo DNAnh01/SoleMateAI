@@ -44,7 +44,7 @@ import PaymentSuccess from './pages/checkout/PaymentSuccessPage';
 import PaymentFailure from './pages/checkout/PaymentFailurePage';
 import DashboardAdmin from './pages/dashboardAdmin';
 import OrderAdmin from './pages/orderAdmin/orderAdmin';
-import { Toaster } from 'react-hot-toast';
+// import { Toaster } from 'react-hot-toast';
 import PromotionAdmin from './pages/promotionAdmin/promotionAdmin';
 import PromotionDetails from './pages/promotionDetails/promotionDetails';
 
@@ -141,13 +141,13 @@ function App() {
                         <Route path={configs.roures.user.emptyOrder} element={<OrderEmpty />} />
                         <Route path={configs.roures.confirm} element={<Confirm />} />
                         <Route path={configs.roures.user.profile} element={<Account />} />
+                        <Route path={configs.roures.user.changePassword} element={<ChangePassword />} />
                         <Route path={configs.roures.user.addAddress} element={<Address />} />
                     </Route>
                     <Route path="/" element={<AuthLayout />}>
                         <Route path={configs.roures.auth.signIn} element={<SignIn />} />
                         <Route path={configs.roures.auth.signUp} element={<SignUp />} />
                         <Route path={configs.roures.auth.forgetPassword} element={<Reset />} />
-                        <Route path="change_password" element={<ChangePassword />} />
                     </Route>
                     <Route path="admin" element={<AdminLayout />}>
                         <Route path="dashboard" element={<DashboardAdmin />} />
@@ -163,7 +163,6 @@ function App() {
             </Router>
             <Loading isLoading={isLoading} />
             <Overlay />
-            <Toaster position="top-center" />
         </>
     );
 }
