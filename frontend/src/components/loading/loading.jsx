@@ -1,10 +1,8 @@
 import React from 'react';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
-import useAppStore from '~/store';
 
-const Loading = () => {
-    const { isLoadingAPI } = useAppStore();
-    if (!isLoadingAPI) {
+const Loading = ({ isLoading }) => {
+    if (!isLoading) {
         return <></>;
     }
     return (

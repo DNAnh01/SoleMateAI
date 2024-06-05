@@ -4,15 +4,15 @@ import { columnsChatbot } from '~/data/data.chatbot';
 import { FaRegEdit } from 'react-icons/fa';
 import { MdDeleteOutline, MdOutlinePublic, MdOutlinePublicOff } from 'react-icons/md';
 import { Modal, Popconfirm, Table, Input } from 'antd';
-import { toast } from 'react-toastify';
+import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
-import useAppStore from '~/store';
 import ChatbotAPI from '~/apis/chatbot.api';
 import { defaultTheme } from '~/styles/themes/default';
+import Loading from '~/components/loading/loading';
 
 const ChatbotAdmin = () => {
     const navigate = useNavigate();
-    const { setIsLoadingAPI } = useAppStore();
+    const [isLoading, setIsLoading] = useState(false);
     const [chatbotList, setChatbotList] = useState([]);
     const [isOpenModalEdit, setIsOpenModalEdit] = useState(false);
 
@@ -33,48 +33,36 @@ const ChatbotAdmin = () => {
 
     const handlePublicChatbot = async (id) => {
         try {
-            setIsLoadingAPI(true);
+            setIsLoading(true);
             const res = await ChatbotAPI.publicChatbot(id);
             if (res.status === 200) {
                 fetchDataChatbot();
                 console.log('chatbot was public', res.data);
-                // toast.success('Công khai chatbot thành công.', {
-                //     autoClose: 3000,
-                // });
+                toast.success('Công khai chatbot thành công.');
             } else {
-                toast.error('Công khai chatbot thất bại. Vui lòng thử lại sau.', {
-                    autoClose: 3000,
-                });
+                toast.error('Công khai chatbot thất bại. Vui lòng thử lại sau.');
             }
         } catch (_) {
-            toast.error('Công khai chatbot thất bại. Vui lòng thử lại sau.', {
-                autoClose: 3000,
-            });
+            toast.error('Công khai chatbot thất bại. Vui lòng thử lại sau.');
         } finally {
-            setIsLoadingAPI(false);
+            setIsLoading(false);
         }
     };
 
     const handleDeleteChatbot = async (id) => {
         try {
-            setIsLoadingAPI(true);
+            setIsLoading(true);
             const res = await ChatbotAPI.deleteChatbot(id);
             if (res.status === 200) {
                 fetchDataChatbot();
-                // toast.success('Xoá chatbot thành công.', {
-                //     autoClose: 2000,
-                // });
+                toast.success('Xoá chatbot thành công.');
             } else {
-                toast.error('Xoá chatbot thất bại. Vui lòng thử lại sau.', {
-                    autoClose: 2000,
-                });
+                toast.error('Xoá chatbot thất bại. Vui lòng thử lại sau.');
             }
         } catch (_) {
-            toast.error('Xoá chatbot thất bại. Vui lòng thử lại sau.', {
-                autoClose: 2000,
-            });
+            toast.error('Xoá chatbot thất bại. Vui lòng thử lại sau.');
         } finally {
-            setIsLoadingAPI(false);
+            setIsLoading(false);
         }
     };
 
@@ -143,7 +131,7 @@ const ChatbotAdmin = () => {
 
     const fetchDataChatbot = async () => {
         try {
-            setIsLoadingAPI(true);
+            setIsLoading(true);
             const res = await ChatbotAPI.getAll();
             if (res.status === 200) {
                 setChatbotList(res.data);
@@ -157,7 +145,7 @@ const ChatbotAdmin = () => {
                 autoClose: 3000,
             });
         } finally {
-            setIsLoadingAPI(false);
+            setIsLoading(false);
         }
     };
 
@@ -226,6 +214,7 @@ const ChatbotAdmin = () => {
                     </div>
                 </div>
             </Modal>
+            <Loading isLoading={isLoading} />
         </>
     );
 };

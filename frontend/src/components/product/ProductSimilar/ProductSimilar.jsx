@@ -1,10 +1,11 @@
 import { Section } from '~/styles/styles';
 import Title from '~/components/common/Title';
 import ProductList from '~/components/product/ProductList';
-import useAppStore from '~/store';
+import { useContext } from 'react';
+import { AppContext } from '~/contexts/app.context';
 
 const ProductSimilar = ({ brandName }) => {
-    const { products } = useAppStore();
+    const { products } = useContext(AppContext);
     // filter products to get similar products
     const similarProducts = products.filter((product) => product?.brand?.brand_name === brandName);
     return (

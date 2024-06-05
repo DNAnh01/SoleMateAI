@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import GlobalStyles from '~/styles/global/GlobalStyles';
 import Home from '~/pages/home/HomePage';
@@ -45,106 +45,76 @@ import PaymentFailure from './pages/checkout/PaymentFailurePage';
 import DashboardAdmin from './pages/dashboardAdmin';
 import OrderAdmin from './pages/orderAdmin/orderAdmin';
 import { Toaster } from 'react-hot-toast';
+import PromotionAdmin from './pages/promotionAdmin/promotionAdmin';
+import PromotionDetails from './pages/promotionDetails/promotionDetails';
 
 function App() {
-    const { accessToken, setAccessToken, setProducts, profile, clearLocalStorage, setIsLoadingAPI } = useAppStore();
+    const { accessToken, setAccessToken, profile, clearLocalStorage } = useAppStore();
+    const [isLoading, setIsLoading] = useState(false);
 
-    useEffect(() => {
-        clearLocalStorage();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    // useEffect(() => {
+    //     clearLocalStorage();
+    // }, [clearLocalStorage]);
 
     // Setup axios interceptors
     useAxiosInterceptors(accessToken, setAccessToken);
-    const { setPromotions } = useContext(AppContext);
+    const { setPromotions, setProducts } = useContext(AppContext);
     const { setCart, setTotalCartItem } = useContext(CartContext);
     const { setAddress } = useContext(AddressContext);
     const { setHistoryOrdersByFilter } = useContext(OrderContext);
 
-    // Fetch products on mount
     useEffect(() => {
-        const fetchProducts = async () => {
-            const result = await productApi.getAll();
-            setProducts(result.data);
-            setIsLoadingAPI(false);
-        };
-
-        fetchProducts();
-    }, [setIsLoadingAPI, setProducts]);
-
-    // Fetch promotions on mount
-    useEffect(() => {
-        const fetchPromotions = async () => {
+        const fetchData = async () => {
             try {
-                const response = await promotionApi.getAllPromotion();
-                setPromotions(response.data);
-                setIsLoadingAPI(false);
-            } catch (error) {
-                console.log('error', error);
-                setIsLoadingAPI(false);
-            }
-        };
-        fetchPromotions();
-    }, [setIsLoadingAPI, setPromotions]);
+                setIsLoading(true);
+                const productPromise = productApi.getAll();
+                const promotionPromise = promotionApi.getAllPromotion();
+                const cartPromise =
+                    accessToken && profile?.role_name !== 'admin' ? cartAPI.getAllCartItem() : Promise.resolve(null);
+                const addressPromise =
+                    accessToken && profile?.role_name !== 'admin'
+                        ? addressApi.getCurrentShippingAddress()
+                        : Promise.resolve(null);
+                const orderPromise = accessToken
+                    ? orderApi.getHistoryOrderByFilter({ status: 'ORDER-PLACED', orderDate: '' })
+                    : Promise.resolve(null);
 
-    // Fetch carts on mount
-    useEffect(() => {
-        if (accessToken && profile.role_name !== 'admin') {
-            const fetchCart = async () => {
-                try {
-                    const response = await cartAPI.getAllCartItem();
-                    setCart(response.data);
-                    setTotalCartItem(response.data.total_item);
-                } catch (error) {
-                    if (error.response && error.response.status !== 200) {
-                        console.log('No cart found');
-                        setCart({});
-                        setTotalCartItem(0);
-                    }
+                const [productResult, promotionResult, cartResult, addressResult, orderResult] = await Promise.all([
+                    productPromise,
+                    promotionPromise,
+                    cartPromise,
+                    addressPromise,
+                    orderPromise,
+                ]);
+
+                if (productResult) setProducts(productResult.data);
+                if (promotionResult) setPromotions(promotionResult.data);
+                if (cartResult) {
+                    setCart(cartResult.data);
+                    setTotalCartItem(cartResult.data.total_item);
                 }
-            };
-            fetchCart();
-        }
-    }, [setCart, setTotalCartItem, accessToken, profile?.role_name]);
-    // Fetch address on mount
-    useEffect(() => {
-        if (accessToken && profile.role_name !== 'admin') {
-            const fetchAddress = async () => {
-                try {
-                    const response = await addressApi.getCurrentShippingAddress();
-                    setAddress(response.data);
-                } catch (error) {
-                    if (error.response && error.response.status === 400) {
-                        console.log('No shipping address found');
-                        setAddress({});
-                    } else {
-                        console.error(error);
-                    }
-                }
-            };
-            fetchAddress();
-        }
-    }, [setAddress, accessToken, profile?.role_name]);
-    // Fetch orders on mount
-    useEffect(() => {
-        if (accessToken) {
-            const fetchOrders = async () => {
-                try {
-                    const response = await orderApi.getHistoryOrderByFilter({
-                        status: 'ORDER-PLACED',
-                        orderDate: '',
-                    });
-                    setHistoryOrdersByFilter(response.data);
-                } catch (error) {
-                    console.log('error', error);
-                }
-            };
-            fetchOrders();
-        }
-        return () => {
-            setIsLoadingAPI(false);
+                if (addressResult) setAddress(addressResult.data);
+                if (orderResult) setHistoryOrdersByFilter(orderResult.data);
+            } catch (error) {
+                console.error(error);
+            } finally {
+                console.log('ed');
+                setIsLoading(false);
+            }
+            console.log('111111');
         };
-    }, [setHistoryOrdersByFilter, accessToken, setIsLoadingAPI]);
+
+        fetchData();
+    }, [
+        accessToken,
+        profile?.role_name,
+        setProducts,
+        setPromotions,
+        setCart,
+        setTotalCartItem,
+        setAddress,
+        setHistoryOrdersByFilter,
+    ]);
 
     return (
         <>
@@ -185,11 +155,13 @@ function App() {
                         <Route path="chatbot" element={<ChatbotAdmin />} />
                         <Route path="chatbot/:id" element={<UpdateChatbotAdmin />} />
                         <Route path="order" element={<OrderAdmin />} />
+                        <Route path="promotion" element={<PromotionAdmin />} />
+                        <Route path="promotion/:id" element={<PromotionDetails />} />
                     </Route>
                     <Route path="*" element={<NotFound />} />
                 </Routes>
             </Router>
-            <Loading />
+            <Loading isLoading={isLoading} />
             <Overlay />
             <Toaster position="top-center" />
         </>

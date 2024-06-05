@@ -10,10 +10,13 @@ import { toast } from 'react-toastify';
 import { IoMdAdd } from 'react-icons/io';
 import { columnsUpdateChatbot } from '~/data/data.updateChatbot';
 import ChatbotAPI from '~/apis/chatbot.api';
+import Loading from '~/components/loading/loading';
 
 const UpdateChatbotAdmin = () => {
     const { id } = useParams();
-    const { setIsLoadingAPI, setIsShowOverlay } = useAppStore();
+    const [isLoading, setIsLoading] = useState(false);
+
+    const { setIsShowOverlay } = useAppStore();
     const [isOpenModalEdit, setIsOpenModalEdit] = useState(false);
     const [chatbotDetails, setChatbotDetails] = useState([]);
     const [isLoadingForm, setIsLoadingForm] = useState(false);
@@ -63,7 +66,7 @@ const UpdateChatbotAdmin = () => {
 
     const fetchDataChatbotDetails = useCallback(async () => {
         try {
-            setIsLoadingAPI(true);
+            setIsLoading(true);
             const res = await ChatbotAPI.getKnowledgeChatbotDetails(id);
             if (res.status === 200) {
                 setChatbotDetails(res.data);
@@ -77,9 +80,9 @@ const UpdateChatbotAdmin = () => {
                 autoClose: 3000,
             });
         } finally {
-            setIsLoadingAPI(false);
+            setIsLoading(false);
         }
-    }, [id, setIsLoadingAPI]);
+    }, [id]);
 
     const convertColumns = useMemo(() => {
         return [
@@ -171,6 +174,7 @@ const UpdateChatbotAdmin = () => {
                     </div>
                 </div>
             </Modal>
+            <Loading isLoading={isLoading} />
         </>
     );
 };
