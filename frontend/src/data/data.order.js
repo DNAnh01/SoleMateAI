@@ -94,13 +94,7 @@ export const orderColumns = [
         render: (text, record, index) => {
             return (
                 <>
-                    <div className="flex items-center gap-1 ">
-                        <IoHomeOutline fontSize={30} />
-                        <div className="flex-1">
-                            <div className="h-[2px]  bg-black"></div>
-                        </div>
-                        {DestinationIcon(record.status)}
-                    </div>
+                    <div className="flex items-center justify-center">{DestinationIcon(record.status)}</div>
                     <div className="mt-2">
                         <h3 className="text-sm">
                             {record.shipping_address.ward} - {record.shipping_address.district} -{' '}
