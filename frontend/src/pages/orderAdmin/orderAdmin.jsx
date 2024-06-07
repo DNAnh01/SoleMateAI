@@ -52,26 +52,37 @@ const OrderAdmin = () => {
             render: (text, record, index) => {
                 return (
                     <div className="flex gap-2">
-                        <Popconfirm
-                            title="Hủy đơn hàng"
-                            placement="bottomLeft"
-                            description="Bạn có chắc hủy đơn hàng này?"
-                            onConfirm={() => handleCancelOrder(record.id)}
-                        >
-                            <button className="p-2 border rounded-md border-slate-600 text-red-500">
-                                <FaTimes fontSize={20} />
-                            </button>
-                        </Popconfirm>
-                        <Popconfirm
-                            title="Xác nhận vận chuyển"
-                            placement="bottomLeft"
-                            description="Bạn có chắc xác nhận vận chuyển đơn hàng này?"
-                            onConfirm={() => handleDeliveOrder(record.id)}
-                        >
-                            <button className="p-2 border text-green-500 rounded-md border-slate-600">
-                                <TbTruckDelivery fontSize={20} />
-                            </button>
-                        </Popconfirm>
+                        {new Date(record.delivery_date) < new Date() && (
+                            <Popconfirm
+                                title="Hủy đơn hàng"
+                                placement="bottomLeft"
+                                description="Bạn có chắc hủy đơn hàng này?"
+                                onConfirm={() => handleCancelOrder(record.id)}
+                            >
+                                <button
+                                    title="Hủy đơn hàng"
+                                    className="p-2 border rounded-md border-slate-600 text-red-500 hover:text-red-700"
+                                >
+                                    <FaTimes fontSize={20} />
+                                </button>
+                            </Popconfirm>
+                        )}
+
+                        {record.status === 'ORDER-PLACED' && (
+                            <Popconfirm
+                                title="Xác nhận vận chuyển"
+                                placement="bottomLeft"
+                                description="Bạn có chắc xác nhận vận chuyển đơn hàng này?"
+                                onConfirm={() => handleDeliveOrder(record.id)}
+                            >
+                                <button
+                                    title="Xác nhận vận chuyển"
+                                    className="p-2 border text-green-500 hover:text-green-700 rounded-md border-slate-600"
+                                >
+                                    <TbTruckDelivery fontSize={20} />
+                                </button>
+                            </Popconfirm>
+                        )}
                     </div>
                 );
             },

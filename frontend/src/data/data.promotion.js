@@ -61,10 +61,15 @@ export const promotionColumns = [
     },
 ];
 
-export const formatDate = (isoString) => {
+export const formatDate = (isoString, dateFormat = 'DD/MM/YYYY') => {
     const date = new Date(isoString);
     const day = String(date.getUTCDate()).padStart(2, '0');
     const month = String(date.getUTCMonth() + 1).padStart(2, '0');
     const year = date.getUTCFullYear();
-    return `${day}-${month}-${year}`;
+    if (dateFormat === 'YYYY/MM/DD') {
+        return `${year}/${month}/${day}`;
+    }
+    return `${day}/${month}/${year}`;
 };
+
+export const dateFormat = 'YYYY/MM/DD';

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { HeaderMainWrapper, SiteBrandWrapper } from '~/styles/header';
 import { Container } from '~/styles/styles';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useNavigation } from 'react-router-dom';
 import { breakpoints, defaultTheme } from '~/styles/themes/default';
 import Icons from '~/components/common/Icons/Icons';
 import images from '~/assets/images';
@@ -137,6 +137,7 @@ const Header = () => {
         isAuthenticated,
         accessToken,
         setIsLoadingAPI,
+        setAccessToken,
     } = useAppStore();
     const location = useLocation();
     const navigate = useNavigate();
@@ -186,6 +187,10 @@ const Header = () => {
             toast.error('Đã xãy ra lỗi', {
                 autoClose: 3000,
             });
+        } finally {
+            setIsAuthenticated(false);
+            setAccessToken('');
+            navigate(configs.roures.auth.signIn);
         }
     };
 
