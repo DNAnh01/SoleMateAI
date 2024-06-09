@@ -24,7 +24,7 @@ const ProductAdmin = () => {
     const [confirmLoading, setConfirmLoading] = useState(false);
     const [itemSelected, setItemSelected] = useState();
     const [previewUrl, setPreviewUrl] = useState(null);
-    const [title, setTitle] = useState('Edit product');
+    const [title, setTitle] = useState('Chỉnh sửa sản phẩm');
     const [image, setImage] = useState(null);
 
     const [productList, setProductList] = useState([]);
@@ -85,7 +85,7 @@ const ProductAdmin = () => {
     };
 
     const handleClickProductEdit = useCallback((item) => {
-        setTitle('Edit product');
+        setTitle('Chỉnh sửa sản phẩm');
         setItemSelected(item);
         setIsOpenModalEdit(true);
     }, []);
@@ -110,7 +110,7 @@ const ProductAdmin = () => {
         return [
             ...columns,
             {
-                title: 'Action',
+                title: 'Hành động',
                 dataIndex: '',
                 key: 'action',
                 render: (text, record, index) => {
@@ -123,10 +123,10 @@ const ProductAdmin = () => {
                                 <FaRegEdit fontSize={18} />
                             </button>
                             <Popconfirm
-                                title="Delete this product"
-                                description="Are you sure to delete this product?"
-                                okText="Yes"
-                                cancelText="No"
+                                title="Xóa sản phẩm này"
+                                description="Bạn có chắc chắn muốn xóa sản phẩm này không?"
+                                okText="Có"
+                                cancelText="Không"
                                 placement="bottomRight"
                                 onConfirm={() => handeDeleteProduct(record.id)}
                             >
@@ -156,7 +156,7 @@ const ProductAdmin = () => {
     };
 
     const handleCreateNewProduct = useCallback(() => {
-        setTitle('Create new product');
+        setTitle('Tạo sản phẩm mới');
         setItemSelected(DEFAULT_PRODUCT);
         setIsOpenModalEdit(true);
     }, []);
@@ -175,7 +175,7 @@ const ProductAdmin = () => {
                         className="flex gap-2 items-center font-semibold bg-green-400 hover:bg-green-500 text-white px-4 py-2 rounded-lg"
                     >
                         <IoMdAdd />
-                        Create new product
+                        Tạo sản phẩm mới
                     </button>
                 </div>
                 <Table dataSource={productList} columns={convertColumns} className="w-full" />

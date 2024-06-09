@@ -6,13 +6,13 @@ import { AiOutlineDeliveredProcedure } from 'react-icons/ai';
 
 export const orderColumns = [
     {
-        title: 'Id',
+        title: 'Mã đơn hàng',
         dataIndex: 'id',
         key: 'id',
         width: '10px',
     },
     {
-        title: 'Product',
+        title: 'Sản phẩm',
         dataIndex: 'order_items',
         key: 'order_items',
         render: (text, record, index) => {
@@ -31,7 +31,7 @@ export const orderColumns = [
         },
     },
     {
-        title: 'Quantity',
+        title: 'Số lượng',
         dataIndex: 'order_items',
         key: 'Quantity',
         render: (text, record, index) => {
@@ -49,7 +49,7 @@ export const orderColumns = [
         },
     },
     {
-        title: 'Price',
+        title: 'Giá',
         dataIndex: 'order_items',
         key: 'Price',
         render: (text, record, index) => {
@@ -67,27 +67,27 @@ export const orderColumns = [
         },
     },
     {
-        title: 'Total',
+        title: 'Tổng số sản phẩm',
         dataIndex: 'total_item',
         key: 'total_item',
     },
     {
-        title: 'Total Price',
+        title: 'Tổng giá',
         dataIndex: 'total_display_price',
         key: 'total_display_price',
     },
     {
-        title: 'Discount Price',
+        title: 'Giá giảm',
         dataIndex: 'total_discounted_price',
         key: 'total_discounted_price',
     },
     {
-        title: 'Warehouse Price',
+        title: 'Giá kho',
         dataIndex: 'total_warehouse_price',
         key: 'total_warehouse_price',
     },
     {
-        title: 'Status',
+        title: 'Trạng thái',
         dataIndex: 'shipping_address',
         key: 'shipping_address',
         width: '200px',

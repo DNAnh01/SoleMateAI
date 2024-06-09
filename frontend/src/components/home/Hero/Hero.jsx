@@ -187,6 +187,7 @@ const HeroContentRight = styled.div`
         &:hover {
             transform: scale(1.1);
             box-shadow: 0 4px 20px ${defaultTheme.color_orange};
+            filter: brightness(1.2);
         }
 
         img {

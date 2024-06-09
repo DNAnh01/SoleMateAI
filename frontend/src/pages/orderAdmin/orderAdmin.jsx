@@ -46,7 +46,7 @@ const OrderAdmin = () => {
     const columns = [
         ...orderColumns,
         {
-            title: 'Action',
+            title: 'Hành động',
             dataIndex: 'action',
             key: 'action',
             render: (text, record, index) => {

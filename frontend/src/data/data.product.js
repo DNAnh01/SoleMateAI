@@ -1,12 +1,12 @@
 export const columns = [
     {
-        title: 'Id',
+        title: 'Mã số',
         dataIndex: 'id',
         key: 'id',
         width: '10px',
     },
     {
-        title: 'Brand',
+        title: 'Thương hiệu',
         dataIndex: 'brand_id_uuid',
         key: 'brand',
         width: '10px',
@@ -14,14 +14,13 @@ export const columns = [
             return (
                 <div>
                     <img src={record.brand.brand_logo} alt={record.brand.brand_name} className="w-[50px]" />
-
                     <p>{record.brand.brand_name}</p>
                 </div>
             );
         },
     },
     {
-        title: 'Color',
+        title: 'Màu sắc',
         dataIndex: 'color_id_uuid',
         key: 'color',
         render: (text, record, index) => {
@@ -38,7 +37,7 @@ export const columns = [
         },
     },
     {
-        title: 'Image',
+        title: 'Hình ảnh',
         dataIndex: 'image',
         key: 'image',
         render: (text, record, index) => {
@@ -50,19 +49,19 @@ export const columns = [
         },
     },
     {
-        title: 'Name',
+        title: 'Tên sản phẩm',
         dataIndex: 'shoe_name',
         key: 'shoe_name',
         width: '10%',
     },
     {
-        title: 'Description',
+        title: 'Mô tả',
         dataIndex: 'description',
         key: 'description',
         width: '20%',
     },
     {
-        title: 'Size',
+        title: 'Kích cỡ',
         dataIndex: 'size',
         key: 'size',
         render: (text, record, index) => {
@@ -70,39 +69,39 @@ export const columns = [
         },
     },
     {
-        title: 'Quantity',
+        title: 'Số lượng trong kho',
         dataIndex: 'quantity_in_stock',
         key: 'quantity_in_stock',
     },
     {
-        title: 'Display Price',
+        title: 'Giá niêm yết',
         dataIndex: 'display_price',
         key: 'display_price',
     },
     {
-        title: 'Warehouse Price',
+        title: 'Giá kho',
         dataIndex: 'warehouse_price',
         key: 'warehouse_price',
     },
     {
-        title: 'Discount',
+        title: 'Giá giảm',
         dataIndex: 'discounted_price',
         key: 'discounted_price',
     },
     {
-        title: 'Active',
+        title: 'Hoạt động',
         dataIndex: 'active',
         key: 'active',
         render: (text, record, index) => {
             return (
                 <div className="flex items-center justify-center z-50">
                     {record.is_active ? (
-                        <div className="bg-green-400  font-semibold px-2 py-1 rounded-full">
-                            <h5 className="text-sm text-white">Active</h5>
+                        <div className="bg-green-400 font-semibold px-2 py-1 rounded-full">
+                            <h5 className="text-sm text-white">Hoạt động</h5>
                         </div>
                     ) : (
-                        <div className="bg-red-400  font-semibold px-2 py-1 rounded-full">
-                            <h5 className="text-sm text-white">Inactive</h5>
+                        <div className="bg-red-400 font-semibold px-2 py-1 rounded-full">
+                            <h5 className="text-sm text-white">Không hoạt động</h5>
                         </div>
                     )}
                 </div>
@@ -129,10 +128,10 @@ export const BRAND = [
 export const STATUS = [
     {
         value: 'active',
-        label: 'Active',
+        label: 'Hoạt động',
     },
     {
         value: 'inactive',
-        label: 'Inactive',
+        label: 'Không hoạt động',
     },
 ];
