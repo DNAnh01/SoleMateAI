@@ -30,7 +30,7 @@ class UserService(ABC):
         pass
 
     @abstractmethod
-    def delete_user(
+    def disable_user(
         self,
         db: Session,
         user_id: uuid.UUID,

@@ -437,12 +437,9 @@ class AdminPromotionServiceImpl(AdminPromotionService):
         promotion: PromotionUpdateSchema,
         current_user_role_permission: UserRolePermissionSchema,
     ) -> PromotionOutSchema:
-        if (
-            "update_promotion"
-            not in current_user_role_permission.u_list_permission_name
-        ):
+        if "update_promotion" not in current_user_role_permission.u_list_permission_name:
             logger.exception(
-                f"Permission Error: User {current_user_role_permission.u_username} has no permission to update promotion"
+                f"Permission Error: User {current_user_role_permission.u_display_name} has no permission to update promotion"
             )
             return JSONResponse(
                 status_code=403,
@@ -453,7 +450,7 @@ class AdminPromotionServiceImpl(AdminPromotionService):
             )
         try:
             promotion_found = self.__crud_promotion.get(db=db, id=promotion_id)
-            if promotion_found is None:
+            if not promotion_found:
                 return JSONResponse(
                     status_code=400,
                     content={
@@ -461,26 +458,67 @@ class AdminPromotionServiceImpl(AdminPromotionService):
                         "message": f"Promotion with id {promotion_id} not found",
                     },
                 )
-            if promotion.promotion_name is not None:
-                promotion_found.promotion_name = promotion.promotion_name
-            if promotion.start_date is not None:
-                promotion_found.start_date = promotion.start_date
-            if promotion.end_date is not None:
-                promotion_found.end_date = promotion.end_date
-            if promotion.discount_percent is not None:
-                promotion_found.discount_percent = promotion.discount_percent
-            updated_promotion = self.__crud_promotion.update_one_by(
-                db=db, filter={"id": promotion_id}, obj_in=promotion_found
-            )
-            if updated_promotion is None:
-                return JSONResponse(
-                    status_code=400,
-                    content={"status": 400, "message": "Update promotion failed"},
-                )
+            
+            # Update promotion details
+            promotion_found.promotion_name = promotion.promotion_name
+            promotion_found.start_date = promotion.start_date
+            promotion_found.end_date = promotion.end_date
+            promotion_found.discount_percent = promotion.discount_percent
+            promotion_found.updated_at = datetime.now()
+            
+            # Update existing shoe promotions
             shoes_out = []
+            shoes_promotions = self.__crud_shoe_promotion.get_multi(
+                db=db,
+                filter_param={"filter": json.dumps({"promotion_id": str(promotion_found.id)})},
+            )
+            
+            for shoe_promotion in shoes_promotions:
+                shoe_found = self.__crud_shoe.get(db=db, id=shoe_promotion.shoe_id)
+                if not shoe_found:
+                    return JSONResponse(
+                        status_code=400,
+                        content={
+                            "status": 400,
+                            "message": f"Shoe with id {shoe_promotion.shoe_id} not found",
+                        },
+                    )
+                
+                # Reset discounted price in shoe
+                shoe_data = shoe_found.__dict__.copy()
+                shoe_data['discounted_price'] = shoe_found.display_price
+                
+                updated_shoe = self.__crud_shoe.update_one_by(
+                    db=db,
+                    filter={"id": shoe_found.id},
+                    obj_in=ShoeInDBSchema(**shoe_data),
+                )
+                if not updated_shoe:
+                    return JSONResponse(
+                        status_code=400,
+                        content={
+                            "status": 400,
+                            "message": f"Update shoe with id {shoe_found.id} failed",
+                        },
+                    )
+            
+            # Delete old shoe promotions
+            for shoe_promotion in shoes_promotions:
+                deleted_shoe_promotion = self.__crud_shoe_promotion.remove(db=db, id=shoe_promotion.id)
+                if not deleted_shoe_promotion:
+                    return JSONResponse(
+                        status_code=400,
+                        content={
+                            "status": 400,
+                            "message": f"Delete shoe promotion with id {shoe_promotion.id} failed",
+                        },
+                    )
+            
+            # Create new shoe promotions
             for shoe_id in promotion.shoe_ids:
+                logger.info(f"shoe_id: {shoe_id}")
                 shoe_found = self.__crud_shoe.get(db=db, id=shoe_id)
-                if shoe_found is None:
+                if not shoe_found:
                     return JSONResponse(
                         status_code=400,
                         content={
@@ -488,58 +526,55 @@ class AdminPromotionServiceImpl(AdminPromotionService):
                             "message": f"Shoe with id {shoe_id} not found",
                         },
                     )
-                """update discounted_price in shoe"""
+                
+                # Update discounted price in shoe
+                shoe_data = shoe_found.__dict__.copy()
+                shoe_data['discounted_price'] = shoe_found.display_price - (shoe_found.display_price * promotion.discount_percent / 100)
+                
                 updated_shoe = self.__crud_shoe.update_one_by(
                     db=db,
                     filter={"id": shoe_found.id},
-                    obj_in=ShoeInDBSchema(
-                        id=shoe_found.id,
-                        brand_id=shoe_found.brand_id,
-                        size_id=shoe_found.size_id,
-                        color_id=shoe_found.color_id,
-                        image_url=shoe_found.image_url,
-                        shoe_name=shoe_found.shoe_name,
-                        description=shoe_found.description,
-                        quantity_in_stock=shoe_found.quantity_in_stock,
-                        display_price=shoe_found.display_price,
-                        warehouse_price=shoe_found.warehouse_price,
-                        discounted_price=shoe_found.display_price
-                        - (shoe_found.display_price * promotion.discount_percent / 100),
-                        is_active=shoe_found.is_active,
-                        created_at=shoe_found.created_at,
-                        updated_at=shoe_found.updated_at,
-                        deleted_at=shoe_found.deleted_at,
+                    obj_in=ShoeInDBSchema(**shoe_data),
+                )
+
+                if not updated_shoe:
+                    return JSONResponse(
+                        status_code=400,
+                        content={
+                            "status": 400,
+                            "message": f"Update shoe with id {shoe_found.id} failed",
+                        },
+                    )
+                """update shoe promotion"""
+                created_shoes_promotions = self.__crud_shoe_promotion.create(
+                    db=db,
+                    obj_in=ShoePromotionInDBSchema(
+                        id=uuid.uuid4(),
+                        shoe_id=shoe_found.id,
+                        promotion_id=promotion_found.id,
+                        is_active=True,
+                        created_at=datetime.now(),
+                        updated_at=datetime.now(),
+                        deleted_at=None,
                     ),
                 )
 
+
+                # Retrieve related entities
                 brand_found = self.__crud_brand.get(db=db, id=shoe_found.brand_id)
-                if brand_found is None:
-                    return JSONResponse(
-                        status_code=400,
-                        content={
-                            "status": 400,
-                            "message": f"Brand with id {shoe_found.brand_id} not found",
-                        },
-                    )
                 size_found = self.__crud_size.get(db=db, id=shoe_found.size_id)
-                if size_found is None:
+                color_found = self.__crud_color.get(db=db, id=shoe_found.color_id)
+
+                if not (brand_found and size_found and color_found):
+                    missing_entity = "brand" if not brand_found else "size" if not size_found else "color"
                     return JSONResponse(
                         status_code=400,
                         content={
                             "status": 400,
-                            "message": f"Size with id {shoe_found.size_id} not found",
+                            "message": f"{missing_entity.capitalize()} with id {shoe_found.brand_id if not brand_found else shoe_found.size_id if not size_found else shoe_found.color_id} not found",
                         },
                     )
 
-                color_found = self.__crud_color.get(db=db, id=shoe_found.color_id)
-                if color_found is None:
-                    return JSONResponse(
-                        status_code=400,
-                        content={
-                            "status": 400,
-                            "message": f"Color with id {shoe_found.color_id} not found",
-                        },
-                    )
                 shoes_out.append(
                     ShoeOutSchema(
                         id=updated_shoe.id,
@@ -559,24 +594,29 @@ class AdminPromotionServiceImpl(AdminPromotionService):
                         deleted_at=updated_shoe.deleted_at,
                     )
                 )
+
+            db.commit()
+            
             return PromotionOutSchema(
-                id=updated_promotion.id,
-                promotion_name=updated_promotion.promotion_name,
-                start_date=updated_promotion.start_date,
-                end_date=updated_promotion.end_date,
-                discount_percent=updated_promotion.discount_percent,
+                id=promotion_found.id,
+                promotion_name=promotion_found.promotion_name,
+                start_date=promotion_found.start_date,
+                end_date=promotion_found.end_date,
+                discount_percent=promotion_found.discount_percent,
                 shoes=shoes_out,
-                is_active=updated_promotion.is_active,
-                created_at=updated_promotion.created_at,
-                updated_at=updated_promotion.updated_at,
-                deleted_at=updated_promotion.deleted_at,
+                is_active=promotion_found.is_active,
+                created_at=promotion_found.created_at,
+                updated_at=promotion_found.updated_at,
+                deleted_at=promotion_found.deleted_at,
             )
         except Exception as e:
+            db.rollback()
             logger.exception(f"Update promotion failed: {e}")
             return JSONResponse(
                 status_code=400,
                 content={"status": 400, "message": "Update promotion failed"},
             )
+
 
     def delete_promotion(
         self,

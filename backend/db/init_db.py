@@ -324,16 +324,17 @@ def init_db():
                 if promotion_found is None:
                     logger.error(f"Promotion {row[0]} not found")
 
-                shoe_name = str(row[1])
+                # shoe_name = str(row[1])
+                shoe_name_filter = f"{row[1]}%"
                 shoe_counter = 0
                 for shoe in crud_shoe.get_multi_ignore_deleted_and_inactive(
                     db=session,
-                    filter_param={"filter": json.dumps({"shoe_name": str(row[1])})},
+                    filter_param={"filter": json.dumps({"shoe_name__like": shoe_name_filter})},
                 ):
                     if shoe is None:
                         logger.error(f"Shoe {row[1]} not found")
                     """update shoe's discounted price"""
-                    if shoe.shoe_name == shoe_name:
+                    if shoe.shoe_name:
                         updated_shoe = crud_shoe.update_one_by(
                             db=session,
                             filter={"id": shoe.id},
@@ -394,14 +395,15 @@ def init_db():
                 if user_found is None:
                     logger.error(f"User {row[0]} not found")
 
-                shoe_name = str(row[1])
+                # shoe_name = str(row[1])
+                shoe_name_filter = f"{row[1]}%"
                 for shoe in crud_shoe.get_multi_ignore_deleted_and_inactive(
                     db=session,
-                    filter_param={"filter": json.dumps({"shoe_name": str(row[1])})},
+                    filter_param={"filter": json.dumps({"shoe_name__like": shoe_name_filter})},
                 ):
                     if shoe is None:
                         logger.error(f"Shoe {row[1]} not found")
-                    if shoe.shoe_name == shoe_name:
+                    if shoe.shoe_name:
                         """create review"""
                         random_rating = random.choice(list(ratings_comments.keys()))
                         random_comment = ratings_comments[random_rating]

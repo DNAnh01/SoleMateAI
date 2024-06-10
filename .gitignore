@@ -1,7 +1,7 @@
 # ignore files of project
 /backend/.env.development
-report
-
+/report
+/quack-quack-game
 # ignore files of backend
 **/__pycache__
 /backend/.vscode

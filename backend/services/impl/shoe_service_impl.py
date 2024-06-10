@@ -410,42 +410,6 @@ class ShoeServiceImpl(ShoeService):
             shoe_found.updated_at = shoe.updated_at
             shoe_found.deleted_at = shoe.deleted_at
 
-            # if shoe.brand and shoe.brand.brand_name:
-            #     shoe_found.brand.brand_name = shoe.brand.brand_name
-            # if shoe.brand and shoe.brand.brand_logo:
-            #     shoe_found.brand.brand_logo = shoe.brand.brand_logo
-            # if shoe.color and shoe.color.color_name:
-            #     shoe_found.color.color_name = shoe.color.color_name
-            # if shoe.color and shoe.color.hex_value:
-            #     shoe_found.color.hex_value = shoe.color.hex_value
-            # if shoe.size and shoe.size.size_number:
-            #     shoe_found.size.size_number = shoe.size.size_number
-            # if shoe.image_url:
-            #     shoe_found.image_url = shoe.image_url
-            # if shoe.shoe_name:
-            #     shoe_found.shoe_name = shoe.shoe_name
-            # if shoe.description:
-            #     shoe_found.description = shoe.description
-            # if shoe.quantity_in_stock:
-            #     shoe_found.quantity_in_stock = shoe.quantity_in_stock
-            # if shoe.display_price:
-            #     shoe_found.display_price = shoe.display_price
-            # if shoe.warehouse_price:
-            #     shoe_found.warehouse_price = shoe.warehouse_price
-            # if shoe.discounted_price:
-            #     shoe_found.discounted_price = shoe.discounted_price
-
-            # if shoe.is_active:
-            #     shoe_found.is_active = shoe.is_active
-            # if shoe.deleted_at:
-            #     shoe_found.deleted_at = shoe.deleted_at
-            # if shoe.created_at:
-            #     shoe_found.created_at = shoe.created_at
-            # if shoe.updated_at:
-            #     shoe_found.updated_at = shoe.updated_at
-
-            # shoe_found.updated_at = datetime.now()
-
             db.commit()
             shoe_out = ShoeOutSchema(
                 id=shoe_found.id,

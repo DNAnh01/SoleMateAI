@@ -130,7 +130,7 @@ class UserServiceImpl(UserService):
             )
         return user_out
 
-    def delete_user(
+    def disable_user(
         self,
         db: Session,
         user_id: uuid.UUID,

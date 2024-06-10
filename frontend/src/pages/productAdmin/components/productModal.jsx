@@ -6,6 +6,7 @@ import { RiImageAddLine } from 'react-icons/ri';
 import useAppStore from '~/store';
 import { useEffect, useState } from 'react';
 const { TextArea } = Input;
+
 const ProductModal = ({
     title,
     handleOk,
@@ -69,6 +70,7 @@ const ProductModal = ({
             [e.target.name]: e.target.value,
         }));
     };
+
     useEffect(() => {
         if (isOpenModalEdit) {
             const initBrand = itemSelected
@@ -77,6 +79,7 @@ const ProductModal = ({
             setBrand(initBrand);
         }
     }, [brands, isOpenModalEdit, itemSelected]);
+
     return (
         <Modal
             title={title}
@@ -90,7 +93,7 @@ const ProductModal = ({
                 <div className="flex">
                     <div className="flex items-center gap-2 w-[30%]">
                         <label className="font-semibold w-[30%]" htmlFor="brand">
-                            Brand:
+                            Thương hiệu:
                         </label>
                         <Select
                             id="brand"
@@ -103,7 +106,7 @@ const ProductModal = ({
                     </div>
                     <div className="flex items-center gap-2 w-[30%]">
                         <label className="font-semibold w-[30%]" htmlFor="color">
-                            Color:
+                            Màu sắc:
                         </label>
                         <Select
                             id="color"
@@ -126,7 +129,7 @@ const ProductModal = ({
                     </div>
                     <div className="flex items-center gap-2 w-[30%]">
                         <label className="font-semibold w-[30%]" htmlFor="active">
-                            Status:
+                            Trạng thái:
                         </label>
                         <Select
                             id="active"
@@ -141,7 +144,7 @@ const ProductModal = ({
                 <div className="flex">
                     <div className="flex items-center gap-2 w-[30%]">
                         <label className="font-semibold w-[30%]" htmlFor="quantity">
-                            Quantity:
+                            Số lượng:
                         </label>
                         <InputNumber
                             onChange={(value) => handeChangeNumber(value, 'quantity_in_stock')}
@@ -153,7 +156,7 @@ const ProductModal = ({
                     </div>
                     <div className="flex items-center gap-2 w-[30%]">
                         <label className="font-semibold w-[30%]" htmlFor="displayPrice">
-                            Display:
+                            Giá bán:
                         </label>
                         <InputNumber
                             onChange={(value) => handeChangeNumber(value, 'display_price')}
@@ -165,7 +168,7 @@ const ProductModal = ({
                     </div>
                     <div className="flex items-center gap-2 w-[30%]">
                         <label className="font-semibold w-[30%]" htmlFor="warehouse">
-                            Warehouse:
+                            Giá kho:
                         </label>
                         <InputNumber
                             onChange={(value) => handeChangeNumber(value, 'warehouse_price')}
@@ -179,7 +182,7 @@ const ProductModal = ({
                 <div>
                     <div className="flex items-center gap-2 w-[30%]">
                         <label className="font-semibold w-[30%]" htmlFor="discount">
-                            Discount:
+                            Giảm giá:
                         </label>
                         <InputNumber
                             onChange={(value) => handeChangeNumber(value, 'discounted_price')}
@@ -193,7 +196,7 @@ const ProductModal = ({
                 <div>
                     <div className="w-3/5">
                         <label className="font-semibold" htmlFor="shoe_name">
-                            Name:
+                            Tên:
                         </label>
                         <Input
                             value={itemSelected?.shoe_name}
@@ -207,7 +210,7 @@ const ProductModal = ({
                 <div className="flex">
                     <div className="w-3/5">
                         <label className="font-semibold" htmlFor="description">
-                            Description:
+                            Mô tả:
                         </label>
                         <TextArea
                             id="description"

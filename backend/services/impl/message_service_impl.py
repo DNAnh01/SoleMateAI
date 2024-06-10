@@ -274,6 +274,8 @@ class MessageServiceImpl(MessageService):
             default_kn_chatbots = self.__crud_knowledge_base.get_default_kn_chatbot(
                 db=db, limit=2
             )
+            
+            
             logger.warning(f"default_kn_chatbots: {default_kn_chatbots}")
             # logger.error(f"default_kn_chatbots: {default_kn_chatbots.__dict__}")
             # logger.info(f"default_kn_chatbots: {[default_kn_chatbot.__dict__ for default_kn_chatbot in default_kn_chatbots]}")
