@@ -3,10 +3,12 @@ import { useParams } from 'react-router-dom';
 import promotionApi from '~/apis/promotion.api';
 import Loading from '~/components/loading/loading';
 import { dateFormat } from '~/data/data.promotion';
-import { DatePicker, InputNumber } from 'antd';
+import { DatePicker, Input, InputNumber } from 'antd';
 import dayjs from 'dayjs';
 import ProductSelect from '~/components/productSelect/ProductSelect';
 import { AppContext } from '~/contexts/app.context';
+import { convertToTargetTimestamp } from '~/utils/common';
+import toast from 'react-hot-toast';
 
 const PromotionDetails = () => {
     const { id } = useParams();
@@ -23,6 +25,47 @@ const PromotionDetails = () => {
     const handleRemoveProduct = useCallback((item) => {
         setProductsChoosed((prev) => prev.filter((product) => product?.id !== item?.id));
     }, []);
+
+    const handleSubmit = async () => {
+        try {
+            setIsLoading(true);
+            const data = {
+                promotion_name: promotion?.promotion_name,
+                start_date: convertToTargetTimestamp(promotion?.start_date),
+                end_date: convertToTargetTimestamp(promotion?.end_date),
+                discount_percent: promotion?.discount_percent,
+                shoe_ids: productChoosed.map((item) => item?.id),
+            };
+            const res = await promotionApi.update(promotion?.id, data);
+            if (res.status === 200) {
+                toast.success('Cập nhật khuyến mãi thành công.');
+            }
+        } catch (_) {
+            toast.error('Cập nhật khuyến mãi thất bại.');
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    const handleChange = (_, dateString, name) => {
+        setPromotion({
+            ...promotion,
+            [name]: dateString,
+        });
+    };
+
+    const handleChangeNumber = (value) => {
+        setPromotion({
+            ...promotion,
+            discount_percent: value,
+        });
+    };
+    const handleChangeName = (e) => {
+        setPromotion({
+            ...promotion,
+            promotion_name: e.target.value,
+        });
+    };
 
     const renderListProduct = useMemo(() => {
         if (products.length > 0) {
@@ -86,7 +129,7 @@ const PromotionDetails = () => {
     return (
         <>
             <div className="p-2">
-                <h1 className="font-semibold text-xl">{promotion?.promotion_name}</h1>
+                <Input value={promotion?.promotion_name} onChange={handleChangeName} />
                 <div>
                     <div className="flex gap-8 mt-6">
                         <div className="flex items-center gap-4">
@@ -96,6 +139,7 @@ const PromotionDetails = () => {
                                 name="start_date"
                                 value={dayjs(promotion?.start_date, dateFormat)}
                                 format={dateFormat}
+                                onChange={(date, dateString) => handleChange(date, dateString, 'start_date')}
                             />
                         </div>
                         <div className="flex items-center gap-4">
@@ -105,6 +149,7 @@ const PromotionDetails = () => {
                                 name="end_date"
                                 value={dayjs(promotion?.end_date, dateFormat)}
                                 format={dateFormat}
+                                onChange={(date, dateString) => handleChange(date, dateString, 'end_date')}
                             />
                         </div>
                         <div className="flex items-center gap-4">
@@ -114,6 +159,7 @@ const PromotionDetails = () => {
                                 name="discount_percent"
                                 min={0}
                                 value={promotion?.discount_percent}
+                                onChange={handleChangeNumber}
                             />
                         </div>
                     </div>
@@ -121,13 +167,9 @@ const PromotionDetails = () => {
                 </div>
                 <div className="flex justify-end gap-4 mt-10">
                     <button
-                        style={{ borderWidth: '1px' }}
-                        className="px-10 py-2 rounded-lg bg-red-300 text-white hover:bg-red-500  border-slate-500 font-semibold"
+                        onClick={handleSubmit}
+                        className="px-10 py-2 rounded-lg bg-sky-500 hover:bg-sky-700 text-white font-semibold"
                     >
-                        Loại bỏ
-                    </button>
-
-                    <button className="px-10 py-2 rounded-lg bg-sky-500 hover:bg-sky-700 text-white font-semibold">
                         Lưu dữ liệu
                     </button>
                 </div>

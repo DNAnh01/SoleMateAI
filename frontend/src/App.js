@@ -45,7 +45,7 @@ import PaymentFailure from './pages/checkout/PaymentFailurePage';
 import DashboardAdmin from './pages/dashboardAdmin';
 import UserAdminPage from './pages/userAdmin';
 import OrderAdmin from './pages/orderAdmin/orderAdmin';
-// import { Toaster } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 import PromotionAdmin from './pages/promotionAdmin/promotionAdmin';
 import PromotionDetails from './pages/promotionDetails/promotionDetails';
 
@@ -164,6 +164,7 @@ function App() {
                 </Routes>
             </Router>
             <Loading isLoading={isLoading} />
+            <Toaster position="top-center" reverseOrder={false} />
             <Overlay />
         </>
     );

@@ -47,3 +47,9 @@ export const convertISOToDateTime = (isoString) => {
 
     return formattedDate;
 };
+
+export const convertToTargetTimestamp = (inputDate) => {
+    const initialDate = new Date(inputDate);
+
+    return initialDate.toISOString();
+};
