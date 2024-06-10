@@ -63,19 +63,19 @@ def get_user_by_id(
     return user
 
 
-@router.delete(
+@router.patch(
     "/user-id={user_id}",
     status_code=status.HTTP_200_OK,
     response_model=Optional[UserOutSchema],
 )
-def delete_user(
+def disable_user(
     user_id: str,
     current_user_role_permission: UserRolePermissionSchema = Depends(
         oauth2.get_current_user_role_permission
     ),
     db: Session = Depends(deps.get_db),
 ) -> Optional[UserOutSchema]:
-    user = user_service.delete_user(
+    user = user_service.disable_user(
         db=db,
         user_id=user_id,
         current_user_role_permission=current_user_role_permission,
