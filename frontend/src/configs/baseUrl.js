@@ -48,12 +48,16 @@ const baseUrl = {
         promotion: {
             getAll: '/admin-promotion/get-all',
             getById: '/admin-promotion/promotion-id=',
+            update: '/admin-promotion/promotion-id=',
         },
         dashboard: {
             getChartStatsByDay: '/admin-dashboard/chart/day/',
             getChartStatsByMonth: '/admin-dashboard/chart/month/',
             getTotalStatsByDay: '/admin-dashboard/total/day/',
             getTotalStatsByMonth: '/admin-dashboard/total/month/',
+        },
+        user: {
+            getAll: '/user/get-all',
         },
     },
 };

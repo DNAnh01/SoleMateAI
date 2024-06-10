@@ -43,8 +43,9 @@ import orderApi from './apis/order.api';
 import PaymentSuccess from './pages/checkout/PaymentSuccessPage';
 import PaymentFailure from './pages/checkout/PaymentFailurePage';
 import DashboardAdmin from './pages/dashboardAdmin';
+import UserAdminPage from './pages/userAdmin';
 import OrderAdmin from './pages/orderAdmin/orderAdmin';
-// import { Toaster } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 import PromotionAdmin from './pages/promotionAdmin/promotionAdmin';
 import PromotionDetails from './pages/promotionDetails/promotionDetails';
 
@@ -157,11 +158,13 @@ function App() {
                         <Route path="order" element={<OrderAdmin />} />
                         <Route path="promotion" element={<PromotionAdmin />} />
                         <Route path="promotion/:id" element={<PromotionDetails />} />
+                        <Route path="user" element={<UserAdminPage />} />
                     </Route>
                     <Route path="*" element={<NotFound />} />
                 </Routes>
             </Router>
             <Loading isLoading={isLoading} />
+            <Toaster position="top-center" reverseOrder={false} />
             <Overlay />
         </>
     );
