@@ -55,6 +55,9 @@ const baseUrl = {
             getTotalStatsByDay: '/admin-dashboard/total/day/',
             getTotalStatsByMonth: '/admin-dashboard/total/month/',
         },
+        user: {
+            getAll: '/user/get-all',
+        },
     },
 };
 
