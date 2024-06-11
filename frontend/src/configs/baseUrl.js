@@ -59,6 +59,7 @@ const baseUrl = {
         },
         user: {
             getAll: '/user/get-all',
+            block: '/user/user-id=',
         },
     },
 };
