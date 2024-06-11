@@ -55,6 +55,7 @@ const PromotionAdmin = () => {
                     discount_percent: 0,
                     shoe_ids: [],
                 });
+                await refresh();
             }
         } catch (err) {
             console.log('error creating promotion', err);
@@ -66,7 +67,7 @@ const PromotionAdmin = () => {
         }
     };
 
-    const { data } = useFetchData(promotionApi.getAllPromotion);
+    const { data, refresh } = useFetchData(promotionApi.getAllPromotion);
     useEffect(() => {
         setIsLoading(true);
         if (data) {
