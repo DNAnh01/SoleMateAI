@@ -49,6 +49,7 @@ const baseUrl = {
             getAll: '/admin-promotion/get-all',
             getById: '/admin-promotion/promotion-id=',
             update: '/admin-promotion/promotion-id=',
+            create: '/admin-promotion/',
         },
         dashboard: {
             getChartStatsByDay: '/admin-dashboard/chart/day/',
@@ -58,6 +59,7 @@ const baseUrl = {
         },
         user: {
             getAll: '/user/get-all',
+            block: '/user/user-id=',
         },
     },
 };

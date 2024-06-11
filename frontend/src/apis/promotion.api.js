@@ -11,5 +11,8 @@ const promotionApi = {
     async update(id, params) {
         return await http.patch(`${configs.baseUrl.admin.promotion.update}${id}`, params);
     },
+    async create(params) {
+        return await http.post(`${configs.baseUrl.admin.promotion.create}`, params);
+    },
 };
 export default promotionApi;
