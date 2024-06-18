@@ -29,10 +29,24 @@ const OrderAdmin = () => {
         [refresh],
     );
 
-    const handleDeliveOrder = useCallback(
+    // const handleDeliveOrder = useCallback(
+    //     async (id) => {
+    //         try {
+    //             const res = await adminOrderAPI.deliveOrder(id);
+    //             if (res.status === 200) {
+    //                 toast.success('Xác nhận vận chuyển đơn hàng thành công');
+    //                 refresh();
+    //             }
+    //         } catch (_) {
+    //             toast.error('Xác nhận vận chuyển đơn hàng thất bại');
+    //         }
+    //     },
+    //     [refresh],
+    // );
+    const handleShippingOrder = useCallback(
         async (id) => {
             try {
-                const res = await adminOrderAPI.deliveOrder(id);
+                const res = await adminOrderAPI.shippingOrder(id);
                 if (res.status === 200) {
                     toast.success('Xác nhận vận chuyển đơn hàng thành công');
                     refresh();
@@ -43,6 +57,7 @@ const OrderAdmin = () => {
         },
         [refresh],
     );
+
     const columns = [
         ...orderColumns,
         {
@@ -73,7 +88,7 @@ const OrderAdmin = () => {
                                 title="Xác nhận vận chuyển"
                                 placement="bottomLeft"
                                 description="Bạn có chắc xác nhận vận chuyển đơn hàng này?"
-                                onConfirm={() => handleDeliveOrder(record.id)}
+                                onConfirm={() => handleShippingOrder(record.id)}
                             >
                                 <button
                                     title="Xác nhận vận chuyển"

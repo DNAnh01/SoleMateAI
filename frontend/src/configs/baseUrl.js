@@ -13,7 +13,12 @@ const baseUrl = {
         getOrderById: '/order/order-id=',
         cancelOrderById: '/order/cancel/order-id=',
         getAll: '/admin-order/get-all',
+        shippingOrder: '/admin-order/shipping/order-id=',
         deliveOrder: '/admin-order/deliver/order-id=',
+    },
+    review: {
+        create: '/review/create-review',
+        like_review: '/review/like-review/review-id=',
     },
     product: {
         getAll: '/shoe/get-all',

@@ -14,6 +14,8 @@ import { CartContext } from '~/contexts/cart.context';
 import cartAPI from '~/apis/cart.api';
 import { toast } from 'react-toastify';
 import useAppStore from '~/store';
+import ReviewForm from './components/ReviewForm/ReviewForm';
+import reviewApi from '~/apis/review.api';
 
 const DetailsScreenWrapper = styled.main`
     margin: 40px 0;
@@ -366,6 +368,27 @@ const ProductDetailsPage = () => {
         }
     };
 
+    const handleReviewSubmitted = async () => {
+        try {
+            const response = await productApi.getById(id);
+            if (response.status === 200) {
+                setProduct(response.data);
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    const handleLikeReview = async (reviewId) => {
+        try {
+            await reviewApi.likeReview(reviewId);
+            handleReviewSubmitted(); // refresh reviews
+        } catch (error) {
+            toast.error('Failed to like review');
+            console.error(error);
+        }
+    };
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -468,6 +491,7 @@ const ProductDetailsPage = () => {
                         </div>
                     </ProductDetailsWrapper>
                 </DetailsContent>
+                <ProductSimilar brandName={brandName} />
                 <ReviewsWrapper>
                     <h3>Bình luận</h3>
                     {product.reviews.map((review, index) => (
@@ -483,15 +507,15 @@ const ProductDetailsPage = () => {
                                     </div>
                                 </div>
                                 <div className="review-comment">{review.comment}</div>
-                                <div className="review-hearts">
+                                <div className="review-hearts" onClick={() => handleLikeReview(review.id)}>
                                     <Icons icon="heart" width={20} height={20} color={defaultTheme.color_red} />{' '}
                                     <p>{review.heart_count}</p>
                                 </div>
                             </div>
                         </div>
                     ))}
+                    <ReviewForm shoeId={product.id} onReviewSubmitted={handleReviewSubmitted} />
                 </ReviewsWrapper>
-                <ProductSimilar brandName={brandName} />
             </Container>
         </DetailsScreenWrapper>
     );

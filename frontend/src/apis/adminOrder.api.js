@@ -8,6 +8,10 @@ const adminOrderAPI = {
     async cancelOrder(id) {
         return http.patch(`${configs.baseUrl.order.cancelOrderById}${id}`);
     },
+
+    async shippingOrder(id) {
+        return http.patch(`${configs.baseUrl.order.shippingOrder}${id}`);
+    },
     async deliveOrder(id) {
         return http.patch(`${configs.baseUrl.order.deliveOrder}${id}`);
     },

@@ -17,6 +17,7 @@ from backend.api.v1.endpoints import (
     payment,
     shoe,
     user,
+    review,
 )
 
 api_router = APIRouter()
@@ -47,3 +48,4 @@ api_router.include_router(
 
 api_router.include_router(payment.router, prefix="/payment", tags=["payments"])
 api_router.include_router(color.router, prefix="/color", tags=["colors"])
+api_router.include_router(review.router, prefix="/review", tags=["reviews"])

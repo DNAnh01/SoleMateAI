@@ -8,7 +8,7 @@ from backend.schemas.user_schema import UserOutInProductDetailPageSchema
 
 
 class ReviewCreateSchema(pydantic.BaseModel):
-    user_id: uuid.UUID
+    # user_id: uuid.UUID
     shoe_id: uuid.UUID
     rating: Optional[int] = None
     comment: Optional[str] = None
@@ -16,7 +16,7 @@ class ReviewCreateSchema(pydantic.BaseModel):
 
 
 class ReviewUpdateSchema(BaseSchema):
-    user_id: Optional[uuid.UUID] = None
+    # user_id: Optional[uuid.UUID] = None
     shoe_id: Optional[uuid.UUID] = None
     rating: Optional[int] = None
     comment: Optional[str] = None
@@ -24,6 +24,7 @@ class ReviewUpdateSchema(BaseSchema):
 
 
 class ReviewOutInProductDetailPageSchema(pydantic.BaseModel):
+    id: uuid.UUID
     user: UserOutInProductDetailPageSchema
     rating: int
     comment: str

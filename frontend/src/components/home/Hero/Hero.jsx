@@ -112,19 +112,22 @@ const HeroSlideContent = styled.div`
     }
 
     .hero-text {
-        font-family: ${defaultTheme.font_family_inter};
+        /* font-family: ${defaultTheme.font_family_inter}; */
         color: ${defaultTheme.color_white};
+        font-size: 22px;
     }
 
     .hero-text-top {
-        font-size: 26px;
+        font-size: 22px;
+        /* font-family: ${defaultTheme.font_family_inter}; */
         @media (max-width: ${breakpoints.lg}) {
             font-size: 24px;
         }
     }
 
     .hero-text-large {
-        font-size: 40px;
+        /* font-family: ${defaultTheme.font_family_inter}; */
+        font-size: 36px;
         letter-spacing: 0.315px;
         line-height: 1.2;
         margin-bottom: 20px;

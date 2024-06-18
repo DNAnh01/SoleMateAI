@@ -20,10 +20,10 @@ const Header = styled.div`
 `;
 
 const Headline = styled.h6`
-    font-size: 1rem;
+    font-size: 1.4rem;
     font-weight: 600;
     color: ${defaultTheme.color_jet};
-    line-height: 1rem;
+    line-height: 1.4rem;
     user-select: none;
     margin-bottom: 0;
 `;

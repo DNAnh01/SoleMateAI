@@ -244,6 +244,7 @@ class ShoeServiceImpl(ShoeService):
                 total_rating += review.rating
                 reviews_out.append(
                     ReviewOutInProductDetailPageSchema(
+                        id=review.id,
                         user=UserOutInProductDetailPageSchema(
                             email=user_found.email,
                             display_name=user_found.display_name,
