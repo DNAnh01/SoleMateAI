@@ -9,6 +9,7 @@ import useFetchData from '~/hooks/useFetchData';
 import brandAPI from '~/apis/brand.api';
 import useAppStore from '~/store';
 import { useEffect } from 'react';
+import colorApi from '~/apis/colors.api';
 
 export const Wrapper = styled.div`
     height: 100vh;
@@ -32,8 +33,10 @@ export const PageContainer = styled.div`
 `;
 
 const AdminLayout = () => {
-    const { setBrands } = useAppStore();
+    const { setBrands, setColors } = useAppStore();
     const { data: brands } = useFetchData(brandAPI.getAll);
+    const { data: colors } = useFetchData(colorApi.getAll);
+
     useEffect(() => {
         if (brands) {
             const formatedBrands = brands.map((item) => ({
@@ -45,7 +48,17 @@ const AdminLayout = () => {
             }));
             setBrands(formatedBrands);
         }
-    }, [brands, setBrands]);
+        if (colors) {
+            const formatedColors = colors.map((item) => ({
+                value: item.color_name,
+                id: item.id,
+                label: item.color_name,
+                isActive: item.is_active,
+                hex_value: item.hex_value,
+            }));
+            setColors(formatedColors);
+        }
+    }, [brands, setBrands, colors, setColors]);
 
     return (
         <Wrapper>

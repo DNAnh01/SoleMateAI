@@ -21,9 +21,9 @@ const ProductModal = ({
     image,
     setItemSelected,
 }) => {
-    const { brands } = useAppStore();
-
+    const { brands, colors } = useAppStore();
     const [brand, setBrand] = useState(brands[0]);
+    const [color, setColor] = useState(colors[0]);
 
     const handleChangeSelect = (value, name) => {
         if (name === 'brand') {
@@ -46,14 +46,15 @@ const ProductModal = ({
             return;
         }
         if (name === 'color') {
+            setColor(value);
+            const colorData = colors.find((color) => color.label === value);
             setItemSelected((pre) => ({
                 ...pre,
                 [name]: {
-                    color_name: 'Yellow',
-                    hex_value: '#e3a338',
+                    color_name: value,
+                    hex_value: colorData.hex_value,
                 },
             }));
-            return;
         }
     };
 

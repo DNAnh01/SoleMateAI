@@ -83,7 +83,7 @@
                 ]
             ],
             "responses": [
-                "Tổng số giày hiện có là 4. Danh sách các giày: Adidas Superstar, Reebok Classic, Puma Suede Classic+, Nike Air Max 90 Essential."
+                "Tổng số giày hiện có là 40. Danh sách các giày: Nike Shoe Model Black 41, Reebok Shoe Model Black 41, Nike Shoe Model Black 40, Puma Shoe Model Black 42, Nike Shoe Model Blue 40, Nike Shoe Model Blue 41, Nike Shoe Model Light Blue 40, Reebok Shoe Model Black 42, Puma Shoe Model Black 40, Reebok Shoe Model Yellow 40, Puma Shoe Model Blue 40, Puma Shoe Model Black 41, Adidas Shoe Model Blue 41, Adidas Shoe Model Black 41, Reebok Shoe Model Blue 42, Adidas Shoe Model Blue 42, Nike Shoe Model Yellow 41, Puma Shoe Model Blue 41, Puma Shoe Model Yellow 42, Reebok Shoe Model Blue 41, Reebok Shoe Model Yellow 42, Adidas Shoe Model Light Blue 40, Adidas Shoe Model Yellow 41, Nike Shoe Model Yellow 40, Nike Shoe Model Black 42, Reebok Shoe Model Black 40, Adidas Shoe Model Blue 40, Puma Shoe Model Blue 42, Adidas Shoe Model Yellow 40, Nike Shoe Model Yellow 42, Adidas Shoe Model Yellow 42, Reebok Shoe Model Blue 40, Adidas Shoe Model Black 40, Adidas Shoe Model Black 42, Puma Shoe Model Yellow 41, Puma Shoe Model Yellow 40, Reebok Shoe Model Light Blue 40, Reebok Shoe Model Yellow 41, Nike Shoe Model Blue 42, Puma Shoe Model Light Blue 40."
             ],
             "context": [
                 "Thông tin về số lượng giày hiện có."
@@ -98,7 +98,7 @@
                 ]
             ],
             "responses": [
-                "Tổng số thương hiệu giày hiện có là 4. Danh sách các thương hiệu giày: Nike, Reebok, Adidas, Puma."
+                "Tổng số thương hiệu giày hiện có là 4. Danh sách các thương hiệu giày: Nike, Reebok, Puma, Adidas."
             ],
             "context": [
                 "Thông tin về số lượng thương hiệu giày hiện có."
@@ -113,7 +113,7 @@
                 ]
             ],
             "responses": [
-                "Tổng số màu giày hiện có là 7. Danh sách các màu giày: Grey, Orange, Blue, Red, Black, Yellow, Light Blue."
+                "Tổng số màu giày hiện có là 4. Danh sách các màu giày: Blue, Yellow, Black, Light Blue."
             ],
             "context": [
                 "Thông tin về số lượng màu giày hiện có."
@@ -128,7 +128,7 @@
                 ]
             ],
             "responses": [
-                "Tổng số size giày hiện có là 2. Danh sách các size giày: 41, 42."
+                "Tổng số size giày hiện có là 3. Danh sách các size giày: 40, 41, 42."
             ],
             "context": [
                 "Thông tin về số lượng size giày hiện có."
@@ -150,67 +150,67 @@
             ]
         },
         {
-            "tag": "có_puma_không",
+            "tag": "có_reebok_không",
             "patterns": [
                 [
-                    "Có Puma không",
-                    "Puma"
+                    "Có Reebok không",
+                    "Reebok"
                 ]
             ],
             "responses": [
-                "Có, chúng tôi có Puma Suede Classic+ từ thương hiệu Puma."
+                "Có, chúng tôi có Reebok Shoe Model Yellow 41 từ thương hiệu Reebok."
             ],
             "context": [
-                "Thông tin về Puma Suede Classic+ từ thương hiệu Puma."
+                "Thông tin về Reebok Shoe Model Yellow 41 từ thương hiệu Reebok."
             ]
         },
         {
-            "tag": "bạn_có_puma_suede_classic+_không",
+            "tag": "bạn_có_reebok_shoe_model_blue_42_không",
             "patterns": [
                 [
-                    "Bạn có Puma Suede Classic+ không",
-                    "có Puma Suede Classic+ không",
-                    "Puma Suede Classic+ có không",
-                    "Puma Suede Classic+"
+                    "Bạn có Reebok Shoe Model Blue 42 không",
+                    "có Reebok Shoe Model Blue 42 không",
+                    "Reebok Shoe Model Blue 42 có không",
+                    "Reebok Shoe Model Blue 42"
                 ]
             ],
             "responses": [
-                "Có, chúng tôi có Puma Suede Classic+ với màu Light Blue và size 42."
+                "Có, chúng tôi có Reebok Shoe Model Blue 42 với màu Blue và size 42."
             ],
             "context": [
-                "Thông tin về Puma Suede Classic+ với màu Light Blue và size 42."
+                "Thông tin về Reebok Shoe Model Blue 42 với màu Blue và size 42."
             ]
         },
         {
-            "tag": "giày_puma_suede_classic+_màu_light_blue_có_đẹp_không",
+            "tag": "giày_reebok_shoe_model_blue_42_màu_blue_có_đẹp_không",
             "patterns": [
                 [
-                    "Giày Puma Suede Classic+ màu Light Blue có đẹp không",
-                    "Puma Suede Classic+ màu Light Blue đẹp không",
-                    "Puma Suede Classic+ màu Light Blue"
+                    "Giày Reebok Shoe Model Blue 42 màu Blue có đẹp không",
+                    "Reebok Shoe Model Blue 42 màu Blue đẹp không",
+                    "Reebok Shoe Model Blue 42 màu Blue"
                 ]
             ],
             "responses": [
-                "Có, giày Puma Suede Classic+ màu Light Blue là một trong những màu được ưa chuộng."
+                "Có, giày Reebok Shoe Model Blue 42 màu Blue là một trong những màu được ưa chuộng."
             ],
             "context": [
-                "Thông tin về giày Puma Suede Classic+ màu Light Blue."
+                "Thông tin về giày Reebok Shoe Model Blue 42 màu Blue."
             ]
         },
         {
-            "tag": "giày_puma_suede_classic+_giá_bao_nhiêu",
+            "tag": "giày_reebok_shoe_model_blue_42_giá_bao_nhiêu",
             "patterns": [
                 [
-                    "giày Puma Suede Classic+ giá bao nhiêu",
-                    "Puma Suede Classic+ giá bao nhiêu",
-                    "Puma Suede Classic+ giá"
+                    "giày Reebok Shoe Model Blue 42 giá bao nhiêu",
+                    "Reebok Shoe Model Blue 42 giá bao nhiêu",
+                    "Reebok Shoe Model Blue 42 giá"
                 ]
             ],
             "responses": [
-                "Giày Puma Suede Classic+ giá 1800000.0 VNĐ."
+                "Giày Reebok Shoe Model Blue 42 giá 1260000.0 VNĐ."
             ],
             "context": [
-                "Thông tin về giày Puma Suede Classic+ giá 1800000.0 VNĐ."
+                "Thông tin về giày Reebok Shoe Model Blue 42 giá 1260000.0 VNĐ."
             ]
         },
         {
@@ -230,163 +230,1013 @@
             ]
         },
         {
-            "tag": "giày_puma_suede_classic+_màu_yellow_có_đẹp_không",
+            "tag": "bạn_có_reebok_shoe_model_blue_40_không",
             "patterns": [
                 [
-                    "Giày Puma Suede Classic+ màu Yellow có đẹp không",
-                    "Puma Suede Classic+ màu Yellow đẹp không",
-                    "Puma Suede Classic+ màu Yellow"
+                    "Bạn có Reebok Shoe Model Blue 40 không",
+                    "có Reebok Shoe Model Blue 40 không",
+                    "Reebok Shoe Model Blue 40 có không",
+                    "Reebok Shoe Model Blue 40"
                 ]
             ],
             "responses": [
-                "Có, giày Puma Suede Classic+ màu Yellow là một trong những màu được ưa chuộng."
+                "Có, chúng tôi có Reebok Shoe Model Blue 40 với màu Blue và size 40."
             ],
             "context": [
-                "Thông tin về giày Puma Suede Classic+ màu Yellow."
+                "Thông tin về Reebok Shoe Model Blue 40 với màu Blue và size 40."
             ]
         },
         {
-            "tag": "giày_puma_suede_classic+_màu_black_có_đẹp_không",
+            "tag": "giày_reebok_shoe_model_blue_40_màu_blue_có_đẹp_không",
             "patterns": [
                 [
-                    "Giày Puma Suede Classic+ màu Black có đẹp không",
-                    "Puma Suede Classic+ màu Black đẹp không",
-                    "Puma Suede Classic+ màu Black"
+                    "Giày Reebok Shoe Model Blue 40 màu Blue có đẹp không",
+                    "Reebok Shoe Model Blue 40 màu Blue đẹp không",
+                    "Reebok Shoe Model Blue 40 màu Blue"
                 ]
             ],
             "responses": [
-                "Có, giày Puma Suede Classic+ màu Black là một trong những màu được ưa chuộng."
+                "Có, giày Reebok Shoe Model Blue 40 màu Blue là một trong những màu được ưa chuộng."
             ],
             "context": [
-                "Thông tin về giày Puma Suede Classic+ màu Black."
+                "Thông tin về giày Reebok Shoe Model Blue 40 màu Blue."
             ]
         },
         {
-            "tag": "giày_puma_suede_classic+_màu_blue_có_đẹp_không",
+            "tag": "giày_reebok_shoe_model_blue_40_giá_bao_nhiêu",
             "patterns": [
                 [
-                    "Giày Puma Suede Classic+ màu Blue có đẹp không",
-                    "Puma Suede Classic+ màu Blue đẹp không",
-                    "Puma Suede Classic+ màu Blue"
+                    "giày Reebok Shoe Model Blue 40 giá bao nhiêu",
+                    "Reebok Shoe Model Blue 40 giá bao nhiêu",
+                    "Reebok Shoe Model Blue 40 giá"
                 ]
             ],
             "responses": [
-                "Có, giày Puma Suede Classic+ màu Blue là một trong những màu được ưa chuộng."
+                "Giày Reebok Shoe Model Blue 40 giá 1350000.0 VNĐ."
             ],
             "context": [
-                "Thông tin về giày Puma Suede Classic+ màu Blue."
+                "Thông tin về giày Reebok Shoe Model Blue 40 giá 1350000.0 VNĐ."
             ]
         },
         {
-            "tag": "giày_puma_suede_classic+_màu_red_có_đẹp_không",
+            "tag": "bạn_có_reebok_shoe_model_light_blue_40_không",
             "patterns": [
                 [
-                    "Giày Puma Suede Classic+ màu Red có đẹp không",
-                    "Puma Suede Classic+ màu Red đẹp không",
-                    "Puma Suede Classic+ màu Red"
+                    "Bạn có Reebok Shoe Model Light Blue 40 không",
+                    "có Reebok Shoe Model Light Blue 40 không",
+                    "Reebok Shoe Model Light Blue 40 có không",
+                    "Reebok Shoe Model Light Blue 40"
                 ]
             ],
             "responses": [
-                "Có, giày Puma Suede Classic+ màu Red là một trong những màu được ưa chuộng."
+                "Có, chúng tôi có Reebok Shoe Model Light Blue 40 với màu Light Blue và size 40."
             ],
             "context": [
-                "Thông tin về giày Puma Suede Classic+ màu Red."
+                "Thông tin về Reebok Shoe Model Light Blue 40 với màu Light Blue và size 40."
             ]
         },
         {
-            "tag": "giày_puma_suede_classic+_màu_grey_có_đẹp_không",
+            "tag": "giày_reebok_shoe_model_light_blue_40_màu_light_blue_có_đẹp_không",
             "patterns": [
                 [
-                    "Giày Puma Suede Classic+ màu Grey có đẹp không",
-                    "Puma Suede Classic+ màu Grey đẹp không",
-                    "Puma Suede Classic+ màu Grey"
+                    "Giày Reebok Shoe Model Light Blue 40 màu Light Blue có đẹp không",
+                    "Reebok Shoe Model Light Blue 40 màu Light Blue đẹp không",
+                    "Reebok Shoe Model Light Blue 40 màu Light Blue"
                 ]
             ],
             "responses": [
-                "Có, giày Puma Suede Classic+ màu Grey là một trong những màu được ưa chuộng."
+                "Có, giày Reebok Shoe Model Light Blue 40 màu Light Blue là một trong những màu được ưa chuộng."
             ],
             "context": [
-                "Thông tin về giày Puma Suede Classic+ màu Grey."
+                "Thông tin về giày Reebok Shoe Model Light Blue 40 màu Light Blue."
             ]
         },
         {
-            "tag": "giày_puma_suede_classic+_màu_orange_có_đẹp_không",
+            "tag": "giày_reebok_shoe_model_light_blue_40_giá_bao_nhiêu",
             "patterns": [
                 [
-                    "Giày Puma Suede Classic+ màu Orange có đẹp không",
-                    "Puma Suede Classic+ màu Orange đẹp không",
-                    "Puma Suede Classic+ màu Orange"
+                    "giày Reebok Shoe Model Light Blue 40 giá bao nhiêu",
+                    "Reebok Shoe Model Light Blue 40 giá bao nhiêu",
+                    "Reebok Shoe Model Light Blue 40 giá"
                 ]
             ],
             "responses": [
-                "Có, giày Puma Suede Classic+ màu Orange là một trong những màu được ưa chuộng."
+                "Giày Reebok Shoe Model Light Blue 40 giá 1800000.0 VNĐ."
             ],
             "context": [
-                "Thông tin về giày Puma Suede Classic+ màu Orange."
+                "Thông tin về giày Reebok Shoe Model Light Blue 40 giá 1800000.0 VNĐ."
             ]
         },
         {
-            "tag": "có_reebok_không",
+            "tag": "bạn_có_reebok_shoe_model_black_40_không",
             "patterns": [
                 [
-                    "Có Reebok không",
-                    "Reebok"
+                    "Bạn có Reebok Shoe Model Black 40 không",
+                    "có Reebok Shoe Model Black 40 không",
+                    "Reebok Shoe Model Black 40 có không",
+                    "Reebok Shoe Model Black 40"
                 ]
             ],
             "responses": [
-                "Có, chúng tôi có Reebok Classic từ thương hiệu Reebok."
+                "Có, chúng tôi có Reebok Shoe Model Black 40 với màu Black và size 40."
             ],
             "context": [
-                "Thông tin về Reebok Classic từ thương hiệu Reebok."
+                "Thông tin về Reebok Shoe Model Black 40 với màu Black và size 40."
             ]
         },
         {
-            "tag": "bạn_có_reebok_classic_không",
+            "tag": "giày_reebok_shoe_model_black_40_màu_black_có_đẹp_không",
             "patterns": [
                 [
-                    "Bạn có Reebok Classic không",
-                    "có Reebok Classic không",
-                    "Reebok Classic có không",
-                    "Reebok Classic"
+                    "Giày Reebok Shoe Model Black 40 màu Black có đẹp không",
+                    "Reebok Shoe Model Black 40 màu Black đẹp không",
+                    "Reebok Shoe Model Black 40 màu Black"
                 ]
             ],
             "responses": [
-                "Có, chúng tôi có Reebok Classic với màu Yellow và size 41."
+                "Có, giày Reebok Shoe Model Black 40 màu Black là một trong những màu được ưa chuộng."
             ],
             "context": [
-                "Thông tin về Reebok Classic với màu Yellow và size 41."
+                "Thông tin về giày Reebok Shoe Model Black 40 màu Black."
             ]
         },
         {
-            "tag": "giày_reebok_classic_màu_red_có_đẹp_không",
+            "tag": "giày_reebok_shoe_model_black_40_giá_bao_nhiêu",
             "patterns": [
                 [
-                    "Giày Reebok Classic màu Red có đẹp không",
-                    "Reebok Classic màu Red đẹp không",
-                    "Reebok Classic màu Red"
+                    "giày Reebok Shoe Model Black 40 giá bao nhiêu",
+                    "Reebok Shoe Model Black 40 giá bao nhiêu",
+                    "Reebok Shoe Model Black 40 giá"
                 ]
             ],
             "responses": [
-                "Có, giày Reebok Classic màu Red là một trong những màu được ưa chuộng."
+                "Giày Reebok Shoe Model Black 40 giá 1350000.0 VNĐ."
             ],
             "context": [
-                "Thông tin về giày Reebok Classic màu Red."
+                "Thông tin về giày Reebok Shoe Model Black 40 giá 1350000.0 VNĐ."
             ]
         },
         {
-            "tag": "giày_reebok_classic_giá_bao_nhiêu",
+            "tag": "bạn_có_reebok_shoe_model_black_42_không",
             "patterns": [
                 [
-                    "giày Reebok Classic giá bao nhiêu",
-                    "Reebok Classic giá bao nhiêu",
-                    "Reebok Classic giá"
+                    "Bạn có Reebok Shoe Model Black 42 không",
+                    "có Reebok Shoe Model Black 42 không",
+                    "Reebok Shoe Model Black 42 có không",
+                    "Reebok Shoe Model Black 42"
                 ]
             ],
             "responses": [
-                "Giày Reebok Classic giá 1600000.0 VNĐ."
+                "Có, chúng tôi có Reebok Shoe Model Black 42 với màu Black và size 42."
             ],
             "context": [
-                "Thông tin về giày Reebok Classic giá 1600000.0 VNĐ."
+                "Thông tin về Reebok Shoe Model Black 42 với màu Black và size 42."
+            ]
+        },
+        {
+            "tag": "giày_reebok_shoe_model_black_42_màu_black_có_đẹp_không",
+            "patterns": [
+                [
+                    "Giày Reebok Shoe Model Black 42 màu Black có đẹp không",
+                    "Reebok Shoe Model Black 42 màu Black đẹp không",
+                    "Reebok Shoe Model Black 42 màu Black"
+                ]
+            ],
+            "responses": [
+                "Có, giày Reebok Shoe Model Black 42 màu Black là một trong những màu được ưa chuộng."
+            ],
+            "context": [
+                "Thông tin về giày Reebok Shoe Model Black 42 màu Black."
+            ]
+        },
+        {
+            "tag": "giày_reebok_shoe_model_black_42_giá_bao_nhiêu",
+            "patterns": [
+                [
+                    "giày Reebok Shoe Model Black 42 giá bao nhiêu",
+                    "Reebok Shoe Model Black 42 giá bao nhiêu",
+                    "Reebok Shoe Model Black 42 giá"
+                ]
+            ],
+            "responses": [
+                "Giày Reebok Shoe Model Black 42 giá 1080000.0 VNĐ."
+            ],
+            "context": [
+                "Thông tin về giày Reebok Shoe Model Black 42 giá 1080000.0 VNĐ."
+            ]
+        },
+        {
+            "tag": "bạn_có_reebok_shoe_model_blue_41_không",
+            "patterns": [
+                [
+                    "Bạn có Reebok Shoe Model Blue 41 không",
+                    "có Reebok Shoe Model Blue 41 không",
+                    "Reebok Shoe Model Blue 41 có không",
+                    "Reebok Shoe Model Blue 41"
+                ]
+            ],
+            "responses": [
+                "Có, chúng tôi có Reebok Shoe Model Blue 41 với màu Blue và size 41."
+            ],
+            "context": [
+                "Thông tin về Reebok Shoe Model Blue 41 với màu Blue và size 41."
+            ]
+        },
+        {
+            "tag": "giày_reebok_shoe_model_blue_41_màu_blue_có_đẹp_không",
+            "patterns": [
+                [
+                    "Giày Reebok Shoe Model Blue 41 màu Blue có đẹp không",
+                    "Reebok Shoe Model Blue 41 màu Blue đẹp không",
+                    "Reebok Shoe Model Blue 41 màu Blue"
+                ]
+            ],
+            "responses": [
+                "Có, giày Reebok Shoe Model Blue 41 màu Blue là một trong những màu được ưa chuộng."
+            ],
+            "context": [
+                "Thông tin về giày Reebok Shoe Model Blue 41 màu Blue."
+            ]
+        },
+        {
+            "tag": "giày_reebok_shoe_model_blue_41_giá_bao_nhiêu",
+            "patterns": [
+                [
+                    "giày Reebok Shoe Model Blue 41 giá bao nhiêu",
+                    "Reebok Shoe Model Blue 41 giá bao nhiêu",
+                    "Reebok Shoe Model Blue 41 giá"
+                ]
+            ],
+            "responses": [
+                "Giày Reebok Shoe Model Blue 41 giá 1170000.0 VNĐ."
+            ],
+            "context": [
+                "Thông tin về giày Reebok Shoe Model Blue 41 giá 1170000.0 VNĐ."
+            ]
+        },
+        {
+            "tag": "bạn_có_reebok_shoe_model_black_41_không",
+            "patterns": [
+                [
+                    "Bạn có Reebok Shoe Model Black 41 không",
+                    "có Reebok Shoe Model Black 41 không",
+                    "Reebok Shoe Model Black 41 có không",
+                    "Reebok Shoe Model Black 41"
+                ]
+            ],
+            "responses": [
+                "Có, chúng tôi có Reebok Shoe Model Black 41 với màu Black và size 41."
+            ],
+            "context": [
+                "Thông tin về Reebok Shoe Model Black 41 với màu Black và size 41."
+            ]
+        },
+        {
+            "tag": "giày_reebok_shoe_model_black_41_màu_black_có_đẹp_không",
+            "patterns": [
+                [
+                    "Giày Reebok Shoe Model Black 41 màu Black có đẹp không",
+                    "Reebok Shoe Model Black 41 màu Black đẹp không",
+                    "Reebok Shoe Model Black 41 màu Black"
+                ]
+            ],
+            "responses": [
+                "Có, giày Reebok Shoe Model Black 41 màu Black là một trong những màu được ưa chuộng."
+            ],
+            "context": [
+                "Thông tin về giày Reebok Shoe Model Black 41 màu Black."
+            ]
+        },
+        {
+            "tag": "giày_reebok_shoe_model_black_41_giá_bao_nhiêu",
+            "patterns": [
+                [
+                    "giày Reebok Shoe Model Black 41 giá bao nhiêu",
+                    "Reebok Shoe Model Black 41 giá bao nhiêu",
+                    "Reebok Shoe Model Black 41 giá"
+                ]
+            ],
+            "responses": [
+                "Giày Reebok Shoe Model Black 41 giá 1080000.0 VNĐ."
+            ],
+            "context": [
+                "Thông tin về giày Reebok Shoe Model Black 41 giá 1080000.0 VNĐ."
+            ]
+        },
+        {
+            "tag": "bạn_có_reebok_shoe_model_yellow_42_không",
+            "patterns": [
+                [
+                    "Bạn có Reebok Shoe Model Yellow 42 không",
+                    "có Reebok Shoe Model Yellow 42 không",
+                    "Reebok Shoe Model Yellow 42 có không",
+                    "Reebok Shoe Model Yellow 42"
+                ]
+            ],
+            "responses": [
+                "Có, chúng tôi có Reebok Shoe Model Yellow 42 với màu Yellow và size 42."
+            ],
+            "context": [
+                "Thông tin về Reebok Shoe Model Yellow 42 với màu Yellow và size 42."
+            ]
+        },
+        {
+            "tag": "giày_reebok_shoe_model_yellow_42_màu_yellow_có_đẹp_không",
+            "patterns": [
+                [
+                    "Giày Reebok Shoe Model Yellow 42 màu Yellow có đẹp không",
+                    "Reebok Shoe Model Yellow 42 màu Yellow đẹp không",
+                    "Reebok Shoe Model Yellow 42 màu Yellow"
+                ]
+            ],
+            "responses": [
+                "Có, giày Reebok Shoe Model Yellow 42 màu Yellow là một trong những màu được ưa chuộng."
+            ],
+            "context": [
+                "Thông tin về giày Reebok Shoe Model Yellow 42 màu Yellow."
+            ]
+        },
+        {
+            "tag": "giày_reebok_shoe_model_yellow_42_giá_bao_nhiêu",
+            "patterns": [
+                [
+                    "giày Reebok Shoe Model Yellow 42 giá bao nhiêu",
+                    "Reebok Shoe Model Yellow 42 giá bao nhiêu",
+                    "Reebok Shoe Model Yellow 42 giá"
+                ]
+            ],
+            "responses": [
+                "Giày Reebok Shoe Model Yellow 42 giá 1440000.0 VNĐ."
+            ],
+            "context": [
+                "Thông tin về giày Reebok Shoe Model Yellow 42 giá 1440000.0 VNĐ."
+            ]
+        },
+        {
+            "tag": "bạn_có_reebok_shoe_model_yellow_40_không",
+            "patterns": [
+                [
+                    "Bạn có Reebok Shoe Model Yellow 40 không",
+                    "có Reebok Shoe Model Yellow 40 không",
+                    "Reebok Shoe Model Yellow 40 có không",
+                    "Reebok Shoe Model Yellow 40"
+                ]
+            ],
+            "responses": [
+                "Có, chúng tôi có Reebok Shoe Model Yellow 40 với màu Yellow và size 40."
+            ],
+            "context": [
+                "Thông tin về Reebok Shoe Model Yellow 40 với màu Yellow và size 40."
+            ]
+        },
+        {
+            "tag": "giày_reebok_shoe_model_yellow_40_màu_yellow_có_đẹp_không",
+            "patterns": [
+                [
+                    "Giày Reebok Shoe Model Yellow 40 màu Yellow có đẹp không",
+                    "Reebok Shoe Model Yellow 40 màu Yellow đẹp không",
+                    "Reebok Shoe Model Yellow 40 màu Yellow"
+                ]
+            ],
+            "responses": [
+                "Có, giày Reebok Shoe Model Yellow 40 màu Yellow là một trong những màu được ưa chuộng."
+            ],
+            "context": [
+                "Thông tin về giày Reebok Shoe Model Yellow 40 màu Yellow."
+            ]
+        },
+        {
+            "tag": "giày_reebok_shoe_model_yellow_40_giá_bao_nhiêu",
+            "patterns": [
+                [
+                    "giày Reebok Shoe Model Yellow 40 giá bao nhiêu",
+                    "Reebok Shoe Model Yellow 40 giá bao nhiêu",
+                    "Reebok Shoe Model Yellow 40 giá"
+                ]
+            ],
+            "responses": [
+                "Giày Reebok Shoe Model Yellow 40 giá 1620000.0 VNĐ."
+            ],
+            "context": [
+                "Thông tin về giày Reebok Shoe Model Yellow 40 giá 1620000.0 VNĐ."
+            ]
+        },
+        {
+            "tag": "bạn_có_reebok_shoe_model_yellow_41_không",
+            "patterns": [
+                [
+                    "Bạn có Reebok Shoe Model Yellow 41 không",
+                    "có Reebok Shoe Model Yellow 41 không",
+                    "Reebok Shoe Model Yellow 41 có không",
+                    "Reebok Shoe Model Yellow 41"
+                ]
+            ],
+            "responses": [
+                "Có, chúng tôi có Reebok Shoe Model Yellow 41 với màu Yellow và size 41."
+            ],
+            "context": [
+                "Thông tin về Reebok Shoe Model Yellow 41 với màu Yellow và size 41."
+            ]
+        },
+        {
+            "tag": "giày_reebok_shoe_model_yellow_41_màu_yellow_có_đẹp_không",
+            "patterns": [
+                [
+                    "Giày Reebok Shoe Model Yellow 41 màu Yellow có đẹp không",
+                    "Reebok Shoe Model Yellow 41 màu Yellow đẹp không",
+                    "Reebok Shoe Model Yellow 41 màu Yellow"
+                ]
+            ],
+            "responses": [
+                "Có, giày Reebok Shoe Model Yellow 41 màu Yellow là một trong những màu được ưa chuộng."
+            ],
+            "context": [
+                "Thông tin về giày Reebok Shoe Model Yellow 41 màu Yellow."
+            ]
+        },
+        {
+            "tag": "giày_reebok_shoe_model_yellow_41_giá_bao_nhiêu",
+            "patterns": [
+                [
+                    "giày Reebok Shoe Model Yellow 41 giá bao nhiêu",
+                    "Reebok Shoe Model Yellow 41 giá bao nhiêu",
+                    "Reebok Shoe Model Yellow 41 giá"
+                ]
+            ],
+            "responses": [
+                "Giày Reebok Shoe Model Yellow 41 giá 1440000.0 VNĐ."
+            ],
+            "context": [
+                "Thông tin về giày Reebok Shoe Model Yellow 41 giá 1440000.0 VNĐ."
+            ]
+        },
+        {
+            "tag": "có_puma_không",
+            "patterns": [
+                [
+                    "Có Puma không",
+                    "Puma"
+                ]
+            ],
+            "responses": [
+                "Có, chúng tôi có Puma Shoe Model Blue 42 từ thương hiệu Puma."
+            ],
+            "context": [
+                "Thông tin về Puma Shoe Model Blue 42 từ thương hiệu Puma."
+            ]
+        },
+        {
+            "tag": "bạn_có_puma_shoe_model_black_41_không",
+            "patterns": [
+                [
+                    "Bạn có Puma Shoe Model Black 41 không",
+                    "có Puma Shoe Model Black 41 không",
+                    "Puma Shoe Model Black 41 có không",
+                    "Puma Shoe Model Black 41"
+                ]
+            ],
+            "responses": [
+                "Có, chúng tôi có Puma Shoe Model Black 41 với màu Black và size 41."
+            ],
+            "context": [
+                "Thông tin về Puma Shoe Model Black 41 với màu Black và size 41."
+            ]
+        },
+        {
+            "tag": "giày_puma_shoe_model_black_41_màu_black_có_đẹp_không",
+            "patterns": [
+                [
+                    "Giày Puma Shoe Model Black 41 màu Black có đẹp không",
+                    "Puma Shoe Model Black 41 màu Black đẹp không",
+                    "Puma Shoe Model Black 41 màu Black"
+                ]
+            ],
+            "responses": [
+                "Có, giày Puma Shoe Model Black 41 màu Black là một trong những màu được ưa chuộng."
+            ],
+            "context": [
+                "Thông tin về giày Puma Shoe Model Black 41 màu Black."
+            ]
+        },
+        {
+            "tag": "giày_puma_shoe_model_black_41_giá_bao_nhiêu",
+            "patterns": [
+                [
+                    "giày Puma Shoe Model Black 41 giá bao nhiêu",
+                    "Puma Shoe Model Black 41 giá bao nhiêu",
+                    "Puma Shoe Model Black 41 giá"
+                ]
+            ],
+            "responses": [
+                "Giày Puma Shoe Model Black 41 giá 1620000.0 VNĐ."
+            ],
+            "context": [
+                "Thông tin về giày Puma Shoe Model Black 41 giá 1620000.0 VNĐ."
+            ]
+        },
+        {
+            "tag": "bạn_có_puma_shoe_model_yellow_42_không",
+            "patterns": [
+                [
+                    "Bạn có Puma Shoe Model Yellow 42 không",
+                    "có Puma Shoe Model Yellow 42 không",
+                    "Puma Shoe Model Yellow 42 có không",
+                    "Puma Shoe Model Yellow 42"
+                ]
+            ],
+            "responses": [
+                "Có, chúng tôi có Puma Shoe Model Yellow 42 với màu Yellow và size 42."
+            ],
+            "context": [
+                "Thông tin về Puma Shoe Model Yellow 42 với màu Yellow và size 42."
+            ]
+        },
+        {
+            "tag": "giày_puma_shoe_model_yellow_42_màu_yellow_có_đẹp_không",
+            "patterns": [
+                [
+                    "Giày Puma Shoe Model Yellow 42 màu Yellow có đẹp không",
+                    "Puma Shoe Model Yellow 42 màu Yellow đẹp không",
+                    "Puma Shoe Model Yellow 42 màu Yellow"
+                ]
+            ],
+            "responses": [
+                "Có, giày Puma Shoe Model Yellow 42 màu Yellow là một trong những màu được ưa chuộng."
+            ],
+            "context": [
+                "Thông tin về giày Puma Shoe Model Yellow 42 màu Yellow."
+            ]
+        },
+        {
+            "tag": "giày_puma_shoe_model_yellow_42_giá_bao_nhiêu",
+            "patterns": [
+                [
+                    "giày Puma Shoe Model Yellow 42 giá bao nhiêu",
+                    "Puma Shoe Model Yellow 42 giá bao nhiêu",
+                    "Puma Shoe Model Yellow 42 giá"
+                ]
+            ],
+            "responses": [
+                "Giày Puma Shoe Model Yellow 42 giá 1260000.0 VNĐ."
+            ],
+            "context": [
+                "Thông tin về giày Puma Shoe Model Yellow 42 giá 1260000.0 VNĐ."
+            ]
+        },
+        {
+            "tag": "bạn_có_puma_shoe_model_black_40_không",
+            "patterns": [
+                [
+                    "Bạn có Puma Shoe Model Black 40 không",
+                    "có Puma Shoe Model Black 40 không",
+                    "Puma Shoe Model Black 40 có không",
+                    "Puma Shoe Model Black 40"
+                ]
+            ],
+            "responses": [
+                "Có, chúng tôi có Puma Shoe Model Black 40 với màu Black và size 40."
+            ],
+            "context": [
+                "Thông tin về Puma Shoe Model Black 40 với màu Black và size 40."
+            ]
+        },
+        {
+            "tag": "giày_puma_shoe_model_black_40_màu_black_có_đẹp_không",
+            "patterns": [
+                [
+                    "Giày Puma Shoe Model Black 40 màu Black có đẹp không",
+                    "Puma Shoe Model Black 40 màu Black đẹp không",
+                    "Puma Shoe Model Black 40 màu Black"
+                ]
+            ],
+            "responses": [
+                "Có, giày Puma Shoe Model Black 40 màu Black là một trong những màu được ưa chuộng."
+            ],
+            "context": [
+                "Thông tin về giày Puma Shoe Model Black 40 màu Black."
+            ]
+        },
+        {
+            "tag": "giày_puma_shoe_model_black_40_giá_bao_nhiêu",
+            "patterns": [
+                [
+                    "giày Puma Shoe Model Black 40 giá bao nhiêu",
+                    "Puma Shoe Model Black 40 giá bao nhiêu",
+                    "Puma Shoe Model Black 40 giá"
+                ]
+            ],
+            "responses": [
+                "Giày Puma Shoe Model Black 40 giá 990000.0 VNĐ."
+            ],
+            "context": [
+                "Thông tin về giày Puma Shoe Model Black 40 giá 990000.0 VNĐ."
+            ]
+        },
+        {
+            "tag": "bạn_có_puma_shoe_model_black_42_không",
+            "patterns": [
+                [
+                    "Bạn có Puma Shoe Model Black 42 không",
+                    "có Puma Shoe Model Black 42 không",
+                    "Puma Shoe Model Black 42 có không",
+                    "Puma Shoe Model Black 42"
+                ]
+            ],
+            "responses": [
+                "Có, chúng tôi có Puma Shoe Model Black 42 với màu Black và size 42."
+            ],
+            "context": [
+                "Thông tin về Puma Shoe Model Black 42 với màu Black và size 42."
+            ]
+        },
+        {
+            "tag": "giày_puma_shoe_model_black_42_màu_black_có_đẹp_không",
+            "patterns": [
+                [
+                    "Giày Puma Shoe Model Black 42 màu Black có đẹp không",
+                    "Puma Shoe Model Black 42 màu Black đẹp không",
+                    "Puma Shoe Model Black 42 màu Black"
+                ]
+            ],
+            "responses": [
+                "Có, giày Puma Shoe Model Black 42 màu Black là một trong những màu được ưa chuộng."
+            ],
+            "context": [
+                "Thông tin về giày Puma Shoe Model Black 42 màu Black."
+            ]
+        },
+        {
+            "tag": "giày_puma_shoe_model_black_42_giá_bao_nhiêu",
+            "patterns": [
+                [
+                    "giày Puma Shoe Model Black 42 giá bao nhiêu",
+                    "Puma Shoe Model Black 42 giá bao nhiêu",
+                    "Puma Shoe Model Black 42 giá"
+                ]
+            ],
+            "responses": [
+                "Giày Puma Shoe Model Black 42 giá 900000.0 VNĐ."
+            ],
+            "context": [
+                "Thông tin về giày Puma Shoe Model Black 42 giá 900000.0 VNĐ."
+            ]
+        },
+        {
+            "tag": "bạn_có_puma_shoe_model_yellow_40_không",
+            "patterns": [
+                [
+                    "Bạn có Puma Shoe Model Yellow 40 không",
+                    "có Puma Shoe Model Yellow 40 không",
+                    "Puma Shoe Model Yellow 40 có không",
+                    "Puma Shoe Model Yellow 40"
+                ]
+            ],
+            "responses": [
+                "Có, chúng tôi có Puma Shoe Model Yellow 40 với màu Yellow và size 40."
+            ],
+            "context": [
+                "Thông tin về Puma Shoe Model Yellow 40 với màu Yellow và size 40."
+            ]
+        },
+        {
+            "tag": "giày_puma_shoe_model_yellow_40_màu_yellow_có_đẹp_không",
+            "patterns": [
+                [
+                    "Giày Puma Shoe Model Yellow 40 màu Yellow có đẹp không",
+                    "Puma Shoe Model Yellow 40 màu Yellow đẹp không",
+                    "Puma Shoe Model Yellow 40 màu Yellow"
+                ]
+            ],
+            "responses": [
+                "Có, giày Puma Shoe Model Yellow 40 màu Yellow là một trong những màu được ưa chuộng."
+            ],
+            "context": [
+                "Thông tin về giày Puma Shoe Model Yellow 40 màu Yellow."
+            ]
+        },
+        {
+            "tag": "giày_puma_shoe_model_yellow_40_giá_bao_nhiêu",
+            "patterns": [
+                [
+                    "giày Puma Shoe Model Yellow 40 giá bao nhiêu",
+                    "Puma Shoe Model Yellow 40 giá bao nhiêu",
+                    "Puma Shoe Model Yellow 40 giá"
+                ]
+            ],
+            "responses": [
+                "Giày Puma Shoe Model Yellow 40 giá 990000.0 VNĐ."
+            ],
+            "context": [
+                "Thông tin về giày Puma Shoe Model Yellow 40 giá 990000.0 VNĐ."
+            ]
+        },
+        {
+            "tag": "bạn_có_puma_shoe_model_light_blue_40_không",
+            "patterns": [
+                [
+                    "Bạn có Puma Shoe Model Light Blue 40 không",
+                    "có Puma Shoe Model Light Blue 40 không",
+                    "Puma Shoe Model Light Blue 40 có không",
+                    "Puma Shoe Model Light Blue 40"
+                ]
+            ],
+            "responses": [
+                "Có, chúng tôi có Puma Shoe Model Light Blue 40 với màu Light Blue và size 40."
+            ],
+            "context": [
+                "Thông tin về Puma Shoe Model Light Blue 40 với màu Light Blue và size 40."
+            ]
+        },
+        {
+            "tag": "giày_puma_shoe_model_light_blue_40_màu_light_blue_có_đẹp_không",
+            "patterns": [
+                [
+                    "Giày Puma Shoe Model Light Blue 40 màu Light Blue có đẹp không",
+                    "Puma Shoe Model Light Blue 40 màu Light Blue đẹp không",
+                    "Puma Shoe Model Light Blue 40 màu Light Blue"
+                ]
+            ],
+            "responses": [
+                "Có, giày Puma Shoe Model Light Blue 40 màu Light Blue là một trong những màu được ưa chuộng."
+            ],
+            "context": [
+                "Thông tin về giày Puma Shoe Model Light Blue 40 màu Light Blue."
+            ]
+        },
+        {
+            "tag": "giày_puma_shoe_model_light_blue_40_giá_bao_nhiêu",
+            "patterns": [
+                [
+                    "giày Puma Shoe Model Light Blue 40 giá bao nhiêu",
+                    "Puma Shoe Model Light Blue 40 giá bao nhiêu",
+                    "Puma Shoe Model Light Blue 40 giá"
+                ]
+            ],
+            "responses": [
+                "Giày Puma Shoe Model Light Blue 40 giá 900000.0 VNĐ."
+            ],
+            "context": [
+                "Thông tin về giày Puma Shoe Model Light Blue 40 giá 900000.0 VNĐ."
+            ]
+        },
+        {
+            "tag": "bạn_có_puma_shoe_model_yellow_41_không",
+            "patterns": [
+                [
+                    "Bạn có Puma Shoe Model Yellow 41 không",
+                    "có Puma Shoe Model Yellow 41 không",
+                    "Puma Shoe Model Yellow 41 có không",
+                    "Puma Shoe Model Yellow 41"
+                ]
+            ],
+            "responses": [
+                "Có, chúng tôi có Puma Shoe Model Yellow 41 với màu Yellow và size 41."
+            ],
+            "context": [
+                "Thông tin về Puma Shoe Model Yellow 41 với màu Yellow và size 41."
+            ]
+        },
+        {
+            "tag": "giày_puma_shoe_model_yellow_41_màu_yellow_có_đẹp_không",
+            "patterns": [
+                [
+                    "Giày Puma Shoe Model Yellow 41 màu Yellow có đẹp không",
+                    "Puma Shoe Model Yellow 41 màu Yellow đẹp không",
+                    "Puma Shoe Model Yellow 41 màu Yellow"
+                ]
+            ],
+            "responses": [
+                "Có, giày Puma Shoe Model Yellow 41 màu Yellow là một trong những màu được ưa chuộng."
+            ],
+            "context": [
+                "Thông tin về giày Puma Shoe Model Yellow 41 màu Yellow."
+            ]
+        },
+        {
+            "tag": "giày_puma_shoe_model_yellow_41_giá_bao_nhiêu",
+            "patterns": [
+                [
+                    "giày Puma Shoe Model Yellow 41 giá bao nhiêu",
+                    "Puma Shoe Model Yellow 41 giá bao nhiêu",
+                    "Puma Shoe Model Yellow 41 giá"
+                ]
+            ],
+            "responses": [
+                "Giày Puma Shoe Model Yellow 41 giá 900000.0 VNĐ."
+            ],
+            "context": [
+                "Thông tin về giày Puma Shoe Model Yellow 41 giá 900000.0 VNĐ."
+            ]
+        },
+        {
+            "tag": "bạn_có_puma_shoe_model_blue_40_không",
+            "patterns": [
+                [
+                    "Bạn có Puma Shoe Model Blue 40 không",
+                    "có Puma Shoe Model Blue 40 không",
+                    "Puma Shoe Model Blue 40 có không",
+                    "Puma Shoe Model Blue 40"
+                ]
+            ],
+            "responses": [
+                "Có, chúng tôi có Puma Shoe Model Blue 40 với màu Blue và size 40."
+            ],
+            "context": [
+                "Thông tin về Puma Shoe Model Blue 40 với màu Blue và size 40."
+            ]
+        },
+        {
+            "tag": "giày_puma_shoe_model_blue_40_màu_blue_có_đẹp_không",
+            "patterns": [
+                [
+                    "Giày Puma Shoe Model Blue 40 màu Blue có đẹp không",
+                    "Puma Shoe Model Blue 40 màu Blue đẹp không",
+                    "Puma Shoe Model Blue 40 màu Blue"
+                ]
+            ],
+            "responses": [
+                "Có, giày Puma Shoe Model Blue 40 màu Blue là một trong những màu được ưa chuộng."
+            ],
+            "context": [
+                "Thông tin về giày Puma Shoe Model Blue 40 màu Blue."
+            ]
+        },
+        {
+            "tag": "giày_puma_shoe_model_blue_40_giá_bao_nhiêu",
+            "patterns": [
+                [
+                    "giày Puma Shoe Model Blue 40 giá bao nhiêu",
+                    "Puma Shoe Model Blue 40 giá bao nhiêu",
+                    "Puma Shoe Model Blue 40 giá"
+                ]
+            ],
+            "responses": [
+                "Giày Puma Shoe Model Blue 40 giá 1620000.0 VNĐ."
+            ],
+            "context": [
+                "Thông tin về giày Puma Shoe Model Blue 40 giá 1620000.0 VNĐ."
+            ]
+        },
+        {
+            "tag": "bạn_có_puma_shoe_model_blue_41_không",
+            "patterns": [
+                [
+                    "Bạn có Puma Shoe Model Blue 41 không",
+                    "có Puma Shoe Model Blue 41 không",
+                    "Puma Shoe Model Blue 41 có không",
+                    "Puma Shoe Model Blue 41"
+                ]
+            ],
+            "responses": [
+                "Có, chúng tôi có Puma Shoe Model Blue 41 với màu Blue và size 41."
+            ],
+            "context": [
+                "Thông tin về Puma Shoe Model Blue 41 với màu Blue và size 41."
+            ]
+        },
+        {
+            "tag": "giày_puma_shoe_model_blue_41_màu_blue_có_đẹp_không",
+            "patterns": [
+                [
+                    "Giày Puma Shoe Model Blue 41 màu Blue có đẹp không",
+                    "Puma Shoe Model Blue 41 màu Blue đẹp không",
+                    "Puma Shoe Model Blue 41 màu Blue"
+                ]
+            ],
+            "responses": [
+                "Có, giày Puma Shoe Model Blue 41 màu Blue là một trong những màu được ưa chuộng."
+            ],
+            "context": [
+                "Thông tin về giày Puma Shoe Model Blue 41 màu Blue."
+            ]
+        },
+        {
+            "tag": "giày_puma_shoe_model_blue_41_giá_bao_nhiêu",
+            "patterns": [
+                [
+                    "giày Puma Shoe Model Blue 41 giá bao nhiêu",
+                    "Puma Shoe Model Blue 41 giá bao nhiêu",
+                    "Puma Shoe Model Blue 41 giá"
+                ]
+            ],
+            "responses": [
+                "Giày Puma Shoe Model Blue 41 giá 1170000.0 VNĐ."
+            ],
+            "context": [
+                "Thông tin về giày Puma Shoe Model Blue 41 giá 1170000.0 VNĐ."
+            ]
+        },
+        {
+            "tag": "bạn_có_puma_shoe_model_blue_42_không",
+            "patterns": [
+                [
+                    "Bạn có Puma Shoe Model Blue 42 không",
+                    "có Puma Shoe Model Blue 42 không",
+                    "Puma Shoe Model Blue 42 có không",
+                    "Puma Shoe Model Blue 42"
+                ]
+            ],
+            "responses": [
+                "Có, chúng tôi có Puma Shoe Model Blue 42 với màu Blue và size 42."
+            ],
+            "context": [
+                "Thông tin về Puma Shoe Model Blue 42 với màu Blue và size 42."
+            ]
+        },
+        {
+            "tag": "giày_puma_shoe_model_blue_42_màu_blue_có_đẹp_không",
+            "patterns": [
+                [
+                    "Giày Puma Shoe Model Blue 42 màu Blue có đẹp không",
+                    "Puma Shoe Model Blue 42 màu Blue đẹp không",
+                    "Puma Shoe Model Blue 42 màu Blue"
+                ]
+            ],
+            "responses": [
+                "Có, giày Puma Shoe Model Blue 42 màu Blue là một trong những màu được ưa chuộng."
+            ],
+            "context": [
+                "Thông tin về giày Puma Shoe Model Blue 42 màu Blue."
+            ]
+        },
+        {
+            "tag": "giày_puma_shoe_model_blue_42_giá_bao_nhiêu",
+            "patterns": [
+                [
+                    "giày Puma Shoe Model Blue 42 giá bao nhiêu",
+                    "Puma Shoe Model Blue 42 giá bao nhiêu",
+                    "Puma Shoe Model Blue 42 giá"
+                ]
+            ],
+            "responses": [
+                "Giày Puma Shoe Model Blue 42 giá 1710000.0 VNĐ."
+            ],
+            "context": [
+                "Thông tin về giày Puma Shoe Model Blue 42 giá 1710000.0 VNĐ."
+            ]
+        },
+        {
+            "tag": "có_adidas_không",
+            "patterns": [
+                [
+                    "Có Adidas không",
+                    "Adidas"
+                ]
+            ],
+            "responses": [
+                "Có, chúng tôi có Adidas Shoe Model Blue 40 từ thương hiệu Adidas."
+            ],
+            "context": [
+                "Thông tin về Adidas Shoe Model Blue 40 từ thương hiệu Adidas."
+            ]
+        },
+        {
+            "tag": "bạn_có_adidas_shoe_model_black_40_không",
+            "patterns": [
+                [
+                    "Bạn có Adidas Shoe Model Black 40 không",
+                    "có Adidas Shoe Model Black 40 không",
+                    "Adidas Shoe Model Black 40 có không",
+                    "Adidas Shoe Model Black 40"
+                ]
+            ],
+            "responses": [
+                "Có, chúng tôi có Adidas Shoe Model Black 40 với màu Black và size 40."
+            ],
+            "context": [
+                "Thông tin về Adidas Shoe Model Black 40 với màu Black và size 40."
+            ]
+        },
+        {
+            "tag": "giày_adidas_shoe_model_black_40_màu_black_có_đẹp_không",
+            "patterns": [
+                [
+                    "Giày Adidas Shoe Model Black 40 màu Black có đẹp không",
+                    "Adidas Shoe Model Black 40 màu Black đẹp không",
+                    "Adidas Shoe Model Black 40 màu Black"
+                ]
+            ],
+            "responses": [
+                "Có, giày Adidas Shoe Model Black 40 màu Black là một trong những màu được ưa chuộng."
+            ],
+            "context": [
+                "Thông tin về giày Adidas Shoe Model Black 40 màu Black."
+            ]
+        },
+        {
+            "tag": "giày_adidas_shoe_model_black_40_giá_bao_nhiêu",
+            "patterns": [
+                [
+                    "giày Adidas Shoe Model Black 40 giá bao nhiêu",
+                    "Adidas Shoe Model Black 40 giá bao nhiêu",
+                    "Adidas Shoe Model Black 40 giá"
+                ]
+            ],
+            "responses": [
+                "Giày Adidas Shoe Model Black 40 giá 960000.0 VNĐ."
+            ],
+            "context": [
+                "Thông tin về giày Adidas Shoe Model Black 40 giá 960000.0 VNĐ."
             ]
         },
         {
@@ -406,259 +1256,444 @@
             ]
         },
         {
-            "tag": "giày_reebok_classic_màu_orange_có_đẹp_không",
+            "tag": "bạn_có_adidas_shoe_model_yellow_42_không",
             "patterns": [
                 [
-                    "Giày Reebok Classic màu Orange có đẹp không",
-                    "Reebok Classic màu Orange đẹp không",
-                    "Reebok Classic màu Orange"
+                    "Bạn có Adidas Shoe Model Yellow 42 không",
+                    "có Adidas Shoe Model Yellow 42 không",
+                    "Adidas Shoe Model Yellow 42 có không",
+                    "Adidas Shoe Model Yellow 42"
                 ]
             ],
             "responses": [
-                "Có, giày Reebok Classic màu Orange là một trong những màu được ưa chuộng."
+                "Có, chúng tôi có Adidas Shoe Model Yellow 42 với màu Yellow và size 42."
             ],
             "context": [
-                "Thông tin về giày Reebok Classic màu Orange."
+                "Thông tin về Adidas Shoe Model Yellow 42 với màu Yellow và size 42."
             ]
         },
         {
-            "tag": "giày_reebok_classic_màu_black_có_đẹp_không",
+            "tag": "giày_adidas_shoe_model_yellow_42_màu_yellow_có_đẹp_không",
             "patterns": [
                 [
-                    "Giày Reebok Classic màu Black có đẹp không",
-                    "Reebok Classic màu Black đẹp không",
-                    "Reebok Classic màu Black"
+                    "Giày Adidas Shoe Model Yellow 42 màu Yellow có đẹp không",
+                    "Adidas Shoe Model Yellow 42 màu Yellow đẹp không",
+                    "Adidas Shoe Model Yellow 42 màu Yellow"
                 ]
             ],
             "responses": [
-                "Có, giày Reebok Classic màu Black là một trong những màu được ưa chuộng."
+                "Có, giày Adidas Shoe Model Yellow 42 màu Yellow là một trong những màu được ưa chuộng."
             ],
             "context": [
-                "Thông tin về giày Reebok Classic màu Black."
+                "Thông tin về giày Adidas Shoe Model Yellow 42 màu Yellow."
             ]
         },
         {
-            "tag": "giày_reebok_classic_màu_grey_có_đẹp_không",
+            "tag": "giày_adidas_shoe_model_yellow_42_giá_bao_nhiêu",
             "patterns": [
                 [
-                    "Giày Reebok Classic màu Grey có đẹp không",
-                    "Reebok Classic màu Grey đẹp không",
-                    "Reebok Classic màu Grey"
+                    "giày Adidas Shoe Model Yellow 42 giá bao nhiêu",
+                    "Adidas Shoe Model Yellow 42 giá bao nhiêu",
+                    "Adidas Shoe Model Yellow 42 giá"
                 ]
             ],
             "responses": [
-                "Có, giày Reebok Classic màu Grey là một trong những màu được ưa chuộng."
+                "Giày Adidas Shoe Model Yellow 42 giá 1360000.0 VNĐ."
             ],
             "context": [
-                "Thông tin về giày Reebok Classic màu Grey."
+                "Thông tin về giày Adidas Shoe Model Yellow 42 giá 1360000.0 VNĐ."
             ]
         },
         {
-            "tag": "giày_reebok_classic_màu_blue_có_đẹp_không",
+            "tag": "bạn_có_adidas_shoe_model_black_41_không",
             "patterns": [
                 [
-                    "Giày Reebok Classic màu Blue có đẹp không",
-                    "Reebok Classic màu Blue đẹp không",
-                    "Reebok Classic màu Blue"
+                    "Bạn có Adidas Shoe Model Black 41 không",
+                    "có Adidas Shoe Model Black 41 không",
+                    "Adidas Shoe Model Black 41 có không",
+                    "Adidas Shoe Model Black 41"
                 ]
             ],
             "responses": [
-                "Có, giày Reebok Classic màu Blue là một trong những màu được ưa chuộng."
+                "Có, chúng tôi có Adidas Shoe Model Black 41 với màu Black và size 41."
             ],
             "context": [
-                "Thông tin về giày Reebok Classic màu Blue."
+                "Thông tin về Adidas Shoe Model Black 41 với màu Black và size 41."
             ]
         },
         {
-            "tag": "giày_reebok_classic_màu_yellow_có_đẹp_không",
+            "tag": "giày_adidas_shoe_model_black_41_màu_black_có_đẹp_không",
             "patterns": [
                 [
-                    "Giày Reebok Classic màu Yellow có đẹp không",
-                    "Reebok Classic màu Yellow đẹp không",
-                    "Reebok Classic màu Yellow"
+                    "Giày Adidas Shoe Model Black 41 màu Black có đẹp không",
+                    "Adidas Shoe Model Black 41 màu Black đẹp không",
+                    "Adidas Shoe Model Black 41 màu Black"
                 ]
             ],
             "responses": [
-                "Có, giày Reebok Classic màu Yellow là một trong những màu được ưa chuộng."
+                "Có, giày Adidas Shoe Model Black 41 màu Black là một trong những màu được ưa chuộng."
             ],
             "context": [
-                "Thông tin về giày Reebok Classic màu Yellow."
+                "Thông tin về giày Adidas Shoe Model Black 41 màu Black."
             ]
         },
         {
-            "tag": "giày_reebok_classic_màu_light_blue_có_đẹp_không",
+            "tag": "giày_adidas_shoe_model_black_41_giá_bao_nhiêu",
             "patterns": [
                 [
-                    "Giày Reebok Classic màu Light Blue có đẹp không",
-                    "Reebok Classic màu Light Blue đẹp không",
-                    "Reebok Classic màu Light Blue"
+                    "giày Adidas Shoe Model Black 41 giá bao nhiêu",
+                    "Adidas Shoe Model Black 41 giá bao nhiêu",
+                    "Adidas Shoe Model Black 41 giá"
                 ]
             ],
             "responses": [
-                "Có, giày Reebok Classic màu Light Blue là một trong những màu được ưa chuộng."
+                "Giày Adidas Shoe Model Black 41 giá 1040000.0 VNĐ."
             ],
             "context": [
-                "Thông tin về giày Reebok Classic màu Light Blue."
+                "Thông tin về giày Adidas Shoe Model Black 41 giá 1040000.0 VNĐ."
             ]
         },
         {
-            "tag": "có_adidas_không",
+            "tag": "bạn_có_adidas_shoe_model_blue_41_không",
             "patterns": [
                 [
-                    "Có Adidas không",
-                    "Adidas"
+                    "Bạn có Adidas Shoe Model Blue 41 không",
+                    "có Adidas Shoe Model Blue 41 không",
+                    "Adidas Shoe Model Blue 41 có không",
+                    "Adidas Shoe Model Blue 41"
                 ]
             ],
             "responses": [
-                "Có, chúng tôi có Adidas Superstar từ thương hiệu Adidas."
+                "Có, chúng tôi có Adidas Shoe Model Blue 41 với màu Blue và size 41."
             ],
             "context": [
-                "Thông tin về Adidas Superstar từ thương hiệu Adidas."
+                "Thông tin về Adidas Shoe Model Blue 41 với màu Blue và size 41."
             ]
         },
         {
-            "tag": "bạn_có_adidas_superstar_không",
+            "tag": "giày_adidas_shoe_model_blue_41_màu_blue_có_đẹp_không",
             "patterns": [
                 [
-                    "Bạn có Adidas Superstar không",
-                    "có Adidas Superstar không",
-                    "Adidas Superstar có không",
-                    "Adidas Superstar"
+                    "Giày Adidas Shoe Model Blue 41 màu Blue có đẹp không",
+                    "Adidas Shoe Model Blue 41 màu Blue đẹp không",
+                    "Adidas Shoe Model Blue 41 màu Blue"
                 ]
             ],
             "responses": [
-                "Có, chúng tôi có Adidas Superstar với màu Grey và size 42."
+                "Có, giày Adidas Shoe Model Blue 41 màu Blue là một trong những màu được ưa chuộng."
             ],
             "context": [
-                "Thông tin về Adidas Superstar với màu Grey và size 42."
+                "Thông tin về giày Adidas Shoe Model Blue 41 màu Blue."
             ]
         },
         {
-            "tag": "giày_adidas_superstar_màu_light_blue_có_đẹp_không",
+            "tag": "giày_adidas_shoe_model_blue_41_giá_bao_nhiêu",
             "patterns": [
                 [
-                    "Giày Adidas Superstar màu Light Blue có đẹp không",
-                    "Adidas Superstar màu Light Blue đẹp không",
-                    "Adidas Superstar màu Light Blue"
+                    "giày Adidas Shoe Model Blue 41 giá bao nhiêu",
+                    "Adidas Shoe Model Blue 41 giá bao nhiêu",
+                    "Adidas Shoe Model Blue 41 giá"
                 ]
             ],
             "responses": [
-                "Có, giày Adidas Superstar màu Light Blue là một trong những màu được ưa chuộng."
+                "Giày Adidas Shoe Model Blue 41 giá 1440000.0 VNĐ."
             ],
             "context": [
-                "Thông tin về giày Adidas Superstar màu Light Blue."
+                "Thông tin về giày Adidas Shoe Model Blue 41 giá 1440000.0 VNĐ."
             ]
         },
         {
-            "tag": "giày_adidas_superstar_giá_bao_nhiêu",
+            "tag": "bạn_có_adidas_shoe_model_black_42_không",
             "patterns": [
                 [
-                    "giày Adidas Superstar giá bao nhiêu",
-                    "Adidas Superstar giá bao nhiêu",
-                    "Adidas Superstar giá"
+                    "Bạn có Adidas Shoe Model Black 42 không",
+                    "có Adidas Shoe Model Black 42 không",
+                    "Adidas Shoe Model Black 42 có không",
+                    "Adidas Shoe Model Black 42"
                 ]
             ],
             "responses": [
-                "Giày Adidas Superstar giá 1800000.0 VNĐ."
+                "Có, chúng tôi có Adidas Shoe Model Black 42 với màu Black và size 42."
             ],
             "context": [
-                "Thông tin về giày Adidas Superstar giá 1800000.0 VNĐ."
+                "Thông tin về Adidas Shoe Model Black 42 với màu Black và size 42."
             ]
         },
         {
-            "tag": "giày_adidas_superstar_màu_orange_có_đẹp_không",
+            "tag": "giày_adidas_shoe_model_black_42_màu_black_có_đẹp_không",
             "patterns": [
                 [
-                    "Giày Adidas Superstar màu Orange có đẹp không",
-                    "Adidas Superstar màu Orange đẹp không",
-                    "Adidas Superstar màu Orange"
+                    "Giày Adidas Shoe Model Black 42 màu Black có đẹp không",
+                    "Adidas Shoe Model Black 42 màu Black đẹp không",
+                    "Adidas Shoe Model Black 42 màu Black"
                 ]
             ],
             "responses": [
-                "Có, giày Adidas Superstar màu Orange là một trong những màu được ưa chuộng."
+                "Có, giày Adidas Shoe Model Black 42 màu Black là một trong những màu được ưa chuộng."
             ],
             "context": [
-                "Thông tin về giày Adidas Superstar màu Orange."
+                "Thông tin về giày Adidas Shoe Model Black 42 màu Black."
             ]
         },
         {
-            "tag": "giày_adidas_superstar_màu_black_có_đẹp_không",
+            "tag": "giày_adidas_shoe_model_black_42_giá_bao_nhiêu",
             "patterns": [
                 [
-                    "Giày Adidas Superstar màu Black có đẹp không",
-                    "Adidas Superstar màu Black đẹp không",
-                    "Adidas Superstar màu Black"
+                    "giày Adidas Shoe Model Black 42 giá bao nhiêu",
+                    "Adidas Shoe Model Black 42 giá bao nhiêu",
+                    "Adidas Shoe Model Black 42 giá"
                 ]
             ],
             "responses": [
-                "Có, giày Adidas Superstar màu Black là một trong những màu được ưa chuộng."
+                "Giày Adidas Shoe Model Black 42 giá 1040000.0 VNĐ."
             ],
             "context": [
-                "Thông tin về giày Adidas Superstar màu Black."
+                "Thông tin về giày Adidas Shoe Model Black 42 giá 1040000.0 VNĐ."
             ]
         },
         {
-            "tag": "giày_adidas_superstar_màu_yellow_có_đẹp_không",
+            "tag": "bạn_có_adidas_shoe_model_light_blue_40_không",
             "patterns": [
                 [
-                    "Giày Adidas Superstar màu Yellow có đẹp không",
-                    "Adidas Superstar màu Yellow đẹp không",
-                    "Adidas Superstar màu Yellow"
+                    "Bạn có Adidas Shoe Model Light Blue 40 không",
+                    "có Adidas Shoe Model Light Blue 40 không",
+                    "Adidas Shoe Model Light Blue 40 có không",
+                    "Adidas Shoe Model Light Blue 40"
                 ]
             ],
             "responses": [
-                "Có, giày Adidas Superstar màu Yellow là một trong những màu được ưa chuộng."
+                "Có, chúng tôi có Adidas Shoe Model Light Blue 40 với màu Light Blue và size 40."
             ],
             "context": [
-                "Thông tin về giày Adidas Superstar màu Yellow."
+                "Thông tin về Adidas Shoe Model Light Blue 40 với màu Light Blue và size 40."
             ]
         },
         {
-            "tag": "giày_adidas_superstar_màu_red_có_đẹp_không",
+            "tag": "giày_adidas_shoe_model_light_blue_40_màu_light_blue_có_đẹp_không",
             "patterns": [
                 [
-                    "Giày Adidas Superstar màu Red có đẹp không",
-                    "Adidas Superstar màu Red đẹp không",
-                    "Adidas Superstar màu Red"
+                    "Giày Adidas Shoe Model Light Blue 40 màu Light Blue có đẹp không",
+                    "Adidas Shoe Model Light Blue 40 màu Light Blue đẹp không",
+                    "Adidas Shoe Model Light Blue 40 màu Light Blue"
                 ]
             ],
             "responses": [
-                "Có, giày Adidas Superstar màu Red là một trong những màu được ưa chuộng."
+                "Có, giày Adidas Shoe Model Light Blue 40 màu Light Blue là một trong những màu được ưa chuộng."
             ],
             "context": [
-                "Thông tin về giày Adidas Superstar màu Red."
+                "Thông tin về giày Adidas Shoe Model Light Blue 40 màu Light Blue."
             ]
         },
         {
-            "tag": "giày_adidas_superstar_màu_blue_có_đẹp_không",
+            "tag": "giày_adidas_shoe_model_light_blue_40_giá_bao_nhiêu",
             "patterns": [
                 [
-                    "Giày Adidas Superstar màu Blue có đẹp không",
-                    "Adidas Superstar màu Blue đẹp không",
-                    "Adidas Superstar màu Blue"
+                    "giày Adidas Shoe Model Light Blue 40 giá bao nhiêu",
+                    "Adidas Shoe Model Light Blue 40 giá bao nhiêu",
+                    "Adidas Shoe Model Light Blue 40 giá"
                 ]
             ],
             "responses": [
-                "Có, giày Adidas Superstar màu Blue là một trong những màu được ưa chuộng."
+                "Giày Adidas Shoe Model Light Blue 40 giá 1360000.0 VNĐ."
             ],
             "context": [
-                "Thông tin về giày Adidas Superstar màu Blue."
+                "Thông tin về giày Adidas Shoe Model Light Blue 40 giá 1360000.0 VNĐ."
             ]
         },
         {
-            "tag": "giày_adidas_superstar_màu_grey_có_đẹp_không",
+            "tag": "bạn_có_adidas_shoe_model_yellow_40_không",
             "patterns": [
                 [
-                    "Giày Adidas Superstar màu Grey có đẹp không",
-                    "Adidas Superstar màu Grey đẹp không",
-                    "Adidas Superstar màu Grey"
+                    "Bạn có Adidas Shoe Model Yellow 40 không",
+                    "có Adidas Shoe Model Yellow 40 không",
+                    "Adidas Shoe Model Yellow 40 có không",
+                    "Adidas Shoe Model Yellow 40"
                 ]
             ],
             "responses": [
-                "Có, giày Adidas Superstar màu Grey là một trong những màu được ưa chuộng."
+                "Có, chúng tôi có Adidas Shoe Model Yellow 40 với màu Yellow và size 40."
             ],
             "context": [
-                "Thông tin về giày Adidas Superstar màu Grey."
+                "Thông tin về Adidas Shoe Model Yellow 40 với màu Yellow và size 40."
+            ]
+        },
+        {
+            "tag": "giày_adidas_shoe_model_yellow_40_màu_yellow_có_đẹp_không",
+            "patterns": [
+                [
+                    "Giày Adidas Shoe Model Yellow 40 màu Yellow có đẹp không",
+                    "Adidas Shoe Model Yellow 40 màu Yellow đẹp không",
+                    "Adidas Shoe Model Yellow 40 màu Yellow"
+                ]
+            ],
+            "responses": [
+                "Có, giày Adidas Shoe Model Yellow 40 màu Yellow là một trong những màu được ưa chuộng."
+            ],
+            "context": [
+                "Thông tin về giày Adidas Shoe Model Yellow 40 màu Yellow."
+            ]
+        },
+        {
+            "tag": "giày_adidas_shoe_model_yellow_40_giá_bao_nhiêu",
+            "patterns": [
+                [
+                    "giày Adidas Shoe Model Yellow 40 giá bao nhiêu",
+                    "Adidas Shoe Model Yellow 40 giá bao nhiêu",
+                    "Adidas Shoe Model Yellow 40 giá"
+                ]
+            ],
+            "responses": [
+                "Giày Adidas Shoe Model Yellow 40 giá 1520000.0 VNĐ."
+            ],
+            "context": [
+                "Thông tin về giày Adidas Shoe Model Yellow 40 giá 1520000.0 VNĐ."
+            ]
+        },
+        {
+            "tag": "bạn_có_adidas_shoe_model_blue_42_không",
+            "patterns": [
+                [
+                    "Bạn có Adidas Shoe Model Blue 42 không",
+                    "có Adidas Shoe Model Blue 42 không",
+                    "Adidas Shoe Model Blue 42 có không",
+                    "Adidas Shoe Model Blue 42"
+                ]
+            ],
+            "responses": [
+                "Có, chúng tôi có Adidas Shoe Model Blue 42 với màu Blue và size 42."
+            ],
+            "context": [
+                "Thông tin về Adidas Shoe Model Blue 42 với màu Blue và size 42."
+            ]
+        },
+        {
+            "tag": "giày_adidas_shoe_model_blue_42_màu_blue_có_đẹp_không",
+            "patterns": [
+                [
+                    "Giày Adidas Shoe Model Blue 42 màu Blue có đẹp không",
+                    "Adidas Shoe Model Blue 42 màu Blue đẹp không",
+                    "Adidas Shoe Model Blue 42 màu Blue"
+                ]
+            ],
+            "responses": [
+                "Có, giày Adidas Shoe Model Blue 42 màu Blue là một trong những màu được ưa chuộng."
+            ],
+            "context": [
+                "Thông tin về giày Adidas Shoe Model Blue 42 màu Blue."
+            ]
+        },
+        {
+            "tag": "giày_adidas_shoe_model_blue_42_giá_bao_nhiêu",
+            "patterns": [
+                [
+                    "giày Adidas Shoe Model Blue 42 giá bao nhiêu",
+                    "Adidas Shoe Model Blue 42 giá bao nhiêu",
+                    "Adidas Shoe Model Blue 42 giá"
+                ]
+            ],
+            "responses": [
+                "Giày Adidas Shoe Model Blue 42 giá 1040000.0 VNĐ."
+            ],
+            "context": [
+                "Thông tin về giày Adidas Shoe Model Blue 42 giá 1040000.0 VNĐ."
+            ]
+        },
+        {
+            "tag": "bạn_có_adidas_shoe_model_yellow_41_không",
+            "patterns": [
+                [
+                    "Bạn có Adidas Shoe Model Yellow 41 không",
+                    "có Adidas Shoe Model Yellow 41 không",
+                    "Adidas Shoe Model Yellow 41 có không",
+                    "Adidas Shoe Model Yellow 41"
+                ]
+            ],
+            "responses": [
+                "Có, chúng tôi có Adidas Shoe Model Yellow 41 với màu Yellow và size 41."
+            ],
+            "context": [
+                "Thông tin về Adidas Shoe Model Yellow 41 với màu Yellow và size 41."
+            ]
+        },
+        {
+            "tag": "giày_adidas_shoe_model_yellow_41_màu_yellow_có_đẹp_không",
+            "patterns": [
+                [
+                    "Giày Adidas Shoe Model Yellow 41 màu Yellow có đẹp không",
+                    "Adidas Shoe Model Yellow 41 màu Yellow đẹp không",
+                    "Adidas Shoe Model Yellow 41 màu Yellow"
+                ]
+            ],
+            "responses": [
+                "Có, giày Adidas Shoe Model Yellow 41 màu Yellow là một trong những màu được ưa chuộng."
+            ],
+            "context": [
+                "Thông tin về giày Adidas Shoe Model Yellow 41 màu Yellow."
+            ]
+        },
+        {
+            "tag": "giày_adidas_shoe_model_yellow_41_giá_bao_nhiêu",
+            "patterns": [
+                [
+                    "giày Adidas Shoe Model Yellow 41 giá bao nhiêu",
+                    "Adidas Shoe Model Yellow 41 giá bao nhiêu",
+                    "Adidas Shoe Model Yellow 41 giá"
+                ]
+            ],
+            "responses": [
+                "Giày Adidas Shoe Model Yellow 41 giá 1360000.0 VNĐ."
+            ],
+            "context": [
+                "Thông tin về giày Adidas Shoe Model Yellow 41 giá 1360000.0 VNĐ."
+            ]
+        },
+        {
+            "tag": "bạn_có_adidas_shoe_model_blue_40_không",
+            "patterns": [
+                [
+                    "Bạn có Adidas Shoe Model Blue 40 không",
+                    "có Adidas Shoe Model Blue 40 không",
+                    "Adidas Shoe Model Blue 40 có không",
+                    "Adidas Shoe Model Blue 40"
+                ]
+            ],
+            "responses": [
+                "Có, chúng tôi có Adidas Shoe Model Blue 40 với màu Blue và size 40."
+            ],
+            "context": [
+                "Thông tin về Adidas Shoe Model Blue 40 với màu Blue và size 40."
+            ]
+        },
+        {
+            "tag": "giày_adidas_shoe_model_blue_40_màu_blue_có_đẹp_không",
+            "patterns": [
+                [
+                    "Giày Adidas Shoe Model Blue 40 màu Blue có đẹp không",
+                    "Adidas Shoe Model Blue 40 màu Blue đẹp không",
+                    "Adidas Shoe Model Blue 40 màu Blue"
+                ]
+            ],
+            "responses": [
+                "Có, giày Adidas Shoe Model Blue 40 màu Blue là một trong những màu được ưa chuộng."
+            ],
+            "context": [
+                "Thông tin về giày Adidas Shoe Model Blue 40 màu Blue."
+            ]
+        },
+        {
+            "tag": "giày_adidas_shoe_model_blue_40_giá_bao_nhiêu",
+            "patterns": [
+                [
+                    "giày Adidas Shoe Model Blue 40 giá bao nhiêu",
+                    "Adidas Shoe Model Blue 40 giá bao nhiêu",
+                    "Adidas Shoe Model Blue 40 giá"
+                ]
+            ],
+            "responses": [
+                "Giày Adidas Shoe Model Blue 40 giá 1360000.0 VNĐ."
+            ],
+            "context": [
+                "Thông tin về giày Adidas Shoe Model Blue 40 giá 1360000.0 VNĐ."
             ]
         },
         {
@@ -670,155 +1705,500 @@
                 ]
             ],
             "responses": [
-                "Có, chúng tôi có Nike Air Max 90 Essential từ thương hiệu Nike."
+                "Có, chúng tôi có Nike Shoe Model Black 40 từ thương hiệu Nike."
             ],
             "context": [
-                "Thông tin về Nike Air Max 90 Essential từ thương hiệu Nike."
+                "Thông tin về Nike Shoe Model Black 40 từ thương hiệu Nike."
             ]
         },
         {
-            "tag": "bạn_có_nike_air_max_90_essential_không",
+            "tag": "bạn_có_nike_shoe_model_blue_40_không",
             "patterns": [
                 [
-                    "Bạn có Nike Air Max 90 Essential không",
-                    "có Nike Air Max 90 Essential không",
-                    "Nike Air Max 90 Essential có không",
-                    "Nike Air Max 90 Essential"
+                    "Bạn có Nike Shoe Model Blue 40 không",
+                    "có Nike Shoe Model Blue 40 không",
+                    "Nike Shoe Model Blue 40 có không",
+                    "Nike Shoe Model Blue 40"
                 ]
             ],
             "responses": [
-                "Có, chúng tôi có Nike Air Max 90 Essential với màu Black và size 42."
+                "Có, chúng tôi có Nike Shoe Model Blue 40 với màu Blue và size 40."
             ],
             "context": [
-                "Thông tin về Nike Air Max 90 Essential với màu Black và size 42."
+                "Thông tin về Nike Shoe Model Blue 40 với màu Blue và size 40."
             ]
         },
         {
-            "tag": "giày_nike_air_max_90_essential_màu_orange_có_đẹp_không",
+            "tag": "giày_nike_shoe_model_blue_40_màu_blue_có_đẹp_không",
             "patterns": [
                 [
-                    "Giày Nike Air Max 90 Essential màu Orange có đẹp không",
-                    "Nike Air Max 90 Essential màu Orange đẹp không",
-                    "Nike Air Max 90 Essential màu Orange"
+                    "Giày Nike Shoe Model Blue 40 màu Blue có đẹp không",
+                    "Nike Shoe Model Blue 40 màu Blue đẹp không",
+                    "Nike Shoe Model Blue 40 màu Blue"
                 ]
             ],
             "responses": [
-                "Có, giày Nike Air Max 90 Essential màu Orange là một trong những màu được ưa chuộng."
+                "Có, giày Nike Shoe Model Blue 40 màu Blue là một trong những màu được ưa chuộng."
             ],
             "context": [
-                "Thông tin về giày Nike Air Max 90 Essential màu Orange."
+                "Thông tin về giày Nike Shoe Model Blue 40 màu Blue."
             ]
         },
         {
-            "tag": "giày_nike_air_max_90_essential_giá_bao_nhiêu",
+            "tag": "giày_nike_shoe_model_blue_40_giá_bao_nhiêu",
             "patterns": [
                 [
-                    "giày Nike Air Max 90 Essential giá bao nhiêu",
-                    "Nike Air Max 90 Essential giá bao nhiêu",
-                    "Nike Air Max 90 Essential giá"
+                    "giày Nike Shoe Model Blue 40 giá bao nhiêu",
+                    "Nike Shoe Model Blue 40 giá bao nhiêu",
+                    "Nike Shoe Model Blue 40 giá"
                 ]
             ],
             "responses": [
-                "Giày Nike Air Max 90 Essential giá 1600000.0 VNĐ."
+                "Giày Nike Shoe Model Blue 40 giá 1200000.0 VNĐ."
             ],
             "context": [
-                "Thông tin về giày Nike Air Max 90 Essential giá 1600000.0 VNĐ."
+                "Thông tin về giày Nike Shoe Model Blue 40 giá 1200000.0 VNĐ."
             ]
         },
         {
-            "tag": "giày_nike_air_max_90_essential_màu_blue_có_đẹp_không",
+            "tag": "bạn_có_nike_shoe_model_yellow_40_không",
             "patterns": [
                 [
-                    "Giày Nike Air Max 90 Essential màu Blue có đẹp không",
-                    "Nike Air Max 90 Essential màu Blue đẹp không",
-                    "Nike Air Max 90 Essential màu Blue"
+                    "Bạn có Nike Shoe Model Yellow 40 không",
+                    "có Nike Shoe Model Yellow 40 không",
+                    "Nike Shoe Model Yellow 40 có không",
+                    "Nike Shoe Model Yellow 40"
                 ]
             ],
             "responses": [
-                "Có, giày Nike Air Max 90 Essential màu Blue là một trong những màu được ưa chuộng."
+                "Có, chúng tôi có Nike Shoe Model Yellow 40 với màu Yellow và size 40."
             ],
             "context": [
-                "Thông tin về giày Nike Air Max 90 Essential màu Blue."
+                "Thông tin về Nike Shoe Model Yellow 40 với màu Yellow và size 40."
             ]
         },
         {
-            "tag": "giày_nike_air_max_90_essential_màu_light_blue_có_đẹp_không",
+            "tag": "giày_nike_shoe_model_yellow_40_màu_yellow_có_đẹp_không",
             "patterns": [
                 [
-                    "Giày Nike Air Max 90 Essential màu Light Blue có đẹp không",
-                    "Nike Air Max 90 Essential màu Light Blue đẹp không",
-                    "Nike Air Max 90 Essential màu Light Blue"
+                    "Giày Nike Shoe Model Yellow 40 màu Yellow có đẹp không",
+                    "Nike Shoe Model Yellow 40 màu Yellow đẹp không",
+                    "Nike Shoe Model Yellow 40 màu Yellow"
                 ]
             ],
             "responses": [
-                "Có, giày Nike Air Max 90 Essential màu Light Blue là một trong những màu được ưa chuộng."
+                "Có, giày Nike Shoe Model Yellow 40 màu Yellow là một trong những màu được ưa chuộng."
             ],
             "context": [
-                "Thông tin về giày Nike Air Max 90 Essential màu Light Blue."
+                "Thông tin về giày Nike Shoe Model Yellow 40 màu Yellow."
             ]
         },
         {
-            "tag": "giày_nike_air_max_90_essential_màu_yellow_có_đẹp_không",
+            "tag": "giày_nike_shoe_model_yellow_40_giá_bao_nhiêu",
             "patterns": [
                 [
-                    "Giày Nike Air Max 90 Essential màu Yellow có đẹp không",
-                    "Nike Air Max 90 Essential màu Yellow đẹp không",
-                    "Nike Air Max 90 Essential màu Yellow"
+                    "giày Nike Shoe Model Yellow 40 giá bao nhiêu",
+                    "Nike Shoe Model Yellow 40 giá bao nhiêu",
+                    "Nike Shoe Model Yellow 40 giá"
                 ]
             ],
             "responses": [
-                "Có, giày Nike Air Max 90 Essential màu Yellow là một trong những màu được ưa chuộng."
+                "Giày Nike Shoe Model Yellow 40 giá 1040000.0 VNĐ."
             ],
             "context": [
-                "Thông tin về giày Nike Air Max 90 Essential màu Yellow."
+                "Thông tin về giày Nike Shoe Model Yellow 40 giá 1040000.0 VNĐ."
             ]
         },
         {
-            "tag": "giày_nike_air_max_90_essential_màu_grey_có_đẹp_không",
+            "tag": "bạn_có_nike_shoe_model_black_41_không",
             "patterns": [
                 [
-                    "Giày Nike Air Max 90 Essential màu Grey có đẹp không",
-                    "Nike Air Max 90 Essential màu Grey đẹp không",
-                    "Nike Air Max 90 Essential màu Grey"
+                    "Bạn có Nike Shoe Model Black 41 không",
+                    "có Nike Shoe Model Black 41 không",
+                    "Nike Shoe Model Black 41 có không",
+                    "Nike Shoe Model Black 41"
                 ]
             ],
             "responses": [
-                "Có, giày Nike Air Max 90 Essential màu Grey là một trong những màu được ưa chuộng."
+                "Có, chúng tôi có Nike Shoe Model Black 41 với màu Black và size 41."
             ],
             "context": [
-                "Thông tin về giày Nike Air Max 90 Essential màu Grey."
+                "Thông tin về Nike Shoe Model Black 41 với màu Black và size 41."
             ]
         },
         {
-            "tag": "giày_nike_air_max_90_essential_màu_red_có_đẹp_không",
+            "tag": "giày_nike_shoe_model_black_41_màu_black_có_đẹp_không",
             "patterns": [
                 [
-                    "Giày Nike Air Max 90 Essential màu Red có đẹp không",
-                    "Nike Air Max 90 Essential màu Red đẹp không",
-                    "Nike Air Max 90 Essential màu Red"
+                    "Giày Nike Shoe Model Black 41 màu Black có đẹp không",
+                    "Nike Shoe Model Black 41 màu Black đẹp không",
+                    "Nike Shoe Model Black 41 màu Black"
                 ]
             ],
             "responses": [
-                "Có, giày Nike Air Max 90 Essential màu Red là một trong những màu được ưa chuộng."
+                "Có, giày Nike Shoe Model Black 41 màu Black là một trong những màu được ưa chuộng."
             ],
             "context": [
-                "Thông tin về giày Nike Air Max 90 Essential màu Red."
+                "Thông tin về giày Nike Shoe Model Black 41 màu Black."
             ]
         },
         {
-            "tag": "giày_nike_air_max_90_essential_màu_black_có_đẹp_không",
+            "tag": "giày_nike_shoe_model_black_41_giá_bao_nhiêu",
             "patterns": [
                 [
-                    "Giày Nike Air Max 90 Essential màu Black có đẹp không",
-                    "Nike Air Max 90 Essential màu Black đẹp không",
-                    "Nike Air Max 90 Essential màu Black"
+                    "giày Nike Shoe Model Black 41 giá bao nhiêu",
+                    "Nike Shoe Model Black 41 giá bao nhiêu",
+                    "Nike Shoe Model Black 41 giá"
                 ]
             ],
             "responses": [
-                "Có, giày Nike Air Max 90 Essential màu Black là một trong những màu được ưa chuộng."
+                "Giày Nike Shoe Model Black 41 giá 1200000.0 VNĐ."
             ],
             "context": [
-                "Thông tin về giày Nike Air Max 90 Essential màu Black."
+                "Thông tin về giày Nike Shoe Model Black 41 giá 1200000.0 VNĐ."
+            ]
+        },
+        {
+            "tag": "bạn_có_nike_shoe_model_blue_41_không",
+            "patterns": [
+                [
+                    "Bạn có Nike Shoe Model Blue 41 không",
+                    "có Nike Shoe Model Blue 41 không",
+                    "Nike Shoe Model Blue 41 có không",
+                    "Nike Shoe Model Blue 41"
+                ]
+            ],
+            "responses": [
+                "Có, chúng tôi có Nike Shoe Model Blue 41 với màu Blue và size 41."
+            ],
+            "context": [
+                "Thông tin về Nike Shoe Model Blue 41 với màu Blue và size 41."
+            ]
+        },
+        {
+            "tag": "giày_nike_shoe_model_blue_41_màu_blue_có_đẹp_không",
+            "patterns": [
+                [
+                    "Giày Nike Shoe Model Blue 41 màu Blue có đẹp không",
+                    "Nike Shoe Model Blue 41 màu Blue đẹp không",
+                    "Nike Shoe Model Blue 41 màu Blue"
+                ]
+            ],
+            "responses": [
+                "Có, giày Nike Shoe Model Blue 41 màu Blue là một trong những màu được ưa chuộng."
+            ],
+            "context": [
+                "Thông tin về giày Nike Shoe Model Blue 41 màu Blue."
+            ]
+        },
+        {
+            "tag": "giày_nike_shoe_model_blue_41_giá_bao_nhiêu",
+            "patterns": [
+                [
+                    "giày Nike Shoe Model Blue 41 giá bao nhiêu",
+                    "Nike Shoe Model Blue 41 giá bao nhiêu",
+                    "Nike Shoe Model Blue 41 giá"
+                ]
+            ],
+            "responses": [
+                "Giày Nike Shoe Model Blue 41 giá 1040000.0 VNĐ."
+            ],
+            "context": [
+                "Thông tin về giày Nike Shoe Model Blue 41 giá 1040000.0 VNĐ."
+            ]
+        },
+        {
+            "tag": "bạn_có_nike_shoe_model_yellow_41_không",
+            "patterns": [
+                [
+                    "Bạn có Nike Shoe Model Yellow 41 không",
+                    "có Nike Shoe Model Yellow 41 không",
+                    "Nike Shoe Model Yellow 41 có không",
+                    "Nike Shoe Model Yellow 41"
+                ]
+            ],
+            "responses": [
+                "Có, chúng tôi có Nike Shoe Model Yellow 41 với màu Yellow và size 41."
+            ],
+            "context": [
+                "Thông tin về Nike Shoe Model Yellow 41 với màu Yellow và size 41."
+            ]
+        },
+        {
+            "tag": "giày_nike_shoe_model_yellow_41_màu_yellow_có_đẹp_không",
+            "patterns": [
+                [
+                    "Giày Nike Shoe Model Yellow 41 màu Yellow có đẹp không",
+                    "Nike Shoe Model Yellow 41 màu Yellow đẹp không",
+                    "Nike Shoe Model Yellow 41 màu Yellow"
+                ]
+            ],
+            "responses": [
+                "Có, giày Nike Shoe Model Yellow 41 màu Yellow là một trong những màu được ưa chuộng."
+            ],
+            "context": [
+                "Thông tin về giày Nike Shoe Model Yellow 41 màu Yellow."
+            ]
+        },
+        {
+            "tag": "giày_nike_shoe_model_yellow_41_giá_bao_nhiêu",
+            "patterns": [
+                [
+                    "giày Nike Shoe Model Yellow 41 giá bao nhiêu",
+                    "Nike Shoe Model Yellow 41 giá bao nhiêu",
+                    "Nike Shoe Model Yellow 41 giá"
+                ]
+            ],
+            "responses": [
+                "Giày Nike Shoe Model Yellow 41 giá 1440000.0 VNĐ."
+            ],
+            "context": [
+                "Thông tin về giày Nike Shoe Model Yellow 41 giá 1440000.0 VNĐ."
+            ]
+        },
+        {
+            "tag": "bạn_có_nike_shoe_model_blue_42_không",
+            "patterns": [
+                [
+                    "Bạn có Nike Shoe Model Blue 42 không",
+                    "có Nike Shoe Model Blue 42 không",
+                    "Nike Shoe Model Blue 42 có không",
+                    "Nike Shoe Model Blue 42"
+                ]
+            ],
+            "responses": [
+                "Có, chúng tôi có Nike Shoe Model Blue 42 với màu Blue và size 42."
+            ],
+            "context": [
+                "Thông tin về Nike Shoe Model Blue 42 với màu Blue và size 42."
+            ]
+        },
+        {
+            "tag": "giày_nike_shoe_model_blue_42_màu_blue_có_đẹp_không",
+            "patterns": [
+                [
+                    "Giày Nike Shoe Model Blue 42 màu Blue có đẹp không",
+                    "Nike Shoe Model Blue 42 màu Blue đẹp không",
+                    "Nike Shoe Model Blue 42 màu Blue"
+                ]
+            ],
+            "responses": [
+                "Có, giày Nike Shoe Model Blue 42 màu Blue là một trong những màu được ưa chuộng."
+            ],
+            "context": [
+                "Thông tin về giày Nike Shoe Model Blue 42 màu Blue."
+            ]
+        },
+        {
+            "tag": "giày_nike_shoe_model_blue_42_giá_bao_nhiêu",
+            "patterns": [
+                [
+                    "giày Nike Shoe Model Blue 42 giá bao nhiêu",
+                    "Nike Shoe Model Blue 42 giá bao nhiêu",
+                    "Nike Shoe Model Blue 42 giá"
+                ]
+            ],
+            "responses": [
+                "Giày Nike Shoe Model Blue 42 giá 1440000.0 VNĐ."
+            ],
+            "context": [
+                "Thông tin về giày Nike Shoe Model Blue 42 giá 1440000.0 VNĐ."
+            ]
+        },
+        {
+            "tag": "bạn_có_nike_shoe_model_light_blue_40_không",
+            "patterns": [
+                [
+                    "Bạn có Nike Shoe Model Light Blue 40 không",
+                    "có Nike Shoe Model Light Blue 40 không",
+                    "Nike Shoe Model Light Blue 40 có không",
+                    "Nike Shoe Model Light Blue 40"
+                ]
+            ],
+            "responses": [
+                "Có, chúng tôi có Nike Shoe Model Light Blue 40 với màu Light Blue và size 40."
+            ],
+            "context": [
+                "Thông tin về Nike Shoe Model Light Blue 40 với màu Light Blue và size 40."
+            ]
+        },
+        {
+            "tag": "giày_nike_shoe_model_light_blue_40_màu_light_blue_có_đẹp_không",
+            "patterns": [
+                [
+                    "Giày Nike Shoe Model Light Blue 40 màu Light Blue có đẹp không",
+                    "Nike Shoe Model Light Blue 40 màu Light Blue đẹp không",
+                    "Nike Shoe Model Light Blue 40 màu Light Blue"
+                ]
+            ],
+            "responses": [
+                "Có, giày Nike Shoe Model Light Blue 40 màu Light Blue là một trong những màu được ưa chuộng."
+            ],
+            "context": [
+                "Thông tin về giày Nike Shoe Model Light Blue 40 màu Light Blue."
+            ]
+        },
+        {
+            "tag": "giày_nike_shoe_model_light_blue_40_giá_bao_nhiêu",
+            "patterns": [
+                [
+                    "giày Nike Shoe Model Light Blue 40 giá bao nhiêu",
+                    "Nike Shoe Model Light Blue 40 giá bao nhiêu",
+                    "Nike Shoe Model Light Blue 40 giá"
+                ]
+            ],
+            "responses": [
+                "Giày Nike Shoe Model Light Blue 40 giá 1040000.0 VNĐ."
+            ],
+            "context": [
+                "Thông tin về giày Nike Shoe Model Light Blue 40 giá 1040000.0 VNĐ."
+            ]
+        },
+        {
+            "tag": "bạn_có_nike_shoe_model_yellow_42_không",
+            "patterns": [
+                [
+                    "Bạn có Nike Shoe Model Yellow 42 không",
+                    "có Nike Shoe Model Yellow 42 không",
+                    "Nike Shoe Model Yellow 42 có không",
+                    "Nike Shoe Model Yellow 42"
+                ]
+            ],
+            "responses": [
+                "Có, chúng tôi có Nike Shoe Model Yellow 42 với màu Yellow và size 42."
+            ],
+            "context": [
+                "Thông tin về Nike Shoe Model Yellow 42 với màu Yellow và size 42."
+            ]
+        },
+        {
+            "tag": "giày_nike_shoe_model_yellow_42_màu_yellow_có_đẹp_không",
+            "patterns": [
+                [
+                    "Giày Nike Shoe Model Yellow 42 màu Yellow có đẹp không",
+                    "Nike Shoe Model Yellow 42 màu Yellow đẹp không",
+                    "Nike Shoe Model Yellow 42 màu Yellow"
+                ]
+            ],
+            "responses": [
+                "Có, giày Nike Shoe Model Yellow 42 màu Yellow là một trong những màu được ưa chuộng."
+            ],
+            "context": [
+                "Thông tin về giày Nike Shoe Model Yellow 42 màu Yellow."
+            ]
+        },
+        {
+            "tag": "giày_nike_shoe_model_yellow_42_giá_bao_nhiêu",
+            "patterns": [
+                [
+                    "giày Nike Shoe Model Yellow 42 giá bao nhiêu",
+                    "Nike Shoe Model Yellow 42 giá bao nhiêu",
+                    "Nike Shoe Model Yellow 42 giá"
+                ]
+            ],
+            "responses": [
+                "Giày Nike Shoe Model Yellow 42 giá 1600000.0 VNĐ."
+            ],
+            "context": [
+                "Thông tin về giày Nike Shoe Model Yellow 42 giá 1600000.0 VNĐ."
+            ]
+        },
+        {
+            "tag": "bạn_có_nike_shoe_model_black_42_không",
+            "patterns": [
+                [
+                    "Bạn có Nike Shoe Model Black 42 không",
+                    "có Nike Shoe Model Black 42 không",
+                    "Nike Shoe Model Black 42 có không",
+                    "Nike Shoe Model Black 42"
+                ]
+            ],
+            "responses": [
+                "Có, chúng tôi có Nike Shoe Model Black 42 với màu Black và size 42."
+            ],
+            "context": [
+                "Thông tin về Nike Shoe Model Black 42 với màu Black và size 42."
+            ]
+        },
+        {
+            "tag": "giày_nike_shoe_model_black_42_màu_black_có_đẹp_không",
+            "patterns": [
+                [
+                    "Giày Nike Shoe Model Black 42 màu Black có đẹp không",
+                    "Nike Shoe Model Black 42 màu Black đẹp không",
+                    "Nike Shoe Model Black 42 màu Black"
+                ]
+            ],
+            "responses": [
+                "Có, giày Nike Shoe Model Black 42 màu Black là một trong những màu được ưa chuộng."
+            ],
+            "context": [
+                "Thông tin về giày Nike Shoe Model Black 42 màu Black."
+            ]
+        },
+        {
+            "tag": "giày_nike_shoe_model_black_42_giá_bao_nhiêu",
+            "patterns": [
+                [
+                    "giày Nike Shoe Model Black 42 giá bao nhiêu",
+                    "Nike Shoe Model Black 42 giá bao nhiêu",
+                    "Nike Shoe Model Black 42 giá"
+                ]
+            ],
+            "responses": [
+                "Giày Nike Shoe Model Black 42 giá 1120000.0 VNĐ."
+            ],
+            "context": [
+                "Thông tin về giày Nike Shoe Model Black 42 giá 1120000.0 VNĐ."
+            ]
+        },
+        {
+            "tag": "bạn_có_nike_shoe_model_black_40_không",
+            "patterns": [
+                [
+                    "Bạn có Nike Shoe Model Black 40 không",
+                    "có Nike Shoe Model Black 40 không",
+                    "Nike Shoe Model Black 40 có không",
+                    "Nike Shoe Model Black 40"
+                ]
+            ],
+            "responses": [
+                "Có, chúng tôi có Nike Shoe Model Black 40 với màu Black và size 40."
+            ],
+            "context": [
+                "Thông tin về Nike Shoe Model Black 40 với màu Black và size 40."
+            ]
+        },
+        {
+            "tag": "giày_nike_shoe_model_black_40_màu_black_có_đẹp_không",
+            "patterns": [
+                [
+                    "Giày Nike Shoe Model Black 40 màu Black có đẹp không",
+                    "Nike Shoe Model Black 40 màu Black đẹp không",
+                    "Nike Shoe Model Black 40 màu Black"
+                ]
+            ],
+            "responses": [
+                "Có, giày Nike Shoe Model Black 40 màu Black là một trong những màu được ưa chuộng."
+            ],
+            "context": [
+                "Thông tin về giày Nike Shoe Model Black 40 màu Black."
+            ]
+        },
+        {
+            "tag": "giày_nike_shoe_model_black_40_giá_bao_nhiêu",
+            "patterns": [
+                [
+                    "giày Nike Shoe Model Black 40 giá bao nhiêu",
+                    "Nike Shoe Model Black 40 giá bao nhiêu",
+                    "Nike Shoe Model Black 40 giá"
+                ]
+            ],
+            "responses": [
+                "Giày Nike Shoe Model Black 40 giá 1360000.0 VNĐ."
+            ],
+            "context": [
+                "Thông tin về giày Nike Shoe Model Black 40 giá 1360000.0 VNĐ."
             ]
         }
     ]

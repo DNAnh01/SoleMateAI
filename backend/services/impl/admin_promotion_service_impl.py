@@ -246,13 +246,14 @@ class AdminPromotionServiceImpl(AdminPromotionService):
                 for shoe_promotion in shoes_promotions:
                     shoe = self.__crud_shoe.get(db=db, id=shoe_promotion.shoe_id)
                     if shoe is None:
-                        return JSONResponse(
-                            status_code=400,
-                            content={
-                                "status": 400,
-                                "message": f"Shoe with id {shoe_promotion.shoe_id} not found",
-                            },
-                        )
+                        # return JSONResponse(
+                        #     status_code=400,
+                        #     content={
+                        #         "status": 400,
+                        #         "message": f"Shoe with id {shoe_promotion.shoe_id} not found",
+                        #     },
+                        # )
+                        continue
                     brand = self.__crud_brand.get(db=db, id=shoe.brand_id)
                     if brand is None:
                         return JSONResponse(

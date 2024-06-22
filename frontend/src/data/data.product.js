@@ -88,26 +88,6 @@ export const columns = [
         dataIndex: 'discounted_price',
         key: 'discounted_price',
     },
-    {
-        title: 'Hoạt động',
-        dataIndex: 'active',
-        key: 'active',
-        render: (text, record, index) => {
-            return (
-                <div className="flex items-center justify-center z-50">
-                    {record.is_active ? (
-                        <div className="bg-green-400 font-semibold px-2 py-1 rounded-full">
-                            <h5 className="text-sm text-white">Hoạt động</h5>
-                        </div>
-                    ) : (
-                        <div className="bg-red-400 font-semibold px-2 py-1 rounded-full">
-                            <h5 className="text-sm text-white">Không hoạt động</h5>
-                        </div>
-                    )}
-                </div>
-            );
-        },
-    },
 ];
 
 export const BRAND = [
