@@ -55,6 +55,7 @@ const baseUrl = {
             getById: '/admin-promotion/promotion-id=',
             update: '/admin-promotion/promotion-id=',
             create: '/admin-promotion/',
+            delete: '/admin-promotion/promotion-id=',
         },
         dashboard: {
             getChartStatsByDay: '/admin-dashboard/chart/day/',

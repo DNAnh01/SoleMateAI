@@ -14,5 +14,8 @@ const promotionApi = {
     async create(params) {
         return await http.post(`${configs.baseUrl.admin.promotion.create}`, params);
     },
+    async delete(id) {
+        return await http.delete(`${configs.baseUrl.admin.promotion.delete}${id}`);
+    },
 };
 export default promotionApi;
