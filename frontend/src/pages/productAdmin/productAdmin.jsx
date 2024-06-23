@@ -4,18 +4,12 @@ import { FaRegEdit } from 'react-icons/fa';
 import { MdDeleteOutline } from 'react-icons/md';
 import { IoMdAdd } from 'react-icons/io';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { colors } from '~/utils/common';
 import productApi from '~/apis/product.api';
 import { toast } from 'react-toastify';
 
 import ProductModal from './components/productModal';
 import { DEFAULT_PRODUCT } from '~/constants/product';
 import Loading from '~/components/loading/loading';
-
-const formattedColors = colors.map((color) => ({
-    value: color,
-    label: color,
-}));
 
 const ProductAdmin = () => {
     const [isLoading, setIsLoading] = useState(false);
@@ -186,7 +180,6 @@ const ProductAdmin = () => {
                 confirmLoading={confirmLoading}
                 handleCancel={handleCancel}
                 isOpenModalEdit={isOpenModalEdit}
-                formattedColors={formattedColors}
                 itemSelected={itemSelected}
                 previewUrl={previewUrl}
                 setItemSelected={setItemSelected}

@@ -1,8 +1,9 @@
-import { Table } from 'antd';
+import { Popconfirm, Table } from 'antd';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IoMdAdd } from 'react-icons/io';
 import promotionApi from '~/apis/promotion.api';
+import { MdDeleteOutline } from 'react-icons/md';
 import Loading from '~/components/loading/loading';
 import { promotionColumns } from '~/data/data.promotion';
 import useFetchData from '~/hooks/useFetchData';
@@ -12,9 +13,56 @@ import toast from 'react-hot-toast';
 const today = new Date();
 const PromotionAdmin = () => {
     const navigate = useNavigate();
+    const [isHover, setIsHover] = useState(false);
     const [productChoosed, setProductsChoosed] = useState([]);
     const [promotionList, setPromotionList] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+    const confirm = async (e, id) => {
+        try {
+            const res = await promotionApi.delete(id);
+            if (res.status === 200) {
+                toast.success('Xoá khuyến mãi thành công.');
+            }
+        } catch (e) {
+            toast.success('Xoá khuyến mãi thất bại.');
+        }
+    };
+    const cancel = (e) => {
+        console.log(e);
+    };
+
+    const columns = [
+        ...promotionColumns,
+        {
+            title: '',
+            dataIndex: 'action',
+            key: 'action',
+            render: (text, record, index) => {
+                return (
+                    <div
+                        className="flex items-center justify-center z-[100]"
+                        onMouseEnter={() => setIsHover(true)}
+                        onMouseLeave={() => {
+                            setIsHover(false);
+                        }}
+                    >
+                        <Popconfirm
+                            title="Xóa khuyến mãi"
+                            description="Bạn có chắc chắn muốn xóa khuyến mãi này?"
+                            onConfirm={(e) => confirm(e, record.id)}
+                            onCancel={cancel}
+                            okText="Xóa"
+                            cancelText="Hủy"
+                        >
+                            <button className=" text-red-500 hover:bg-red-500 hover:text-white p-1 rounded-md">
+                                <MdDeleteOutline fontSize={24} />
+                            </button>
+                        </Popconfirm>
+                    </div>
+                );
+            },
+        },
+    ];
 
     const [dataPromotionForm, setDataPromotionForm] = useState({
         promotion_name: '',
@@ -88,12 +136,14 @@ const PromotionAdmin = () => {
                     </button>
                 </div>
                 <Table
-                    columns={promotionColumns}
+                    columns={columns}
                     dataSource={promotionList}
                     onRow={(record, rowIndex) => {
                         return {
                             onClick: (event) => {
-                                navigate(`/admin/promotion/${record.id}`);
+                                if (!isHover) {
+                                    navigate(`/admin/promotion/${record.id}`);
+                                }
                             },
                         };
                     }}

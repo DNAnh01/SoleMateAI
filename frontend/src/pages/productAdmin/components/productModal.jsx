@@ -13,7 +13,6 @@ const ProductModal = ({
     confirmLoading,
     handleCancel,
     isOpenModalEdit,
-    formattedColors,
     itemSelected,
     previewUrl,
     handleClearImage,
@@ -23,7 +22,8 @@ const ProductModal = ({
 }) => {
     const { brands, colors } = useAppStore();
     const [brand, setBrand] = useState(brands[0]);
-    const [color, setColor] = useState(colors[0]);
+    const [listColor, setListColor] = useState([]);
+    const [color, setColor] = useState();
 
     const handleChangeSelect = (value, name) => {
         if (name === 'brand') {
@@ -45,20 +45,29 @@ const ProductModal = ({
             }));
             return;
         }
-        if (name === 'color') {
+        if (name === 'color' && listColor) {
             setColor(value);
-            const colorData = colors.find((color) => color.label === value);
+            const colorData = listColor.find((color) => color.value === value);
             setItemSelected((pre) => ({
                 ...pre,
                 [name]: {
-                    color_name: value,
-                    hex_value: colorData.hex_value,
+                    color_name: colorData.label,
+                    hex_value: value,
                 },
             }));
         }
     };
 
     const handeChangeNumber = (value, name) => {
+        if (name === 'size') {
+            setItemSelected((pre) => ({
+                ...pre,
+                size: {
+                    size_number: value,
+                },
+            }));
+            return;
+        }
         setItemSelected((pre) => ({
             ...pre,
             [name]: value,
@@ -80,6 +89,16 @@ const ProductModal = ({
             setBrand(initBrand);
         }
     }, [brands, isOpenModalEdit, itemSelected]);
+
+    useEffect(() => {
+        if (colors) {
+            const temp = colors.map((item) => ({
+                value: item.hex_value,
+                label: item.label,
+            }));
+            setListColor(temp);
+        }
+    }, [colors]);
 
     return (
         <Modal
@@ -112,10 +131,10 @@ const ProductModal = ({
                         <Select
                             id="color"
                             name="color"
+                            options={listColor}
+                            value={color}
                             onChange={(e) => handleChangeSelect(e, 'color')}
-                            options={formattedColors}
                             className="w-[100px]"
-                            value={formattedColors[0].value}
                             optionRender={(option) => (
                                 <Space>
                                     <span
@@ -124,6 +143,7 @@ const ProductModal = ({
                                             backgroundColor: option.value,
                                         }}
                                     ></span>
+                                    <span>{option.label}</span>
                                 </Space>
                             )}
                         />
@@ -180,7 +200,7 @@ const ProductModal = ({
                         />
                     </div>
                 </div>
-                <div>
+                <div className="flex">
                     <div className="flex items-center gap-2 w-[30%]">
                         <label className="font-semibold w-[30%]" htmlFor="discount">
                             Giảm giá:
@@ -191,6 +211,18 @@ const ProductModal = ({
                             className="w-[100px]"
                             min={1}
                             value={itemSelected?.discounted_price}
+                        />
+                    </div>
+                    <div className="flex items-center gap-2 w-[30%]">
+                        <label className="font-semibold w-[30%]" htmlFor="size">
+                            Size:
+                        </label>
+                        <InputNumber
+                            onChange={(value) => handeChangeNumber(value, 'size')}
+                            id="size"
+                            className="w-[100px]"
+                            min={1}
+                            value={itemSelected?.size?.size_number}
                         />
                     </div>
                 </div>
