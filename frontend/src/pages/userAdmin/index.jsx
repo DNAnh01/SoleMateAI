@@ -25,7 +25,7 @@ const AdminUserPage = () => {
     const columns = [
         ...columnsUser,
         {
-            title: 'Action',
+            title: 'Hành động',
             dataIndex: '',
             key: 'action',
             render: (text, record, index) => {
@@ -33,10 +33,10 @@ const AdminUserPage = () => {
                     return (
                         <div className="flex items-center gap-1 z-50">
                             <Popconfirm
-                                title="Block user"
-                                description="Are you sure to block this user?"
-                                okText="Yes"
-                                cancelText="No"
+                                title="Chặn người dùng"
+                                description="Bạn có chắc chắn muốn chặn người dùng này không?"
+                                okText="Có"
+                                cancelText="Không"
                                 placement="bottomRight"
                                 onConfirm={() => handleBlogUser(record.id)}
                             >
@@ -57,7 +57,7 @@ const AdminUserPage = () => {
                 setIsLoading(true);
                 const res = await UserAdminAPI.getAll();
                 setData(res.data);
-                console.log('res', res.data);
+                // console.log('res', res.data);
             } catch (err) {
                 console.err(err);
             } finally {

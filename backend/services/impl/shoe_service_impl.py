@@ -27,6 +27,7 @@ from backend.schemas.size_schema import SizeCreateSchema, SizeInDBSchema
 from backend.schemas.user_role_permission_schema import UserRolePermissionSchema
 from backend.schemas.user_schema import UserOutInProductDetailPageSchema
 from backend.services.abc.shoe_service import ShoeService
+from backend.crud.crud_knowledge_base import crud_knowledge_base
 
 logger = setup_logger()
 
@@ -40,6 +41,7 @@ class ShoeServiceImpl(ShoeService):
         self.__crud_size = crud_size
         self.__crud_review = crud_review
         self.__crud_user = crud_user
+        self.__crud_knowledge_base = crud_knowledge_base
 
     def create_shoe(
         self,
@@ -365,6 +367,81 @@ class ShoeServiceImpl(ShoeService):
                 content={"status": 400, "message": "Get all shoes failed"},
             )
         return shoes_out
+    
+    def get_latest_shoes(
+        self,
+        db: Session,
+        limit: int,
+    ) -> Optional[List[ShoeOutInHomePageSchema]]:
+        
+        try:
+            shoes = self.__crud_knowledge_base.get_latest_shoe(db=db,limit=limit);
+            if shoes is None:
+                return JSONResponse(
+                    status_code=404,
+                    content={"status": 404, "message": "Shoes not found"},
+                )
+            shoes_out = []
+            for shoe in shoes:
+                shoe_found = self.__crud_shoe.get(db=db, id=shoe.get_shoe_id())
+                if shoe_found is None:
+                    continue
+                
+                total_user_rating = 0
+                total_rating = 0
+                avg_rating = 0
+                review_found = self.__crud_review.get_all_reviews_by_shoe_id(
+                    db=db, shoe_id=shoe.get_shoe_id()
+                )
+                if not review_found:
+                    review_found = []
+                
+                for review in review_found:
+                    total_user_rating += 1
+                    total_rating += review.rating
+                
+                if total_user_rating != 0:
+                    avg_rating = total_rating / total_user_rating
+                else:
+                    avg_rating = 0
+                
+                shoes_out.append(
+                    ShoeOutInHomePageSchema(
+                        id=shoe_found.id,
+                        brand=BrandCreateSchema(
+                            brand_name=shoe_found.brand.brand_name,
+                            brand_logo=shoe_found.brand.brand_logo,
+                        ),
+                        color=ColorCreateSchema(
+                            color_name=shoe_found.color.color_name,
+                            hex_value=shoe_found.color.hex_value,
+                        ),
+                        size=SizeCreateSchema(size_number=shoe_found.size.size_number),
+                        image_url=shoe_found.image_url,
+                        shoe_name=shoe_found.shoe_name,
+                        description=shoe_found.description,
+                        quantity_in_stock=shoe_found.quantity_in_stock,
+                        display_price=shoe_found.display_price,
+                        warehouse_price=shoe_found.warehouse_price,
+                        discounted_price=shoe_found.discounted_price,
+                        avg_rating=avg_rating,
+                        is_active=shoe_found.is_active,
+                        created_at=shoe_found.created_at,
+                        updated_at=shoe_found.updated_at,
+                        deleted_at=shoe_found.deleted_at,
+                    )
+                )
+        except:
+            logger.exception(
+                f"Exception in {__name__}.{self.__class__.__name__}.get_latest_shoes"
+            )
+            return JSONResponse(
+                status_code=400,
+                content={"status": 400, "message": "Get latest shoes failed"},
+            )
+        return shoes_out
+                        
+
 
     def update_shoe(
         self,

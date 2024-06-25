@@ -1,6 +1,6 @@
 export const columnsUser = [
     {
-        title: 'Id',
+        title: 'Mã',
         dataIndex: 'id',
         key: 'id',
         width: '10px',
@@ -11,17 +11,17 @@ export const columnsUser = [
         key: 'email',
     },
     {
-        title: 'Display name',
+        title: 'Tên hiển thị',
         dataIndex: 'display_name',
         key: 'display_name',
     },
     {
-        title: 'Phone number',
+        title: 'Số điện thoại',
         dataIndex: 'phone_number',
         key: 'phone_number',
     },
     {
-        title: 'Avatar',
+        title: 'Ảnh đại diện',
         dataIndex: 'avatar_url',
         key: 'avatar_url',
         render: (text, record, index) => {
@@ -33,12 +33,12 @@ export const columnsUser = [
         },
     },
     {
-        title: 'Role',
+        title: 'Vai trò',
         dataIndex: 'role_name',
         key: 'role_name',
     },
     {
-        title: 'Active',
+        title: 'Trạng thái',
         dataIndex: 'active',
         key: 'active',
         render: (text, record, index) => {
@@ -46,11 +46,11 @@ export const columnsUser = [
                 <div className="flex items-center justify-start z-50">
                     {record.is_active ? (
                         <div className="bg-green-400  font-semibold px-2 py-1 rounded-full">
-                            <h5 className="text-sm text-white">Active</h5>
+                            <h5 className="text-sm text-white">Hoạt động</h5>
                         </div>
                     ) : (
                         <div className="bg-red-400  font-semibold px-2 py-1 rounded-full">
-                            <h5 className="text-sm text-white">Inactive</h5>
+                            <h5 className="text-sm text-white">Không hoạt động</h5>
                         </div>
                     )}
                 </div>

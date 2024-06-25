@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 from typing import List, Optional
 
 from sqlalchemy.orm import Session
-
+from backend.schemas.default_kn_chatbot import DefaultKNChatbotSchema
 from backend.schemas.shoe_schema import (
     AdminUpdateShoeSchema,
     ShoeCreateSchema,
@@ -49,6 +49,15 @@ class ShoeService(ABC):
         common_filters: dict,
     ) -> Optional[List[ShoeOutInHomePageSchema]]:
         pass
+    
+    @abstractmethod
+    def get_latest_shoes(
+        self,
+        db: Session,
+        limit: int,
+    ) -> Optional[List[ShoeOutInHomePageSchema]]:
+        pass
+
 
     @abstractmethod
     def update_shoe(

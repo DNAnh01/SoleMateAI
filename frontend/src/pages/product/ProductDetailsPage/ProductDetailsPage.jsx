@@ -491,7 +491,7 @@ const ProductDetailsPage = () => {
                         </div>
                     </ProductDetailsWrapper>
                 </DetailsContent>
-                <ProductSimilar brandName={brandName} />
+                {/*<ProductSimilar brandName={brandName} /> */}
                 <ReviewsWrapper>
                     <h3>Bình luận</h3>
                     {product.reviews.map((review, index) => (
@@ -516,6 +516,7 @@ const ProductDetailsPage = () => {
                     ))}
                     <ReviewForm shoeId={product.id} onReviewSubmitted={handleReviewSubmitted} />
                 </ReviewsWrapper>
+                <ProductSimilar brandName={brandName} />
             </Container>
         </DetailsScreenWrapper>
     );

@@ -26,7 +26,7 @@ const HeaderAdmin = () => {
         setShowCalendar(false);
     };
 
-    console.log('location.pathname', location.pathname);
+    // console.log('location.pathname', location.pathname);
 
     useEffect(() => {
         let isMounted = true;
@@ -101,7 +101,7 @@ const HeaderAdmin = () => {
                     );
                 })}
             </h1>
-            {!location.pathname.startsWith('/admin/chatbot/') && location.pathname !== '/admin/chatbot' && (
+            {location.pathname.startsWith('/admin/dashboard') && location.pathname === '/admin/dashboard' && (
                 <div className="flex items-center justify-center">
                     <span className="mr-3">{selectedTime}</span>
                     <HeadlessTippy

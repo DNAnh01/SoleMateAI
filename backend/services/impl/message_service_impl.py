@@ -276,9 +276,12 @@ class MessageServiceImpl(MessageService):
             )
             
             
-            logger.warning(f"default_kn_chatbots: {default_kn_chatbots}")
+            # logger.warning(f"default_kn_chatbots: {default_kn_chatbots}")
             # logger.error(f"default_kn_chatbots: {default_kn_chatbots.__dict__}")
             # logger.info(f"default_kn_chatbots: {[default_kn_chatbot.__dict__ for default_kn_chatbot in default_kn_chatbots]}")
+            latest_shoes = self.__crud_knowledge_base.get_latest_shoe(db=db, limit=1)
+            # logger.warning(f"latest_shoes: {[latest_shoe.__dict__ for latest_shoe in latest_shoes]}")
+            
             logger.error(f"len(default_kn_chatbots): {len(default_kn_chatbots)}")
             temp_knowledge_base.append(
                 {
@@ -288,6 +291,15 @@ class MessageServiceImpl(MessageService):
                             default_kn_chatbot.__dict__
                             for default_kn_chatbot in default_kn_chatbots
                         ],
+                        cls=utils.UUIDEncoder,
+                    ),
+                }
+            )
+            temp_knowledge_base.append(
+                {
+                    "role": "system",
+                    "content": json.dumps(
+                        [latest_shoe.__dict__ for latest_shoe in latest_shoes],
                         cls=utils.UUIDEncoder,
                     ),
                 }

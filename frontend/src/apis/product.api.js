@@ -20,5 +20,8 @@ const productApi = {
     async delete(shoeId) {
         return http.delete(`${configs.baseUrl.product.delete}${shoeId}`);
     },
+    async getLatest() {
+        return http.get(`${configs.baseUrl.product.getLatest}?limit=4`);
+    },
 };
 export default productApi;

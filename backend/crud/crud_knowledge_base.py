@@ -71,6 +71,54 @@ GET_DEFAULT_KN_CHATBOT = """
     promotion_end_date=DefaultKNChatbotSchema.PROMOTION_END_DATE,
     promotion_discount_percent=DefaultKNChatbotSchema.PROMOTION_DISCOUNT_PERCENT,
 )
+# get latest shoe
+GET_LATEST_SHOE = """
+    SELECT  
+            sho.id AS {shoe_id}, 
+            sho.shoe_name AS {shoe_name}, 
+            b.brand_name AS {brand_name}, 
+            s.size_number AS {size_number}, 
+            c.color_name AS {color_name}, 
+            sho.discounted_price AS {discounted_price}, 
+            sho.created_at {created_at}, 
+            p.promotion_name AS {promotion_name}, 
+            p.start_date AS {promotion_start_date}, 
+            p.end_date AS {promotion_end_date}, 
+            p.discount_percent AS {promotion_discount_percent} 
+        FROM  
+            shoes AS sho 
+        JOIN  
+            brands AS b ON sho.brand_id = b.id 
+        JOIN  
+            sizes AS s ON sho.size_id = s.id 
+        JOIN  
+            colors AS c ON sho.color_id = c.id 
+        LEFT JOIN  
+            shoes_promotions AS sp ON sho.id = sp.shoe_id 
+        LEFT JOIN  
+            promotions AS p ON sp.promotion_id = p.id 
+        WHERE  
+            sho.deleted_at IS NULL  
+            AND b.deleted_at IS NULL  
+            AND s.deleted_at IS NULL  
+            AND c.deleted_at IS NULL  
+        ORDER BY  
+            sho.created_at DESC 
+        LIMIT :limit;
+    """.format(
+        shoe_id=DefaultKNChatbotSchema.SHOE_ID,
+        shoe_name=DefaultKNChatbotSchema.SHOE_NAME,
+        brand_name=DefaultKNChatbotSchema.BRAND_NAME,
+        size_number=DefaultKNChatbotSchema.SIZE_NUMBER,
+        color_name=DefaultKNChatbotSchema.COLOR_NAME,
+        discounted_price=DefaultKNChatbotSchema.DISCOUNTED_PRICE,
+        created_at=DefaultKNChatbotSchema.CREATED_AT,
+        promotion_name=DefaultKNChatbotSchema.PROMOTION_NAME,
+        promotion_start_date=DefaultKNChatbotSchema.PROMOTION_START_DATE,
+        promotion_end_date=DefaultKNChatbotSchema.PROMOTION_END_DATE,
+        promotion_discount_percent=DefaultKNChatbotSchema.PROMOTION_DISCOUNT_PERCENT,
+    )
+
 
 
 class CRUDKnowledgeBase(
@@ -116,6 +164,48 @@ class CRUDKnowledgeBase(
             default_kn_chatbots.append(default_kn_chatbot)
         if default_kn_chatbots:
             return default_kn_chatbots
+        return []
+    
+    def get_latest_shoe(self, db: Session, limit: int) -> List[DefaultKNChatbotSchema]:
+        result_proxy = db.execute(text(GET_LATEST_SHOE), {"limit": limit})
+        column_names = result_proxy.keys()
+        results = result_proxy.fetchall()
+        latest_shoes = []
+        for result in results:
+            result_dict = dict(zip(column_names, result))
+            builder = DefaultKNChatbotSchema.builder()
+            builder.with_shoe_id(
+                result_dict[DefaultKNChatbotSchema.SHOE_ID]
+            ).with_shoe_name(
+                result_dict[DefaultKNChatbotSchema.SHOE_NAME]
+            ).with_brand_name(
+                result_dict[DefaultKNChatbotSchema.BRAND_NAME]
+            ).with_size_number(
+                result_dict[DefaultKNChatbotSchema.SIZE_NUMBER]
+            ).with_color_name(
+                result_dict[DefaultKNChatbotSchema.COLOR_NAME]
+            ).with_discounted_price(
+                result_dict[DefaultKNChatbotSchema.DISCOUNTED_PRICE]
+            ).with_created_at(
+                result_dict[DefaultKNChatbotSchema.CREATED_AT]
+            ).with_promotion_name(
+                result_dict[DefaultKNChatbotSchema.PROMOTION_NAME]
+            ).with_promotion_start_date(
+                DefaultKNChatbotSchema.convert_date(
+                    str(result_dict[DefaultKNChatbotSchema.PROMOTION_START_DATE])
+                )
+            ).with_promotion_end_date(
+                DefaultKNChatbotSchema.convert_date(
+                    str(result_dict[DefaultKNChatbotSchema.PROMOTION_END_DATE])
+                )
+            ).with_promotion_discount_percent(
+                result_dict[DefaultKNChatbotSchema.PROMOTION_DISCOUNT_PERCENT]
+            )
+            latest_shoe = builder.build()
+            # logger.info(f"default_kn_chatbot: {default_kn_chatbot.__dict__}")
+            latest_shoes.append(latest_shoe)
+        if latest_shoes:
+            return latest_shoes
         return []
 
 

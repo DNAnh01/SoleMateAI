@@ -50,7 +50,7 @@ import PromotionAdmin from './pages/promotionAdmin/promotionAdmin';
 import PromotionDetails from './pages/promotionDetails/promotionDetails';
 
 function App() {
-    const { accessToken, setAccessToken, profile, clearLocalStorage } = useAppStore();
+    const { accessToken, setAccessToken, profile } = useAppStore();
     const [isLoading, setIsLoading] = useState(false);
 
     // useEffect(() => {
@@ -59,7 +59,7 @@ function App() {
 
     // Setup axios interceptors
     useAxiosInterceptors(accessToken, setAccessToken);
-    const { setPromotions, setProducts } = useContext(AppContext);
+    const { setPromotions, setProducts, setLatestProducts } = useContext(AppContext);
     const { setCart, setTotalCartItem } = useContext(CartContext);
     const { setAddress } = useContext(AddressContext);
     const { setHistoryOrdersByFilter } = useContext(OrderContext);
@@ -70,6 +70,7 @@ function App() {
                 setIsLoading(true);
                 const productPromise = productApi.getAll();
                 const promotionPromise = promotionApi.getAllPromotion();
+                const latestProductPromise = productApi.getLatest();
                 const cartPromise =
                     accessToken && profile?.role_name !== 'admin' ? cartAPI.getAllCartItem() : Promise.resolve(null);
                 const addressPromise =
@@ -80,16 +81,19 @@ function App() {
                     ? orderApi.getHistoryOrderByFilter({ status: 'ORDER-PLACED', orderDate: '' })
                     : Promise.resolve(null);
 
-                const [productResult, promotionResult, cartResult, addressResult, orderResult] = await Promise.all([
-                    productPromise,
-                    promotionPromise,
-                    cartPromise,
-                    addressPromise,
-                    orderPromise,
-                ]);
+                const [productResult, promotionResult, latestProductResult, cartResult, addressResult, orderResult] =
+                    await Promise.all([
+                        productPromise,
+                        promotionPromise,
+                        latestProductPromise,
+                        cartPromise,
+                        addressPromise,
+                        orderPromise,
+                    ]);
 
                 if (productResult) setProducts(productResult.data);
                 if (promotionResult) setPromotions(promotionResult.data);
+                if (latestProductResult) setLatestProducts(latestProductResult.data);
                 if (cartResult) {
                     setCart(cartResult.data);
                     setTotalCartItem(cartResult.data.total_item);
@@ -99,10 +103,10 @@ function App() {
             } catch (error) {
                 console.error(error);
             } finally {
-                console.log('ed');
+                // console.log('ed');
                 setIsLoading(false);
             }
-            console.log('111111');
+            // console.log('111111');
         };
 
         fetchData();
@@ -111,6 +115,7 @@ function App() {
         profile?.role_name,
         setProducts,
         setPromotions,
+        setLatestProducts,
         setCart,
         setTotalCartItem,
         setAddress,

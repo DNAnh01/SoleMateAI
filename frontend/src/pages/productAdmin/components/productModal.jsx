@@ -215,7 +215,7 @@ const ProductModal = ({
                     </div>
                     <div className="flex items-center gap-2 w-[30%]">
                         <label className="font-semibold w-[30%]" htmlFor="size">
-                            Size:
+                            Kích thước:
                         </label>
                         <InputNumber
                             onChange={(value) => handeChangeNumber(value, 'size')}

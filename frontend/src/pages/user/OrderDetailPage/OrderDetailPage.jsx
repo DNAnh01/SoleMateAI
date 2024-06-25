@@ -202,7 +202,7 @@ const OrderDetailPage = () => {
     const navigate = useNavigate();
     const { id } = useParams();
     const [activeButton, setActiveButton] = useState('Cancel');
-    console.log(order);
+    // console.log(order);
 
     useEffect(() => {
         const fetchData = async () => {

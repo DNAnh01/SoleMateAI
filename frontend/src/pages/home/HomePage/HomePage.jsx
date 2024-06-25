@@ -5,11 +5,12 @@ import Brands from '~/components/home/Brands';
 import { useContext, useState } from 'react';
 import Pagination from '~/components/common/Pagination';
 import { AppContext } from '~/contexts/app.context';
+import TopProductList from '~/components/home/TopProductList';
 
 const HomePageWrapper = styled.main``;
 
 const HomePage = () => {
-    const { products } = useContext(AppContext);
+    const { products, latestProducts } = useContext(AppContext);
     const [currentPage, setCurrentPage] = useState(1);
     const productsPerPage = 12;
     const totalProducts = products.length;
@@ -25,8 +26,8 @@ const HomePage = () => {
         <HomePageWrapper>
             <Hero />
             <Brands />
-            {/*<TopProductList title={'Sản phẩm mới'} />
-    <TopProductList title={'Sản phẩm bán chạy'} />*/}
+            {/*<TopProductList title={'Sản phẩm mới nhất'} /> */}
+            <Catalog catalogTitle={'Các sản phẩm mới nhất'} products={latestProducts} />
             <Catalog catalogTitle={'Các sản phẩm'} products={currentProducts} />
             <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
         </HomePageWrapper>

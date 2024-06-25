@@ -5,6 +5,8 @@ export const getInitialAppContext = () => ({
     setPromotions: () => null,
     products: [],
     setProducts: () => null,
+    latestProducts: [],
+    setLatestProducts: () => null,
 });
 
 const initialAppContext = getInitialAppContext();
@@ -14,6 +16,7 @@ export const AppContext = createContext(initialAppContext);
 export const AppProvider = ({ children, defaultValue = initialAppContext }) => {
     const [promotions, setPromotions] = useState([]);
     const [products, setProducts] = useState([]);
+    const [latestProducts, setLatestProducts] = useState([]);
 
     return (
         <AppContext.Provider
@@ -22,6 +25,8 @@ export const AppProvider = ({ children, defaultValue = initialAppContext }) => {
                 setPromotions,
                 products,
                 setProducts,
+                latestProducts,
+                setLatestProducts,
             }}
         >
             {children}

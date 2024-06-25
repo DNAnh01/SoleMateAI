@@ -93,6 +93,22 @@ def get_all_shoes(
     return shoes
 
 
+@router.get(
+    "/get-latest",
+    status_code=status.HTTP_200_OK,
+    response_model=Optional[List[ShoeOutInHomePageSchema]],
+)
+def get_latest_shoes(
+    limit: int = 4,
+    db: Session = Depends(deps.get_db),
+) -> Optional[List[ShoeOutInHomePageSchema]]:
+    shoes = shoe_service.get_latest_shoes(
+        db=db,
+        limit=limit,
+    )
+    return shoes
+
+
 @router.patch(
     "/shoe-id={shoe_id}",
     status_code=status.HTTP_200_OK,

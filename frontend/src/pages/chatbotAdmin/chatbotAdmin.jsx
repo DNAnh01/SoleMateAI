@@ -19,7 +19,7 @@ const ChatbotAdmin = () => {
     const [chatbotName, setChatbotName] = useState('');
     const [isLoadingForm, setIsLoadingForm] = useState(false);
 
-    console.log('chatbotList', chatbotList);
+    // console.log('chatbotList', chatbotList);
 
     const handleClickCreate = () => {
         setIsOpenModalEdit(true);

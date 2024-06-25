@@ -28,7 +28,7 @@ const ProductAdmin = () => {
             const res = await productApi.getAll();
             if (res.status === 200) {
                 setProductList(res.data);
-                console.log(res.data.length);
+                // console.log(res.data.length);
             } else {
                 setProductList([]);
             }
@@ -44,8 +44,7 @@ const ProductAdmin = () => {
             setConfirmLoading(true);
             if (itemSelected.id) {
                 // const res = await productApi.updateProduct(itemSelected.id, itemSelected);
-
-                console.log('update', JSON.stringify(itemSelected));
+                // console.log('update', JSON.stringify(itemSelected));
             } else {
                 const reader = await new FileReader();
                 reader.readAsDataURL(image);

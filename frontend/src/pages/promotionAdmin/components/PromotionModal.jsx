@@ -18,7 +18,7 @@ const PromotionModal = ({
 }) => {
     const { products } = useContext(AppContext);
     const handleChange = (_, dateString, name) => {
-        console.log(name, dateString);
+        // console.log(name, dateString);
         setDataPromotionForm({
             ...dataPromotionForm,
             [name]: dateString,
