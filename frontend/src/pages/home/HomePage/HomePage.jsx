@@ -5,7 +5,6 @@ import Brands from '~/components/home/Brands';
 import { useContext, useState } from 'react';
 import Pagination from '~/components/common/Pagination';
 import { AppContext } from '~/contexts/app.context';
-import TopProductList from '~/components/home/TopProductList';
 
 const HomePageWrapper = styled.main``;
 

@@ -26,11 +26,11 @@ const Title = styled.div`
     cursor: pointer;
 `;
 
-const DaysOfWeek = styled.div`
-    font-size: 0.8rem;
-    font-weight: 700;
-    text-transform: uppercase;
-`;
+// const DaysOfWeek = styled.div`
+//     font-size: 0.8rem;
+//     font-weight: 700;
+//     text-transform: uppercase;
+// `;
 
 const CellContainer = styled.div`
     font-family: ${defaultTheme.font_family_inter};
