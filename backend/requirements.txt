@@ -1,5 +1,5 @@
 absl-py==0.15.0
-aiosmtplib==1.2.0
+aiosmtplib==3.0.1
 anyio==3.3.0
 asttokens==2.4.1
 astunparse==1.6.3
