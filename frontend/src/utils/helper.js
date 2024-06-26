@@ -8,24 +8,10 @@ export const currencyFormat = (amount) => {
 };
 
 export function extractProductId(message) {
-    /*
-    "Thông tin về giày: 
-    Tên giày: Nike Air Max 90 Essential,    
-    Thương hiệu: Nike,    
-    Kích thước: 43,
-    Màu sắc: Yellow,
-    Giá bán: 1600000.0,
-    Chương trình khuyến mãi: Mùa Hè Sale cùng Sole Mate AI,
-    Ngày bắt đầu chương trình khuyến mãi: 01-06-2024,
-    Ngày kết thúc chương trình khuyến mãi: 31-08-2024,
-    Phần trăm khuyến mãi: 20
-
-    [http://localhost:3000/product/1f2ecb93-1297-41b2-9ace-ba845bf5bc83]"
-    */
     try {
         const messageText = message.message_text.trim();
 
-        const urlPattern = /http:\/\/[^\s]+/g;
+        const urlPattern = /https:\/\/[^\s]+/g;
         const urls = messageText.match(urlPattern);
 
         if (!urls || urls.length === 0) {
@@ -50,6 +36,12 @@ export function extractProductId(message) {
     }
 }
 
+// // Example usage:
+// const message = {
+//     message_text: 'https://sole-mate-ai.vercel.app/product/1ff05221-8c25-44e0-b888-4b81818a9ddd',
+// };
+
+// console.log(extractProductId(message));
 export function getFormattedDate(date) {
     let formattedDate = new Date(date);
     return formattedDate.toISOString().split('T')[0];

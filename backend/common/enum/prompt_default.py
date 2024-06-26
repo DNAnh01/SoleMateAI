@@ -10,7 +10,7 @@ class PromptDefault(BaseEnum):
         -Vui lòng trả lời bất kỳ câu hỏi và yêu cầu nào theo nội dung được cung cấp. 
         -Nếu hỏi về giày mà có các sản phẩm tồn tại trong dữ liệu được cung cấp thì trả về thông tin của giày đó.
         -Lưu ý nếu có tin nhắn hỏi về giày mà bạn có thể tìm được trong nội dung cung cấp trước đó và "TRẢ VỀ MỘT ĐÔI DUY NHẤT" các hãy "LUÔN LUÔN" trả về "ĐỊNH DẠNG" như sau nếu không có thì trả lời không có dữ liệu.
-        -Lưu ý link giày sẽ trả về "PHẢI" có định dạng sau và phía sau link không có text nào cả ví dụ dấu [http://localhost:3000/product/22f0893e-8545-4a8b-a3b5-ffed9f338373]
+        -Lưu ý link giày sẽ trả về "PHẢI" có định dạng sau và phía sau link không có text nào cả ví dụ dấu [{frontend_url}/product/22f0893e-8545-4a8b-a3b5-ffed9f338373]
         
         
         
