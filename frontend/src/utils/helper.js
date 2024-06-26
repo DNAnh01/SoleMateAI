@@ -42,6 +42,7 @@ export function extractProductId(message) {
 // };
 
 // console.log(extractProductId(message));
+
 export function getFormattedDate(date) {
     let formattedDate = new Date(date);
     return formattedDate.toISOString().split('T')[0];

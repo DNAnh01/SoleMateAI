@@ -328,7 +328,7 @@ class MessageServiceImpl(MessageService):
             )
             response_rs = response.choices[0].message.content
             chatbot_id_rs = chatbot_found.id
-            # logger.info(f"response_rs: {response_rs}")
+            logger.info(f"response_rs: {response_rs}")
             return response_rs, chatbot_id_rs
         except openai.OpenAIError as e:
             logger.error(f"Error calling OpenAI API: {e}")

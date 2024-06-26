@@ -337,10 +337,13 @@ const Chatbot = () => {
 
             messages = await Promise.all(
                 messages.map(async (message) => {
-                    if (message.message_text.includes('http')) {
+                    if (message.message_text.includes('https')) {
                         // [{frontend_url}/product/_shoe_id]
 
                         const productId = extractProductId(message);
+
+                        console.log('productId:345:', productId);
+
                         try {
                             const responseProduct = await productApi.getById(productId);
                             message.image_url = responseProduct.data.image_url;
@@ -410,8 +413,9 @@ const Chatbot = () => {
                 created_at: response.data.created_at,
             };
 
-            if (response.data.message_text.includes('http')) {
+            if (response.data.message_text.includes('https')) {
                 const productId = extractProductId(response.data);
+                console.log('productId:418:', productId);
                 try {
                     const responseProduct = await productApi.getById(productId);
                     botMessage.image_url = responseProduct.data.image_url;
@@ -451,9 +455,9 @@ const Chatbot = () => {
                     <Image className="chatbot-icon" src={images.chatbot} alt="Bot" width={30} height={30} />
                 </span>
             )}
-            {message.message_text.includes('http') ? (
+            {message.message_text.includes('https') ? (
                 <p>
-                    {message.message_text.split('http')[0].split('[')[0]}
+                    {message.message_text.split('https')[0].split('[')[0]}
                     <br />
                     <Link to={`${configs.roures.productList}/${extractProductId(message)}`}>
                         <Image className="product-image" src={message.image_url || images.noImage} alt="Product" />
